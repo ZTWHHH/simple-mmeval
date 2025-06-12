@@ -1,7 +1,8 @@
-from mmeval.utils.res_handler import ResponseHandler
 import os
 import tqdm
+
 from mmeval.data import load_dataset
+from mmeval.utils.res_handler import ResponseHandler
 
 class Task:
     def __init__(self, model_arguments, data_arguments, inference_arguments):
@@ -40,7 +41,7 @@ class Task:
                 try:
                     ret = self.run_sample(sample)
                     self.res_handler.save(ret)
-                    
+
                 except Exception as e:
                     print(f"Encountered Error: {e}")
                     cnt += 1
