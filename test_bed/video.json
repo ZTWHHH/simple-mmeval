@@ -1,24 +1,52 @@
 [
     {
-        "prompt": "What is in the video<video-placeholder: cat_and_chicken.mp4>?",
-        "type": "MC",
-        "choices": {
-            "A": "a cat.",
-            "B": "a man.",
-            "C": "a plane."
-        },
-        "label": "A",
-        "image": ["data/test_bed/cat_and_chicken.mp4"]
+        "questions": "<video>\nWhat is in the video?",
+        "modality": ["cat_and_chicken.mp4"],
+        "id": "1"
     },
     {
-        "prompt": "What is in the image<image-placeholder: e0001.png>?",
-        "type": "MC",
-        "choices": {
-            "A": "a cat.",
-            "B": "a man.",
-            "C": "a plane."
-        },
-        "label": "A",
-        "image": ["data/test_bed/e0001.png"]
+        "questions": "<video>\nWhat is in the image?",
+        "modality": ["cat_and_chicken.mp4"],
+        "id": "2"
+    },
+    {
+        "questions": "<image>\nDescribe the image in detail.",
+        "modality": ["apple.jpg"],
+        "id": "3"
+    },
+    {
+        "questions": "<image>\nWhich of the paths shown in the figure leads to the blue triangle reasonably?",
+        "modality": ["e0001.png"],
+        "id": "4"
+    },
+    {
+        "questions": "<video>\nWhat is in the video?",
+        "modality": ["cat_and_chicken.mp4"],
+        "id": "5"
+    },
+    {
+        "questions": "<video>\nWhat is in the video?",
+        "modality": ["cat_and_chicken.mp4"],
+        "id": "6"
+    },
+    {
+        "questions": "<video>\nWhat is in the image?",
+        "modality": ["cat_and_chicken.mp4"],
+        "id": "7"
+    },
+    {
+        "questions": "<image>\nDescribe the image in detail.",
+        "modality": ["apple.jpg"],
+        "id": "8"
+    },
+    {
+        "questions": "<image>\nWhich of the paths shown in the figure leads to the blue triangle reasonably?",
+        "modality": ["e0001.png"],
+        "id": "9"
+    },
+    {
+        "questions": "<video>\nWhat is in the video?",
+        "modality": ["cat_and_chicken.mp4"],
+        "id": "10"
     }
 ]

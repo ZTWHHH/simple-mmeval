@@ -39,13 +39,11 @@ class Task:
                 cnt = 0
                 try:
                     ret = self.run_sample(sample)
+                    self.res_handler.save(ret)
+                    
                 except Exception as e:
                     print(f"Encountered Error: {e}")
                     cnt += 1
                     if cnt >= self.max_retry_sample:
                         print("Max retries reached, skip example.")
                         continue
-
-                self.res_handler.save(ret)
-
-
