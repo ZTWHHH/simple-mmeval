@@ -1,27 +1,23 @@
-import argparse
-import json
-import os
 import re
-import tqdm
 import copy
-
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
-from qwen_vl_utils import process_vision_info
 import torch
+import transformers
+from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
+
+from qwen_vl_utils import process_vision_info
 
 from mmeval.infer.task import Task
 from mmeval.utils import spec_tokens 
+from mmeval.utils.argparser import ModelArguments, DataArguments, InferenceArguments
 
 class TaskRunner(Task):
-    def __init__(self, args):
-        super().__init__(args)
-        self.load_model(args)
+    def __init__(self, model_arguments, data_arguments, inference_arguments):
+        super().__init__(model_arguments, data_arguments, inference_arguments)
+        
     
     def load_model(self, args):
-        model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.model_path, torch_dtype="auto", device_map="auto")
-        processor = AutoProcessor.from_pretrained(args.model_path)
-        self.model = model
-        self.processor = processor
+        self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype="auto", device_map="auto")
+        self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
 
     def run_sample(self, sample:dict):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -95,18 +91,12 @@ class TaskRunner(Task):
     
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Qwen2D5 evaluation')
-    parser.add_argument('--infile', type=str, required=True)
-    parser.add_argument('--dataset', type=str, required=True)
-    parser.add_argument('--out_dir', type=str, required=True)
-    parser.add_argument('--img_dir', type=str, required=True)
-    parser.add_argument('--save_freq', type=int, default=3)
-    parser.add_argument('--max_retry', type=int, default=3)
-    parser.add_argument('--model_path', type=str, default="Qwen/Qwen2.5-VL-3B-Instruct")
+    parser = transformers.HfArgumentParser(
+        (ModelArguments, DataArguments, InferenceArguments))
+    model_arguments, data_arguments, inference_arguments = parser.parse_args_into_dataclasses()
     
-    args = parser.parse_args()
 
-    model_evaluator = TaskRunner(args)
+    model_evaluator = TaskRunner(model_arguments, data_arguments, inference_arguments)
 
     model_evaluator.inference_dataset()
 

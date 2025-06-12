@@ -5,4 +5,4 @@ python mmeval/infer/qwen2d5.py \
     --dataset local@json \
     --out_dir test_bed/test_qwen2d5 \
     --img_dir test_bed \
-    --model_path Qwen/Qwen2.5-VL-3B-Instruct
+    --model_name_or_path Qwen/Qwen2.5-VL-3B-Instruct
