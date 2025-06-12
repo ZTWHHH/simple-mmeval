@@ -69,6 +69,8 @@ class TaskRunner(Task):
                 continue
             
             if any(p in chunk for p in spec_tokens.all):
+                
+                # TODO: Qwen2.5-VL might support other modality
                 assert chunk == spec_tokens.image, f"Unsupported placeholder {chunk}"
 
                 media_file = images.pop(0)
