@@ -1,0 +1,51 @@
+import os
+import json
+
+class ResponseHandler:
+    def __init__(self, args):
+        self.cache_file = os.path.join(args.out_dir, "result.json.tmp")
+        self.output_file = os.path.join(args.out_dir, "result.json")
+        self.save_freq = args.save_freq
+        self.load_cache()
+
+    def load_cache(self):
+        if os.path.exists(self.cache_file):
+            self.cache = json.load(open(self.cache_file, "r"))
+        else:
+            self.cache = {}
+
+    @property
+    def length(self):
+        return len(self.cache)
+
+    def in_cache(self, id_:str):
+        return id_ in self.cache
+    
+    def check_complete(self, dataset):
+        if len(self.cache) != len(dataset):
+            return False
+        else:
+            for sample in dataset:
+                if not self.in_cache(sample["id"]):
+                    return False
+            print("task completed.")
+            if os.path.exists(self.cache_file):
+                print(f"deleting cache file {self.cache_file}.")
+                os.remove(self.cache_file)
+            print(f"save output file {self.output_file}.")
+            self._dump_result()
+            return True
+        
+    def save(self, result:dict):
+        assert "id" in result, "id is required"
+        assert "response" in result, f"no model response for sample {result}"
+        self.cache[result["id"]] = result
+        if len(self.cache) % self.save_freq == 0:
+            self._dump_cache()
+
+    def _dump_cache(self):
+        json.dump(self.cache, open(self.cache_file, "w"), indent=4)
+
+    def _dump_result(self):
+        ret = [self.cache[k] for k in sorted(self.cache.keys())]
+        json.dump(ret, open(self.output_file, "w",), indent=4)

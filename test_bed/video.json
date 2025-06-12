@@ -1,0 +1,24 @@
+[
+    {
+        "prompt": "What is in the video<video-placeholder: cat_and_chicken.mp4>?",
+        "type": "MC",
+        "choices": {
+            "A": "a cat.",
+            "B": "a man.",
+            "C": "a plane."
+        },
+        "label": "A",
+        "image": ["data/test_bed/cat_and_chicken.mp4"]
+    },
+    {
+        "prompt": "What is in the image<image-placeholder: e0001.png>?",
+        "type": "MC",
+        "choices": {
+            "A": "a cat.",
+            "B": "a man.",
+            "C": "a plane."
+        },
+        "label": "A",
+        "image": ["data/test_bed/e0001.png"]
+    }
+]
