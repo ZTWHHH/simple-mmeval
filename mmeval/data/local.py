@@ -4,16 +4,20 @@ import os
 class LocalJSONDataset:
     def __init__(self, args):
         self.args = args
+        self.parallel_per_task = args.parallel_per_task
+        self.rank = args.rank
 
         self.data_file = args.infile
         data = json.load(open(self.data_file, "r"))
         self.img_dir = args.img_dir
 
-        self.data = []
+        data_list = []
         for sample in data:
             modality = [os.path.join(self.img_dir, f) for f in sample["modality"]]
             sample["modality"] = modality
-            self.data.append(sample)
+            data_list.append(sample)
+        
+        self.data = data_list[self.rank::self.parallel_per_task]
     @property
     def name(self):
         return f"local@{self.data_file.split('/')[-1]}"

@@ -3,8 +3,11 @@ import json
 
 class ResponseHandler:
     def __init__(self, args):
-        self.cache_file = os.path.join(args.out_dir, "result.json.tmp")
-        self.output_file = os.path.join(args.out_dir, "result.json")
+        self.rank = args.rank
+        self.tmp_dir = os.path.join(args.out_dir, "tmp")    
+        os.makedirs(self.tmp_dir, exist_ok=True)
+        self.cache_file = os.path.join(self.tmp_dir, f"result_{self.rank}.json.tmp")
+        self.output_file = os.path.join(self.tmp_dir, f"result_{self.rank}.json")
         self.save_freq = args.save_freq
         self.load_cache()
 

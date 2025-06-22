@@ -5,20 +5,18 @@ from mmeval.data import load_dataset
 from mmeval.utils.res_handler import ResponseHandler
 
 class Task:
-    def __init__(self, model_arguments, data_arguments, inference_arguments):
-        self.model_arguments = model_arguments
-        self.data_arguments = data_arguments
-        self.inference_arguments = inference_arguments
+    def __init__(self, args):
 
-        self.max_retry = inference_arguments.max_retry
-        self.max_retry_sample = inference_arguments.max_retry_sample
-        self.out_dir = inference_arguments.out_dir
+
+        self.max_retry = args.max_retry
+        self.max_retry_sample = args.max_retry_sample
+        self.out_dir = args.out_dir
         os.makedirs(self.out_dir, exist_ok=True)
 
-        self.res_handler = ResponseHandler(inference_arguments)
-        self.dataset = load_dataset(data_arguments)
+        self.res_handler = ResponseHandler(args)
+        self.dataset = load_dataset(args)
 
-        self.load_model(model_arguments)
+        self.load_model(args)
 
     def run_sample(self, sample:dict):
         raise NotImplementedError("run_sample is not implemented")

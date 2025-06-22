@@ -2,17 +2,17 @@ import re
 import copy
 import torch
 import transformers
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
+from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
 
 from qwen_vl_utils import process_vision_info
 
 from mmeval.infer.task import Task
-from mmeval.utils import spec_tokens 
-from mmeval.utils.argparser import ModelArguments, DataArguments, InferenceArguments
+from mmeval.utils import constants
+from mmeval.utils.argparser import parse_args
 
 class TaskRunner(Task):
-    def __init__(self, model_arguments, data_arguments, inference_arguments):
-        super().__init__(model_arguments, data_arguments, inference_arguments)
+    def __init__(self, args):
+        super().__init__(args)
         
     
     def load_model(self, args):
@@ -40,7 +40,7 @@ class TaskRunner(Task):
         inputs = inputs.to(device)
 
         # Inference
-        generated_ids = self.model.generate(**inputs, max_new_tokens=128)
+        generated_ids = self.model.generate(**inputs, max_new_tokens=256)
         generated_ids_trimmed = [
             out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]
@@ -68,10 +68,10 @@ class TaskRunner(Task):
             if len(chunk.strip()) == 0:
                 continue
             
-            if any(p in chunk for p in spec_tokens.all):
+            if any(p in chunk for p in constants.all):
                 
                 # TODO: Qwen2.5-VL might support other modality
-                assert chunk == spec_tokens.image, f"Unsupported placeholder {chunk}"
+                assert chunk == constants.image, f"Unsupported placeholder {chunk}"
 
                 media_file = images.pop(0)
                 messages[0]["content"].append(
@@ -93,13 +93,8 @@ class TaskRunner(Task):
     
 
 if __name__ == "__main__":
-    parser = transformers.HfArgumentParser(
-        (ModelArguments, DataArguments, InferenceArguments))
-    model_arguments, data_arguments, inference_arguments = parser.parse_args_into_dataclasses()
-    
-
-    model_evaluator = TaskRunner(model_arguments, data_arguments, inference_arguments)
-
+    args = parse_args()
+    model_evaluator = TaskRunner(args)
     model_evaluator.inference_dataset()
 
         

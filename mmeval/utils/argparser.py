@@ -26,7 +26,6 @@ class DataArguments:
                            metadata={"help": "input file."})
     img_dir: Optional[str] = field(default=None,
                            metadata={"help": "image directory."})
-
 @dataclass
 class InferenceArguments:
     save_freq: int = field(default=3, metadata={"help": "save frequency for cache."})
@@ -36,4 +35,15 @@ class InferenceArguments:
                            metadata={"help": "output directory."})
     
     
-   
+@dataclass
+class ExperimentArguments:
+    gpu_per_parallel: int = field(default=1, metadata={"help": "number of gpus per task"})
+    parallel_per_task: int = field(default=4, metadata={"help": "number of parallel tasks."}) 
+    rank: int = field(default=-1, metadata={"help": "rank for parallel inference"}) 
+
+
+def parse_args():
+    parser = transformers.HfArgumentParser(
+        (ModelArguments, DataArguments, InferenceArguments, ExperimentArguments))
+    args = parser.parse_args()
+    return args
