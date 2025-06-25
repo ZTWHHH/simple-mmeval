@@ -199,7 +199,7 @@ class Dataset(ABC):
         return len(self.data)
     
     def __repr__(self):
-        return f"Dataset(name='{self.dataset_name}', samples={len(self.data)})"
+        return f"Dataset(name='{self.name}', samples={len(self.data)})"
     
     def __str__(self):
-        return f"{self.dataset_name} dataset with {len(self.data)} samples" 
+        return f"{self.name} dataset with {len(self.data)} samples" 
