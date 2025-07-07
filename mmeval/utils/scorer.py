@@ -13,7 +13,7 @@ from typing import (
 
 import torch
 import warnings
-
+import torch.nn.functional as F
 from collections import defaultdict
 
 from transformers import (
@@ -34,6 +34,37 @@ def target_tokens(
         encoded = tokenizer.encode(i, add_special_tokens=False)
         tokens.append(encoded)
     return tokens
+
+def check_length(prime: BatchEncoding, target: List[List[int]], full: List) -> None:
+    '''
+    Check if the length of the full text is the sum of the length of the prime and target.
+    '''
+    for i in range(len(full)):
+        if hasattr(prime, 'input_ids'):
+            if not len(prime['input_ids'][0]) + len(target[i]) == len(full[i]['input_ids'][0]):
+                warnings.warn(f"The output score maybe incorrect due to some target tokens may be merged into the prompt.")
+
+
+def first_non_special_token(tokenizer: AutoTokenizer, tokens: BatchEncoding) -> List[List[int]]:
+    '''
+    Return the first non-special token's offset from the last index in the token.
+    '''
+    res = []
+    for i in tokens:
+        if "input_ids" in i:
+            l = i.input_ids.shape[1]
+        else:
+            l = len(i)
+        for j in range(-1, -1-l, -1):
+            if "input_ids" in i:
+                if i.input_ids[0][j] not in tokenizer.all_special_ids:
+                    res.append(j)
+                    break
+            else:
+                if i[j] not in tokenizer.all_special_ids:
+                    res.append(j)
+                    break
+    return res
 
 def batch_wise_logprobs(logprobs, ids, reduction):
     batch_wise = [torch.stack(token_wise).T for token_wise in list(zip(*logprobs))]
@@ -88,6 +119,7 @@ class LMScorer:
         self,
         target_tokens: List[BatchEncoding],
         stimuli: BatchEncoding,
+        prompt: BatchEncoding,
         separator: str = " ",
         reduction: Callable = lambda x: x.mean(0).item(),
         prob: bool = False,
@@ -109,7 +141,7 @@ class LMScorer:
         :return: List of floats specifying the desired score for the stimuli part of the input, e.g., P(stimuli | preamble).
         :rtype: ``List[float]``
         """
-        primed = (stimuli, target_tokens)
+        primed = (stimuli, target_tokens, prompt)
 
         result = self.compute_stats(
             primed,
@@ -263,8 +295,14 @@ class IncrementalLMScorer(LMScorer):
             base_two and prob
         ), "cannot both use base (which is for a log), and a probability measure at the same time!"
 
-        encoded, target_tokens = batch
+        encoded, target_tokens, prompt = batch
+        if prompt is not None:
+            check_length(prompt, target_tokens, encoded)
         offsets = [len(target_token) for target_token in target_tokens]
+        if "input_ids" in encoded[0]:
+            positions = first_non_special_token(self.tokenizer, encoded)
+        elif "inputs_embeds" in encoded[0]:
+            positions = first_non_special_token(self.tokenizer, target_tokens)
         ids = encoded
 
         effective_ids = target_tokens
@@ -277,13 +315,12 @@ class IncrementalLMScorer(LMScorer):
         ## Set up storage variables
         scores = []
 
-        for logit, idx, offset in zip(logits, effective_ids, offsets):
+        for logit, idx, offset, pos in zip(logits, effective_ids, offsets, positions):
 
             query_ids = idx
             logit = logit.squeeze(0)  # remove the batch dimension
-            logprob_distribution = logit - logit.logsumexp(1).unsqueeze(1)
-            
-            actual_logprob_distribution = logprob_distribution[-offset-1:-1]  # get the log probability of the target tokens
+            logprob_distribution = F.log_softmax(logit, dim=1)
+            actual_logprob_distribution = logprob_distribution[pos-offset:pos]  # get the log probability of the target tokens
 
             score = actual_logprob_distribution[
                 torch.arange(offset), query_ids

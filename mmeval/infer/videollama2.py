@@ -72,7 +72,13 @@ class TaskRunner(Task):
             
             message = system_message + message
             prompt = self.tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
-
+            _, _, _, prompt_encoded, _ = self.model.prepare_inputs_labels_for_multimodal(
+                input_ids=tokenizer_multimodal_token(prompt, self.tokenizer, modal_token, return_tensors='pt').unsqueeze(0).to(device),
+                images=tensor,
+                attention_mask=None,
+                labels=None,
+                past_key_values=None
+            )
             full = [tokenizer_multimodal_token(prompt+content, self.tokenizer, modal_token, return_tensors='pt').unsqueeze(0).to(device) for content in contents]  # full conversation for each choice
             full_encoded = []
             for i in full:
@@ -80,7 +86,7 @@ class TaskRunner(Task):
                 full_encoded.append(BatchEncoding({"inputs_embeds": tmp,}))
 
             scorer = IncrementalLMScorer(self.model, device, tokenizer=self.tokenizer)
-            scores = scorer.conditional_score(target_toks, full_encoded)  # inputs are used to truncate/locate the prompt and choices' contents
+            scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)  # inputs are used to truncate/locate the prompt and choices' contents
             for i, choice in enumerate(choices):
                 ori_sample[choice] = scores[i]
             ori_sample["response"] = choices[np.argmax(np.array(scores))]  # model most preferred choice

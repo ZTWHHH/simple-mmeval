@@ -33,17 +33,17 @@ class TaskRunner(Task):
             messages, tokenize=False, add_generation_prompt=True
         )
         image_inputs, video_inputs = process_vision_info(messages)
-        inputs = self.processor(
-            text=[text],
-            images=image_inputs,
-            videos=video_inputs,
-            padding=True,
-            return_tensors="pt",
-        )
-        inputs = inputs.to(device)
 
         # Inference
         if not self.args.output_scores:
+            inputs = self.processor(
+                text=[text],
+                images=image_inputs,
+                videos=video_inputs,
+                padding=True,
+                return_tensors="pt",
+            )
+            inputs = inputs.to(device)
             generated_ids = self.model.generate(**inputs, max_new_tokens=256)
             generated_ids_trimmed = [
                 out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
@@ -60,9 +60,10 @@ class TaskRunner(Task):
 
             full = [text+content for content in contents]  # full conversation for each choice
             full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(device) for i in full]
+            prompt_encoded = self.processor(text=text, images=image_inputs, videos=video_inputs, return_tensors="pt").to(device)
             target_toks = target_tokens(self.tokenizer, contents)
             scorer = IncrementalLMScorer(self.model, device, tokenizer=self.tokenizer)
-            scores = scorer.conditional_score(target_toks, full_encoded)  # inputs are used to truncate/locate the prompt and choices' contents
+            scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)  # inputs are used to truncate/locate the prompt and choices' contents
             for i, choice in enumerate(choices):
                 ori_sample[choice] = scores[i]
             ori_sample["response"] = choices[np.argmax(np.array(scores))]  # model most preferred choice
