@@ -13,8 +13,8 @@ class LocalJSONDataset:
 
         data_list = []
         for sample in data:
-            modality = [os.path.join(self.img_dir, f) for f in sample["modality"]]
-            sample["modality"] = modality
+            media = [os.path.join(self.img_dir, f) for f in sample["media"]]
+            sample["media"] = media
             data_list.append(sample)
         
         self.data = data_list[self.rank::self.parallel_per_task]
