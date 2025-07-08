@@ -30,7 +30,8 @@ class TaskRunner(Task):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         ori_sample = copy.deepcopy(sample)
         question, modality = self.parse_input(sample)
-        image_file = sample["modality"][0]
+        image_file = sample["media"][0]
+
         media_tensor = self.processor[modality](image_file)
 
         if not self.args.output_scores:
@@ -94,7 +95,7 @@ class TaskRunner(Task):
         return ori_sample
 
     def parse_input(self, sample:dict):
-        question = sample["questions"]
+        question = sample["prompt"]
         # extract placeholder
         placeholders = re.findall(r'<[^>]*>', question)
         assert len(placeholders) == 1, f"VideoLLaMA2 supports one image or video, but got {len(placeholder)}"
