@@ -42,6 +42,13 @@ class ResponseHandler:
     def save(self, result:dict):
         assert "id" in result, "id is required"
         assert "response" in result, f"no model response for sample {result}"
+        
+        if "media" in result and result["media"]:
+            from PIL import Image
+            has_image_objects = any(isinstance(item, Image.Image) for item in result["media"])
+            if has_image_objects:
+                result.pop("media", None)
+               
         self.cache[result["id"]] = result
         if len(self.cache) % self.save_freq == 0:
             self._dump_cache()
