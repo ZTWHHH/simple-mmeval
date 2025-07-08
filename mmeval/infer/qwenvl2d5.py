@@ -49,13 +49,14 @@ class TaskRunner(Task):
         )[0].strip()
 
         ori_sample["response"] = output_text
+
         return ori_sample
 
     def parse_input(self, sample:dict):
-        question = sample["questions"]
+        question = sample["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<[^>]*>)', question)
-        images = copy.deepcopy(sample['modality'])
+        images = copy.deepcopy(sample['media'])
 
         messages = [
             {
@@ -96,5 +97,3 @@ if __name__ == "__main__":
     args = parse_args()
     model_evaluator = TaskRunner(args)
     model_evaluator.inference_dataset()
-
-        
