@@ -40,8 +40,7 @@ class TaskRunner(Task):
             ori_sample["response"] = output_text
         
         else:
-            choices = ["A", "B", "C", "D"]  # TODO: choices and contents should be get from the dataset loader
-            contents = ["1", "2", "34", "5678"]  # contents for each choice
+            contents = sample.get("choices")
 
             target_toks = target_tokens(self.tokenizer, contents)
 
@@ -88,9 +87,8 @@ class TaskRunner(Task):
 
             scorer = IncrementalLMScorer(self.model, device, tokenizer=self.tokenizer)
             scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)  # inputs are used to truncate/locate the prompt and choices' contents
-            for i, choice in enumerate(choices):
-                ori_sample[choice] = scores[i]
-            ori_sample["response"] = choices[np.argmax(np.array(scores))]  # model most preferred choice
+            ori_sample["score"] = scores
+            ori_sample["response"] = contents[np.argmax(np.array(scores))]  # model most preferred choice
 
         return ori_sample
 
