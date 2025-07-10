@@ -10,7 +10,7 @@ class Dataset(ABC):
     """A unified dataset class for loading, processing, and storing dataset samples.
     
     This class provides:
-    1. Lazy data loading (only when accessed)
+    1. Lazy data loading
     2. Memory-efficient processing
     3. Standard iteration helpers (__iter__, __getitem__, __len__)
     4. ID uniqueness enforcement
