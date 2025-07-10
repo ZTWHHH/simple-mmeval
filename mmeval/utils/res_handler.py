@@ -1,7 +1,7 @@
 import os
 import json
 import numpy as np
-
+from PIL import Image
 
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder for numpy types."""
@@ -59,9 +59,8 @@ class ResponseHandler:
         assert "response" in result, f"no model response for sample {result}"
         
         if "media" in result and result["media"]:
-            from PIL import Image
             result["media"] = [
-                '<image-object-placeholder>' if isinstance(item, Image.Image) else item
+                'pil image cannot be saved' if isinstance(item, Image.Image) else item
                 for item in result["media"]
             ]
                
