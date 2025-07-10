@@ -142,27 +142,49 @@ class VLMEvalKitDataset(Dataset):
         # Extract media paths and build placeholder prompt
         media_path_list = []
         prompt_list = []
-        
-        if isinstance(vlm_prompt, list):
-            # Handle list format prompts with interleaved media and text
-            for item in vlm_prompt:
-                if isinstance(item, dict):
-                    if item.get('type') == 'image':
-                        media_path_list.append(item.get('value', ''))
-                    elif item.get('type') == 'video':
-                        media_path_list.append(item.get('value', ''))
-                    elif item.get('type') == 'text':
-                        prompt_list.append(item.get('value', ''))
+
+        if self.dataset_name in ['MMMU_DEV_VAL', 'MMMU_TEST', 'LEGO']:
+            if isinstance(vlm_prompt, list):
+                # Handle list format prompts with interleaved media and text
+                for item in vlm_prompt:
+                    if isinstance(item, dict):
+                        if item.get('type') == 'image':
+                            media_path_list.append(item.get('value', ''))
+                            prompt_list.append('<image>')
+                        elif item.get('type') == 'video':
+                            media_path_list.append(item.get('value', ''))
+                            prompt_list.append('<video>')
+                        elif item.get('type') == 'text':
+                            prompt_list.append(item.get('value', ''))
+                        else:
+                            raise ValueError(f"Unknown item type: {item}")
                     else:
-                        raise ValueError(f"Unknown item type: {item}")
-                else:
-                    raise ValueError(f"Item is not a dictionary: {item}")
-            
-            # Join text parts
-            text_prompt = ' '.join(prompt_list).strip()
-            
-            # Normalize image placeholders in the text
-            prompt = normalize_image_placeholders(text_prompt, len(media_path_list))
+                        raise ValueError(f"Item is not a dictionary: {item}")
+                    
+                # Join text parts
+                prompt = ' '.join(s.strip() for s in prompt_list).strip()
+        
+        else:
+            if isinstance(vlm_prompt, list):
+                # Handle list format prompts with interleaved media and text
+                for item in vlm_prompt:
+                    if isinstance(item, dict):
+                        if item.get('type') == 'image':
+                            media_path_list.append(item.get('value', ''))
+                        elif item.get('type') == 'video':
+                            media_path_list.append(item.get('value', ''))
+                        elif item.get('type') == 'text':
+                            prompt_list.append(item.get('value', ''))
+                        else:
+                            raise ValueError(f"Unknown item type: {item}")
+                    else:
+                        raise ValueError(f"Item is not a dictionary: {item}")
+                
+                # Join text parts
+                text_prompt = ' '.join(s.strip() for s in prompt_list).strip()
+                
+                # Normalize image placeholders in the text
+                prompt = normalize_image_placeholders(text_prompt, len(media_path_list))
         
         # Set media and prompt fields
         sample['media'] = media_path_list

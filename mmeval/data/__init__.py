@@ -2,6 +2,7 @@ from .local import LocalJSONDataset
 from .huggingface import HuggingFaceDataset
 from .vlm_evalkit import VLMEvalKitDataset
 
+
 VLMEVALKIT_DATASETS = [
     '3DSRBench',
     'A-Bench_TEST',
@@ -24,11 +25,9 @@ VLMEVALKIT_DATASETS = [
     'CharXiv_reasoning_val',
     'ChartQA_TEST',
     'Creation_MMBench',
-    # 'DUDE',
+    'DUDE',
     'DocVQA_TEST',
     'DocVQA_VAL',
-    'Dynamath',
-    'GMAI-MMBench_VAL',
     'GOBench',
     'GQA_TestDev_Balanced',
     'HRBench4K',
