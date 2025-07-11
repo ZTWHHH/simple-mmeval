@@ -59,10 +59,9 @@ class ResponseHandler:
         assert "response" in result, f"no model response for sample {result}"
         
         if "media" in result and result["media"]:
-            result["media"] = [
-                'pil image cannot be saved' if isinstance(item, Image.Image) else item
-                for item in result["media"]
-            ]
+            # Check if any item is a PIL Image, if so, remove the entire media section
+            if any(isinstance(item, Image.Image) for item in result["media"]):
+                del result["media"]
                
         self.cache[result["id"]] = result
         if len(self.cache) % self.save_freq == 0:
