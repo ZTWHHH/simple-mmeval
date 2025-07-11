@@ -1,5 +1,20 @@
 import os
 import json
+import numpy as np
+from PIL import Image
+
+class NumpyEncoder(json.JSONEncoder):
+    """Custom JSON encoder for numpy types."""
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.bool_):
+            return bool(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super().default(obj)
 
 class ResponseHandler:
     def __init__(self, args):
@@ -42,13 +57,19 @@ class ResponseHandler:
     def save(self, result:dict):
         assert "id" in result, "id is required"
         assert "response" in result, f"no model response for sample {result}"
+        
+        if "media" in result and result["media"]:
+            # Check if any item is a PIL Image, if so, remove the entire media section
+            if any(isinstance(item, Image.Image) for item in result["media"]):
+                del result["media"]
+               
         self.cache[result["id"]] = result
         if len(self.cache) % self.save_freq == 0:
             self._dump_cache()
 
     def _dump_cache(self):
-        json.dump(self.cache, open(self.cache_file, "w"), indent=4)
+        json.dump(self.cache, open(self.cache_file, "w"), indent=4, cls=NumpyEncoder)
 
     def _dump_result(self):
         ret = [self.cache[k] for k in sorted(self.cache.keys())]
-        json.dump(ret, open(self.output_file, "w",), indent=4)
+        json.dump(ret, open(self.output_file, "w",), indent=4, cls=NumpyEncoder)
