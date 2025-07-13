@@ -1,27 +1,29 @@
 import re
 import copy
 import torch
+import numpy as np
 import transformers
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
+from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
 
 from qwen_vl_utils import process_vision_info
 
 from mmeval.infer.task import Task
 from mmeval.utils import constants
 from mmeval.utils.argparser import parse_args
+from mmeval.utils.scorer import IncrementalLMScorer, target_tokens
 
 class TaskRunner(Task):
     def __init__(self, args):
         super().__init__(args)
-        
+        self.args = args
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     def load_model(self, args):
         self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype="auto", device_map="auto")
+        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
-
-    def run_sample(self, sample:dict):
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+    
+    def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
         messages = self.parse_input(sample)
         
@@ -30,6 +32,15 @@ class TaskRunner(Task):
             messages, tokenize=False, add_generation_prompt=True
         )
         image_inputs, video_inputs = process_vision_info(messages)
+
+        if not self.args.score_target:
+            ori_sample["response"] = self._generate_response(text, image_inputs, video_inputs)
+        else:
+            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, sample))
+
+        return ori_sample
+
+    def _generate_response(self, text, image_inputs, video_inputs):
         inputs = self.processor(
             text=[text],
             images=image_inputs,
@@ -37,20 +48,35 @@ class TaskRunner(Task):
             padding=True,
             return_tensors="pt",
         )
-        inputs = inputs.to(device)
+        inputs = inputs.to(self.device)
 
-        # Inference
         generated_ids = self.model.generate(**inputs, max_new_tokens=256)
         generated_ids_trimmed = [
             out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]
+
         output_text = self.processor.batch_decode(
             generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
         )[0].strip()
 
-        ori_sample["response"] = output_text
+        return output_text
 
-        return ori_sample
+    def _score_choices(self, text, image_inputs, video_inputs, sample):
+        contents = sample.get("choices")
+        full = [text + content for content in contents]
+
+        full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device) for i in full]
+        prompt_encoded = self.processor(text=text, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device)
+        target_toks = target_tokens(self.tokenizer, contents)
+
+        scorer = IncrementalLMScorer(self.model, self.device, tokenizer=self.tokenizer)
+        scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)
+        
+        return {
+            "score": scores,
+            "response": contents[np.argmax(scores)]
+        }
+
 
     def parse_input(self, sample:dict):
         question = sample["prompt"]
