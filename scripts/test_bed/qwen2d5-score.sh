@@ -8,4 +8,4 @@ python mmeval/run.py \
     --model_name_or_path Qwen/Qwen2.5-VL-3B-Instruct \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
-    --output_scores
+    --score_target

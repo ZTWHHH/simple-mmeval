@@ -33,7 +33,7 @@ class TaskRunner(Task):
         )
         image_inputs, video_inputs = process_vision_info(messages)
 
-        if not self.args.output_scores:
+        if not self.args.score_target:
             ori_sample["response"] = self._generate_response(text, image_inputs, video_inputs)
         else:
             ori_sample.update(self._score_choices(text, image_inputs, video_inputs, sample))

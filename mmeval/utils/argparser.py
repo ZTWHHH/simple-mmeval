@@ -33,7 +33,7 @@ class InferenceArguments:
     max_retry_sample: int = field(default=1, metadata={"help": "maximum number of retries for one inference sample."}) 
     out_dir: str = field(default=None,
                            metadata={"help": "output directory."})
-    output_scores: bool = field(default=False, metadata={"help": "whether to output scores for each choice."})
+    score_target: bool = field(default=False, metadata={"help": "whether to output scores for each choice."})
     
     
 @dataclass
