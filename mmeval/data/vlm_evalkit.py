@@ -3,11 +3,13 @@ import os
 import re
 import base64
 import string
+import zipfile
 import pandas as pd
 from PIL import Image
 from io import BytesIO
 from typing import Dict, Any, Optional
 from dotenv import load_dotenv
+from huggingface_hub import hf_hub_download
 from .dataset import Dataset
 
 
@@ -119,11 +121,109 @@ class VLMEvalKitDataset(Dataset):
         if os.path.exists(path):
             return path
         
-        abs_path = os.path.join(self.dataset_dir, 'images', self.dataset_name, path)
+        # Check in dataset-specific images folder
+        abs_path = os.path.join(self.dataset_dir, self.dataset_name, 'images', path)
         if os.path.exists(abs_path):
             return abs_path
+            
+        # Download images if folder doesn't exist
+        images_folder = os.path.join(self.dataset_dir, self.dataset_name, 'images')
+        if not os.path.exists(images_folder):
+            print(f"Images folder not found, downloading {self.dataset_name} images...")
+            self.download_image(self.dataset_name)
+            
+            # Try again after download
+            if os.path.exists(abs_path):
+                return abs_path
         
         raise FileNotFoundError(f"Image file not found: {abs_path}")
+
+    def download_tsv(self, dataset_name: str) -> None:
+        """Download TSV file from Hugging Face for the specified dataset.
+        
+        Parameters
+        ----------
+        dataset_name : str
+            Name of the dataset to download
+        """
+        # Create dataset directory if it doesn't exist
+        dataset_path = os.path.join(self.dataset_dir, dataset_name)
+        os.makedirs(dataset_path, exist_ok=True)
+        
+        # Handle multipart datasets
+        if dataset_name in MULTIPART_DATASET_CONFIG:
+            config = MULTIPART_DATASET_CONFIG[dataset_name]
+            pattern = config["filename_pattern"]
+            start_idx = config["start_idx"]
+            end_idx = config["end_idx"]
+            
+            for part_num in range(start_idx, end_idx+1):
+                filename = pattern.format(part_num)
+                try:
+                    hf_hub_download(
+                        repo_id="mm-eval/VLMEvalKit",
+                        filename=filename,
+                        local_dir=dataset_path,
+                        repo_type="dataset"
+                    )
+                except Exception as e:
+                    print(f"Warning: Failed to download {filename}: {e}")
+        else:
+            # Download main TSV file
+            try:
+                hf_hub_download(
+                    repo_id="mm-eval/VLMEvalKit",
+                    filename=f"{dataset_name}.tsv",
+                    local_dir=dataset_path,
+                    repo_type="dataset"
+                )
+            except Exception as e:
+                print(f"Warning: Failed to download {dataset_name}.tsv: {e}")
+            
+            # Try to download local version if exists
+            try:
+                hf_hub_download(
+                    repo_id="mm-eval/VLMEvalKit", 
+                    filename=f"{dataset_name}_local.tsv",
+                    local_dir=dataset_path,
+                    repo_type="dataset"
+                )
+            except Exception:
+                # Local version may not exist, which is fine
+                pass
+
+    def download_image(self, dataset_name: str) -> None:
+        """Download and extract image ZIP file from Hugging Face for the specified dataset.
+        
+        Parameters
+        ----------
+        dataset_name : str
+            Name of the dataset to download images for
+        """
+        dataset_path = os.path.join(self.dataset_dir, dataset_name)
+        os.makedirs(dataset_path, exist_ok=True)
+        
+        # Download image ZIP file
+        zip_path = hf_hub_download(
+            repo_id="mm-eval/VLMEvalKit",
+            filename=f"{dataset_name}.zip",
+            local_dir=dataset_path,
+            repo_type="dataset"
+        )
+        
+        # Extract ZIP file
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(dataset_path)
+        
+        # Rename the extracted folder to 'images' (folder name same as zip name)
+        old_folder_path = os.path.join(dataset_path, dataset_name)
+        new_folder_path = os.path.join(dataset_path, 'images')
+        
+        if os.path.exists(old_folder_path) and not os.path.exists(new_folder_path):
+            os.rename(old_folder_path, new_folder_path)
+        
+        # Remove the downloaded ZIP file
+        os.remove(zip_path)
 
     def _extract_media_from_sample(self, sample: Dict[str, Any], index: int) -> list:
         """Extract media paths or objects from a sample.
@@ -217,14 +317,16 @@ class VLMEvalKitDataset(Dataset):
             Loaded DataFrame
         """
         # Try to find TSV file for this dataset
-        tsv_file = os.path.join(self.dataset_dir, f"{dataset_name}.tsv")
+        tsv_file = os.path.join(self.dataset_dir, dataset_name, f"{dataset_name}.tsv")
         
+        # Download TSV if not exists
         if not os.path.exists(tsv_file):
-            raise FileNotFoundError(f"TSV file not found: {tsv_file}")
+            print(f"TSV file not found, downloading {dataset_name}...")
+            self.download_tsv(dataset_name)
         
         # Check for large file and use local version if available
-        if os.stat(tsv_file).st_size / 2 ** 30 > 1:
-            local_tsv_file = os.path.join(self.dataset_dir, f"{dataset_name}_local.tsv")
+        if os.path.exists(tsv_file) and os.stat(tsv_file).st_size / 2 ** 30 > 1:
+            local_tsv_file = os.path.join(self.dataset_dir, dataset_name, f"{dataset_name}_local.tsv")
             if os.path.exists(local_tsv_file):
                 tsv_file = local_tsv_file
             else:
@@ -261,8 +363,21 @@ class VLMEvalKitDataset(Dataset):
         end_idx = config["end_idx"]
 
         dataframes = []
+        
+        # Check if all part files exist, if not download
+        missing_file = False
         for part_num in range(start_idx, end_idx+1):
-            tsv_file = os.path.join(self.dataset_dir, pattern.format(part_num))
+            part_file = os.path.join(self.dataset_dir, dataset_name, pattern.format(part_num))
+            if not os.path.exists(part_file):
+                missing_file = True
+                break
+        
+        if missing_file:
+            print(f"Missing file for {dataset_name}, downloading...")
+            self.download_tsv(dataset_name)
+        
+        for part_num in range(start_idx, end_idx+1):
+            tsv_file = os.path.join(self.dataset_dir, dataset_name, pattern.format(part_num))
             
             if not os.path.exists(tsv_file):
                 raise FileNotFoundError(f"TSV file not found: {tsv_file}")
