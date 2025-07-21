@@ -3,7 +3,7 @@ import os
 import re
 import base64
 import string
-import zipfile
+import tarfile
 import pandas as pd
 from PIL import Image
 from io import BytesIO
@@ -122,12 +122,12 @@ class VLMEvalKitDataset(Dataset):
             return path
         
         # Check in dataset-specific images folder
-        abs_path = os.path.join(self.dataset_dir, self.dataset_name, 'images', path)
+        abs_path = os.path.join(self.dataset_dir, 'images', self.dataset_name, path)
         if os.path.exists(abs_path):
             return abs_path
             
         # Download images if folder doesn't exist
-        images_folder = os.path.join(self.dataset_dir, self.dataset_name, 'images')
+        images_folder = os.path.join(self.dataset_dir, 'images', self.dataset_name)
         if not os.path.exists(images_folder):
             print(f"Images folder not found, downloading {self.dataset_name} images...")
             self.download_image(self.dataset_name)
@@ -145,11 +145,7 @@ class VLMEvalKitDataset(Dataset):
         ----------
         dataset_name : str
             Name of the dataset to download
-        """
-        # Create dataset directory if it doesn't exist
-        dataset_path = os.path.join(self.dataset_dir, dataset_name)
-        os.makedirs(dataset_path, exist_ok=True)
-        
+        """        
         # Handle multipart datasets
         if dataset_name in MULTIPART_DATASET_CONFIG:
             config = MULTIPART_DATASET_CONFIG[dataset_name]
@@ -163,7 +159,7 @@ class VLMEvalKitDataset(Dataset):
                     hf_hub_download(
                         repo_id="mm-eval/VLMEvalKit",
                         filename=filename,
-                        local_dir=dataset_path,
+                        local_dir=self.dataset_dir,
                         repo_type="dataset"
                     )
                 except Exception as e:
@@ -174,7 +170,7 @@ class VLMEvalKitDataset(Dataset):
                 hf_hub_download(
                     repo_id="mm-eval/VLMEvalKit",
                     filename=f"{dataset_name}.tsv",
-                    local_dir=dataset_path,
+                    local_dir=self.dataset_dir,
                     repo_type="dataset"
                 )
             except Exception as e:
@@ -185,7 +181,7 @@ class VLMEvalKitDataset(Dataset):
                 hf_hub_download(
                     repo_id="mm-eval/VLMEvalKit", 
                     filename=f"{dataset_name}_local.tsv",
-                    local_dir=dataset_path,
+                    local_dir=self.dataset_dir,
                     repo_type="dataset"
                 )
             except Exception:
@@ -193,37 +189,30 @@ class VLMEvalKitDataset(Dataset):
                 pass
 
     def download_image(self, dataset_name: str) -> None:
-        """Download and extract image ZIP file from Hugging Face for the specified dataset.
+        """Download and extract image archive from Hugging Face for the specified dataset.
         
         Parameters
         ----------
         dataset_name : str
             Name of the dataset to download images for
         """
-        dataset_path = os.path.join(self.dataset_dir, dataset_name)
-        os.makedirs(dataset_path, exist_ok=True)
+        images_base_dir = os.path.join(self.dataset_dir, 'images')
+        os.makedirs(images_base_dir, exist_ok=True)
         
-        # Download image ZIP file
-        zip_path = hf_hub_download(
+        # Download image archive directly to base directory
+        archive_path = hf_hub_download(
             repo_id="mm-eval/VLMEvalKit",
-            filename=f"{dataset_name}.zip",
-            local_dir=dataset_path,
+            filename=f"images/{dataset_name}.tar.gz",
+            local_dir=self.dataset_dir,  # Download to base dir to avoid extra nesting
             repo_type="dataset"
         )
         
-        # Extract ZIP file
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(dataset_path)
+        # Extract archive to images directory  
+        with tarfile.open(archive_path, 'r') as tar_ref:
+            tar_ref.extractall(images_base_dir)
         
-        # Rename the extracted folder to 'images' (folder name same as zip name)
-        old_folder_path = os.path.join(dataset_path, dataset_name)
-        new_folder_path = os.path.join(dataset_path, 'images')
-        
-        if os.path.exists(old_folder_path) and not os.path.exists(new_folder_path):
-            os.rename(old_folder_path, new_folder_path)
-        
-        # Remove the downloaded ZIP file
-        os.remove(zip_path)
+        # Remove the downloaded archive file
+        os.remove(archive_path)
 
     def _extract_media_from_sample(self, sample: Dict[str, Any], index: int) -> list:
         """Extract media paths or objects from a sample.
@@ -269,7 +258,7 @@ class VLMEvalKitDataset(Dataset):
                 image_data = base64.b64decode(sample['image'])
                 image_object = Image.open(BytesIO(image_data))
             except Exception as e:
-                raise ValueError (f"Failed to load image in sample {index}: {e}")
+                raise ValueError(f"Failed to load image in sample {index}: {e}")
             media.append(image_object)
         else:
             raise ValueError(f"No image found in sample {index}.")
@@ -317,7 +306,7 @@ class VLMEvalKitDataset(Dataset):
             Loaded DataFrame
         """
         # Try to find TSV file for this dataset
-        tsv_file = os.path.join(self.dataset_dir, dataset_name, f"{dataset_name}.tsv")
+        tsv_file = os.path.join(self.dataset_dir, f"{dataset_name}.tsv")
         
         # Download TSV if not exists
         if not os.path.exists(tsv_file):
@@ -326,7 +315,7 @@ class VLMEvalKitDataset(Dataset):
         
         # Check for large file and use local version if available
         if os.path.exists(tsv_file) and os.stat(tsv_file).st_size / 2 ** 30 > 1:
-            local_tsv_file = os.path.join(self.dataset_dir, dataset_name, f"{dataset_name}_local.tsv")
+            local_tsv_file = os.path.join(self.dataset_dir, f"{dataset_name}_local.tsv")
             if os.path.exists(local_tsv_file):
                 tsv_file = local_tsv_file
             else:
@@ -367,7 +356,7 @@ class VLMEvalKitDataset(Dataset):
         # Check if all part files exist, if not download
         missing_file = False
         for part_num in range(start_idx, end_idx+1):
-            part_file = os.path.join(self.dataset_dir, dataset_name, pattern.format(part_num))
+            part_file = os.path.join(self.dataset_dir, pattern.format(part_num))
             if not os.path.exists(part_file):
                 missing_file = True
                 break
@@ -377,7 +366,7 @@ class VLMEvalKitDataset(Dataset):
             self.download_tsv(dataset_name)
         
         for part_num in range(start_idx, end_idx+1):
-            tsv_file = os.path.join(self.dataset_dir, dataset_name, pattern.format(part_num))
+            tsv_file = os.path.join(self.dataset_dir, pattern.format(part_num))
             
             if not os.path.exists(tsv_file):
                 raise FileNotFoundError(f"TSV file not found: {tsv_file}")
@@ -430,8 +419,7 @@ class VLMEvalKitDataset(Dataset):
         if not self.dataset_dir:
             raise ValueError("VLMEVALKIT_DATASET_DIR environment variable is not set")
         
-        if not os.path.exists(self.dataset_dir):
-            raise ValueError(f"Dataset directory does not exist: {self.dataset_dir}")
+        os.makedirs(self.dataset_dir, exist_ok=True)
         
         # Handle multipart datasets
         if self.dataset_name in ["MicroBench", "XLRS-Bench-lite", "OmniEarth-Bench", "OmniMedVQA"]:
@@ -459,7 +447,6 @@ class VLMEvalKitDataset(Dataset):
         """
         # Get raw item from pandas DataFrame
         raw_item = self._raw_dataset.iloc[index]
-        media = self._extract_media_from_sample(raw_item, index)
         
         # Convert pandas Series to dict
         sample = raw_item.to_dict()
