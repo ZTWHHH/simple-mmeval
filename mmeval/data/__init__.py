@@ -1,5 +1,4 @@
 from .local import LocalJSONDataset
-# from .huggingface import HuggingFaceDataset
 from .vlm_evalkit import VLMEvalKitDataset
 
 
