@@ -1,0 +1,124 @@
+# .github/workflows/docker-build-on-requirements.yml
+name: Build Docker on Requirements Change
+
+on:
+  push:
+    paths:
+      - '**/requirements.txt'
+  pull_request:
+    paths:
+      - '**/requirements.txt'
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find first changed requirements.txt
+        id: find-requirements
+        uses: tj-actions/changed-files@v40
+        with:
+          files: |
+            **/requirements.txt
+
+      - name: Exit if no requirements.txt changed
+        if: steps.find-requirements.outputs.any_changed != 'true'
+        run: |
+          echo "No requirements.txt files changed. Exiting."
+          exit 0
+
+      - name: Get first requirements file info
+        id: get-req-info
+        run: |
+          # Get the first changed requirements.txt file
+          FIRST_REQ_FILE=$(echo "${{ steps.find-requirements.outputs.all_changed_files }}" | cut -d' ' -f1)
+          DIR_NAME=$(dirname "$FIRST_REQ_FILE")
+          
+          echo "requirements-file=$FIRST_REQ_FILE" >> $GITHUB_OUTPUT
+          echo "dir-name=$DIR_NAME" >> $GITHUB_OUTPUT
+          echo "Building for requirements file: $FIRST_REQ_FILE in directory: $DIR_NAME"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Create Dockerfile
+        run: |
+          DIR_NAME="${{ steps.get-req-info.outputs.dir-name }}"
+          
+          # Create Dockerfile in the same directory as requirements.txt
+          cat > "$DIR_NAME/Dockerfile" << 'EOF'
+          FROM python:3.10-slim
+
+          # Set working directory
+          WORKDIR /app
+
+          # Copy requirements file
+          COPY requirements.txt .
+
+          # Upgrade pip and install requirements
+          RUN pip install --no-cache-dir --upgrade pip && \
+              pip install --no-cache-dir -r requirements.txt
+
+          # Copy the rest of the application (if needed)
+          # COPY . .
+
+          # Default command (can be overridden)
+          CMD ["python", "--version"]
+          EOF
+          
+          echo "Created Dockerfile in $DIR_NAME/"
+          cat "$DIR_NAME/Dockerfile"
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/simple-mmeval-dev
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ steps.get-req-info.outputs.dir-name }}
+          push: ${{ github.event_name == 'push' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Test Docker image locally
+        if: github.event_name == 'pull_request'
+        run: |
+          DIR_NAME="${{ steps.get-req-info.outputs.dir-name }}"
+          
+          # Build locally for PR testing
+          docker build -t test-image "$DIR_NAME/"
+          
+          # Test that the image runs and Python is installed
+          docker run --rm test-image python --version
+          
+          # Test that pip packages are installed
+          docker run --rm test-image pip list
+
+      - name: Clean up
+        if: always()
+        run: |
+          DIR_NAME="${{ steps.get-req-info.outputs.dir-name }}"
+          # Remove the generated Dockerfile
+          rm -f "$DIR_NAME/Dockerfile"
