@@ -39,9 +39,18 @@ jobs:
           FIRST_REQ_FILE=$(echo "${{ steps.find-requirements.outputs.all_changed_files }}" | cut -d' ' -f1)
           DIR_NAME=$(dirname "$FIRST_REQ_FILE")
           
+          # Create tag from path: replace slashes with dashes, handle root directory
+          if [ "$DIR_NAME" = "." ]; then
+            TAG_NAME="root"
+          else
+            TAG_NAME=$(echo "$DIR_NAME" | sed 's/\//-/g')
+          fi
+          
           echo "requirements-file=$FIRST_REQ_FILE" >> $GITHUB_OUTPUT
           echo "dir-name=$DIR_NAME" >> $GITHUB_OUTPUT
+          echo "tag-name=$TAG_NAME" >> $GITHUB_OUTPUT
           echo "Building for requirements file: $FIRST_REQ_FILE in directory: $DIR_NAME"
+          echo "Docker tag will be: $TAG_NAME"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -59,7 +68,7 @@ jobs:
           
           # Create Dockerfile in the same directory as requirements.txt
           cat > "$DIR_NAME/Dockerfile" << 'EOF'
-          FROM python:3.10-slim
+          FROM icywang444/simple-mmeval:base-runtime-nvcc
 
           # Set working directory
           WORKDIR /app
@@ -87,10 +96,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/simple-mmeval-dev
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ steps.get-req-info.outputs.tag-name }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
