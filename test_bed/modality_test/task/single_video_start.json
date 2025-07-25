@@ -1,14 +1,26 @@
 [
-  {
-    "id": 0,
-    "question": "<video> Please provide a detailed description of the contents shown in the video.",
-    "type": "",
-    "concept_type": 0,
-    "stage_lvl": "",
-    "label": "",
-    "choices": {},
-    "image": "['cat.mp4']",
-    "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
-    "hint": ""
-  }
+    {
+        "id": 0,
+        "question": "<video> Please provide a detailed description of the contents shown in the video.",
+        "answer": "",
+        "choices": {},
+        "media": [
+            "cat.mp4"
+        ],
+        "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+        "hint": "",
+        "comment": "Test 'single video start' modality."
+    },
+    {
+        "id": 1,
+        "question": "<video> Please provide a detailed description of the contents shown in the video.",
+        "answer": "",
+        "choices": {},
+        "media": [
+            "sun.mp4"
+        ],
+        "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+        "hint": "",
+        "comment": "Test 'single video start' modality."
+    }
 ]
