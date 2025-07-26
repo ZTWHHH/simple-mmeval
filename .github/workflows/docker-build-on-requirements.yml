@@ -68,7 +68,7 @@ jobs:
           
           # Create Dockerfile in the same directory as requirements.txt
           cat > "$DIR_NAME/Dockerfile" << 'EOF'
-          FROM icywang444/simple-mmeval:base-runtime-nvcc
+          FROM mmevaluation/simple-mmeval:base-runtime-nvcc
 
           # Set working directory
           WORKDIR /app
@@ -94,7 +94,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/simple-mmeval-dev
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/simple-mmeval
           tags: |
             type=raw,value=${{ steps.get-req-info.outputs.tag-name }}
 
