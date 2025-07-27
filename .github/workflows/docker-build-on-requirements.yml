@@ -10,34 +10,68 @@ on:
       - '**/requirements.txt'
 
 jobs:
-  build-docker:
+  detect-changes:
     runs-on: ubuntu-latest
-    
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      has-changes: ${{ steps.find-requirements.outputs.any_changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Find first changed requirements.txt
+      - name: Find changed requirements.txt files
         id: find-requirements
         uses: tj-actions/changed-files@v40
         with:
           files: |
             **/requirements.txt
 
-      - name: Exit if no requirements.txt changed
-        if: steps.find-requirements.outputs.any_changed != 'true'
+      - name: Set matrix for changed files
+        id: set-matrix
+        if: steps.find-requirements.outputs.any_changed == 'true'
         run: |
-          echo "No requirements.txt files changed. Exiting."
-          exit 0
+          files="${{ steps.find-requirements.outputs.all_changed_files }}"
+          
+          # Convert space-separated files to JSON array
+          matrix_json="["
+          first=true
+          for file in $files; do
+            if [ "$first" = true ]; then
+              first=false
+            else
+              matrix_json="$matrix_json,"
+            fi
+            matrix_json="$matrix_json\"$file\""
+          done
+          matrix_json="$matrix_json]"
+          
+          echo "matrix={\"requirements-file\":$matrix_json}" >> $GITHUB_OUTPUT
+          echo "Matrix: {\"requirements-file\":$matrix_json}"
+          
+          echo "Changed requirements files:"
+          for file in $files; do
+            echo "  - $file"
+          done
 
-      - name: Get first requirements file info
+  build-docker:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has-changes == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+      fail-fast: false
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get requirements file info
         id: get-req-info
         run: |
-          # Get the first changed requirements.txt file
-          FIRST_REQ_FILE=$(echo "${{ steps.find-requirements.outputs.all_changed_files }}" | cut -d' ' -f1)
-          DIR_NAME=$(dirname "$FIRST_REQ_FILE")
+          REQ_FILE="${{ matrix.requirements-file }}"
+          DIR_NAME=$(dirname "$REQ_FILE")
           
           # Create tag from path: replace slashes with dashes, handle root directory
           if [ "$DIR_NAME" = "." ]; then
@@ -46,10 +80,10 @@ jobs:
             TAG_NAME=$(echo "$DIR_NAME" | sed 's/\//-/g')
           fi
           
-          echo "requirements-file=$FIRST_REQ_FILE" >> $GITHUB_OUTPUT
+          echo "requirements-file=$REQ_FILE" >> $GITHUB_OUTPUT
           echo "dir-name=$DIR_NAME" >> $GITHUB_OUTPUT
           echo "tag-name=$TAG_NAME" >> $GITHUB_OUTPUT
-          echo "Building for requirements file: $FIRST_REQ_FILE in directory: $DIR_NAME"
+          echo "Building for requirements file: $REQ_FILE in directory: $DIR_NAME"
           echo "Docker tag will be: $TAG_NAME"
 
       - name: Set up Docker Buildx
@@ -112,15 +146,16 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           DIR_NAME="${{ steps.get-req-info.outputs.dir-name }}"
+          TAG_NAME="${{ steps.get-req-info.outputs.tag-name }}"
           
           # Build locally for PR testing
-          docker build -t test-image "$DIR_NAME/"
+          docker build -t "test-image-$TAG_NAME" "$DIR_NAME/"
           
           # Test that the image runs and Python is installed
-          docker run --rm test-image python --version
+          docker run --rm "test-image-$TAG_NAME" python --version
           
           # Test that pip packages are installed
-          docker run --rm test-image pip list
+          docker run --rm "test-image-$TAG_NAME" pip list
 
       - name: Clean up
         if: always()
