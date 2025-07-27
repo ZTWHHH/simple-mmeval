@@ -46,9 +46,9 @@ class ResponseHandler:
             for sample in dataset:
                 if not self.in_cache(sample["id"]):
                     return False
-            print("📖 [Shard {self.rank}] Results completed. Saved output file {self.output_file}.")
+            print(f"📖 [Shard {self.rank}] Results completed. Saved output file {self.output_file}.")
             if os.path.exists(self.cache_file):
-                print(f"🗑️ Deleting cache file {self.cache_file}.")
+                print(f"🗑️  Deleting cache file {self.cache_file}.")
                 os.remove(self.cache_file)
             self._dump_result()
             return True
