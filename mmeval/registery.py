@@ -9,7 +9,7 @@ series_infer_env_mapping = {
         "infer_file": "qwenvl2d5.py",
     },
     "blip2_flan_t5": {
-        "env": "/u/boqiny2/miniconda3/envs/mmeval",
+        "env": "/u/boqiny2/miniconda3/envs/flan-t5",
         "infer_file": "blip2_flan_t5.py",
     }
 }

@@ -10,4 +10,4 @@ python mmeval/run.py \
     --img_dir test_bed \
     --model_name_or_path Salesforce/blip2-flan-t5-xl \
     --gpu_per_parallel 1 \
-    --parallel_per_task 1
+    --parallel_per_task 4
