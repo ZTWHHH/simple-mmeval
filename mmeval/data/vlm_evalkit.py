@@ -9,7 +9,7 @@ from PIL import Image
 from io import BytesIO
 from typing import Dict, Any, Optional
 from dotenv import load_dotenv
-from .dataset import Dataset
+from mmeval.data.base import BaseDataset
 
 
 load_dotenv()
@@ -182,7 +182,7 @@ def normalize_image_placeholders(text: str, num_images: int) -> str:
     return text
 
 
-class VLMEvalKitDataset(Dataset):
+class VLMEvalKitDataset(BaseDataset):
     """Dataset class for loading VLMEvalKit datasets from TSV files.
     
     This class provides a bridge between VLMEvalKit's dataset TSV files and the mmeval Dataset interface.
@@ -197,18 +197,14 @@ class VLMEvalKitDataset(Dataset):
         args: argparse.Namespace
             Arguments from argparse containing dataset configuration
         """
-        # Store args for use in _load_raw_data
-        self.dataset_name = args.dataset
+        
+        super().__init__(args)
+
+    
         self.dataset_dir = os.getenv('DATASET_DIR')
         self.parallel_num = args.parallel_per_task
         self.rank = args.rank
-        
-        # Initialize parent class with parallel processing parameters
-        super().__init__(
-            self.dataset_name, 
-            parallel_num=self.parallel_num, 
-            rank=self.rank
-        )
+    
 
     def _decode_base64_image(self, image: str) -> Image.Image:
         """Decode base64 image string to PIL Image object."""

@@ -34,7 +34,7 @@ class InferenceArguments:
     out_dir: str = field(default=None,
                            metadata={"help": "output directory."})
     score_target: bool = field(default=False, metadata={"help": "whether to output scores for each choice."})
-    
+    resume: bool = field(default=True, metadata={"help": "whether to resume from cache."})
     
 @dataclass
 class ExperimentArguments:
