@@ -4,7 +4,7 @@ series_mapping = {
 
 series_infer_env_mapping = {
     "qwenvl2d5": {
-        "env": "/home/jovyan/shared/Yijiang-Li/envs/vllm",
+        "env": "vllm",
         "infer_file": "qwenvl2d5.py",
     }
 }

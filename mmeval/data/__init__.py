@@ -1,127 +1,66 @@
+import os
+from .utils import download_tsv, get_hf_tsv_url
 from .local import LocalJSONDataset
-from .vlm_evalkit import VLMEvalKitDataset
+from .vlm_evalkit import VLMEvalKitDataset, VLMEVALKIT_DATASET_LIST, VLMEVALKIT_MULTIPART_DATASET_CONFIG, VLMEVALKIT_CONCAT_DATASET_SETS
 
-
-VLMEVALKIT_DATASETS = [
-    '3DSRBench',
-    'A-Bench_TEST',
-    'A-Bench_VAL',
-    'A-OKVQA',
-    'A4Bench',
-    'AI2D_TEST',
-    'AI2D_TEST_NO_MASK',
-    'AMBER',
-    'AesBench_TEST',
-    'AesBench_VAL',
-    'BLINK',
-    'CMMU_MCQ',
-    'CRPE_EXIST',
-    'CharXiv_descriptive_val',
-    'CharXiv_reasoning_val',
-    'ChartQA_TEST',
-    'Creation_MMBench',
-    'DocVQA_TEST',
-    'DocVQA_VAL',
-    'GOBench',
-    'GQA_TestDev_Balanced',
-    'HRBench4K',
-    'HRBench8K',
-    'InfoVQA_TEST',
-    'InfoVQA_VAL',
-    'LEGO',
-    'LLaVABench',
-    'LogicVista',
-    'LogicVista',
-    'MIA-Bench',
-    'MLLMGuard_DS',
-    'MM-IFEval',
-    'MM-Math',
-    'MMBench_dev_ar',
-    'MMBench_dev_cn',
-    'MMBench_dev_en',
-    'MMBench_dev_pt',
-    'MMBench_dev_ru',
-    'MMBench_dev_tr',
-    'MMCR',
-    'MME',
-    'MMMB',
-    'MMMB_ar',
-    'MMMB_cn',
-    'MMMB_en',
-    'MMMB_pt',
-    'MMMB_ru',
-    'MMMB_tr',
-    'MMSci_DEV_Captioning_image_only',
-    'MMSci_DEV_MCQ',
-    'MMStar',
-    'MMT-Bench_ALL',
-    'MMT-Bench_VAL',
-    'MMVP',
-    'MMVet',
-    'MMVet_Hard',
-    'MTL_MMBench_DEV',
-    'MTVQA_TEST',
-    'MUIRBench',
-    'MathVerse_MINI',
-    'MathVerse_MINI_Text_Dominant',
-    'MathVerse_MINI_Text_Lite',
-    'MathVerse_MINI_Vision_Dominant',
-    'MathVerse_MINI_Vision_Intensive',
-    'MathVerse_MINI_Vision_Only',
-    'MathVision',
-    'MathVision_MINI',
-    'MathVista_MINI',
-    'MedXpertQA_MM_test',
-    'MicroBench',
-    'MicroVQA',
-    'NaturalBenchDataset',
-    'OCRBench',
-    'OlympiadBench',
-    'OmniMedVQA',
-    'POPE',
-    'PathMMU_TEST',
-    'PathMMU_VAL',
-    'PathVQA_TEST',
-    'PathVQA_VAL',
-    'Q-Bench1_TEST',
-    'Q-Bench1_VAL',
-    'R-Bench-Dis',
-    'R-Bench-Ref',
-    'RealWorldQA',
-    'SEEDBench2',
-    'SEEDBench2_Plus',
-    'SEEDBench_IMG',
-    'ScienceQA_TEST',
-    'ScienceQA_VAL',
-    'TableVQABench',
-    'TaskMeAnything_v1_imageqa_random',
-    'TextVQA_VAL',
-    'VCR_EN_EASY_ALL',
-    'VCR_EN_HARD_ALL',
-    'VCR_ZH_EASY_ALL',
-    'VCR_ZH_HARD_ALL',
-    'VL-RewardBench',
-    'VStarBench',
-    'VisOnlyQA-VLMEvalKit',
-    'VizWiz',
-    'WeMath',
-    'WeMath',
-    'WeMath_COT',
-    'WildVision',
-    'WorldMedQA-V',
-    'atomic_dataset',
-    'electro_dataset',
-    'hle',
-    'mechanics_dataset',
-    'optics_dataset',
-    'quantum_dataset',
-    'statistics_dataset'
-    ]
 
 def load_dataset(args):
-    if args.dataset in VLMEVALKIT_DATASETS:
-        return VLMEvalKitDataset(args)
-    elif args.dataset == "local@json":
+    """Load dataset based on the dataset specification.
+    
+    Supported formats:
+    - local@json: Load from local JSON file
+    - evalkit@dataset_name: Load VLMEvalKit dataset
+    - evalkit@url: Load from remote TSV URL
+    - dataset_name: Legacy support for VLMEvalKit datasets
+    """
+    dataset_dir = os.getenv('DATASET_DIR')
+
+    if args.dataset == "local@json":
         return LocalJSONDataset(args)
+
+    elif args.dataset.startswith("evalkit@http"):
+        file_url = args.dataset[8:]  # Remove "evalkit@" prefix
+        dataset_name = file_url.split('/')[-1].replace('.tsv', '')
+        if not os.path.exists(os.path.join(dataset_dir, f"{dataset_name}.tsv")):  
+            download_tsv(file_url, dataset_name, dataset_dir)
+            print(f"Downloaded dataset {dataset_name} to {dataset_dir}")
+        args.dataset = dataset_name
+        return VLMEvalKitDataset(args)
+
+    elif args.dataset.startswith("evalkit@"):
+        dataset_name = args.dataset[8:]  # Remove "evalkit@" prefix
+        if dataset_name not in VLMEVALKIT_DATASET_LIST:
+            raise ValueError(f"Unsupported VLMEvalKit dataset: {args.dataset}")
+
+        if dataset_name in VLMEVALKIT_MULTIPART_DATASET_CONFIG:
+            config = VLMEVALKIT_MULTIPART_DATASET_CONFIG[dataset_name]
+            pattern = config["filename_pattern"]
+            start_idx = config["start_idx"]
+            end_idx = config["end_idx"]
+
+            for part_idx in range(start_idx, end_idx+1):
+                tsv_file = os.path.join(dataset_dir, pattern.format(part_idx))
+                if not os.path.exists(tsv_file):
+                    file_url = get_hf_tsv_url(pattern.format(part_idx))
+                    download_tsv(file_url, pattern.format(part_idx), dataset_dir)
+                    print(f"Downloaded dataset {pattern.format(part_idx)} to {dataset_dir}")
+
+        elif dataset_name in VLMEVALKIT_CONCAT_DATASET_SETS:
+            dataset_list = VLMEVALKIT_CONCAT_DATASET_SETS[dataset_name]
+            for sub_dataset_name in dataset_list:
+                if not os.path.exists(os.path.join(dataset_dir, f"{sub_dataset_name}.tsv")):
+                    file_url = get_hf_tsv_url(sub_dataset_name)
+                    download_tsv(file_url, sub_dataset_name, dataset_dir)
+                    print(f"Downloaded dataset {sub_dataset_name} to {dataset_dir}")
+
+        else:
+            file_url = get_hf_tsv_url(dataset_name)
+            if not os.path.exists(os.path.join(dataset_dir, f"{dataset_name}.tsv")):
+                download_tsv(file_url, dataset_name, dataset_dir)
+                print(f"Downloaded dataset {dataset_name} to {dataset_dir}") 
+        
+        args.dataset = dataset_name
+        return VLMEvalKitDataset(args)
+
     else:
-        raise ValueError(f"Unsupported dataset: {args.dataset}") 
+        raise ValueError(f"Unsupported dataset specification: {args.dataset}") 
