@@ -11,12 +11,19 @@ class ModelArguments:
     model_name_or_path: Optional[str] = field(default=None)
     
     # inference hyper-parameters
-    max_new_tokens: int = field(default=512, metadata={"help": "maximum number of new tokens to generate."})
-    temperature: float = field(default=0.0, metadata={"help": "temperature for sampling."})
-    top_p: float = field(default=None, metadata={"help": "top-p for sampling."})
+    max_new_tokens: int = field(default=None, metadata={"help": "maximum number of new tokens to generate."})
+    max_length: int = field(default=None, metadata={"help": " maximum length the generated tokens can have."})
+    min_length: int = field(default=None, metadata={"help": "minimum length of the sequence to be generated."})
+    do_sample: bool = field(default=None, metadata={"help": "whether or not to use sampling."})
+    num_beams: int = field(default=None, metadata={"help": "number of beams for beam search."})
+    temperature: float = field(default=None, metadata={"help": "temperature for sampling."})
     top_k: int = field(default=None, metadata={"help": "top-k for sampling."})
+    top_p: float = field(default=None, metadata={"help": "top-p for sampling."})
     repetition_penalty: float = field(default=None, metadata={"help": "repetition penalty for sampling."})
-    
+    length_penalty: float = field(default=None, metadata={"help": "length penalty for sampling."})
+
+    # precision hyper-parameters
+    dtype: str = field(default=None, metadata={"help": "precision for model."})
 
 @dataclass
 class DataArguments:
