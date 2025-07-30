@@ -22,6 +22,9 @@ class ModelArguments:
     repetition_penalty: float = field(default=None, metadata={"help": "repetition penalty for sampling."})
     length_penalty: float = field(default=None, metadata={"help": "length penalty for sampling."})
 
+    # cache hyper-parameters
+    use_cache: bool = field(default=None, metadata={"help": "whether to use cache to speed up decoding."})
+
     # precision hyper-parameters
     dtype: str = field(default=None, metadata={"help": "precision for model."})
 
