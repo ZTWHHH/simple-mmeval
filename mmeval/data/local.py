@@ -1,36 +1,45 @@
 import json
 import os
+from PIL import Image
 
-class LocalJSONDataset:
+from mmeval.data.base import BaseDataset
+
+class LocalJSONDataset(BaseDataset):
+    """Dataset class for loading local JSON files.
+    """
+    
     def __init__(self, args):
-        self.args = args
-        self.parallel_per_task = args.parallel_per_task
-        self.rank = args.rank
-
         self.data_file = args.infile
-        data = json.load(open(self.data_file, "r"))
         self.img_dir = args.img_dir
+        super().__init__(args)
+
+    def _load_raw_data(self, args):
+        data = json.load(open(self.data_file, "r"))
 
         data_list = []
-        for sample in data:
-            media = [os.path.join(self.img_dir, f) for f in sample["media"]]
-            sample["media"] = media
+        for i, sample in enumerate(data):
+            assert "eval-id" not in sample, "eval-id already exists"
+            sample["eval-id"] = i
+            sample["media"] = [os.path.join(self.img_dir, f) for f in sample["media"]]
             data_list.append(sample)
         
-        self.data = data_list[self.rank::self.parallel_per_task]
-    @property
-    def name(self):
-        return f"local@{self.data_file.split('/')[-1]}"
+        return data_list
     
-    def __iter__(self):
-        return iter(self.data)
+    def _process_sample(self, idx: int):
+        
+        sample = self._raw_dataset[idx]
+        
+        sample["media"] = [self.load_image(f) for f in sample["media"]]
+        
+        return sample
     
-    def __next__(self):
-        return next(self.data)  
 
-    def __getitem__(self, index):
-        return self.data[index]
-
-    def __len__(self):
-        return len(self.data)
+    def __repr__(self):
+        if self.parallel_per_task > 1:
+            return f"local@{self.data_file.split('/')[-1]}(rank={self.rank}/{self.parallel_per_task}, local={len(self)}, global={self.global_length})"
+        else:
+            return f"local@{self.data_file.split('/')[-1]}(samples={len(self)})"
+    
+    def __str__(self):
+        return self.__repr__()
     
