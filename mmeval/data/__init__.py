@@ -1,5 +1,5 @@
 from .local import LocalJSONDataset
-from .evalkit import VLMEvalKitDataset
+from .evalkit import load_evalkit_dataset
 
 
 def load_dataset(args):
@@ -14,8 +14,8 @@ def load_dataset(args):
     if args.dataset == "local@json":
         return LocalJSONDataset(args)
     elif args.dataset.endswith(".tsv"):
-        return VLMEvalKitDataset(args).load_dataset()
+        return load_evalkit_dataset(args)
     elif args.dataset.startswith("evalkit@"):
-        return VLMEvalKitDataset(args).load_dataset()
+        return load_evalkit_dataset(args)
     else:
         raise ValueError(f"Unsupported dataset specification: {args.dataset}") 

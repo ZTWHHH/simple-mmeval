@@ -6,6 +6,7 @@ import pandas as pd
 from typing import Dict, Any
 from dotenv import load_dotenv
 from mmeval.data.base import BaseDataset
+from mmeval.data.utils import download_tsv
 
 load_dotenv(dotenv_path=".env", override=True)
 
@@ -36,7 +37,16 @@ class TSVDataset(BaseDataset):
             Arguments from argparse containing dataset configuration
         """
         self.dataset_dir = os.getenv('DATASET_DIR')
-        self.dataset_name = args.dataset
+        self.dataset_url = None
+        
+        if args.dataset.startswith("http"):
+            self.file_name = args.dataset.split('/')[-1].replace('.tsv', '')
+            self.dataset_url = args.dataset
+        elif os.path.exists(args.dataset):
+            self.file_name = args.dataset.split('/')[-1].replace('.tsv', '')
+        else:
+            self.file_name = args.dataset
+
         super().__init__(args)
     
     def _load_raw_data(self, args) -> Any:
@@ -47,13 +57,16 @@ class TSVDataset(BaseDataset):
         Any
             Pandas DataFrame containing the dataset
         """
-        tsv_file = os.path.join(self.dataset_dir, f"{self.dataset_name}.tsv")
-        dataset = pd.read_csv(tsv_file, sep='\t')
+        data_file = os.path.join(self.dataset_dir, f"{self.file_name}.tsv")
+
+        if not os.path.exists(data_file) and self.dataset_url:
+            download_tsv(self.dataset_url, data_file)
+            
+        dataset = pd.read_csv(data_file, sep='\t')
 
         if "eval-id" not in dataset.columns:
             dataset["eval-id"] = range(len(dataset))
         
-        # Handle single file datasets
         return dataset
 
     def _extract_media(self, sample: Dict[str, Any]) -> list:
@@ -146,9 +159,9 @@ class TSVDataset(BaseDataset):
 
     def __repr__(self):
         if self.parallel_per_task > 1:
-            return f"{self.dataset_name}(rank={self.rank}/{self.parallel_per_task}, local={len(self)}, global={self.global_length})"
+            return f"{self.file_name}(rank={self.rank}/{self.parallel_per_task}, local={len(self)}, global={self.global_length})"
         else:
-            return f"{self.dataset_name}(samples={len(self)})"
+            return f"{self.file_name}(samples={len(self)})"
     
     def __str__(self):
         return self.__repr__()
