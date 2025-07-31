@@ -1,0 +1,101 @@
+"""
+Fuyu-8B is a multi-modal text and image transformer trained by Adept AI.
+https://huggingface.co/adept/fuyu-8b
+"""
+import re
+import copy
+import torch
+import numpy as np
+from PIL import Image
+from transformers import FuyuForCausalLM, AutoProcessor, AutoTokenizer
+
+from mmeval.infer.task import Task
+from mmeval.utils import constants
+from mmeval.utils.argparser import parse_args
+from mmeval.utils.scorer import IncrementalLMScorer, target_tokens
+
+BEGINNING_OF_ANSWER_STRING = "<0x04>"
+
+def read_video_pyav(container, indices):
+    '''
+    Decode the video with PyAV decoder.
+
+    Args:
+        container (av.container.input.InputContainer): PyAV container.
+        indices (List[int]): List of frame indices to decode.
+
+    Returns:
+        np.ndarray: np array of decoded frames of shape (num_frames, height, width, 3).
+    '''
+    frames = []
+    container.seek(0)
+    start_index = indices[0]
+    end_index = indices[-1]
+    for i, frame in enumerate(container.decode(video=0)):
+        if i > end_index:
+            break
+        if i >= start_index and i in indices:
+            frames.append(frame)
+    return np.stack([x.to_ndarray(format="rgb24") for x in frames])
+
+class TaskRunner(Task):
+    def __init__(self, args):
+        super().__init__(args)
+        self.args = args
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    def load_model(self, args):
+        self.model = FuyuForCausalLM.from_pretrained(args.model_name_or_path, torch_dtype="auto", device_map="auto")
+        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
+        self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
+    
+    def run_sample(self, sample: dict):
+        ori_sample = copy.deepcopy(sample)
+        messages = self.parse_input(sample)
+
+        if not self.args.score_target:
+            ori_sample["response"] = self._generate_response(messages, sample['media'])
+        else:
+            ori_sample.update(self._score_choices(messages, sample['media'], sample))
+
+        return ori_sample
+
+    def _generate_response(self, messages, media):
+        inputs = self.processor(text=messages, images=media, return_tensors="pt").to(self.device, torch.float16)
+        generated_ids = self.model.generate(**inputs, max_new_tokens=256)
+        generated_ids_trimmed = [
+            out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+        ]
+
+        output_text = self.processor.batch_decode(
+            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )[0].strip()
+
+        return output_text
+
+    def _score_choices(self, messages, media, sample):
+        contents = sample.get("choices")
+        full = [messages + BEGINNING_OF_ANSWER_STRING+content for content in contents]
+        full_encoded = [self.processor(text=i, images=media, return_tensors="pt").to(self.device) for i in full]
+        prompt_encoded = self.processor(text=messages, images=media, return_tensors="pt").to(self.device)
+
+        target_toks = target_tokens(self.tokenizer, contents)
+
+        scorer = IncrementalLMScorer(self.model, self.device, tokenizer=self.tokenizer)
+        scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)
+        
+        return {
+            "score": scores,
+            "response": contents[np.argmax(scores)]
+        }
+
+
+    def parse_input(self, sample:dict):
+        question = sample["prompt"]
+        question = question.replace(constants.image, "")
+        return question
+    
+if __name__ == "__main__":
+    args = parse_args()
+    model_evaluator = TaskRunner(args)
+    model_evaluator.inference_dataset()
