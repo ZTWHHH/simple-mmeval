@@ -25,8 +25,10 @@ class ModelArguments:
     # cache hyper-parameters
     use_cache: bool = field(default=None, metadata={"help": "whether to use cache to speed up decoding."})
 
-    # precision hyper-parameters
+    # model hyper-parameters
     dtype: str = field(default=None, metadata={"help": "precision for model."})
+    low_cpu_mem_usage: bool = field(default=None, metadata={"help": "whether to use low cpu memory usage."})
+    use_flash_attn: bool = field(default=None, metadata={"help": "whether to use flash attention."})
 
 @dataclass
 class DataArguments:
