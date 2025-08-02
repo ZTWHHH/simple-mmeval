@@ -4,11 +4,9 @@ import ast
 import string
 import pandas as pd
 from typing import Dict, Any
-from dotenv import load_dotenv
 from mmeval.data.base import BaseDataset
 from mmeval.data.utils import download_tsv
 
-load_dotenv(dotenv_path=".env", override=True)
 
 IMG_PLACEHOLDER_RE = re.compile(
     r"""
@@ -36,7 +34,7 @@ class TSVDataset(BaseDataset):
         args: argparse.Namespace
             Arguments from argparse containing dataset configuration
         """
-        self.dataset_dir = os.getenv('DATASET_DIR')
+        self.dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
         self.dataset_url = None
         
         if args.dataset.startswith("http"):

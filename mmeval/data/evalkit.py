@@ -1,11 +1,8 @@
 import os
 import pandas as pd
 from typing import Any
-from dotenv import load_dotenv
 from mmeval.data.tsv import TSVDataset
 from mmeval.data.utils import download_tsv
-
-load_dotenv(dotenv_path=".env", override=True)
 
 # VLMEvalKit supported datasets
 VLMEVALKIT_DATASET_LIST = [
@@ -223,8 +220,7 @@ def load_evalkit_dataset(args) -> Any:
         Pandas DataFrame containing the dataset
     """
     # Validate environment
-    dataset_dir = os.getenv('DATASET_DIR')
-    os.makedirs(dataset_dir, exist_ok=True)
+    dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
 
     if args.dataset.startswith("evalkit@"):
         dataset_name = args.dataset.split("@")[-1]
