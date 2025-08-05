@@ -35,7 +35,7 @@ class LocalJSONDataset(BaseDataset):
             self.load_image(f) if placeholder == "<image>" else f
             for placeholder, f in zip(placeholder_list, sample["media"])
         ]
-        print(sample)
+
         return sample
     
 
