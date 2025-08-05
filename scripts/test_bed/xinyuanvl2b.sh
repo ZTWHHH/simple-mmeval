@@ -6,5 +6,6 @@ python mmeval/run.py \
     --out_dir test_bed/test_xinyuanvl-2b \
     --img_dir test_bed \
     --model_name_or_path Xinyuan-VL-2B \
+    --max_new_tokens 256 \
     --gpu_per_parallel 1 \
     --parallel_per_task 4 
