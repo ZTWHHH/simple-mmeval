@@ -1,0 +1,68 @@
+[
+    {
+        "id": 0,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "choices": {},
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0,
+        "response": "[INST]  \n Please provide a detailed description of the contents shown in the image. [/INST] The image shows a GMC pickup truck in motion on a dirt road. The truck is a modern model with a sleek design, featuring a prominent front grille with the GMC logo in the center. The vehicle has a chrome grille, black side mirrors, and black wheels with a multi-spoke design. The truck is equipped with a four-door crew cab configuration, and the windows are tinted.\n\nThe truck is kicking up a cloud of dust as it moves, indicating that the road is unpaved and possibly dry. The background of the image reveals a rugged landscape with rocky terrain and a clear sky, suggesting that the photo was taken during the day in a desert-like environment. The lighting in the image is bright, with the sun casting shadows on the ground, which adds to the dynamic feel of the scene. "
+    },
+    {
+        "id": 1,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "choices": {},
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1,
+        "response": "[INST]  \n Please provide a detailed description of the contents shown in the image. [/INST] The image shows a high-speed motor yacht cutting through the water. The yacht is predominantly white with a dark blue stripe running along its side. It has a sleek, modern design with a large, open deck area at the rear, which is likely used for relaxation or entertaining guests. The bow of the yacht is visible, and it appears to be equipped with a radar dome and other navigation equipment.\n\nThe yacht is moving at a high speed, as evidenced by the wake it is creating, which is white and frothy, indicating that the water is being displaced by the boat's movement. The wake is trailing behind the yacht, suggesting that the boat is moving forward.\n\nThe background of the image shows a clear sky and calm ocean, with no other vessels or landmarks visible. The water is a deep blue, and the horizon is visible in the distance. The image is taken from a perspective that is slightly above the yacht, providing a view of the boat's profile and the wake it is creating.\n\nThere are no visible texts or branding on the yacht, and the image is a standard photograph with no apparent filters or artistic manipulations. The style of the image is realistic, capturing the yacht in its natural environment. "
+    },
+    {
+        "id": 2,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "choices": {},
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2,
+        "response": "[INST]  \n \n Please provide a detailed description of the contents shown in the two images. [/INST] The image shows a high-performance off-road vehicle, which appears to be a GMC Hummer EV, driving on a sandy surface with a body of water in the background. The vehicle is equipped with large, black off-road tires and has a distinctive, angular design with a prominent front grille and a raised suspension. The color scheme of the vehicle is a combination of white and black, with the GMC logo prominently displayed on the front grille. The vehicle is kicking up a significant amount of sand as it moves, indicating its powerful acceleration and off-road capabilities. The background features a clear sky and a calm body of water, suggesting a desert or coastal environment. The image is a high-resolution photograph with vibrant colors and a dynamic composition that emphasizes the vehicle's ruggedness and speed. "
+    },
+    {
+        "id": 3,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "choices": {},
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3,
+        "response": "[INST]  \n \n Please provide a detailed description of the contents shown in the two images. [/INST] The image shows a GMC Hummer H3, a mid-size SUV, in motion on a body of water. The vehicle is equipped with large off-road tires and is kicking up a significant amount of water spray, indicating high speed. The Hummer is painted in a metallic silver color and features the GMC logo prominently on the front grille. The vehicle is designed with a boxy shape, typical of the Hummer lineup, and has a robust, utilitarian appearance. The background suggests a clear day with a blue sky and a calm water surface, which contrasts with the dynamic action of the vehicle. The image is likely a promotional or advertising photograph, showcasing the vehicle's off-road capabilities. "
+    },
+    {
+        "id": 4,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "choices": {},
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4,
+        "response": "[INST]  \n \nPlease provide a detailed description of the contents shown in  and . [/INST] The image shows a high-performance off-road vehicle, which appears to be a GMC Hummer EV, a fully electric SUV. The vehicle is captured in motion, with its front wheels lifted off the ground, suggesting it is traversing a rough terrain or possibly performing a stunt. The Hummer EV is characterized by its robust and boxy design, with a prominent front grille, large wheels, and a high ground clearance. The vehicle's body is painted in a metallic silver color, and it features a black roof and a black front bumper. The GMC logo is prominently displayed on the front grille.\n\nThe background of the image shows a rugged landscape with a body of water, possibly a lake or a river, and a rocky shoreline. The sky is clear, indicating good weather conditions. The image is likely a promotional or advertising photograph, showcasing the vehicle's off-road capabilities and the type of environment it can handle. "
+    },
+    {
+        "id": 5,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "choices": {},
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5,
+        "response": "[INST]  \n \nPlease provide a detailed description of the contents shown in  and . [/INST] The image shows a GMC Hummer H3, a mid-size SUV, in motion on a body of water. The vehicle is equipped with a snorkel, which is a tube that extends above the vehicle's roofline, allowing it to pass through water without the risk of water entering the engine compartment. The Hummer is kicking up a significant amount of water spray, indicating that it is moving at a high speed. The vehicle's design is rugged and utilitarian, with a boxy shape and a high ground clearance, which is typical for off-road vehicles. The GMC logo is prominently displayed on the front grille. The background features a clear sky and a calm sea, suggesting that the photo was taken during the day under good weather conditions. The image is likely used for promotional or advertising purposes, showcasing the vehicle's off-road capabilities. "
+    }
+]
