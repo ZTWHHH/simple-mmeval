@@ -84,7 +84,6 @@ class TaskRunner(Task):
                 messages, tokenize=False, add_generation_prompt=True
             )
             full = [text + content for content in contents]
-            media = [Image.open(m) for m in media]
             full_encoded = [self.processor(text=i, images=media, return_tensors="pt").to(self.device) for i in full]
             prompt_encoded = self.processor(text=text, images=media, return_tensors="pt").to(self.device)
         elif modality == "video":
