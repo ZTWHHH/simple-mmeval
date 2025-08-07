@@ -47,10 +47,14 @@ class ModelArguments:
 class DataArguments:
     dataset: str = field(default=None,
                            metadata={"help": "name of the dataset."})
+    split: str = field(default="None",
+                           metadata={"help": "split of the dataset for huggingface."})
     infile: Optional[str]= field(default=None,
                            metadata={"help": "input file."})
     img_dir: Optional[str] = field(default=None,
                            metadata={"help": "image directory."})
+    circular_eval: bool = field(default=False, metadata={"help": "whether to prepare data for circular evaluation."})
+
 @dataclass
 class InferenceArguments:
     save_freq: int = field(default=3, metadata={"help": "save frequency for cache."})
