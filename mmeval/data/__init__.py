@@ -1,127 +1,21 @@
 from .local import LocalJSONDataset
-from .vlm_evalkit import VLMEvalKitDataset
+from .evalkit import load_evalkit_dataset
 
-
-VLMEVALKIT_DATASETS = [
-    '3DSRBench',
-    'A-Bench_TEST',
-    'A-Bench_VAL',
-    'A-OKVQA',
-    'A4Bench',
-    'AI2D_TEST',
-    'AI2D_TEST_NO_MASK',
-    'AMBER',
-    'AesBench_TEST',
-    'AesBench_VAL',
-    'BLINK',
-    'CMMU_MCQ',
-    'CRPE_EXIST',
-    'CharXiv_descriptive_val',
-    'CharXiv_reasoning_val',
-    'ChartQA_TEST',
-    'Creation_MMBench',
-    'DocVQA_TEST',
-    'DocVQA_VAL',
-    'GOBench',
-    'GQA_TestDev_Balanced',
-    'HRBench4K',
-    'HRBench8K',
-    'InfoVQA_TEST',
-    'InfoVQA_VAL',
-    'LEGO',
-    'LLaVABench',
-    'LogicVista',
-    'LogicVista',
-    'MIA-Bench',
-    'MLLMGuard_DS',
-    'MM-IFEval',
-    'MM-Math',
-    'MMBench_dev_ar',
-    'MMBench_dev_cn',
-    'MMBench_dev_en',
-    'MMBench_dev_pt',
-    'MMBench_dev_ru',
-    'MMBench_dev_tr',
-    'MMCR',
-    'MME',
-    'MMMB',
-    'MMMB_ar',
-    'MMMB_cn',
-    'MMMB_en',
-    'MMMB_pt',
-    'MMMB_ru',
-    'MMMB_tr',
-    'MMSci_DEV_Captioning_image_only',
-    'MMSci_DEV_MCQ',
-    'MMStar',
-    'MMT-Bench_ALL',
-    'MMT-Bench_VAL',
-    'MMVP',
-    'MMVet',
-    'MMVet_Hard',
-    'MTL_MMBench_DEV',
-    'MTVQA_TEST',
-    'MUIRBench',
-    'MathVerse_MINI',
-    'MathVerse_MINI_Text_Dominant',
-    'MathVerse_MINI_Text_Lite',
-    'MathVerse_MINI_Vision_Dominant',
-    'MathVerse_MINI_Vision_Intensive',
-    'MathVerse_MINI_Vision_Only',
-    'MathVision',
-    'MathVision_MINI',
-    'MathVista_MINI',
-    'MedXpertQA_MM_test',
-    'MicroBench',
-    'MicroVQA',
-    'NaturalBenchDataset',
-    'OCRBench',
-    'OlympiadBench',
-    'OmniMedVQA',
-    'POPE',
-    'PathMMU_TEST',
-    'PathMMU_VAL',
-    'PathVQA_TEST',
-    'PathVQA_VAL',
-    'Q-Bench1_TEST',
-    'Q-Bench1_VAL',
-    'R-Bench-Dis',
-    'R-Bench-Ref',
-    'RealWorldQA',
-    'SEEDBench2',
-    'SEEDBench2_Plus',
-    'SEEDBench_IMG',
-    'ScienceQA_TEST',
-    'ScienceQA_VAL',
-    'TableVQABench',
-    'TaskMeAnything_v1_imageqa_random',
-    'TextVQA_VAL',
-    'VCR_EN_EASY_ALL',
-    'VCR_EN_HARD_ALL',
-    'VCR_ZH_EASY_ALL',
-    'VCR_ZH_HARD_ALL',
-    'VL-RewardBench',
-    'VStarBench',
-    'VisOnlyQA-VLMEvalKit',
-    'VizWiz',
-    'WeMath',
-    'WeMath',
-    'WeMath_COT',
-    'WildVision',
-    'WorldMedQA-V',
-    'atomic_dataset',
-    'electro_dataset',
-    'hle',
-    'mechanics_dataset',
-    'optics_dataset',
-    'quantum_dataset',
-    'statistics_dataset'
-    ]
 
 def load_dataset(args):
-    if args.dataset in VLMEVALKIT_DATASETS:
-        return VLMEvalKitDataset(args)
-    elif args.dataset == "local@json":
+    """Load dataset based on the dataset specification.
+    
+    Supported formats:
+    - local@json: Load from local JSON file
+    - evalkit@dataset_name: Load VLMEvalKit dataset
+    - evalkit@url: Load from remote TSV URL
+    - dataset_name: Legacy support for VLMEvalKit datasets
+    """
+    if args.dataset == "local@json":
         return LocalJSONDataset(args)
+    elif args.dataset.endswith(".tsv"):
+        return load_evalkit_dataset(args)
+    elif args.dataset.startswith("evalkit@"):
+        return load_evalkit_dataset(args)
     else:
-        raise ValueError(f"Unsupported dataset: {args.dataset}") 
+        raise ValueError(f"Unsupported dataset specification: {args.dataset}") 
