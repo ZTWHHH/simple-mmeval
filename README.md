@@ -136,6 +136,12 @@ Currently supported model series:
 ## Supported Datasets
 
 
+| Dataset                                                                  | Split/Version | Loader Type  |
+| ------------------------------------------------------------------------ | ------------- | ------------ |
+| [MMBench-en](https://huggingface.co/datasets/mm-eval/MMBench-en) | dev, test     | `mmeval_hf@` |
+
+
+
 ### Custom Dataset Support
 - **Local JSON**: Simple JSON format for custom evaluation datasets
 - **Custom Loaders**: Easy integration of new dataset formats through the modular dataset system
