@@ -1,5 +1,5 @@
 import re
-from datasets import load_dataset
+from datasets import load_dataset, Image
 from mmeval.data.base import BaseDataset
 
 class MMEvalHFDataset(BaseDataset):
@@ -13,6 +13,11 @@ class MMEvalHFDataset(BaseDataset):
 
     def _load_raw_data(self, args):
         ds = load_dataset(self.dataset_name, split=self.split)
+        if "image" in ds.column_names:
+            ds = ds.cast_column("image", Image(decode=True))
+            print(f"Loaded dataset {self.dataset_name} with image column.")
+        if "video" in ds.column_names:
+            ds = ds.cast_column("video", Image(decode=True))
         return ds
 
     def convert_circular(self, **kwargs) -> any:
@@ -23,27 +28,31 @@ class MMEvalHFDataset(BaseDataset):
         sample = self._raw_dataset[idx]
         prompt = sample["prompt"] if "prompt" in sample else sample["question"]
 
-        # media: always a list, follow <image> and <video> order in prompt
+        # Normalize to list
+        image = sample.get("image", None)
+        video = sample.get("video", None)
+
+        if image is None:
+            image_list = []
+        elif isinstance(image, list):
+            image_list = image
+        else:
+            image_list = [image]
+
+        if video is None:
+            video_list = []
+        elif isinstance(video, list):
+            video_list = video
+        else:
+            video_list = [video]
+
         media = []
-        image_list = sample["image"] if "image" in sample and sample["image"] is not None else []
-        video_list = sample["video"] if "video" in sample and sample["video"] is not None else []
-
-        if not isinstance(image_list, list):
-            image_list = [image_list]
-        if not isinstance(video_list, list):
-            video_list = [video_list]
-
-        img_idx, vid_idx = 0, 0
-        placeholder_list = re.findall(r"<(image|video)>", prompt)
-        for ph in placeholder_list:
-            if ph == "<image>":
-                if img_idx < len(image_list):
-                    media.append(image_list[img_idx])
-                    img_idx += 1
-            elif ph == "<video>":
-                if vid_idx < len(video_list):
-                    media.append(video_list[vid_idx])
-                    vid_idx += 1
+        placeholder_list = re.findall(r"<(video|image)>", prompt)
+        for tag in placeholder_list:
+            if tag == "image" and image_list:
+                media.append(image_list.pop(0))
+            elif tag == "video" and video_list:
+                media.append(video_list.pop(0))
 
         # Conditional logic for circular_eval
         if self.circular_eval:
