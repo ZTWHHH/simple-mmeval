@@ -18,7 +18,7 @@ series_infer_env_mapping = {
         "infer_file": "gemma3.py",
     },
     "moondream1": {
-        "env": os.path.join(env_dir, "moondream1"),
+        "env": os.path.join(env_dir, "mmeval"),
         "infer_file": "moondream1.py",
     }, 
 }
