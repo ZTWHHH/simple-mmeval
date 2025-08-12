@@ -1,8 +1,5 @@
 export PYTHONPATH=./:$PYTHONPATH
 
-export HF_HOME=/scratch/bbkc/boqiny2/simple-mmeval/.cache/huggingface
-export HF_DATASETS_CACHE=/scratch/bbkc/boqiny2/simple-mmeval/.cache/huggingface/datasets
-
 python mmeval/run.py \
     --infile test_bed/image.json \
     --dataset local@json \
