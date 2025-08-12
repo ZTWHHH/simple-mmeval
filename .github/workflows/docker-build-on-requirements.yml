@@ -104,7 +104,10 @@ jobs:
 
           COPY $(basename "$REQ_FILE") requirements.txt
 
-          RUN pip install --no-cache-dir --upgrade pip && \
+          # Switch to Python 3.10 via conda
+          RUN conda install -y python=3.10 && \
+              conda init bash && \
+              pip install --no-cache-dir --upgrade pip && \
               pip install --no-cache-dir -r requirements.txt
 
           CMD ["python", "--version"]
@@ -112,6 +115,7 @@ jobs:
           
           echo "Created Dockerfile in $DIR_NAME/"
           cat "$DIR_NAME/Dockerfile"
+
 
       - name: Generate Docker metadata
         id: meta
