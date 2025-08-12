@@ -17,6 +17,7 @@ from mmeval.utils.argparser import parse_args
 class TaskRunner(Task):
     def __init__(self, args):
         self.args = args
+        self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         super().__init__(args)
     
@@ -31,7 +32,7 @@ class TaskRunner(Task):
     
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
-        messages = self.parse_input(sample)
+        messages = self._parse_input(sample)
         
         prompt = ""
         image_path = None
@@ -48,9 +49,10 @@ class TaskRunner(Task):
 
         return ori_sample
 
-    def _generate_response(self, text, image_path):
-        if image_path:
-            image = Image.open(image_path)
+    def _generate_response(self, text, image):
+        if image:
+            if isinstance(image, str):
+                image = Image.open(image)
             output = self.model.query(image, text)
             return output["answer"]
         else:
@@ -59,11 +61,11 @@ class TaskRunner(Task):
     def _score_choices(self, text, image_path, sample):
         pass
 
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def _parse_input(self, sample:dict):
+        prompt = sample["prompt"]
         # placeholder <>, can be image, video, audio, etc.
-        q_chunks = re.split(r'(<[^>]*>)', question)
-        images = copy.deepcopy(sample['media'])
+        q_chunks = re.split(r'(<[^>]*>)', prompt)
+        media = copy.deepcopy(sample['media'])
 
         messages = [
             {
@@ -75,21 +77,14 @@ class TaskRunner(Task):
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
-            
-            # Check if chunk contains any placeholder
-            if chunk in constants.all:
-                
-                # Moondream2 only supports images
-                assert chunk == constants.image, f"Moondream2 only supports images, got {chunk}"
-
-                media_file = images.pop(0)
+            if chunk == constants.image:
+                media_file = media.pop(0)
                 messages[0]["content"].append(
                     {
                         "type": "image",
                         "image": media_file
                     }
                 )       
-
             else:
                 messages[0]["content"].append(
                     {
@@ -97,6 +92,7 @@ class TaskRunner(Task):
                         "text": chunk
                     }
                 )
+
         return messages
 
     
