@@ -8,7 +8,7 @@ from transformers import LlavaOnevisionForConditionalGeneration, AutoProcessor, 
 
 from mmeval.infer.task import Task
 from mmeval.utils import constants
-from mmeval.utils.argparser import parse_args
+from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
 from mmeval.utils.scorer import IncrementalLMScorer, target_tokens
 
 
@@ -38,10 +38,15 @@ class TaskRunner(Task):
     def __init__(self, args):
         super().__init__(args)
         self.args = args
+        self.dtype = getattr(args, "dtype") or torch.bfloat16
+        self.default_model_kwargs = {"device_map": "auto"}
+        self.default_gen_kwargs = {"max_new_tokens": 100, "do_sample": False}
+        self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
+        self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     def load_model(self, args):
-        self.model = LlavaOnevisionForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype="auto", device_map="auto")
+        self.model = LlavaOnevisionForConditionalGeneration.from_pretrained(args.model_name_or_path, **self.model_kwargs)
         self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
     
@@ -66,7 +71,7 @@ class TaskRunner(Task):
                 messages, num_frames=8, tokenize=True, add_generation_prompt=True, return_dict=True, return_tensors="pt"
             ).to(self.device, torch.float16)
         
-        generated_ids = self.model.generate(**inputs, max_new_tokens=256)
+        generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         generated_ids_trimmed = [
             out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]
