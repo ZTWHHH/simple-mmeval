@@ -13,6 +13,8 @@ class ModelArguments:
     # parameters for model
     low_cpu_mem_usage: bool = field(default=None, metadata={"help": "Tries to not use more than 1x model size in CPU memory (including peak memory) while loading the model."})
     attn_implementation: str = field(default=None, metadata={"help": "The attention implementation to use in the model (if relevant)."})
+    revision: str = field(default=None, metadata={"help": "The specific model version to use (branch name, tag name or commit id)."})
+    trust_remote_code: bool = field(default=None, metadata={"help": "Whether to trust remote code when loading a model from Hugging Face hub."})
 
     # parameters for model inference
     dtype: str = field(default=None, metadata={"help": "Override the default torch.dtype and load the model under a specific dtype."})
@@ -79,7 +81,7 @@ def parse_model_kwargs(args, default_kwargs=None):
     model_kwargs = {}
 
     for key in (
-        "low_cpu_mem_usage", "attn_implementation", "device_map"
+        "low_cpu_mem_usage", "attn_implementation", "device_map", "revision", "trust_remote_code"
     ):
         value = getattr(args, key, None)
         if value is None:
