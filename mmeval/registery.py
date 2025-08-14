@@ -7,7 +7,9 @@ series_mapping = {
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "llava": ["llava-1.5-7b-hf", "llava-1.5-13b-hf"],
     "llava_next": ["llava-v1.6-mistral-7b-hf", "llava-v1.6-vicuna-7b-hf", "llava-v1.6-vicuna-13b-hf", "llava-v1.6-34b-hf", "llama3-llava-next-8b-hf", "llava-next-72b-hf", "llava-next-110b-hf"],
-    "glm_4v": ["glm-4v-9b"]
+    "glm_4v": ["glm-4v-9b"],
+    "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
+    "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B", "Ovis1.6-Gemma2-27B"],
 }
 
 series_infer_env_mapping = {
@@ -30,5 +32,13 @@ series_infer_env_mapping = {
     "glm_4v": {
         "env": os.path.join(env_dir, "glm_4v"),
         "infer_file": "glm_4v.py",
+    },
+    "ovis1d5": {
+        "env": os.path.join(env_dir, "ovis1d5"),
+        "infer_file": "ovis1d5.py",
+    },
+    "ovis1d6": {
+        "env": os.path.join(env_dir, "ovis1d6"),
+        "infer_file": "ovis1d6.py",
     }
 }
