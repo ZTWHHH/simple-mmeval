@@ -53,7 +53,10 @@ class DataArguments:
                            metadata={"help": "input file."})
     img_dir: Optional[str] = field(default=None,
                            metadata={"help": "image directory."})
-    circular_eval: bool = field(default=False, metadata={"help": "whether to prepare data for circular evaluation."})
+    circular: bool = field(default=False, 
+                           metadata={"help": "whether to prepare data for circular evaluation."})
+    resize: int = field(default=None,
+                           metadata={"help": "resize images to this pixel value."})
 
 @dataclass
 class InferenceArguments:

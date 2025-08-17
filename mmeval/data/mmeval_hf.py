@@ -8,16 +8,14 @@ class MMEvalHFDataset(BaseDataset):
     def __init__(self, args):
         self.dataset_name = args.dataset.split("@")[1] if "@" in args.dataset else args.dataset
         self.split = args.split
-        self.circular_eval = args.circular_eval
+        self.circular = args.circular
+        self.resize = args.resize
+        if self.resize is not None:
+            print(f"Resizing images to {self.resize}x{self.resize}")
         super().__init__(args)
 
     def _load_raw_data(self, args):
         ds = load_dataset(self.dataset_name, split=self.split)
-        if "image" in ds.column_names:
-            ds = ds.cast_column("image", Image(decode=True))
-            print(f"Loaded dataset {self.dataset_name} with image column.")
-        if "video" in ds.column_names:
-            ds = ds.cast_column("video", Image(decode=True))
         return ds
 
     def convert_circular(self, **kwargs) -> any:
@@ -50,26 +48,32 @@ class MMEvalHFDataset(BaseDataset):
         placeholder_list = re.findall(r"<(video|image)>", prompt)
         for tag in placeholder_list:
             if tag == "image" and image_list:
-                media.append(image_list.pop(0))
+                img = image_list.pop(0)
+                # Resize image if resize parameter is set
+                if self.resize is not None:
+                    img = self.load_image(img)
+                    img = self.resize_image(img, self.resize)
+                media.append(img)
             elif tag == "video" and video_list:
                 media.append(video_list.pop(0))
 
-        # Conditional logic for circular_eval
-        if self.circular_eval:
+        # Extract <option_index:...:END> and <option_content:...:END> pairs
+        index_matches = re.findall(r"<option_index:(.*?):END>", prompt)
+        content_matches = re.findall(r"<option_content:(.*?):END>", prompt)
+        options = {
+            idx_val.strip(): content_val.strip()
+            for idx_val, content_val in zip(index_matches, content_matches)
+        }
+
+        # Conditional logic for circular
+        if self.circular:
             prompt_clean = self.convert_circular(idx=idx, sample=sample)
-        else:
-            # Extract <option_index:...:END> and <option_content:...:END> pairs
-            index_matches = re.findall(r"<option_index:(.*?):END>", prompt)
-            content_matches = re.findall(r"<option_content:(.*?):END>", prompt)
-            options = {
-                idx_val.strip(): content_val.strip()
-                for idx_val, content_val in zip(index_matches, content_matches)
-            }
-            # Replace <option_index:...:END> and <option_content:...:END> with their contents in the prompt
-            def replace_option(match):
-                return match.group(1)
-            prompt_clean = re.sub(r"<option_index:(.*?):END>", replace_option, prompt)
-            prompt_clean = re.sub(r"<option_content:(.*?):END>", replace_option, prompt_clean)
+
+        # Replace <option_index:...:END> and <option_content:...:END> with their contents in the prompt
+        def replace_option(match):
+            return match.group(1)
+        prompt_clean = re.sub(r"<option_index:(.*?):END>", replace_option, prompt)
+        prompt_clean = re.sub(r"<option_content:(.*?):END>", replace_option, prompt_clean)
 
         # create choices for score_target
         choices = [f"{idx_key}. {options[idx_key]}" for idx_key in options]
