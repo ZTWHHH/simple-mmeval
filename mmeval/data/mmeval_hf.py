@@ -65,10 +65,6 @@ class MMEvalHFDataset(BaseDataset):
             for idx_val, content_val in zip(index_matches, content_matches)
         }
 
-        # Conditional logic for circular
-        if self.circular:
-            prompt_clean = self.convert_circular(idx=idx, sample=sample)
-
         # Replace <option_index:...:END> and <option_content:...:END> with their contents in the prompt
         def replace_option(match):
             return match.group(1)
