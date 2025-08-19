@@ -42,7 +42,7 @@ class TaskRunner(Task):
                 ],
             },
         ]
-        print(conversation)
+
         return conversation
 
     def _generate_response(self, inputs):
