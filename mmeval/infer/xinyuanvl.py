@@ -5,19 +5,23 @@ from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoPro
 from qwen_vl_utils import process_vision_info
 from mmeval.infer.task import Task
 from mmeval.utils import constants
-from mmeval.utils.argparser import parse_args
+from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
 
 class TaskRunner(Task):
     def __init__(self, args):
-        super().__init__(args)
         self.args = args
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.dtype = getattr(args, "dtype") or torch.bfloat16
+        self.default_model_kwargs = {"device_map": "auto"}
+        self.default_gen_kwargs = {"max_new_tokens": 256}
+        self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
+        self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
+
+        super().__init__(args)
     
     def load_model(self, args):
-        model_path = f"Cylingo/{args.model_name_or_path}"
-        self.model = Qwen2VLForConditionalGeneration.from_pretrained(model_path, torch_dtype="auto", device_map="auto")
-        self.processor = AutoProcessor.from_pretrained(model_path)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+        self.model = Qwen2VLForConditionalGeneration.from_pretrained(args.model_name_or_path, **self.model_kwargs)
+        self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
     
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
@@ -42,10 +46,9 @@ class TaskRunner(Task):
             videos=video_inputs,
             padding=True,
             return_tensors="pt",
-        )
-        inputs = inputs.to(self.device)
+        ).to("cuda")
 
-        generated_ids = self.model.generate(**inputs, max_new_tokens=self.args.max_new_tokens)
+        generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         generated_ids_trimmed = [
             out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]

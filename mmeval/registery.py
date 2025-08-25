@@ -23,7 +23,7 @@ series_infer_env_mapping = {
         "infer_file": "blip2_flan_t5.py",
     }, 
     "xinyuanvl": {
-        "env": "/root/yuexuanliu/simple-mmeval/envs/Xinyuan-VL-2B",
+        "env": os.path.join(env_dir, "Xinyuan-VL-2B"),
         "infer_file": "xinyuanvl.py",
     }
 }
