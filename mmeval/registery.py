@@ -53,7 +53,7 @@ series_infer_env_mapping = {
         "infer_file": "blip2_flan_t5.py",
     },
     "moondream2": {
-        "env": os.path.join(env_dir, "mmeval"),
+        "env": os.path.join(env_dir, "moondream2"),
         "infer_file": "moondream2.py",
     }
 }
