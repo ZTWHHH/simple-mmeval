@@ -1,12 +1,11 @@
 export PYTHONPATH=./:$PYTHONPATH
 
 python mmeval/run.py \
-    --infile test_bed/image.json \
+    --infile test_bed/modality_test/task/single_image_start.json \
     --dataset local@json \
-    --out_dir test_bed/test_moondream2 \
-    --img_dir test_bed \
+    --out_dir work_dirs/moondream2-single-image-start \
+    --img_dir test_bed/modality_test/media/448 \
     --model_name_or_path vikhyatk/moondream2 \
     --gpu_per_parallel 1 \
     --parallel_per_task 4 \
-    --max_new_tokens 512 \
-    --do_sample false
+    --max_new_tokens 512
