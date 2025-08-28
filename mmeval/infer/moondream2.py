@@ -27,6 +27,8 @@ class TaskRunner(Task):
     def load_model(self, args):
         self.model = AutoModelForCausalLM.from_pretrained(
             args.model_name_or_path,
+            revision="2025-06-21",
+            trust_remote_code=True,
             **self.model_kwargs
         )
 

@@ -47,13 +47,13 @@ series_infer_env_mapping = {
     "ovis1d6_27b": {
         "env": os.path.join(env_dir, "ovis1d6_27b"),
         "infer_file": "ovis1d6.py",
-    }
+    },
     "blip2_flan_t5": {
         "env": os.path.join(env_dir, "flan-t5"),
         "infer_file": "blip2_flan_t5.py",
     },
     "moondream2": {
-        "env": os.path.join(env_dir, "moondream2"),
+        "env": os.path.join(env_dir, "mmeval"),
         "infer_file": "moondream2.py",
     }
 }

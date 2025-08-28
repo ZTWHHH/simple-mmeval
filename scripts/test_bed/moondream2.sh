@@ -9,6 +9,4 @@ python mmeval/run.py \
     --gpu_per_parallel 1 \
     --parallel_per_task 4 \
     --max_new_tokens 512 \
-    --do_sample false \
-    --revision "2025-06-21" \
-    --trust_remote_code true
+    --do_sample false
