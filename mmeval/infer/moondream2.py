@@ -27,14 +27,13 @@ class TaskRunner(Task):
     def load_model(self, args):
         self.model = AutoModelForCausalLM.from_pretrained(
             args.model_name_or_path,
-            revision="2025-06-21",
             trust_remote_code=True,
             **self.model_kwargs
         )
 
     def _parse_input(self, sample: dict):
         prompt = sample["prompt"]
-        q_chunks = re.split(r'(<(?:image|video)>)', question)
+        q_chunks = re.split(r'(<(?:image|video)>)', prompt)
         media = copy.deepcopy(sample['media'])
 
         messages = [
