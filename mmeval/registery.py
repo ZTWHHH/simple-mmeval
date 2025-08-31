@@ -11,7 +11,8 @@ series_mapping = {
     "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
     "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B"],
     "ovis1d6_27b": ["Ovis1.6-Gemma2-27B"],
-    "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"]
+    "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
+    "moondream2": ["moondream2"]
 }
 
 series_infer_env_mapping = {
@@ -46,9 +47,13 @@ series_infer_env_mapping = {
     "ovis1d6_27b": {
         "env": os.path.join(env_dir, "ovis1d6_27b"),
         "infer_file": "ovis1d6.py",
-    }
+    },
     "blip2_flan_t5": {
         "env": os.path.join(env_dir, "flan-t5"),
         "infer_file": "blip2_flan_t5.py",
+    },
+    "moondream2": {
+        "env": os.path.join(env_dir, "moondream2"),
+        "infer_file": "moondream2.py",
     }
 }
