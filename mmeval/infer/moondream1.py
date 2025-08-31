@@ -29,6 +29,9 @@ class TaskRunner(Task):
             trust_remote_code=True,
             **self.model_kwargs
         )
+        # Move model to GPU since Moondream1 doesn't support device_map="auto"
+        if torch.cuda.is_available():
+            self.model = self.model.cuda()
         self.tokenizer = Tokenizer.from_pretrained(args.model_name_or_path)
     
     def _parse_input(self, sample: dict):
@@ -82,7 +85,7 @@ class TaskRunner(Task):
                 output = self.model.answer_question(enc_image, text, self.tokenizer)
             return output
         else:
-            raise ValueError("Moondream2 requires an image input")
+            raise ValueError("Moondream1 requires an image input")
 
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
