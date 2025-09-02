@@ -36,7 +36,6 @@ def read_video_pyav(container, indices):
 
 class TaskRunner(Task):
     def __init__(self, args):
-        super().__init__(args)
         self.args = args
         self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.default_model_kwargs = {"device_map": "auto"}
@@ -44,6 +43,7 @@ class TaskRunner(Task):
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        super().__init__(args)
     
     def load_model(self, args):
         self.model = LlavaOnevisionForConditionalGeneration.from_pretrained(args.model_name_or_path, **self.model_kwargs)
@@ -119,7 +119,7 @@ class TaskRunner(Task):
     def parse_input(self, sample:dict):
         question = sample["prompt"]
         # placeholder <>, can be image, video, audio, etc.
-        q_chunks = re.split(r'(<[^>]*>)', question)
+        q_chunks = re.split(r'(<(?:image|video)>)', question)
         images = copy.deepcopy(sample['media'])
 
         messages = [
