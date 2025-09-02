@@ -138,6 +138,7 @@ Currently supported model series:
 | **GLM-4V**     | glm-4v-9b                                                                                                                                         | [`scripts/test_bed/glm-4v-single-image-start.sh`](scripts/test_bed/glm-4v-single-image-start.sh) |
 | **Ovis1.5**    | Ovis1.5-Llama3-8B, Ovis1.5-Gemma2-9B                                                                                                             | [`scripts/test_bed/ovis1d5-single-image-start.sh`](scripts/test_bed/ovis1d5-single-image-start.sh) |
 | **Ovis1.6**    | Ovis1.6-Llama3.2-3B, Ovis1.6-Gemma2-9B, Ovis1.6-Gemma2-27B                                                                                                            | [`scripts/test_bed/ovis1d6-multi-image-start.sh`](scripts/test_bed/ovis1d6-multi-image-start.sh) |
+| **Moondream1** | vikhyatk/moondream1 | [`scripts/test_bed/moondream1.sh`](scripts/test_bed/moondream1.sh) |
 | **Moondream2** | vikhyatk/moondream2                                                                                                                         | [`scripts/test_bed/moondream2.sh`](scripts/test_bed/moondream2.sh) |
 | **LLaVA-OneVision** | LLaVA-OneVision-Qwen2-0.5B, LLaVA-OneVision-Qwen2-7B, LLaVA-OneVision-Qwen2-72B | [`scripts/test_bed/llava_ov.sh`](scripts/test_bed/llava_ov.sh) |
 
