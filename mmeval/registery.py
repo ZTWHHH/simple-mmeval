@@ -36,6 +36,7 @@ series_infer_env_mapping = {
     "llava_ov": {
         "env": os.path.join(env_dir, "llava_ov"),
         "infer_file": "llava_ov.py",
+    },
     "llava": {
         "env": os.path.join(env_dir, "llava"),
         "infer_file": "llava.py",
