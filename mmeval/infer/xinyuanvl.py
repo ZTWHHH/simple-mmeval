@@ -65,7 +65,7 @@ class TaskRunner(Task):
     def parse_input(self, sample:dict):
         question = sample["prompt"]
         # placeholder <>, can be image, video, audio, etc.
-        q_chunks = re.split(r'(<[^>]*>)', question)
+        q_chunks = re.split(r'(<(?:image|video)>)', question)
         images = copy.deepcopy(sample['media'])
 
         messages = [
@@ -78,20 +78,15 @@ class TaskRunner(Task):
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
-            
-            if any(p in chunk for p in constants.all):
-                
-                # TODO: Qwen2.5-VL might support other modality
-                assert chunk == constants.image, f"Unsupported placeholder {chunk}"
 
+            if chunk == constants.image:
                 media_file = images.pop(0)
                 messages[0]["content"].append(
                     {
                         "type": "image",
                         "image": media_file
                     }
-                )       
-
+                )      
             else:
                 messages[0]["content"].append(
                     {
@@ -99,6 +94,7 @@ class TaskRunner(Task):
                         "text": chunk
                     }
                 )
+        
         return messages
     
 
