@@ -28,8 +28,9 @@ series_mapping = {
     "internvl3d5": ["InternVL3_5-1B", "InternVL3_5-2B", "InternVL3_5-4B", "InternVL3_5-8B", "InternVL3_5-14B", "InternVL3_5-GPT-OSS-20B-A4B-Preview", "InternVL3_5-30B-A3B", "InternVL3_5-38B", "InternVL3_5-241B-A28B",
                     "InternVL3_5-1B-MPO", "InternVL3_5-2B-MPO", "InternVL3_5-4B-MPO", "InternVL3_5-8B-MPO", "InternVL3_5-14B-MPO", "InternVL3_5-30B-A3B-MPO", "InternVL3_5-38B-MPO", "InternVL3_5-241B-A28B-MPO",
                     "InternVL3_5-1B-Pretrained", "InternVL3_5-2B-Pretrained", "InternVL3_5-4B-Pretrained", "InternVL3_5-8B-Pretrained", "InternVL3_5-14B-Pretrained", "InternVL3_5-30B-A3B-Pretrained", "InternVL3_5-38B-Pretrained", "InternVL3_5-241B-A28B-Pretrained",
-                    "InternVL3_5-1B-Instruct", "InternVL3_5-2B-Instruct", "InternVL3_5-4B-Instruct", "InternVL3_5-8B-Instruct", "InternVL3_5-14B-Instruct", "InternVL3_5-30B-A3B-Instruct", "InternVL3_5-38B-Instruct", "InternVL3_5-241B-A28B-Instruct",
-    ],
+                    "InternVL3_5-1B-Instruct", "InternVL3_5-2B-Instruct", "InternVL3_5-4B-Instruct", "InternVL3_5-8B-Instruct", "InternVL3_5-14B-Instruct", "InternVL3_5-30B-A3B-Instruct", "InternVL3_5-38B-Instruct", "InternVL3_5-241B-A28B-Instruct"],
+    "moondream1": ["moondream1"],
+    "moondream2": ["moondream2"]
 }
 
 series_infer_env_mapping = {
@@ -101,4 +102,12 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "internvl3d5"),
         "infer_file": "internvl3d5.py",
     },
+    "moondream1": {
+        "env": os.path.join(env_dir, "moondream1"),
+        "infer_file": "moondream1.py",
+    }, 
+    "moondream2": {
+        "env": os.path.join(env_dir, "moondream2"),
+        "infer_file": "moondream2.py",
+    }
 }
