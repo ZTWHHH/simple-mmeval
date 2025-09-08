@@ -30,8 +30,10 @@ series_mapping = {
                     "InternVL3_5-1B-Pretrained", "InternVL3_5-2B-Pretrained", "InternVL3_5-4B-Pretrained", "InternVL3_5-8B-Pretrained", "InternVL3_5-14B-Pretrained", "InternVL3_5-30B-A3B-Pretrained", "InternVL3_5-38B-Pretrained", "InternVL3_5-241B-A28B-Pretrained",
                     "InternVL3_5-1B-Instruct", "InternVL3_5-2B-Instruct", "InternVL3_5-4B-Instruct", "InternVL3_5-8B-Instruct", "InternVL3_5-14B-Instruct", "InternVL3_5-30B-A3B-Instruct", "InternVL3_5-38B-Instruct", "InternVL3_5-241B-A28B-Instruct"],
     "moondream1": ["moondream1"],
-    "moondream2": ["moondream2"]
-}
+    "moondream2": ["moondream2"],
+    "janus_pro": ["Janus-Pro-1B", "Janus-Pro-7B"],
+    "cambrian": ["cambrian-8b", "cambrian-13b", "cambrian-34b", "cambrian-phi3-3b"],
+}   
 
 series_infer_env_mapping = {
     "qwenvl2": {
@@ -109,5 +111,13 @@ series_infer_env_mapping = {
     "moondream2": {
         "env": os.path.join(env_dir, "moondream2"),
         "infer_file": "moondream2.py",
+    },
+    "janus_pro": {
+        "env": os.path.join(env_dir, "janus_pro"),
+        "infer_file": "janus_pro.py",
+    },
+    "cambrian": {
+        "env": os.path.join(env_dir, "cambrian"),
+        "infer_file": "cambrian.py",
     }
 }
