@@ -8,7 +8,6 @@ import torch
 import numpy as np
 from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import warnings
 import transformers
 
 from mmeval.infer.task import Task
@@ -43,7 +42,7 @@ class TaskRunner(Task):
         media = copy.deepcopy(sample['media'])
 
         images = []
-        text = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: "
+        PROMPT = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: "
 
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
@@ -51,13 +50,12 @@ class TaskRunner(Task):
             if chunk == constants.image:
                 media_file = media.pop(0)
                 images.append(media_file)
-                text += "<image>"
+                PROMPT += "<image>"
             else:
-                text += chunk
+                PROMPT += chunk
                 
-        text += " ASSISTANT:"
-        
-        return text, images
+        PROMPT += " ASSISTANT:"
+        return PROMPT, images
     
     def _generate_response(self, text, images):
         # Process images - Bunny expects file paths, not PIL images
