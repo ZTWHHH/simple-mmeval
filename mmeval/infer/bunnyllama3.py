@@ -58,10 +58,7 @@ class TaskRunner(Task):
         return PROMPT, images
     
     def _generate_response(self, text, images):
-        # Process images - Bunny expects file paths, not PIL images
         image_tensor = self.model.process_images(images, self.model.config).to(dtype=self.model.dtype, device=self.model.device)
-        
-        # Process text with image tokens
         text_chunks = [self.tokenizer(chunk).input_ids for chunk in text.split('<image>')]
         
         # Reconstruct input_ids with image tokens (-200)
@@ -70,15 +67,11 @@ class TaskRunner(Task):
             input_ids = input_ids + [-200] + text_chunks[i][1:]  # Remove BOS token from subsequent chunks
         
         input_ids = torch.tensor(input_ids, dtype=torch.long).unsqueeze(0).to(self.model.device)
-        
-        # Generate response
         output_ids = self.model.generate(
             input_ids,
             images=image_tensor,
             **self.gen_kwargs
         )[0]
-        
-        # Decode response
         response = self.tokenizer.decode(output_ids[input_ids.shape[1]:], skip_special_tokens=True).strip()
         
         return response
