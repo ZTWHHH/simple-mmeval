@@ -10,6 +10,14 @@ series_mapping = {
                   "Qwen2.5-VL-3B-Instruct-AWQ", "Qwen2.5-VL-7B-Instruct-AWQ", "Qwen2.5-VL-32B-Instruct-AWQ", "Qwen2.5-VL-72B-Instruct-AWQ"],
     "qwenvl2d5_omni": ["Qwen2.5-Omni-3B", "Qwen2.5-Omni-7B", "Qwen2.5-Omni-7B-AWQ", "Qwen2.5-Omni-7B-GPTQ-Int4"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
+    "llava_ov": ["llava-onevision-qwen2-0.5b-si-hf", 
+                 "llava-onevision-qwen2-0.5b-ov-hf", 
+                 "llava-onevision-qwen2-7b-si-hf", 
+                 "llava-onevision-qwen2-7b-ov-hf", 
+                 "llava-onevision-qwen2-72b-ov-hf", 
+                 "llava-onevision-qwen2-72b-si-hf", 
+                 "llava-onevision-qwen2-72b-ov-chat-hf", 
+                 "llava-onevision-qwen2-7b-ov-chat-hf"],
     "llava": ["llava-1.5-7b-hf", "llava-1.5-13b-hf"],
     "llava_next": ["llava-v1.6-mistral-7b-hf", "llava-v1.6-vicuna-7b-hf", "llava-v1.6-vicuna-13b-hf", "llava-v1.6-34b-hf", "llama3-llava-next-8b-hf", "llava-next-72b-hf", "llava-next-110b-hf"],
     "glm_4v": ["glm-4v-9b"],
@@ -51,6 +59,10 @@ series_infer_env_mapping = {
     "gemma3": {
         "env": os.path.join(env_dir, "gemma3"),
         "infer_file": "gemma3.py",
+    },
+    "llava_ov": {
+        "env": os.path.join(env_dir, "llava_ov"),
+        "infer_file": "llava_ov.py",
     },
     "llava": {
         "env": os.path.join(env_dir, "llava"),
