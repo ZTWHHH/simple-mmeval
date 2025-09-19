@@ -1,13 +1,5 @@
-# flash-attn==2.7.0.post2
+# flash-attn==2.7.3
 
-torch==2.2.0
-transformers>=4.38.2
-timm>=0.9.16
-diffusers==0.34.0
-numpy==1.26.4
-pandas==2.3.1
-accelerate
-sentencepiece
-attrdict
-einops
+janus @ git+https://github.com/deepseek-ai/Janus.git
 datasets
+diffusers==0.34.0

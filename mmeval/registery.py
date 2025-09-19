@@ -100,7 +100,7 @@ series_infer_env_mapping = {
         "infer_file": "janusflow.py",
     },
     "janus_pro": {
-        "env": os.path.join(env_dir, "janus_pro"),
+        "env": os.path.join(env_dir, "janus"),
         "infer_file": "janus_pro.py",
     },
     "llava": {

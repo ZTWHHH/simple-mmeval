@@ -1,3 +1,23 @@
+import os, sys, importlib
+d = os.path.abspath(os.path.dirname(__file__))
+popped = sys.path.pop(0) if sys.path and os.path.abspath(sys.path[0]) == d else None
+try:
+    m = importlib.import_module('mantis')  
+    sys.modules['mantis'] = m        
+finally:
+    if popped is not None:
+        sys.path.insert(0, popped)
+
+import os, sys, importlib
+d = os.path.abspath(os.path.dirname(__file__))
+popped = sys.path.pop(0) if sys.path and os.path.abspath(sys.path[0]) == d else None
+try:
+    m = importlib.import_module('mantis')  
+    sys.modules['mantis'] = m        
+finally:
+    if popped is not None:
+        sys.path.insert(0, popped)
+
 import re
 import copy
 import torch
