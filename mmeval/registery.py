@@ -35,6 +35,8 @@ series_mapping = {
     "moondream1": ["moondream1"],
     "moondream2": ["moondream2"],
     "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
+    "phi3v": ["Phi-3.5-vision-instruct", "Phi-3-vision-128k-instruct"],
+    "phi4mm": ["Phi-4-multimodal-instruct"],
     # "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B"],
     # "ovis1d6_27b": ["Ovis1.6-Gemma2-27B"],
     # "qwenvl2": ["Qwen2-VL-2B-Instruct", "Qwen2-VL-7B-Instruct", "Qwen2-VL-72B-Instruct",
@@ -170,5 +172,13 @@ series_infer_env_mapping = {
     "videollama2": {
         "env": os.path.join(env_dir, "videollama2"),
         "infer_file": "videollama2.py",
-    }
+    },
+    "phi3v": {
+        "env": os.path.join(env_dir, "phi3v"),
+        "infer_file": "phi3v.py",
+    },
+    "phi4mm": {
+        "env": os.path.join(env_dir, "phi4"),
+        "infer_file": "phi4mm.py",
+    },
 }
