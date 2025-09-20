@@ -145,6 +145,8 @@ Currently supported model series:
 | **Moondream1** | moondream1 | [`scripts/test_bed/moondream1.sh`](scripts/test_bed/moondream1.sh) |
 | **Moondream2** | moondream2 | [`scripts/test_bed/moondream2.sh`](scripts/test_bed/moondream2.sh) |
 | **Ovis1.5** | Ovis1.5-Llama3-8B, Ovis1.5-Gemma2-9B | [`scripts/test_bed/ovis1d5-single-image-start.sh`](scripts/test_bed/ovis1d5-single-image-start.sh) |
+| **Phi-3V** | Phi-3.5-vision-instruct, Phi-3-vision-128k-instruct | [`scripts/test_bed/phi3v-multi-image-interleave.sh`](scripts/test_bed/phi3v-multi-image-interleave.sh) |
+| **Phi-4MM** | Phi-4-multimodal-instruct | [`scripts/test_bed/phi4mm-multi-image-interleave.sh`](scripts/test_bed/phi4mm-multi-image-interleave.sh) |
 
 
 ## Supported Datasets
