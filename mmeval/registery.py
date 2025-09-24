@@ -6,6 +6,7 @@ series_mapping = {
     "qwenvl2d5": ["Qwen2.5-VL-3B-Instruct", "Qwen2.5-VL-7B-Instruct", "Qwen2.5-VL-32B-Instruct", "Qwen2.5-VL-72B-Instruct"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
+    "llava-ov-1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
 }
 
 series_infer_env_mapping = {
@@ -21,4 +22,8 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "flan-t5"),
         "infer_file": "blip2_flan_t5.py",
     }, 
+    "llava-ov-1d5": {
+        "env": os.path.join(env_dir, "test"),
+        "infer_file": "llava_ov_1d5.py",
+    },
 }
