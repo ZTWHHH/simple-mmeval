@@ -6,6 +6,8 @@ series_mapping = {
     # "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
     "cambrian": ["cambrian-8b", "cambrian-13b", "cambrian-34b", "cambrian-phi3-3b"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
+    "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
+    "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
     # "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
     "internvl_chat": ["InternVL-Chat-V1-1", "InternVL-Chat-V1-2", "InternVL-Chat-V1-2-Plus"],
@@ -113,7 +115,11 @@ series_infer_env_mapping = {
     },
     "llava_ov": {
         "env": os.path.join(env_dir, "llava_ov"),
-        "infer_file": "llava_ov.py",
+        "infer_file": "llava_ov.py",    
+    },
+    "llava_ov_1d5": {
+        "env": os.path.join(env_dir, "llava_ov_1d5"),
+        "infer_file": "llava_ov_1d5.py",
     },
     "mantis": {
         "env": os.path.join(env_dir, "mantis"),
