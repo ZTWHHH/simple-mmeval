@@ -1,4 +1,5 @@
 import re
+import json
 from datasets import load_dataset, Image
 from mmeval.data.base import BaseDataset
 
@@ -16,15 +17,16 @@ class MMEvalHFDataset(BaseDataset):
 
     def _load_raw_data(self, args):
         ds = load_dataset(self.dataset_name, split=self.split)
-        return ds
+        dataset = json.loads(ds[0]['data'])
+        return dataset['content'], dataset['jinja_template']
 
     def convert_circular(self, **kwargs) -> any:
         """Prepare dataset for circular evaluation."""
         raise NotImplementedError("convert_circular not implemented.")
 
     def _process_sample(self, idx: int):
-        sample = self._raw_dataset[idx]
-        prompt = sample["prompt"] if "prompt" in sample else sample["question"]
+        sample = self._raw_dataset[idx]['conversations'][0]['value']
+        prompt = self.build_prompt(self._prompt_template, sample)
 
         # Normalize to list
         image = sample.get("image", None)
@@ -33,9 +35,9 @@ class MMEvalHFDataset(BaseDataset):
         if image is None:
             image_list = []
         elif isinstance(image, list):
-            image_list = image
+            image_list = [self.load_image(img) for img in image]
         else:
-            image_list = [image]
+            image_list = [self.load_image(image)]
 
         if video is None:
             video_list = []
@@ -57,28 +59,9 @@ class MMEvalHFDataset(BaseDataset):
             elif tag == "video" and video_list:
                 media.append(video_list.pop(0))
 
-        # Extract <option_index:...:END> and <option_content:...:END> pairs
-        index_matches = re.findall(r"<option_index:(.*?):END>", prompt)
-        content_matches = re.findall(r"<option_content:(.*?):END>", prompt)
-        options = {
-            idx_val.strip(): content_val.strip()
-            for idx_val, content_val in zip(index_matches, content_matches)
-        }
-
-        # Replace <option_index:...:END> and <option_content:...:END> with their contents in the prompt
-        def replace_option(match):
-            return match.group(1)
-        prompt_clean = re.sub(r"<option_index:(.*?):END>", replace_option, prompt)
-        prompt_clean = re.sub(r"<option_content:(.*?):END>", replace_option, prompt_clean)
-
-        # create choices for score_target
-        choices = [f"{idx_key}. {options[idx_key]}" for idx_key in options]
-
         return {
             "eval-id": idx,
-            "prompt": prompt_clean,
+            "prompt": prompt,
             "media": media,
-            "options": options,
-            "choices": choices,
             **{k: v for k, v in sample.items() if k not in ("prompt", "image", "video")}
         }
