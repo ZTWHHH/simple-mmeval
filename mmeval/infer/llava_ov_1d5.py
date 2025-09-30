@@ -9,18 +9,18 @@ from qwen_vl_utils import process_vision_info
 
 from mmeval.infer.task import Task
 from mmeval.utils import constants
-from mmeval.utils.argparser import parse_args
+from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
 from mmeval.utils.scorer import IncrementalLMScorer, target_tokens
 
 class TaskRunner(Task):
     def __init__(self, args):
-        super().__init__(args)
         self.args = args
         self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.default_model_kwargs = {"device_map": "auto"}
         self.default_gen_kwargs = {"max_new_tokens": 100, "do_sample": False}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
+        super().__init__(args)
     
     def load_model(self, args):
         self.model = AutoModelForCausalLM.from_pretrained(args.model_name_or_path, **self.model_kwargs)
@@ -54,7 +54,7 @@ class TaskRunner(Task):
         )
         if "second_per_grid_ts" in inputs:
             inputs.pop("second_per_grid_ts")  # TODO: need to check this
-        inputs = inputs.to(self.device)
+        inputs = inputs.to(self.model.device)
 
         generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         generated_ids_trimmed = [
@@ -71,11 +71,11 @@ class TaskRunner(Task):
         contents = sample.get("choices")
         full = [text + content for content in contents]
 
-        full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device) for i in full]
-        prompt_encoded = self.processor(text=text, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device)
+        full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.model.device) for i in full]
+        prompt_encoded = self.processor(text=text, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.model.device)
         target_toks = target_tokens(self.tokenizer, contents)
 
-        scorer = IncrementalLMScorer(self.model, self.device, tokenizer=self.tokenizer)
+        scorer = IncrementalLMScorer(self.model, self.model.device, tokenizer=self.tokenizer)
         scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)
         
         return {
@@ -103,7 +103,6 @@ class TaskRunner(Task):
             
             if any(p in chunk for p in constants.all):
                 
-                # TODO: Qwen2.5-VL might support other modality
                 assert chunk == constants.image or chunk == constants.video, f"Unsupported placeholder {chunk}"
 
                 media_file = images.pop(0)
