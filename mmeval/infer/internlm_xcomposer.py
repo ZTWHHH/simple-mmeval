@@ -36,6 +36,9 @@ class TaskRunner(Task):
         if torch.cuda.is_available():
             self.model = self.model.cuda()
         
+        # Store the device for later use
+        self.device = next(self.model.parameters()).device
+        
         # Set the tokenizer as an attribute of the model for the chat method
         self.model.tokenizer = self.tokenizer
         
@@ -73,88 +76,52 @@ class TaskRunner(Task):
 
     def generate_output(self, sample, **generation_kwargs):
         messages = self._parse_input(sample)
+    
+        # Extract text and image from the parsed messages
+        text_content = ""
+        image = None
         
-        # InternLM-XComposer specific implementation
-        try:
-            # Extract text and image from the parsed messages
-            text_content = ""
-            image = None
-            
-            for msg in messages:
-                for content in msg["content"]:
-                    if content["type"] == "text":
-                        text_content += content["text"]
-                    elif content["type"] == "image":
-                        image = content["image"]
-            
-            # Use the model's multimodal generation capability
-            # Using the correct InternLM-XComposer API
-            if hasattr(self.model, 'chat'):
-                # Convert PIL Image to tensor if needed
-                if image is not None and not isinstance(image, torch.Tensor):
-                    # Convert PIL Image to tensor format expected by the model
-                    import torchvision.transforms as transforms
-                    
-                    # Define transform to convert PIL Image to tensor
-                    transform = transforms.Compose([
-                        transforms.Resize((224, 224)),  # Resize to expected input size
-                        transforms.ToTensor(),
-                        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-                    ])
-                    
-                    if isinstance(image, Image.Image):
-                        image = transform(image).unsqueeze(0)  # Add batch dimension
-                        
-                        # Move to the same device as the model
-                        device = next(self.model.parameters()).device
-                        image = image.to(device)
-                
-                # Use the model's chat method with correct parameters
-                # The chat method returns (response, history) tuple
-                response, _ = self.model.chat(text_content, image=image, history=None, **self.gen_kwargs, **generation_kwargs)
-            elif image is not None:
-                # Fallback: try to use generate with multimodal inputs
-                # This is a simplified approach that may need refinement
-                inputs = self.tokenizer(text_content, return_tensors="pt")
-                
-                with torch.no_grad():
-                    outputs = self.model.generate(
-                        inputs.input_ids,
-                        images=image,
-                        **self.gen_kwargs,
-                        **generation_kwargs
-                    )
-                
-                response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-                # Remove the input prompt from the response
-                if text_content in response:
-                    response = response.replace(text_content, "").strip()
-            else:
-                # Text-only generation
-                inputs = self.tokenizer(text_content, return_tensors="pt")
-                
-                with torch.no_grad():
-                    outputs = self.model.generate(
-                        inputs.input_ids,
-                        **self.gen_kwargs,
-                        **generation_kwargs
-                    )
-                
-                response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-                if text_content in response:
-                    response = response.replace(text_content, "").strip()
-            
-            return response
-            
-        except Exception as e:
-            # Fallback: return error message with more details
-            import traceback
-            error_details = f"Exception type: {type(e).__name__}, Message: {str(e)}, Traceback: {traceback.format_exc()}"
-            return f"Error generating response with internlm-xcomposer: {error_details}"
+        for msg in messages:
+            for content in msg["content"]:
+                if content["type"] == "text":
+                    text_content += content["text"]
+                elif content["type"] == "image":
+                    image = content["image"]
+        
+        # Use the model's multimodal generation capability
+        if hasattr(self.model, 'chat'):
+            if image is not None and not isinstance(image, torch.Tensor):
+                import torchvision.transforms as transforms
 
-    def chat(self, messages):
-        # This would be the main interface for chat-based interaction
-        return self.generate_output({"prompt": messages[-1]["content"], "media": []})
+                transform = transforms.Compose([
+                    transforms.Resize((224, 224)),  # Resize to expected input size
+                    transforms.ToTensor(),
+                    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+                ])
+                
+                if isinstance(image, Image.Image):
+                    image = transform(image).unsqueeze(0)  # Add batch dimension
+                    image = image.to(self.device)
+            
+            # Use the model's chat method with correct parameters
+            # The chat method returns (response, history) tuple
+            response, _ = self.model.chat(text_content, image=image, history=None, **self.gen_kwargs, **generation_kwargs)
+        else:
+            # Text-only generation
+            inputs = self.tokenizer(text_content, return_tensors="pt")
+            
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    inputs.input_ids,
+                    **self.gen_kwargs,
+                    **generation_kwargs
+                )
+            
+            response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            if text_content in response:
+                response = response.replace(text_content, "").strip()
+        
+        return response
     
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
