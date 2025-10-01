@@ -18,6 +18,7 @@ class TaskRunner(Task):
         self.default_gen_kwargs = {"max_new_tokens": 512, "do_sample": False}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
         super().__init__(args)
     
@@ -31,27 +32,17 @@ class TaskRunner(Task):
             args.model_name_or_path,
             trust_remote_code=True
         )
-        
-        # Move model to GPU if available
-        if torch.cuda.is_available():
-            self.model = self.model.cuda()
-        
-        # Store the device for later use
-        self.device = next(self.model.parameters()).device
-        
-        # Set the tokenizer as an attribute of the model for the chat method
+        self.model = self.model.to(self.device)
         self.model.tokenizer = self.tokenizer
-        
-        # Ensure model is in eval mode
         self.model.eval()
 
     def _parse_input(self, sample: dict):
         prompt = sample["prompt"]
-        q_chunks = re.split(r'(<(?:image|video)>)', prompt)
+        q_chunks = re.split(r'(<image>)', prompt)
         media = copy.deepcopy(sample['media'])
 
-        messages = []
-        content = []
+        text_content = ""
+        image = None
 
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
@@ -62,53 +53,30 @@ class TaskRunner(Task):
                     image = media_file.convert('RGB')
                 else:
                     image = Image.open(media_file).convert('RGB')
-                content.append({"type": "image", "image": image})
-            elif chunk == constants.video:
-                # Video processing would need to be implemented based on model capabilities
-                media_file = media.pop(0)
-                # For now, treat as image (first frame)
-                content.append({"type": "text", "text": "[VIDEO]"})
-            else:
-                content.append({"type": "text", "text": chunk})
-        
-        messages.append({"role": "user", "content": content})
-        return messages
-
-    def generate_output(self, sample, **generation_kwargs):
-        messages = self._parse_input(sample)
-    
-        # Extract text and image from the parsed messages
-        text_content = ""
-        image = None
-        
-        for msg in messages:
-            for content in msg["content"]:
-                if content["type"] == "text":
-                    text_content += content["text"]
-                elif content["type"] == "image":
-                    image = content["image"]
-        
-        # Use the model's multimodal generation capability
-        if hasattr(self.model, 'chat'):
-            if image is not None and not isinstance(image, torch.Tensor):
-                import torchvision.transforms as transforms
-
+                
                 transform = transforms.Compose([
-                    transforms.Resize((224, 224)),  # Resize to expected input size
+                    transforms.Resize((224, 224)), 
                     transforms.ToTensor(),
                     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
                 ])
                 
                 if isinstance(image, Image.Image):
-                    image = transform(image).unsqueeze(0)  # Add batch dimension
+                    image = transform(image).unsqueeze(0)  
                     image = image.to(self.device)
-            
-            # Use the model's chat method with correct parameters
-            # The chat method returns (response, history) tuple
+            else:
+                text_content += chunk
+        
+        return {"text": text_content, "image": image}
+
+    def generate_output(self, sample, **generation_kwargs):
+        parsed_input = self._parse_input(sample)
+        text_content = parsed_input["text"]
+        image = parsed_input["image"]
+        
+        if hasattr(self.model, 'chat'):
             response, _ = self.model.chat(text_content, image=image, history=None, **self.gen_kwargs, **generation_kwargs)
         else:
-            # Text-only generation
-            inputs = self.tokenizer(text_content, return_tensors="pt")
+            inputs = self.tokenizer(text_content, return_tensors="pt").to(self.device)
             
             with torch.no_grad():
                 outputs = self.model.generate(
