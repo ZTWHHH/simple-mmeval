@@ -1,6 +1,7 @@
 import re
 import copy
 import torch
+import torchvision.transforms as transforms
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from PIL import Image
@@ -89,8 +90,21 @@ class TaskRunner(Task):
         
         # Use the model's multimodal generation capability
         if hasattr(self.model, 'chat'):
-            # InternLM-XComposer should handle PIL images directly (similar to other models)
-            # Let the model handle its own preprocessing internally
+            if image is not None and not isinstance(image, torch.Tensor):
+                import torchvision.transforms as transforms
+
+                transform = transforms.Compose([
+                    transforms.Resize((224, 224)),  # Resize to expected input size
+                    transforms.ToTensor(),
+                    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+                ])
+                
+                if isinstance(image, Image.Image):
+                    image = transform(image).unsqueeze(0)  # Add batch dimension
+                    image = image.to(self.device)
+            
+            # Use the model's chat method with correct parameters
+            # The chat method returns (response, history) tuple
             response, _ = self.model.chat(text_content, image=image, history=None, **self.gen_kwargs, **generation_kwargs)
         else:
             # Text-only generation
