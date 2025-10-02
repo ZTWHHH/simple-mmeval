@@ -25,6 +25,7 @@ series_mapping = {
     "janus_pro": ["Janus-Pro-1B", "Janus-Pro-7B"],
     # "llava": ["llava-1.5-7b-hf", "llava-1.5-13b-hf"],
     # "llava_next": ["llava-v1.6-mistral-7b-hf", "llava-v1.6-vicuna-7b-hf", "llava-v1.6-vicuna-13b-hf", "llava-v1.6-34b-hf", "llama3-llava-next-8b-hf", "llava-next-72b-hf", "llava-next-110b-hf"],
+    "llava_next_interleave": ["llava-next-interleave-qwen-0.5b", "llava-next-interleave-qwen-7b", "llava-next-interleave-qwen-7b-dpo"],
     "llava_ov": ["llava-onevision-qwen2-0.5b-si-hf",  "llava-onevision-qwen2-7b-si-hf", "llava-onevision-qwen2-72b-si-hf", 
     "llava-onevision-qwen2-0.5b-ov-hf","llava-onevision-qwen2-7b-ov-hf", "llava-onevision-qwen2-72b-ov-hf",  
     "llava-onevision-qwen2-7b-ov-chat-hf", "llava-onevision-qwen2-72b-ov-chat-hf"],
@@ -35,6 +36,8 @@ series_mapping = {
     "moondream1": ["moondream1"],
     "moondream2": ["moondream2"],
     "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
+    "vintern": ["Vintern-1B-v2", "Vintern-1B-v3_5", "Vintern-3B-beta"],
+    "xgen": ["xgen-mm-phi3-mini-instruct-interleave-r-v1.5"],
     # "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B"],
     # "ovis1d6_27b": ["Ovis1.6-Gemma2-27B"],
     # "qwenvl2": ["Qwen2-VL-2B-Instruct", "Qwen2-VL-7B-Instruct", "Qwen2-VL-72B-Instruct",
@@ -111,6 +114,10 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "llava_next"),
         "infer_file": "llava_next.py",
     },
+    "llava_next_interleave": {
+        "env": os.path.join(env_dir, "llava_next_interleave"),
+        "infer_file": "llava_next_interleave.py",
+    },
     "llava_ov": {
         "env": os.path.join(env_dir, "llava_ov"),
         "infer_file": "llava_ov.py",
@@ -150,6 +157,14 @@ series_infer_env_mapping = {
     "ovis1d6_27b": {
         "env": os.path.join(env_dir, "ovis1d6_27b"),
         "infer_file": "ovis1d6.py",
+    },
+    "vintern": {
+        "env": os.path.join(env_dir, "vintern"),
+        "infer_file": "vintern.py",
+    },
+    "xgen": {
+        "env": os.path.join(env_dir, "xgen"),
+        "infer_file": "xgen.py",
     },
     "paligemma": {
         "env": os.path.join(env_dir, "paligemma"),
