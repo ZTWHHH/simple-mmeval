@@ -47,6 +47,8 @@ series_mapping = {
     #               "Qwen2.5-VL-3B-Instruct-AWQ", "Qwen2.5-VL-7B-Instruct-AWQ", "Qwen2.5-VL-32B-Instruct-AWQ", "Qwen2.5-VL-72B-Instruct-AWQ"],
     # "qwenvl2d5_omni": ["Qwen2.5-Omni-3B", "Qwen2.5-Omni-7B", "Qwen2.5-Omni-7B-AWQ", "Qwen2.5-Omni-7B-GPTQ-Int4"],
     # "videollama2": ["VideoLLaMA2-7B"]
+    "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
+    "r1_onevision": ["R1-Onevision-7B"]
 }
 
 series_infer_env_mapping = {
@@ -185,5 +187,13 @@ series_infer_env_mapping = {
     "videollama2": {
         "env": os.path.join(env_dir, "videollama2"),
         "infer_file": "videollama2.py",
+    },
+    "vlaa_thinking": {
+        "env": os.path.join(env_dir, "vlaa_thinking"),
+        "infer_file": "vlaa_thinking.py",
+    },
+    "r1_onevision": {
+        "env": os.path.join(env_dir, "r1_onevision"),
+        "infer_file": "r1_onevision.py",
     }
 }
