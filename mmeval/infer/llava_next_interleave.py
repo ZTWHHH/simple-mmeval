@@ -108,11 +108,7 @@ class TaskRunner(Task):
         # Replace <image> placeholders with actual image processing
         conversations = []
         
-        # Handle multiple images in interleaved format
-        if "<image>" in prompt:
-            conversations.append({"from": "human", "value": prompt})
-        else:
-            conversations.append({"from": "human", "value": prompt})
+        conversations.append({"from": "human", "value": prompt})
             
         return conversations
 
