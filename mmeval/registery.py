@@ -7,6 +7,7 @@ series_mapping = {
     "cambrian": ["cambrian-8b", "cambrian-13b", "cambrian-34b", "cambrian-phi3-3b"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
+    "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
     # "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
@@ -176,6 +177,10 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "moondream1"),
         "infer_file": "moondream1.py",
     }, 
+    "smolvlm": {
+        "env": os.path.join(env_dir, "smolvlm"),
+        "infer_file": "smolvlm.py",
+    },
     "moondream2": {
         "env": os.path.join(env_dir, "moondream2"),
         "infer_file": "moondream2.py",
