@@ -18,7 +18,6 @@ class TaskRunner(Task):
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
 
         super().__init__(args)
         
@@ -27,6 +26,7 @@ class TaskRunner(Task):
             args.model_name_or_path, **self.model_kwargs
         ).eval()
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
         
     def _parse_input(self, sample:dict):
         prompt = sample["prompt"]
