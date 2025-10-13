@@ -28,8 +28,8 @@ class TaskRunner(Task):
         
     def _parse_input(self, sample:dict):
         prompt = sample["prompt"]
-        # placeholder <>, can be image, video, audio, etc.
-        q_chunks = re.split(r'(<[^>]*>)', prompt)
+        # placeholder <>, can be image, video, etc.
+        q_chunks = re.split(r'(<(?:image|video)>)', prompt)
         media = copy.deepcopy(sample['media'])
 
         messages = [
