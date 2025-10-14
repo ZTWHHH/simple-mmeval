@@ -29,7 +29,7 @@ if __name__ == "__main__":
     gpu_per_parallel = args.gpu_per_parallel
     total_gpus = torch.cuda.device_count()
 
-    if os.path.exists(os.path.join(args.out_dir, "result.json")) and not args.resume:
+    if os.path.exists(os.path.join(args.out_dir, "result.json")) and args.resume:
         # exit and return success
         print(f"🌟 Result file {os.path.join(args.out_dir, 'result.json')} exists. Task finished, exiting...")
         exit(0)
