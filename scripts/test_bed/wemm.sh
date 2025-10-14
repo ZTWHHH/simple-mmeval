@@ -5,6 +5,6 @@ python mmeval/run.py \
     --dataset local@json \
     --out_dir work_dirs/wemm-single-image-start \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path ../WeMM \
+    --model_name_or_path mm-eval/WeMM \
     --gpu_per_parallel 1 \
     --parallel_per_task 1
