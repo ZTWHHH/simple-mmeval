@@ -38,8 +38,8 @@ series_mapping = {
     # "mantis_llava": ["Mantis-llava-7b", "Mantis-bakllava-7b"],
     "moondream1": ["moondream1"],
     "moondream2": ["moondream2"],
-    "bunnyllama3": ["Bunny-Llama-3-8B-V"]
-    "xinyuanvl": ["Xinyuan-VL-2B"]
+    "bunnyllama3": ["Bunny-Llama-3-8B-V"],
+    "xinyuanvl": ["Xinyuan-VL-2B"],
     "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
     "vintern": ["Vintern-1B-v2", "Vintern-1B-v3_5", "Vintern-3B-beta"],
     "xgen": ["xgen-mm-phi3-mini-instruct-interleave-r-v1.5"],
@@ -188,9 +188,11 @@ series_infer_env_mapping = {
     "bunnyllama3": {
         "env": os.path.join(env_dir, "bunnyllama3"),
         "infer_file": "bunnyllama3.py",
+    },
     "xinyuanvl": {
         "env": os.path.join(env_dir, "Xinyuan-VL-2B"),
         "infer_file": "xinyuanvl.py",
+    },
     "xgen": {
         "env": os.path.join(env_dir, "xgen"),
         "infer_file": "xgen.py",
