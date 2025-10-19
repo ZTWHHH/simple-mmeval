@@ -128,8 +128,15 @@ Separate worker outputs are merged into a single result file, abstracting parall
 
 Currently supported model series:
 
-| Model Series   | Models                                                                                                                                           | Usage Example |
-|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+
+| Model Series | Models | Usage Example |
+|--------------|--------|---------------|
+| **Qwen2.5-VL** | Qwen2.5-VL-3B-Instruct, Qwen2.5-VL-7B-Instruct, Qwen2.5-VL-32B-Instruct, Qwen2.5-VL-72B-Instruct | [`scripts/test_bed/qwen2d5.sh`](scripts/test_bed/qwen2d5.sh) |
+| **VideoLLaMA2** | VideoLLaMA2-7B, VideoLLaMA2-13B | [`scripts/test_bed/videollama2.sh`](scripts/test_bed/videollama2.sh) |
+| **BLIP2-FLAN-T5** | Salesforce/blip2-flan-t5-xl, Salesforce/blip2-flan-t5-xxl | [`scripts/test_bed/blip2-flan-t5-xl.sh`](scripts/test_bed/blip2-flan-t5-xl.sh) |
+| **SmolVLM** | HuggingFaceTB/SmolVLM | [`scripts/test_bed/smolvlm.sh`](scripts/test_bed/smolvlm.sh) |
+| **Xinyuan-VL-2B** | Xinyuan-VL-2B | [`scripts/test_bed/xinyuanvl2b.sh`](scripts/test_bed/xinyuanvl2b.sh) |
+| **LLaVA-OneVision-1.5** | lmms-lab/LLaVA-OneVision-1.5-8B-Instruct | [`scripts/test_bed/llava-ov-1d5.sh`](scripts/test_bed/llava-ov-1d5.sh) |
 | **Cambrian** | cambrian-8b, cambrian-13b, cambrian-34b, cambrian-phi3-3b | [`scripts/test_bed/cambrian-multi-image-video-interleave.sh`](scripts/test_bed/cambrian-multi-image-video-interleave.sh) |
 | **Gemma3** | gemma-3-4b-it, gemma-3-12b-it, gemma-3-27b-it | [`scripts/test_bed/gemma3-multi-image-interleave.sh`](scripts/test_bed/gemma3-multi-image-interleave.sh) |
 | **GLM-4V** | glm-4v-9b | [`scripts/test_bed/glm-4v-single-image-start.sh`](scripts/test_bed/glm-4v-single-image-start.sh) |
@@ -138,6 +145,7 @@ Currently supported model series:
 | **InternVL2** | InternVL2-1B, InternVL2-2B, InternVL2-4B, InternVL2-8B, InternVL2-26B, InternVL2-40B, InternVL2-Llama3-76B | [`scripts/test_bed/internvl2-multi-image-video-interleave.sh`](scripts/test_bed/internvl2-multi-image-video-interleave.sh) |
 | **InternVL2.5** | InternVL2_5-1B, InternVL2_5-2B, InternVL2_5-4B, InternVL2_5-8B, InternVL2_5-26B, InternVL2_5-38B, InternVL2_5-78B, InternVL2_5-1B-MPO, InternVL2_5-2B-MPO, InternVL2_5-4B-MPO, InternVL2_5-8B-MPO, InternVL2_5-26B-MPO, InternVL2_5-38B-MPO, InternVL2_5-78B-MPO | [`scripts/test_bed/internvl2d5-multi-image-video-interleave.sh`](scripts/test_bed/internvl2d5-multi-image-video-interleave.sh) |
 | **InternVL3** | InternVL3-1B, InternVL3-2B, InternVL3-8B, InternVL3-9B, InternVL3-14B, InternVL3-38B, InternVL3-78B, InternVL3-1B-Instruct, InternVL3-2B-Instruct, InternVL3-8B-Instruct, InternVL3-9B-Instruct, InternVL3-14B-Instruct, InternVL3-38B-Instruct, InternVL3-78B-Instruct, InternVL3-1B-Pretrained, InternVL3-2B-Pretrained, InternVL3-8B-Pretrained, InternVL3-9B-Pretrained, InternVL3-14B-Pretrained, InternVL3-38B-Pretrained, InternVL3-78B-Pretrained | [`scripts/test_bed/internvl3-multi-image-video-interleave.sh`](scripts/test_bed/internvl3-multi-image-video-interleave.sh) |
+| **Bunnyllama3** | Bunny-Llama-3-8B-V | [`scripts/test_bed/bunnyllama3-multi-image-interleave.sh`](scripts/test_bed/bunnyllama3-multi-image-interleave.sh) |
 | **Janus-Pro** | Janus-Pro-1B, Janus-Pro-7B | [`scripts/test_bed/janus-pro-multi-image-video-interleave.sh`](scripts/test_bed/janus-pro-multi-image-video-interleave.sh) |
 | **LLaVA-OneVision** | LLaVA-OneVision-Qwen2-0.5B, LLaVA-OneVision-Qwen2-7B, LLaVA-OneVision-Qwen2-72B | [`scripts/test_bed/llava_ov.sh`](scripts/test_bed/llava_ov.sh) |
 | **Mantis** | Mantis-8B-clip-llama3, Mantis-8B-siglip-llama3 | [`scripts/test_bed/mantis-multi-image-interleave.sh`](scripts/test_bed/mantis-multi-image-interleave.sh) |
@@ -147,7 +155,7 @@ Currently supported model series:
 | **Ovis1.5** | Ovis1.5-Llama3-8B, Ovis1.5-Gemma2-9B | [`scripts/test_bed/ovis1d5-single-image-start.sh`](scripts/test_bed/ovis1d5-single-image-start.sh) |
 | **Phi-3V** | Phi-3.5-vision-instruct, Phi-3-vision-128k-instruct | [`scripts/test_bed/phi3v-multi-image-interleave.sh`](scripts/test_bed/phi3v-multi-image-interleave.sh) |
 | **Phi-4MM** | Phi-4-multimodal-instruct | [`scripts/test_bed/phi4mm-multi-image-interleave.sh`](scripts/test_bed/phi4mm-multi-image-interleave.sh) |
-
+| **WeMM** | WeMM, WeMM-Chat-CN, WeMM-Chat-2k-CN | [`scripts/test_bed/wemm.sh`](scripts/test_bed/wemm.sh) |
 
 ## Supported Datasets
 
