@@ -198,8 +198,11 @@ class TaskRunner(Task):
                 pixel_values_list.extend(video_pixel_values_list)
                 num_patches_list.extend(video_num_patches_list)
 
-        pixel_values = torch.cat(pixel_values_list, dim=0).to(self.dtype).to(self.device)  
-                
+        if len(pixel_values_list) == 0:
+            return question, None, None
+
+        pixel_values = torch.cat(pixel_values_list, dim=0).to(self.dtype).to(self.device)
+                 
         return question, pixel_values, num_patches_list
 
     def _generate_response(self, question,pixel_values, num_patches_list):

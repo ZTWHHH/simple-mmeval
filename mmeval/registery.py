@@ -228,7 +228,6 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "phi4"),
         "infer_file": "phi4mm.py",
     },
-}
     "vlaa_thinking": {
         "env": os.path.join(env_dir, "vlaa_thinking"),
         "infer_file": "vlaa_thinking.py",
