@@ -47,11 +47,16 @@ class TaskRunner(Task):
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
         query = self._parse_input(ori_sample)
-        image = ori_sample['media'][0]
+        image = ori_sample['media'][0] if ori_sample['media'] else None
         
-        inputs = self.tokenizer.apply_chat_template([{"role": "user", "image": image, "content": query}],
-                                            add_generation_prompt=True, tokenize=True, return_tensors="pt",
-                                            return_dict=True)  # chat mode
+        if image:
+            inputs = self.tokenizer.apply_chat_template([{"role": "user", "image": image, "content": query}],
+                                                add_generation_prompt=True, tokenize=True, return_tensors="pt",
+                                                return_dict=True)  # chat mode
+        else:
+            inputs = self.tokenizer.apply_chat_template([{"role": "user", "content": query}],
+                                                add_generation_prompt=True, tokenize=True, return_tensors="pt",
+                                                return_dict=True)
 
         inputs = inputs.to(self.device)
 
