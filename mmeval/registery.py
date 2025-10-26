@@ -6,6 +6,9 @@ series_mapping = {
     # "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
     "cambrian": ["cambrian-8b", "cambrian-13b", "cambrian-34b", "cambrian-phi3-3b"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
+    "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
+    "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
+    "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
     # "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
     "internlm_xcomposer": ["internlm-xcomposer-7b"],
@@ -26,6 +29,7 @@ series_mapping = {
     "janus_pro": ["Janus-Pro-1B", "Janus-Pro-7B"],
     # "llava": ["llava-1.5-7b-hf", "llava-1.5-13b-hf"],
     # "llava_next": ["llava-v1.6-mistral-7b-hf", "llava-v1.6-vicuna-7b-hf", "llava-v1.6-vicuna-13b-hf", "llava-v1.6-34b-hf", "llama3-llava-next-8b-hf", "llava-next-72b-hf", "llava-next-110b-hf"],
+    "llava_next_interleave": ["llava-next-interleave-qwen-0.5b", "llava-next-interleave-qwen-7b", "llava-next-interleave-qwen-7b-dpo"],
     "llava_ov": ["llava-onevision-qwen2-0.5b-si-hf",  "llava-onevision-qwen2-7b-si-hf", "llava-onevision-qwen2-72b-si-hf", 
     "llava-onevision-qwen2-0.5b-ov-hf","llava-onevision-qwen2-7b-ov-hf", "llava-onevision-qwen2-72b-ov-hf",  
     "llava-onevision-qwen2-7b-ov-chat-hf", "llava-onevision-qwen2-72b-ov-chat-hf"],
@@ -35,7 +39,13 @@ series_mapping = {
     # "mantis_llava": ["Mantis-llava-7b", "Mantis-bakllava-7b"],
     "moondream1": ["moondream1"],
     "moondream2": ["moondream2"],
+    "bunnyllama3": ["Bunny-Llama-3-8B-V"],
+    "xinyuanvl": ["Xinyuan-VL-2B"],
     "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
+    "phi3v": ["Phi-3.5-vision-instruct", "Phi-3-vision-128k-instruct"],
+    "phi4mm": ["Phi-4-multimodal-instruct"],
+    "vintern": ["Vintern-1B-v2", "Vintern-1B-v3_5", "Vintern-3B-beta"],
+    "xgen": ["xgen-mm-phi3-mini-instruct-interleave-r-v1.5"],
     # "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B"],
     # "ovis1d6_27b": ["Ovis1.6-Gemma2-27B"],
     # "qwenvl2": ["Qwen2-VL-2B-Instruct", "Qwen2-VL-7B-Instruct", "Qwen2-VL-72B-Instruct",
@@ -45,6 +55,9 @@ series_mapping = {
     #               "Qwen2.5-VL-3B-Instruct-AWQ", "Qwen2.5-VL-7B-Instruct-AWQ", "Qwen2.5-VL-32B-Instruct-AWQ", "Qwen2.5-VL-72B-Instruct-AWQ"],
     # "qwenvl2d5_omni": ["Qwen2.5-Omni-3B", "Qwen2.5-Omni-7B", "Qwen2.5-Omni-7B-AWQ", "Qwen2.5-Omni-7B-GPTQ-Int4"],
     # "videollama2": ["VideoLLaMA2-7B"]
+    "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
+    "r1_onevision": ["R1-Onevision-7B"],
+    "wemm": ["WeMM", "WeMM-Chat-CN", "WeMM-Chat-2k-CN"],
 }
 
 series_infer_env_mapping = {
@@ -116,9 +129,17 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "llava_next"),
         "infer_file": "llava_next.py",
     },
+    "llava_next_interleave": {
+        "env": os.path.join(env_dir, "llava_next_interleave"),
+        "infer_file": "llava_next_interleave.py",
+    },
     "llava_ov": {
         "env": os.path.join(env_dir, "llava_ov"),
-        "infer_file": "llava_ov.py",
+        "infer_file": "llava_ov.py",    
+    },
+    "llava_ov_1d5": {
+        "env": os.path.join(env_dir, "llava_ov_1d5"),
+        "infer_file": "llava_ov_1d5.py",
     },
     "mantis": {
         "env": os.path.join(env_dir, "mantis"),
@@ -156,6 +177,34 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "ovis1d6_27b"),
         "infer_file": "ovis1d6.py",
     },
+    "vintern": {
+        "env": os.path.join(env_dir, "vintern"),
+        "infer_file": "vintern.py",
+    },
+    "moondream1": {
+        "env": os.path.join(env_dir, "moondream1"),
+        "infer_file": "moondream1.py",
+    }, 
+    "smolvlm": {
+        "env": os.path.join(env_dir, "smolvlm"),
+        "infer_file": "smolvlm.py",
+    },
+    "moondream2": {
+        "env": os.path.join(env_dir, "moondream2"),
+        "infer_file": "moondream2.py",
+    },
+    "bunnyllama3": {
+        "env": os.path.join(env_dir, "bunnyllama3"),
+        "infer_file": "bunnyllama3.py",
+    },
+    "xinyuanvl": {
+        "env": os.path.join(env_dir, "Xinyuan-VL-2B"),
+        "infer_file": "xinyuanvl.py",
+    },
+    "xgen": {
+        "env": os.path.join(env_dir, "xgen"),
+        "infer_file": "xgen.py",
+    },
     "paligemma": {
         "env": os.path.join(env_dir, "paligemma"),
         "infer_file": "paligemma.py",
@@ -175,5 +224,25 @@ series_infer_env_mapping = {
     "videollama2": {
         "env": os.path.join(env_dir, "videollama2"),
         "infer_file": "videollama2.py",
-    }
+    },
+    "phi3v": {
+        "env": os.path.join(env_dir, "phi3v"),
+        "infer_file": "phi3v.py",
+    },
+    "phi4mm": {
+        "env": os.path.join(env_dir, "phi4"),
+        "infer_file": "phi4mm.py",
+    },
+    "vlaa_thinking": {
+        "env": os.path.join(env_dir, "vlaa_thinking"),
+        "infer_file": "vlaa_thinking.py",
+    },
+    "r1_onevision": {
+        "env": os.path.join(env_dir, "r1_onevision"),
+        "infer_file": "r1_onevision.py",
+    },
+    "wemm": {
+        "env": os.path.join(env_dir, "wemm"),
+        "infer_file": "wemm.py",
+    },
 }
