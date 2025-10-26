@@ -11,6 +11,7 @@ series_mapping = {
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
     # "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
+    "internlm_xcomposer": ["internlm-xcomposer-7b"],
     "internvl_chat": ["InternVL-Chat-V1-1", "InternVL-Chat-V1-2", "InternVL-Chat-V1-2-Plus"],
     "internvl_chat1d5": ["Mini-InternVL-Chat-2B-V1-5", "Mini-InternVL-Chat-4B-V1-5", "InternVL-Chat-V1-5"],
     "internvl2": ["InternVL2-1B", "InternVL2-2B", "InternVL2-4B", "InternVL2-8B", "InternVL2-26B", "InternVL2-40B", "InternVL2-Llama3-76B"],
@@ -79,6 +80,10 @@ series_infer_env_mapping = {
     "instructblip": {
         "env": os.path.join(env_dir, "instructblip"),
         "infer_file": "instructblip.py",
+    },
+    "internlm_xcomposer": {
+        "env": os.path.join(env_dir, "internlm"),
+        "infer_file": "internlm_xcomposer.py",
     },
     "internvl2": {
         "env": os.path.join(env_dir, "internvl"),
