@@ -46,36 +46,32 @@ class SQLiteKVStore:
         finally:
             conn.close()
 
-    @contextmanager
-    def _transaction(self, conn: sqlite3.Connection) -> Iterable[sqlite3.Connection]:
+    def _execute_in_transaction(self, conn: sqlite3.Connection, fn: Callable[[sqlite3.Connection], Any]) -> Any:
         conn.execute("BEGIN IMMEDIATE;")
         try:
-            yield conn
+            out = fn(conn)
             conn.execute("COMMIT;")
+            return out
         except Exception:
-            # Safe rollback: don't let rollback errors mask the original error
             try:
                 conn.execute("ROLLBACK;")
             except Exception:
-                pass  
+                pass  # Don't mask original error
             raise
 
     def _with_txn(self, fn: Callable[[sqlite3.Connection], Any]) -> Any:
-        for attempt in range(self.retries + 1):
+        attempt = 0
+        while True:
             try:
                 with self._conn() as conn:
-                    with self._transaction(conn):
-                        return fn(conn)
+                    return self._execute_in_transaction(conn, fn)
             except sqlite3.OperationalError as e:
                 msg = str(e).lower()
-                is_lock_error = "locked" in msg or "busy" in msg
-                is_last_attempt = attempt >= self.retries
-                
-                if not is_lock_error or is_last_attempt:
-                    raise
-                
-                # Exponential backoff before retry
-                time.sleep(self.base_sleep * (2 ** attempt))
+                if ("locked" in msg or "busy" in msg) and attempt < self.retries:
+                    attempt += 1
+                    time.sleep(self.base_sleep * (2 ** (attempt - 1)))
+                    continue
+                raise
 
     def _init_db(self) -> None:
         with self._conn() as conn:
