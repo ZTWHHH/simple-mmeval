@@ -32,14 +32,21 @@ class TaskRunner(Task):
         
     def _parse_input(self, sample:dict):
         prompt = sample["prompt"]
-        prompt = prompt.replace("<image>", "")
+        has_image = bool(sample.get("media"))
+
+        if has_image:
+            prompt = prompt.replace("<image>", "")
+            content = [
+                {"type": "image"},
+                {"type": "text", "text": prompt},
+            ]
+        else:
+            content = [{"type": "text", "text": prompt}]
+
         conversation = [
             {
                 "role": "user",
-                "content": [
-                    {"type": "image"},
-                    {"type": "text", "text": prompt}
-                ],
+                "content": content,
             },
         ]
 
@@ -55,8 +62,11 @@ class TaskRunner(Task):
         conversation = self._parse_input(ori_sample)
         prompt = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
 
-        image = ori_sample["media"][0]
-        inputs = self.processor(images=image, text=prompt, return_tensors="pt").to(0, self.dtype)
+        if ori_sample.get("media"):
+            image = ori_sample["media"][0]
+            inputs = self.processor(images=image, text=prompt, return_tensors="pt").to(0, self.dtype)
+        else:
+            inputs = self.processor(text=prompt, return_tensors="pt").to(0, self.dtype)
 
         if not self.args.score_target:
             ori_sample["response"] = self._generate_response(inputs)

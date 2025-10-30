@@ -70,6 +70,10 @@ class TaskRunner(Task):
             inputs = self.processor.apply_chat_template(
                 messages, num_frames=8, tokenize=True, add_generation_prompt=True, return_dict=True, return_tensors="pt"
             ).to(self.device, torch.float16)
+        elif modality == "text":
+            inputs = self.processor.apply_chat_template(
+                messages, tokenize=True, add_generation_prompt=True, return_dict=True, return_tensors="pt"
+            ).to(self.device)
         
         generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         generated_ids_trimmed = [
@@ -104,6 +108,13 @@ class TaskRunner(Task):
             clip = read_video_pyav(container, indices)
             full_encoded = [self.processor(text=i, videos=clip, return_tensors="pt").to(self.device) for i in full]
             prompt_encoded = self.processor(text=text, videos=clip, return_tensors="pt").to(self.device)
+        elif modality == "text":
+            text = self.processor.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+            full = [text + content for content in contents]
+            full_encoded = [self.processor(text=i, return_tensors="pt").to(self.device) for i in full]
+            prompt_encoded = self.processor(text=text, return_tensors="pt").to(self.device)
 
         target_toks = target_tokens(self.tokenizer, contents)
 
@@ -120,7 +131,8 @@ class TaskRunner(Task):
         question = sample["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        images = copy.deepcopy(sample['media'])
+        images = copy.deepcopy(sample.get('media', []))
+        modality = "text"
 
         messages = [
             {

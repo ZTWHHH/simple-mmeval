@@ -28,7 +28,7 @@ series_mapping = {
     # "janus": ["Janus-1.3B"],
     # "janus_flow": ["JanusFlow-1.3B"],
     "janus_pro": ["Janus-Pro-1B", "Janus-Pro-7B"],
-    # "llava": ["llava-1.5-7b-hf", "llava-1.5-13b-hf"],
+    "llava": ["llava-1.5-7b-hf", "llava-1.5-13b-hf"],
     # "llava_next": ["llava-v1.6-mistral-7b-hf", "llava-v1.6-vicuna-7b-hf", "llava-v1.6-vicuna-13b-hf", "llava-v1.6-34b-hf", "llama3-llava-next-8b-hf", "llava-next-72b-hf", "llava-next-110b-hf"],
     "llava_next_interleave": ["llava-next-interleave-qwen-0.5b", "llava-next-interleave-qwen-7b", "llava-next-interleave-qwen-7b-dpo"],
     "llava_ov": ["llava-onevision-qwen2-0.5b-si-hf",  "llava-onevision-qwen2-7b-si-hf", "llava-onevision-qwen2-72b-si-hf", 
