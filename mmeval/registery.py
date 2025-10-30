@@ -8,9 +8,11 @@ series_mapping = {
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
     "llama3_2_vision": ["Llama-3.2-11B-Vision-Instruct", "Llama-3.2-90B-Vision-Instruct"],
+    "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
     # "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
+    "internlm_xcomposer": ["internlm-xcomposer-7b"],
     "internvl_chat": ["InternVL-Chat-V1-1", "InternVL-Chat-V1-2", "InternVL-Chat-V1-2-Plus"],
     "internvl_chat1d5": ["Mini-InternVL-Chat-2B-V1-5", "Mini-InternVL-Chat-4B-V1-5", "InternVL-Chat-V1-5"],
     "internvl2": ["InternVL2-1B", "InternVL2-2B", "InternVL2-4B", "InternVL2-8B", "InternVL2-26B", "InternVL2-40B", "InternVL2-Llama3-76B"],
@@ -38,9 +40,11 @@ series_mapping = {
     # "mantis_llava": ["Mantis-llava-7b", "Mantis-bakllava-7b"],
     "moondream1": ["moondream1"],
     "moondream2": ["moondream2"],
-    "bunnyllama3": ["Bunny-Llama-3-8B-V"]
-    "xinyuanvl": ["Xinyuan-VL-2B"]
+    "bunnyllama3": ["Bunny-Llama-3-8B-V"],
+    "xinyuanvl": ["Xinyuan-VL-2B"],
     "ovis1d5": ["Ovis1.5-Llama3-8B", "Ovis1.5-Gemma2-9B"],
+    "phi3v": ["Phi-3.5-vision-instruct", "Phi-3-vision-128k-instruct"],
+    "phi4mm": ["Phi-4-multimodal-instruct"],
     "vintern": ["Vintern-1B-v2", "Vintern-1B-v3_5", "Vintern-3B-beta"],
     "xgen": ["xgen-mm-phi3-mini-instruct-interleave-r-v1.5"],
     # "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B"],
@@ -53,7 +57,8 @@ series_mapping = {
     # "qwenvl2d5_omni": ["Qwen2.5-Omni-3B", "Qwen2.5-Omni-7B", "Qwen2.5-Omni-7B-AWQ", "Qwen2.5-Omni-7B-GPTQ-Int4"],
     # "videollama2": ["VideoLLaMA2-7B"]
     "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
-    "r1_onevision": ["R1-Onevision-7B"]
+    "r1_onevision": ["R1-Onevision-7B"],
+    "wemm": ["WeMM", "WeMM-Chat-CN", "WeMM-Chat-2k-CN"],
 }
 
 series_infer_env_mapping = {
@@ -76,6 +81,10 @@ series_infer_env_mapping = {
     "instructblip": {
         "env": os.path.join(env_dir, "instructblip"),
         "infer_file": "instructblip.py",
+    },
+    "internlm_xcomposer": {
+        "env": os.path.join(env_dir, "internlm"),
+        "infer_file": "internlm_xcomposer.py",
     },
     "internvl2": {
         "env": os.path.join(env_dir, "internvl"),
@@ -180,6 +189,10 @@ series_infer_env_mapping = {
     "llama3_2_vision": {
         "env": os.path.join(env_dir, "llama3-2-vision"),
         "infer_file": "llama3_2_vision.py",
+    }, 
+    "smolvlm": {
+        "env": os.path.join(env_dir, "smolvlm"),
+        "infer_file": "smolvlm.py",
     },
     "moondream2": {
         "env": os.path.join(env_dir, "moondream2"),
@@ -188,9 +201,11 @@ series_infer_env_mapping = {
     "bunnyllama3": {
         "env": os.path.join(env_dir, "bunnyllama3"),
         "infer_file": "bunnyllama3.py",
+    },
     "xinyuanvl": {
         "env": os.path.join(env_dir, "Xinyuan-VL-2B"),
         "infer_file": "xinyuanvl.py",
+    },
     "xgen": {
         "env": os.path.join(env_dir, "xgen"),
         "infer_file": "xgen.py",
@@ -215,6 +230,14 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "videollama2"),
         "infer_file": "videollama2.py",
     },
+    "phi3v": {
+        "env": os.path.join(env_dir, "phi3v"),
+        "infer_file": "phi3v.py",
+    },
+    "phi4mm": {
+        "env": os.path.join(env_dir, "phi4"),
+        "infer_file": "phi4mm.py",
+    },
     "vlaa_thinking": {
         "env": os.path.join(env_dir, "vlaa_thinking"),
         "infer_file": "vlaa_thinking.py",
@@ -222,5 +245,9 @@ series_infer_env_mapping = {
     "r1_onevision": {
         "env": os.path.join(env_dir, "r1_onevision"),
         "infer_file": "r1_onevision.py",
-    }
+    },
+    "wemm": {
+        "env": os.path.join(env_dir, "wemm"),
+        "infer_file": "wemm.py",
+    },
 }

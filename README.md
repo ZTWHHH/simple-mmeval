@@ -135,6 +135,7 @@ Currently supported model series:
 | **VideoLLaMA2** | VideoLLaMA2-7B, VideoLLaMA2-13B | [`scripts/test_bed/videollama2.sh`](scripts/test_bed/videollama2.sh) |
 | **BLIP2-FLAN-T5** | Salesforce/blip2-flan-t5-xl, Salesforce/blip2-flan-t5-xxl | [`scripts/test_bed/blip2-flan-t5-xl.sh`](scripts/test_bed/blip2-flan-t5-xl.sh) |
 | **Llama3.2-Vision** | Llama-3.2-11B-Vision-Instruct, Llama-3.2-90B-Vision-Instruct | [`scripts/test_bed/llama3_2_vision.sh`](scripts/test_bed/llama3_2_vision.sh) |
+| **SmolVLM** | HuggingFaceTB/SmolVLM | [`scripts/test_bed/smolvlm.sh`](scripts/test_bed/smolvlm.sh) |
 | **Xinyuan-VL-2B** | Xinyuan-VL-2B | [`scripts/test_bed/xinyuanvl2b.sh`](scripts/test_bed/xinyuanvl2b.sh) |
 | **LLaVA-OneVision-1.5** | lmms-lab/LLaVA-OneVision-1.5-8B-Instruct | [`scripts/test_bed/llava-ov-1d5.sh`](scripts/test_bed/llava-ov-1d5.sh) |
 | **Cambrian** | cambrian-8b, cambrian-13b, cambrian-34b, cambrian-phi3-3b | [`scripts/test_bed/cambrian-multi-image-video-interleave.sh`](scripts/test_bed/cambrian-multi-image-video-interleave.sh) |
@@ -153,6 +154,10 @@ Currently supported model series:
 | **Moondream1** | moondream1 | [`scripts/test_bed/moondream1.sh`](scripts/test_bed/moondream1.sh) |
 | **Moondream2** | moondream2 | [`scripts/test_bed/moondream2.sh`](scripts/test_bed/moondream2.sh) |
 | **Ovis1.5** | Ovis1.5-Llama3-8B, Ovis1.5-Gemma2-9B | [`scripts/test_bed/ovis1d5-single-image-start.sh`](scripts/test_bed/ovis1d5-single-image-start.sh) |
+| **Internlm** | internlm-xcomposer-7b | [`scripts/test_bed/internlm-xcomposer-7b.sh`](scripts/test_bed/internlm-xcomposer-7b.sh) |
+| **Phi-3V** | Phi-3.5-vision-instruct, Phi-3-vision-128k-instruct | [`scripts/test_bed/phi3v-multi-image-interleave.sh`](scripts/test_bed/phi3v-multi-image-interleave.sh) |
+| **Phi-4MM** | Phi-4-multimodal-instruct | [`scripts/test_bed/phi4mm-multi-image-interleave.sh`](scripts/test_bed/phi4mm-multi-image-interleave.sh) |
+| **WeMM** | WeMM, WeMM-Chat-CN, WeMM-Chat-2k-CN | [`scripts/test_bed/wemm.sh`](scripts/test_bed/wemm.sh) |
 
 ## Supported Datasets
 
