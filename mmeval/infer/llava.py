@@ -32,8 +32,16 @@ class TaskRunner(Task):
         
     def _parse_input(self, sample:dict):
         prompt = sample["prompt"]
-        prompt = prompt.replace("<image>", "")
-        content = [{"type": "text", "text": prompt}]
+        has_image = bool(sample.get("media"))
+
+        if has_image:
+            prompt = prompt.replace("<image>", "")
+            content = [
+                {"type": "image"},
+                {"type": "text", "text": prompt},
+            ]
+        else:
+            content = [{"type": "text", "text": prompt}]
 
         conversation = [
             {
