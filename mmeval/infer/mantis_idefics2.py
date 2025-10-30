@@ -77,7 +77,7 @@ class TaskRunner(Task):
         messages = self._parse_input(ori_sample)
         prompt = self.processor.apply_chat_template(messages, add_generation_prompt=True)
 
-        images = sample["media"]
+        images = sample.get("media", [])
         inputs = self.processor(text=prompt, images=images, return_tensors="pt")
         inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
 

@@ -56,7 +56,7 @@ class TaskRunner(Task):
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
         text = sample["prompt"]
-        images = sample["media"]
+        images = sample.get("media", [])
 
         self.gen_kwargs["pad_token_id"] = self.processor.tokenizer.eos_token_id
 

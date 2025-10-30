@@ -44,7 +44,7 @@ class TaskRunner(Task):
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
         text = sample["prompt"]
-        images = sample["media"]
+        images = sample.get("media", [])
 
         if not self.args.score_target:
             ori_sample["response"] = self._generate_response(text, images)
