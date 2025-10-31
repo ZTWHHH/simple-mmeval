@@ -74,16 +74,28 @@ class SQLiteKVStore:
                 raise
 
     def _init_db(self) -> None:
-        with self._conn() as conn:
-            conn.execute("""
-            CREATE TABLE IF NOT EXISTS kv (
-                k TEXT PRIMARY KEY,
-                v TEXT NOT NULL,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            );
-            """)
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.commit()
+        """Initialize database with retry on lock errors."""
+        attempt = 0
+        while True:
+            try:
+                with self._conn() as conn:
+                    conn.execute("""
+                    CREATE TABLE IF NOT EXISTS kv (
+                        k TEXT PRIMARY KEY,
+                        v TEXT NOT NULL,
+                        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                    );
+                    """)
+                    conn.execute("PRAGMA journal_mode=WAL;")
+                    conn.commit()
+                    return  # Success
+            except sqlite3.OperationalError as e:
+                msg = str(e).lower()
+                if ("locked" in msg or "busy" in msg) and attempt < self.retries:
+                    attempt += 1
+                    time.sleep(self.base_sleep * (2 ** (attempt - 1)))
+                    continue
+                raise
 
     def _dumps(self, obj: JSONType) -> str:
         # Validate JSON-compatibility; disallow NaN/Inf which aren't valid JSON.
