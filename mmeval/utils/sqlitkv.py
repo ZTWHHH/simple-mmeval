@@ -17,6 +17,7 @@ class SQLiteKVStore:
     def __init__(
         self,
         db_path: str,
+        timeout: int = 10,
         busy_timeout_ms: int = 3000,
         synchronous: str = "NORMAL",      # "FULL" for stronger durability
         retries: int = 5,
@@ -24,6 +25,7 @@ class SQLiteKVStore:
         json_indent: Optional[int] = None # pretty print if you like
     ) -> None:
         self.db_path = db_path
+        self.timeout = timeout
         self.busy_timeout_ms = busy_timeout_ms
         self.synchronous = synchronous
         self.retries = retries
@@ -35,27 +37,34 @@ class SQLiteKVStore:
     @contextmanager
     def _conn(self) -> Iterable[sqlite3.Connection]:
         # New connection each time: safer for multiprocess.
-        conn = sqlite3.connect(self.db_path, isolation_level=None)  # autocommit
+        conn = sqlite3.connect(self.db_path, timeout=self.timeout)
         try:
             conn.row_factory = sqlite3.Row
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute(f"PRAGMA synchronous={self.synchronous};")
-            conn.execute("PRAGMA foreign_keys=ON;")
             conn.execute(f"PRAGMA busy_timeout={self.busy_timeout_ms};")
+            conn.execute(f"PRAGMA synchronous={self.synchronous};")
             yield conn
         finally:
             conn.close()
 
+    def _execute_in_transaction(self, conn: sqlite3.Connection, fn: Callable[[sqlite3.Connection], Any]) -> Any:
+        conn.execute("BEGIN IMMEDIATE;")
+        try:
+            out = fn(conn)
+            conn.execute("COMMIT;")
+            return out
+        except Exception:
+            try:
+                conn.execute("ROLLBACK;")
+            except Exception:
+                pass  # Don't mask original error
+            raise
+
     def _with_txn(self, fn: Callable[[sqlite3.Connection], Any]) -> Any:
-        # BEGIN IMMEDIATE + exponential backoff when DB is busy/locked.
         attempt = 0
         while True:
             try:
                 with self._conn() as conn:
-                    conn.execute("BEGIN IMMEDIATE;")
-                    out = fn(conn)
-                    conn.execute("COMMIT;")
-                    return out
+                    return self._execute_in_transaction(conn, fn)
             except sqlite3.OperationalError as e:
                 msg = str(e).lower()
                 if ("locked" in msg or "busy" in msg) and attempt < self.retries:
@@ -65,14 +74,28 @@ class SQLiteKVStore:
                 raise
 
     def _init_db(self) -> None:
-        with self._conn() as conn:
-            conn.execute("""
-            CREATE TABLE IF NOT EXISTS kv (
-                k TEXT PRIMARY KEY,
-                v TEXT NOT NULL,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            );
-            """)
+        """Initialize database with retry on lock errors."""
+        attempt = 0
+        while True:
+            try:
+                with self._conn() as conn:
+                    conn.execute("""
+                    CREATE TABLE IF NOT EXISTS kv (
+                        k TEXT PRIMARY KEY,
+                        v TEXT NOT NULL,
+                        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                    );
+                    """)
+                    conn.execute("PRAGMA journal_mode=WAL;")
+                    conn.commit()
+                    return  # Success
+            except sqlite3.OperationalError as e:
+                msg = str(e).lower()
+                if ("locked" in msg or "busy" in msg) and attempt < self.retries:
+                    attempt += 1
+                    time.sleep(self.base_sleep * (2 ** (attempt - 1)))
+                    continue
+                raise
 
     def _dumps(self, obj: JSONType) -> str:
         # Validate JSON-compatibility; disallow NaN/Inf which aren't valid JSON.
