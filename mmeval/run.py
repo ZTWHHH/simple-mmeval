@@ -7,7 +7,7 @@ import json
 import copy
 import glob
 
-from mmeval.registery import series_mapping, series_infer_env_mapping
+from mmeval.registry import series_mapping, series_infer_env_mapping
 from mmeval.utils.argparser import parse_args
 
 
@@ -15,7 +15,7 @@ def get_series(model_name: str):
     for series, models in series_mapping.items():
         if model_name in models:
             return series
-    raise ValueError(f"Model {model_name} not found in registery.")
+    raise ValueError(f"Model {model_name} not found in registry.")
     
 
 if __name__ == "__main__":

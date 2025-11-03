@@ -3,7 +3,7 @@ import copy
 
 import torch
 import numpy as np
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
+from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
 from mmeval.infer.task import Task
@@ -25,7 +25,7 @@ class TaskRunner(Task):
         super().__init__(args)
         
     def load_model(self, args):
-        self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype=self.dtype, **self.model_kwargs)
+        self.model = Qwen2VLForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype=self.dtype, **self.model_kwargs)
         self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
         min_pixels = 256 * 28 * 28
         max_pixels = 1280 * 28 * 28
@@ -111,7 +111,7 @@ class TaskRunner(Task):
             messages, tokenize=False, add_generation_prompt=True
         )
 
-        image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
+        image_inputs, video_inputs = process_vision_info(messages)
 
         inputs = self.processor(
             text=[text],
@@ -119,7 +119,6 @@ class TaskRunner(Task):
             videos=video_inputs,
             padding=True,
             return_tensors="pt",
-            **video_kwargs,
         )
         inputs = inputs.to(self.device)
 
