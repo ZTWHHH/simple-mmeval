@@ -5,6 +5,7 @@ env_dir = os.getenv('ENV_DIR') or ""
 series_mapping = {
     "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
     "cambrian": ["cambrian-8b", "cambrian-13b", "cambrian-34b", "cambrian-phi3-3b"],
+    "fuyu": ["fuyu-8B"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
     "llama3_2_vision": ["Llama-3.2-11B-Vision-Instruct", "Llama-3.2-90B-Vision-Instruct"],
@@ -72,6 +73,10 @@ series_infer_env_mapping = {
     "cambrian": {
         "env": os.path.join(env_dir, "cambrian"),
         "infer_file": "cambrian.py",
+    },
+    "fuyu": {
+        "env": os.path.join(env_dir, "fuyu"),
+        "infer_file": "fuyu.py",
     },
     "gemma3": {
         "env": os.path.join(env_dir, "gemma3"),
