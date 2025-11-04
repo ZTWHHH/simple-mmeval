@@ -49,6 +49,8 @@ class TaskRunner(Task):
         self.model = MFuyuForCausalLM.from_pretrained(args.model_name_or_path, torch_dtype=self.dtype, **self.model_kwargs)
 
     def _generate_response(self, text, images):
+        if not images:
+            images = None
         response, _ = chat_mllava(text, images, self.model, self.processor, **self.gen_kwargs)
 
         return response

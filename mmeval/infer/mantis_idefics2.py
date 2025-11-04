@@ -65,7 +65,8 @@ class TaskRunner(Task):
         return messages
 
     def _generate_response(self, inputs):
-        # Generate
+        if not images:
+            images = None
         generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         response = self.processor.batch_decode(generated_ids[:, inputs["input_ids"].shape[1]:], skip_special_tokens=True)
 
