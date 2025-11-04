@@ -38,6 +38,8 @@ class TaskRunner(Task):
         self.model = LlavaForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype=self.dtype, **self.model_kwargs)
 
     def _generate_response(self, text, images):
+        if not images:
+            images = None
         response, _ = chat_mllava(text, images, self.model, self.processor, **self.gen_kwargs)
 
         return response
@@ -45,7 +47,7 @@ class TaskRunner(Task):
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
         text = sample["prompt"]
-        images = sample["media"]
+        images = sample.get("media", [])
 
         if not self.args.score_target:
             ori_sample["response"] = self._generate_response(text, images)
