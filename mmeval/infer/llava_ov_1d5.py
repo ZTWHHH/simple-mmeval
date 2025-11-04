@@ -88,7 +88,7 @@ class TaskRunner(Task):
         question = sample["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        images = copy.deepcopy(sample['media'])
+        images = copy.deepcopy(sample.get('media', []))
 
         messages = [
             {
