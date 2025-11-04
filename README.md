@@ -133,6 +133,7 @@ Currently supported model series:
 |--------------|--------|---------------|
 | **Qwen2.5-VL** | Qwen2.5-VL-3B-Instruct, Qwen2.5-VL-7B-Instruct, Qwen2.5-VL-32B-Instruct, Qwen2.5-VL-72B-Instruct | [`scripts/test_bed/qwen2d5.sh`](scripts/test_bed/qwen2d5.sh) |
 | **VideoLLaMA2** | VideoLLaMA2-7B, VideoLLaMA2-13B | [`scripts/test_bed/videollama2.sh`](scripts/test_bed/videollama2.sh) |
+| **Fuyu** | Fuyu-8B | [`scripts/test_bed/fuyu.sh`](scripts/test_bed/fuyu.sh) |
 | **BLIP2-FLAN-T5** | Salesforce/blip2-flan-t5-xl, Salesforce/blip2-flan-t5-xxl | [`scripts/test_bed/blip2-flan-t5-xl.sh`](scripts/test_bed/blip2-flan-t5-xl.sh) |
 | **Llama3.2-Vision** | Llama-3.2-11B-Vision-Instruct, Llama-3.2-90B-Vision-Instruct | [`scripts/test_bed/llama3_2_vision.sh`](scripts/test_bed/llama3_2_vision.sh) |
 | **SmolVLM** | HuggingFaceTB/SmolVLM | [`scripts/test_bed/smolvlm.sh`](scripts/test_bed/smolvlm.sh) |
