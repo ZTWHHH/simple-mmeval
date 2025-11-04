@@ -1,0 +1,98 @@
+[
+    {
+        "id": 0,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0,
+        "response": "The image features a silver Chevrolet truck driving on a dirt road, kicking up dust as it moves. The truck is positioned in the center of the scene, with the front facing towards the right side of the image. The surroundings include a rocky hillside and a grassy area, giving the impression of a rugged, outdoor environment. The truck appears to be in motion, possibly traversing a challenging terrain."
+    },
+    {
+        "id": 1,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1,
+        "response": "The image features a large white yacht speeding through the water, creating a large wake behind it. The yacht is positioned in the center of the scene, with its bow pointed towards the right side of the image. The water around the yacht is disturbed, indicating its high speed.\n\nThe yacht is surrounded by a serene blue ocean, which extends to the horizon in the background. The overall scene captures the excitement and power of the yacht as it cuts through the water at a fast pace."
+    },
+    {
+        "id": 2,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2,
+        "response": "The first image features a silver Chevrolet truck driving on a dirt road. The truck is positioned in the center of the image, with its front facing towards the right side of the frame. The truck is surrounded by a natural landscape with a rocky hillside in the background. The truck's tires are kicking up dirt as it moves along the road.\n\nThe second image showcases a white yacht speeding through the water. The yacht is in the center of the image, with its bow pointed towards the right side. The water around the yacht is disturbed, indicating its high speed. The sky above is clear, and the horizon line is visible in the distance, separating the sky from the water."
+    },
+    {
+        "id": 3,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3,
+        "response": "The first image features a white yacht speeding through the water, leaving a trail of white foam behind it. The yacht is positioned in the center of the image, with the water surrounding it on all sides. The vast expanse of the ocean stretches out behind the yacht, creating a serene and tranquil atmosphere.\n\nThe second image showcases a gray Chevrolet truck driving on a dirt road. The truck is in motion, kicking up dust as it moves along the road. The road is surrounded by a rocky landscape, adding a rugged and adventurous feel to the scene. The truck is the main focus of the image, with no other vehicles or objects visible in the background."
+    },
+    {
+        "id": 4,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4,
+        "response": "The image showcases a **silver Chevrolet Silverado** pickup truck in motion on a dirt road. The truck is positioned on the left side of the image, moving towards the right. The front of the truck is facing the viewer, giving a clear view of its design. The truck is equipped with a **black bumper** and **black tires**, adding to its rugged appearance. The background of the image features a **desert landscape** with **rocks** and **dirt**, providing a stark contrast to the shiny silver of the truck. The image does not contain any discernible text. The relative position of the truck to the background suggests it is in the foreground, while the landscape is in the background. The image captures a moment of motion, with the truck in the midst of its journey across the desert."
+    },
+    {
+        "id": 5,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5,
+        "response": "The image captures a moment of a white yacht, adorned with a black stripe, cutting through the deep blue waters of the ocean. The yacht is moving from the left to the right of the frame, leaving behind a trail of white foam that contrasts with the dark blue of the water. The sky above is a clear blue, suggesting a sunny day. The yacht is positioned in the center of the image, drawing the viewer's attention to its journey across the water. The image does not contain any discernible text. The relative position of the yacht to the water and the sky indicates that it is moving towards the right side of the image. The image is a testament to the beauty of nature and the thrill of sailing."
+    },
+    {
+        "id": 6,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6,
+        "response": "The image showcases a silver Chevrolet Silverado pickup truck driving on a dirt road. The truck is positioned in the center of the frame, with its front facing towards the right side of the image. The truck is equipped with a large grille and has a black bumper. The tires are mud-covered, indicating that the truck has been off-roading.\n\nThe surroundings of the truck include a rocky hillside and a clear blue sky, suggesting a rugged outdoor environment. The image captures the essence of adventure and exploration, as the truck navigates through the challenging terrain."
+    },
+    {
+        "id": 7,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7,
+        "response": "The image captures a white yacht speeding across a large body of water, leaving a trail of white foam in its wake. The yacht is positioned centrally in the frame, with its bow pointed towards the right side of the image. The water around the yacht is a deep blue, reflecting the clear sky above. The yacht's speed and the wake it creates give a sense of motion and excitement. The image does not contain any discernible text or other objects. The focus is solely on the yacht and its dynamic movement across the water."
+    }
+]
