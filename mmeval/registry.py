@@ -1,5 +1,7 @@
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 env_dir = os.getenv('ENV_DIR') or ""
 
 series_mapping = {
@@ -61,9 +63,10 @@ series_mapping = {
     "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
     "r1_onevision": ["R1-Onevision-7B"],
     "wemm": ["WeMM", "WeMM-Chat-CN", "WeMM-Chat-2k-CN"],
-    "openai_gpt": ["openai-gpt-4o", "openai-gpt-4o-mini", "openai-gpt-4-turbo"],
-    "google_gemini": ["google-gemini-1.5-pro", "google-gemini-1.5-flash", "google-gemini-2.0-flash-exp"],
-    "anthropic_claude": ["anthropic-claude-3-5-sonnet-latest", "anthropic-claude-3-opus-latest", "anthropic-claude-3-5-haiku-latest"],
+    "openai_gpt": ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano"],
+    "google_gemini": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-2.0-flash-lite"],
+    "anthropic_claude": ["claude-sonnet-4-5", "claude-opus-4-1", "claude-haiku-4-5"],
+    "xai_grok": ["grok-4-fast-reasoning", "grok-4-fast-non-reasoning", "grok-4-0709", "grok-2-vision-1212"],
 }
 
 series_infer_env_mapping = {
@@ -266,5 +269,9 @@ series_infer_env_mapping = {
     "anthropic_claude": {
         "env": os.path.join(env_dir, "anthropic_claude"),
         "infer_file": "anthropic_claude.py",
+    },
+    "xai_grok": {
+        "env": os.path.join(env_dir, "xai_grok"),
+        "infer_file": "xai_grok.py",
     },
 }

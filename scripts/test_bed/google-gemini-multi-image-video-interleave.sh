@@ -1,35 +1,52 @@
 export PYTHONPATH=./:$PYTHONPATH
 
-# Google Gemini 1.5 Pro
+# Google Gemini 2.5 Pro
 python mmeval/run.py \
     --infile test_bed/modality_test/task/multi_image_video_interleave.json \
     --dataset local@json \
-    --out_dir work_dirs/google-gemini-1.5-pro-multi-image-video-interleave \
+    --out_dir work_dirs/gemini-2.5-pro-multi-image-video-interleave \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path google-gemini-1.5-pro \
-    --gpu_per_parallel 1 \
-    --parallel_per_task 1 \
-    --max_new_tokens 512
+    --model_name_or_path gemini-2.5-pro \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
 
-# Google Gemini 1.5 Flash
+# Google Gemini 2.5 Flash
 python mmeval/run.py \
     --infile test_bed/modality_test/task/multi_image_video_interleave.json \
     --dataset local@json \
-    --out_dir work_dirs/google-gemini-1.5-flash-multi-image-video-interleave \
+    --out_dir work_dirs/gemini-2.5-flash-multi-image-video-interleave \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path google-gemini-1.5-flash \
-    --gpu_per_parallel 1 \
-    --parallel_per_task 1 \
-    --max_new_tokens 512
+    --model_name_or_path gemini-2.5-flash \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
 
-# Google Gemini 2.0 Flash Exp
+# Google Gemini 2.5 Flash Lite
 python mmeval/run.py \
     --infile test_bed/modality_test/task/multi_image_video_interleave.json \
     --dataset local@json \
-    --out_dir work_dirs/google-gemini-2.0-flash-exp-multi-image-video-interleave \
+    --out_dir work_dirs/gemini-2.5-flash-lite-multi-image-video-interleave \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path google-gemini-2.0-flash-exp \
-    --gpu_per_parallel 1 \
-    --parallel_per_task 1 \
-    --max_new_tokens 512
+    --model_name_or_path gemini-2.5-flash-lite \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
+
+# Google Gemini 2.0 Flash
+python mmeval/run.py \
+    --infile test_bed/modality_test/task/multi_image_video_interleave.json \
+    --dataset local@json \
+    --out_dir work_dirs/gemini-2.0-flash-multi-image-video-interleave \
+    --img_dir test_bed/modality_test/media/448 \
+    --model_name_or_path gemini-2.0-flash \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
+
+# Google Gemini 2.0 Flash Lite
+python mmeval/run.py \
+    --infile test_bed/modality_test/task/multi_image_video_interleave.json \
+    --dataset local@json \
+    --out_dir work_dirs/gemini-2.0-flash-lite-multi-image-video-interleave \
+    --img_dir test_bed/modality_test/media/448 \
+    --model_name_or_path gemini-2.0-flash-lite \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
 

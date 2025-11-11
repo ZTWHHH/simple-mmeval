@@ -10,7 +10,7 @@ from PIL import Image
 
 from mmeval.infer.task import Task
 from mmeval.utils import constants
-from mmeval.utils.argparser import parse_args
+from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
 
 load_dotenv()
 
@@ -18,15 +18,10 @@ load_dotenv()
 class TaskRunner(Task):
     def __init__(self, args):
         self.args = args
-        self.default_gen_kwargs = {
-            "temperature": 1,
-            "top_p": 0.95,
-            "top_k": 40,
-            "max_output_tokens": 512,
-        }
-        
-        if hasattr(args, 'max_new_tokens') and args.max_new_tokens:
-            self.default_gen_kwargs["max_output_tokens"] = args.max_new_tokens
+        self.default_gen_kwargs = {}
+        self.default_model_kwargs = {}
+        self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
+        self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
         
         super().__init__(args)
         
@@ -35,7 +30,7 @@ class TaskRunner(Task):
         if not api_key:
             raise ValueError("GOOGLE_API_KEY not found in environment variables")
         
-        genai.configure(api_key=api_key)
+        genai.configure(api_key=api_key, **self.model_kwargs)
         self.model_name = args.model_name_or_path.split("/")[-1]
         self.model = genai.GenerativeModel(self.model_name)
         self.client = genai
@@ -51,9 +46,7 @@ class TaskRunner(Task):
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                image_path = media_list.pop(0)
-                image = Image.open(image_path)
-                contents.append(image)
+                image = media_list.pop(0)
             elif chunk == constants.video:
                 video_path = media_list.pop(0)
                 video_file = self.client.upload_file(path=video_path)
@@ -72,7 +65,7 @@ class TaskRunner(Task):
         return contents
 
     def _generate_response(self, contents):
-        generation_config = genai.types.GenerationConfig(**self.default_gen_kwargs)
+        generation_config = genai.types.GenerationConfig(**self.gen_kwargs)
         
         response = self.model.generate_content(
             contents,

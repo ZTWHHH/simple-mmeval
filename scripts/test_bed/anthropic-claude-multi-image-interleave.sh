@@ -1,35 +1,32 @@
 export PYTHONPATH=./:$PYTHONPATH
 
-# Anthropic Claude 3.5 Sonnet
+# Claude Sonnet 4.5
 python mmeval/run.py \
     --infile test_bed/modality_test/task/multi_image_interleave.json \
     --dataset local@json \
-    --out_dir work_dirs/anthropic-claude-3-5-sonnet-latest-multi-image-interleave \
+    --out_dir work_dirs/claude-sonnet-4-5-multi-image-interleave \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path anthropic-claude-3-5-sonnet-latest \
-    --gpu_per_parallel 1 \
-    --parallel_per_task 1 \
-    --max_new_tokens 512
+    --model_name_or_path claude-sonnet-4-5 \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
 
-# Anthropic Claude 3 Opus
+# Claude Opus 4.1
 python mmeval/run.py \
     --infile test_bed/modality_test/task/multi_image_interleave.json \
     --dataset local@json \
-    --out_dir work_dirs/anthropic-claude-3-opus-latest-multi-image-interleave \
+    --out_dir work_dirs/claude-opus-4-1-multi-image-interleave \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path anthropic-claude-3-opus-latest \
-    --gpu_per_parallel 1 \
-    --parallel_per_task 1 \
-    --max_new_tokens 512
+    --model_name_or_path claude-opus-4-1 \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
 
-# Anthropic Claude 3.5 Haiku
+# Claude Haiku 4.5
 python mmeval/run.py \
     --infile test_bed/modality_test/task/multi_image_interleave.json \
     --dataset local@json \
-    --out_dir work_dirs/anthropic-claude-3-5-haiku-latest-multi-image-interleave \
+    --out_dir work_dirs/claude-haiku-4-5-multi-image-interleave \
     --img_dir test_bed/modality_test/media/448 \
-    --model_name_or_path anthropic-claude-3-5-haiku-latest \
-    --gpu_per_parallel 1 \
-    --parallel_per_task 1 \
-    --max_new_tokens 512
+    --model_name_or_path claude-haiku-4-5 \
+    --gpu_per_parallel 0 \
+    --parallel_per_task 1
 

@@ -11,7 +11,7 @@ from PIL import Image
 from mmeval.infer.task import Task
 from mmeval.utils import constants
 from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
- 
+
 load_dotenv()
 
 
@@ -33,11 +33,15 @@ class TaskRunner(Task):
         super().__init__(args)
         
     def load_model(self, args):
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("XAI_API_KEY")
         if not api_key:
-            raise ValueError("OPENAI_API_KEY not found in environment variables")
+            raise ValueError("XAI_API_KEY not found in environment variables")
         
-        self.client = OpenAI(api_key=api_key, **self.model_kwargs)
+        self.client = OpenAI(
+            api_key=api_key,
+            base_url="https://api.x.ai/v1",
+            **self.model_kwargs
+        )
         self.model_name = args.model_name_or_path.split("/")[-1]
 
     def parse_input(self, sample: dict):
@@ -60,7 +64,7 @@ class TaskRunner(Task):
                     }
                 })
             elif chunk == constants.video:
-                raise NotImplementedError("OpenAI GPT does not support video input")
+                raise NotImplementedError("xAI Grok does not support video input")
             else:
                 content.append({
                     "type": "text",
@@ -70,14 +74,21 @@ class TaskRunner(Task):
         return content
 
     def _generate_response(self, content):
+        messages = []
+        
+        messages.append({
+            "role": "system",
+            "content": "You are a helpful assistant that can answer questions and help with tasks."
+        })
+
+        messages.append({
+            "role": "user",
+            "content": content
+        })
+        
         response = self.client.chat.completions.create(
             model=self.model_name,
-            messages=[
-                {
-                    "role": "user",
-                    "content": content
-                }
-            ],
+            messages=messages,
             **self.gen_kwargs
         )
         
@@ -90,7 +101,7 @@ class TaskRunner(Task):
         if not self.args.score_target:
             ori_sample["response"] = self._generate_response(content)
         else:
-            raise NotImplementedError("Score target mode not supported for OpenAI API models")
+            raise NotImplementedError("Score target mode not supported for xAI Grok API models")
 
         return ori_sample
 

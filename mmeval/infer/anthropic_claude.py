@@ -10,40 +10,25 @@ from PIL import Image
 
 from mmeval.infer.task import Task
 from mmeval.utils import constants
-from mmeval.utils.argparser import parse_args
+from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
 
 load_dotenv()
 
 
 def encode_image(image):
-    """Encode PIL Image to base64 with media type"""
+    """Encode PIL Image to base64"""
     buffered = io.BytesIO()
-    
-    # Convert RGBA/LA/P images to RGB
-    if image.mode in ('RGBA', 'LA', 'P'):
-        rgb_image = Image.new('RGB', image.size, (255, 255, 255))
-        if image.mode == 'P':
-            image = image.convert('RGBA')
-        if image.mode in ('RGBA', 'LA'):
-            rgb_image.paste(image, mask=image.split()[-1])
-        else:
-            rgb_image.paste(image)
-        image = rgb_image
-    
     image.save(buffered, format="JPEG")
-    image_data = base64.b64encode(buffered.getvalue()).decode('utf-8')
-    media_type = "image/jpeg"
-    
-    return image_data, media_type
+    return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
 
 class TaskRunner(Task):
     def __init__(self, args):
         self.args = args
-        self.default_gen_kwargs = {"max_tokens": 512}
-        
-        if hasattr(args, 'max_new_tokens') and args.max_new_tokens:
-            self.default_gen_kwargs["max_tokens"] = args.max_new_tokens
+        self.default_model_kwargs = {}
+        self.default_gen_kwargs = {}
+        self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
+        self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
         
         super().__init__(args)
         
@@ -52,7 +37,7 @@ class TaskRunner(Task):
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
         
-        self.client = Anthropic(api_key=api_key)
+        self.client = Anthropic(api_key=api_key, **self.model_kwargs)
         self.model_name = args.model_name_or_path.split("/")[-1]
 
     def parse_input(self, sample: dict):
@@ -67,13 +52,13 @@ class TaskRunner(Task):
                 continue
             if chunk == constants.image:
                 image = media_list.pop(0)
-                image_data, media_type = encode_image(image)
+                base64_image = encode_image(image)
                 content.append({
                     "type": "image",
                     "source": {
                         "type": "base64",
-                        "media_type": media_type,
-                        "data": image_data
+                        "media_type": "image/jpeg",
+                        "data": base64_image
                     }
                 })
             elif chunk == constants.video:
@@ -95,7 +80,8 @@ class TaskRunner(Task):
                     "content": content
                 }
             ],
-            **self.default_gen_kwargs
+            **self.gen_kwargs,
+            max_tokens=1024
         )
         
         return message.content[0].text
