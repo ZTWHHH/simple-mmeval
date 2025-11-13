@@ -1,0 +1,240 @@
+[
+    {
+        "id": 0,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0,
+        "response": "I am sorry, I am unable to process that request. I am unable to see or interact with images. Can I help with something else?\n"
+    },
+    {
+        "id": 1,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1,
+        "response": "Since I am a text-based AI, I am unable to analyze and describe the contents of an image. Is there anything else I can do to help?\n"
+    },
+    {
+        "id": 2,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2,
+        "response": "Please provide me with the two images! I need to see the images to be able to give you a detailed description of their contents. \n\nOnce you provide the images, I will be able to tell you about:\n\n*   **Objects present:** What are the things I can see in the images? (e.g., people, animals, buildings, objects)\n*   **Colors and textures:** What are the dominant colors? How would I describe the textures (smooth, rough, etc.)?\n*   **Composition and layout:** How are the objects arranged in the image? What is the background like? What is the focus of the image?\n*   **Actions and interactions:** Are people or objects interacting? What are they doing?\n*   **Possible context or story:** Based on what I see, what might be happening or what is the general theme of the image?\n\nI look forward to helping you!\n"
+    },
+    {
+        "id": 3,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3,
+        "response": "Please provide me with the two images you are referring to! I need the images to be able to describe their contents in detail. \n\nOnce you provide them, I can give you a thorough description, including:\n\n*   **Overall scene:** What is the general setting? Is it indoors or outdoors? What time of day does it appear to be?\n*   **Objects and subjects:** Identify the main objects, people, and animals present. Describe their features, size, and position.\n*   **Actions and interactions:** What are the subjects doing? Are they interacting with each other or the environment?\n*   **Details:** Include specific details like colors, textures, patterns, and any labels or text present.\n*   **Composition:** Describe how the elements are arranged in the image, considering factors like perspective, framing, and balance.\n*   **Possible interpretation:** (If applicable) Based on the content, what could the image be about or what message might it convey?\n\nI look forward to helping you!\n"
+    },
+    {
+        "id": 4,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4,
+        "response": "You haven't provided any information about \" and \" - I don't know what they are. To provide a detailed description, I need to know what you're referring to.  Please provide me with information such as:\n\n*   **What is the object?** Is it a picture, a video, a document, a website, a physical object?\n*   **How can I access it?** Do you provide a link, or a description I can base a description on?\n*   **If it's a visual object (picture, video, etc.), what are its key features?** (e.g., subjects, colors, composition, setting, etc.)\n*   **If it's text (document, website), what is the general topic?**\n\nThe more information you give me, the more detailed and helpful my description can be.\n"
+    },
+    {
+        "id": 5,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5,
+        "response": "You haven't provided the images. Please provide the images or descriptions of what the images contain. I need the content of those images to provide a detailed description.\n\nOnce you provide the content, I will be able to help you.  For example, tell me:\n\n*   **What are the subjects of the images?** (e.g., people, landscapes, objects, abstract art)\n*   **What is the composition like?** (e.g., close-up, wide shot, rule of thirds, centered)\n*   **What are the colors and lighting like?** (e.g., bright, dark, warm, cool)\n*   **Are there any specific details or elements that stand out?** (e.g., a specific person's expression, a unique object, a specific pattern)\n*   **What seems to be the purpose or message of the images?** (e.g., a portrait, a landscape, an advertisement, an artistic statement)\n\nThe more information you give me, the more detailed and accurate my description will be.\n"
+    },
+    {
+        "id": 6,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6,
+        "response": "Please provide the images you'd like me to describe! I need to see Image A and Image B to be able to give you a detailed description of their contents. \n"
+    },
+    {
+        "id": 7,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7,
+        "response": "Please provide me with the images you are referring to (Image A and Image B). I need to see the images to be able to provide you with a detailed description of their contents. Once you provide the images, I will be happy to help!\n"
+    },
+    {
+        "id": 8,
+        "question": "<video> Please provide a detailed description of the contents shown in the video.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "media": [
+            "test_bed/modality_test/media/448/cat.mp4"
+        ],
+        "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+        "hint": "",
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8,
+        "response": "Here is a detailed description of the contents shown in the video:\n\n**Overall Scene:**\n\n*   The video shows a medium shot of an orange tabby cat walking through a patch of green grass. The sunlight appears to be bright, and the scene is natural and outdoors.\n\n**Specific Elements:**\n\n*   **Cat:** The main subject is the cat, which is the focal point of the video. The cat has orange fur with tabby markings. The cat has a long tail, a long body, and light-colored patches on its chest and paws. It is walking towards the camera.\n*   **Grass:** The cat is walking through a dense patch of green grass. The grass is lush, suggesting a well-maintained lawn or a grassy area.\n*   **Light/Shadow:** The light is bright and sunny. The position of the sun creates a shadow of the cat on the grass.\n*   **Framing/Composition:** The video appears to be static, with the camera focused on the cat. The framing keeps the cat centered and walking into the frame.\n\n**Motion:**\n\n*   The cat is slowly walking toward the camera at a deliberate pace. It is casually exploring the environment.\n\n**In summary, the video shows a cat walking through the grass in a natural, outdoor setting, providing a simple yet pleasant and focused view of the animal.**"
+    },
+    {
+        "id": 9,
+        "question": "<video> Please provide a detailed description of the contents shown in the video.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "media": [
+            "test_bed/modality_test/media/448/sun.mp4"
+        ],
+        "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+        "hint": "",
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9,
+        "response": "Here's a detailed description of the video content:\n\n**Overall Impression:**\n\nThe video presents a scenic view of a sunrise or sunset. The dominant colors are vibrant shades of orange and yellow, creating a warm, glowing atmosphere. The composition features a silhouette of a mountain or hillside, with the sun emerging from behind it.\n\n**Specific Elements:**\n\n*   **The Sun:** The sun is the focal point, appearing as a bright, circular shape. Its light bursts forth, illuminating the sky. Initially, it's partially obscured by the hillside, but as time progresses in the video, it emerges more fully, becoming more prominent.\n\n*   **The Sky:** The sky is filled with a rich blend of orange and yellow hues, with the color intensity near the sun. The texture suggests clouds, with some areas appearing more opaque and others with a slight gradient of color.\n\n*   **The Hillside/Mountain:** The lower portion of the frame shows a dark silhouette that is likely a mountain or a hillside. The outline is defined by a line of trees or vegetation.\n\n*   **Motion:** The video captures a transition of the sun rising or setting.\n\n**Mood and Atmosphere:**\n\nThe video evokes a sense of peace, warmth, and tranquility. The vibrant colors and the natural imagery create a visually pleasing experience. The time of day suggested is either dawn or dusk, possibly indicating a beginning or an end, depending on the sun."
+    },
+    {
+        "id": 10,
+        "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "media": [
+            "test_bed/modality_test/media/448/cat.mp4",
+            "test_bed/modality_test/media/448/sun.mp4"
+        ],
+        "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+        "hint": "",
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10,
+        "response": "Here is a detailed description of the content shown:\n\n**00:00 - 00:04**\n\nA medium shot of an orange tabby cat in green grass.  The cat is mostly in view, with the majority of its body in the frame. At 00:00 the cat is sniffing and looking down into the grass. By 00:01, the cat looks up and begins to move toward the camera.  In the following frames, the cat is walking towards the camera. The grassy environment is blurred in the background, creating a shallow depth of field.\n\n**00:00 - 00:04**\n\nA shot of a vibrant sunset over a landscape. The sun is large and bright in the center. The light of the sun illuminates the sky, which has a gradient of oranges and yellows. A dark silhouette of a hill and some trees are on the bottom left of the image.\n"
+    },
+    {
+        "id": 11,
+        "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "media": [
+            "test_bed/modality_test/media/448/sun.mp4",
+            "test_bed/modality_test/media/448/cat.mp4"
+        ],
+        "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+        "hint": "",
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11,
+        "response": "Here's a detailed description of the video content:\n\n**From 00:00 to 00:04:**\n\n*   **Landscape:** The scene showcases a stunning sunset over a mountainous terrain.\n*   **Sky:** The sky is a vibrant palette of warm colors, primarily orange and gold. The clouds are lightly scattered, creating a soft, textured appearance.\n*   **Sun:** The sun is the primary focus, appearing as a bright, glowing orb peeking over the top of a silhouette of a mountain. Rays of light radiate outwards.\n*   **Mountain:**  A dark silhouette of a mountain runs diagonally across the frame. Trees or foliage line the top of the mountain.\n\n**From 00:00 to 00:04:**\n\n*   **Scene:** The scene transitions to a medium shot in which a reddish-orange long-haired cat is walking through tall, green grass.\n*   **Cat:** The cat has long, fluffy fur, and its tail is upright and bushy. The cat's amber-colored eyes are visible.\n*   **Grass:** The grass is lush and green, creating a natural background for the cat.\n*   **Movement:** The cat is walking toward the camera at a slow, leisurely pace.\n"
+    },
+    {
+        "id": 12,
+        "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "media": [
+            "test_bed/modality_test/media/448/cat.mp4",
+            "test_bed/modality_test/media/448/sun.mp4"
+        ],
+        "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+        "hint": "",
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12,
+        "response": "Here's a detailed description of the content in each video:\n\n**Video A:**\n\n*   **Overall Scene:** The video shows a cat in a grassy area. It appears to be a sunny day.\n*   **Cat's Appearance:** The cat is orange or reddish-brown in color, with fluffy fur. It has a fluffy tail.\n*   **Action:**\n    *   00:00 - The cat is sniffing or investigating something in the grass.\n    *   00:01 - The cat begins to walk towards the camera.\n    *   00:02-00:04 - The cat continues walking towards the camera.\n\n**Video B:**\n\n*   **Overall Scene:** The video shows a sunset behind a silhouetted mountain range. The sky is filled with shades of orange and yellow.\n*   **Details:**\n    *   The sun is bright and almost fully visible as it sets.\n    *   The sky's colors indicate a sunset.\n    *   A portion of the mountain range is silhouetted against the bright sky."
+    },
+    {
+        "id": 13,
+        "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "media": [
+            "test_bed/modality_test/media/448/sun.mp4",
+            "test_bed/modality_test/media/448/cat.mp4"
+        ],
+        "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+        "hint": "",
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13,
+        "response": "Here's a breakdown of the content in each video:\n\n**Video A**\n\n*   **00:00-00:04:** The video depicts a scenic sunset. The sun is setting behind a dark silhouette of a hill or mountain. The sky is filled with warm, orange and yellow hues, indicating a sunset. The sun's light is breaking through the trees on the hillside, and the sky is a gradient of color.\n\n**Video B**\n\n*   **00:00-00:04:** The video shows an orange cat in a grassy area. At first, the cat sniffs at the ground and is surrounded by the green grass. The cat then looks up and walks toward the camera."
+    },
+    {
+        "id": 14,
+        "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+        "hint": "",
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14,
+        "response": "Here's a detailed description of the video content, frame by frame:\n\n**Overall Scene:**\n\nThe video shows an orange tabby cat in a field of lush, green grass. The lighting appears to be natural and sunny, creating shadows. The background is simple and uncluttered, putting the focus squarely on the cat.\n\n**Frame 00:00:**\n\n*   **Main Subject:** The cat is the primary focus. It's an orange tabby, possibly with long fur.\n*   **Action:** The cat has its head down and appears to be sniffing or investigating something in the grass. Its body is partially hidden by the grass. The tail is curled up and fluffy.\n*   **Environment:** The cat is surrounded by tall, green grass.\n\n**Frame 00:01:**\n\n*   **Action:** The cat is now in motion, starting to walk towards the camera. Its head is up, and it's looking directly at the viewer.\n*   **Appearance:** The cat is fully visible, showing off its tabby markings and fur.\n*   **Background:** The same lush green grass surrounds the cat.\n\n**Frame 00:02:**\n\n*   **Action:** The cat continues to walk towards the camera.\n*   **Appearance:** The cat is centered in the frame, walking with a steady gait. Its tail remains curled up and fluffy.\n*   **Perspective:** The viewer's perspective is getting closer to the cat.\n\n**Frame 00:03:**\n\n*   **Action:** The cat keeps walking toward the camera.\n*   **Appearance:** The cat's features, like its eyes and markings, are becoming more distinct.\n*   **Shadow:** The shadow of the cat is becoming more prominent in the frame.\n\n**Frame 00:04:**\n\n*   **Action:** The cat continues its approach.\n*   **Appearance:** The cat is closer to the viewer.\n*   **Background:** The green grass is more in the foreground, with the cat's shadow growing longer.\n"
+    },
+    {
+        "id": 15,
+        "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15,
+        "response": "Here's a detailed description of the scene shown in the provided images, which seem to be successive frames from a short video clip:\n\n**Overall Scene:**\n\nThe images depict a stunning sunset or sunrise scene. The dominant colors are warm oranges and yellows, creating a vibrant and dramatic atmosphere. The scene is likely of a mountain range or hillside, silhouetted against the bright sky.\n\n**Key Elements:**\n\n*   **The Sun:** The sun is the central focal point. In the initial image (00:00), it's partly obscured by the mountain ridge and peeking out. As the images progress (00:01 to 00:04), the sun appears to be gradually rising or emerging further from behind the silhouette of the trees, becoming increasingly brighter and more visible.\n*   **Mountain Ridge/Hillside:** A dark, silhouetted mountain ridge or hillside fills the lower-left section of the frame. The silhouette shows the slope and the outline of trees along the top.\n*   **Sky and Color Gradient:** The sky is filled with a rich gradient of orange and yellow hues, suggesting the early morning or late evening. There are wisps of clouds scattered in the sky.\n*   **Light and Shadows:** The sunlight creates a strong contrast between the dark silhouettes and the bright sky. As the sun rises, the light increases and intensifies, casting golden rays.\n\n**Progression (Based on Sequence of Images):**\n\n*   **00:00:** The sun is just starting to peak over the mountain.\n*   **00:01 - 00:04:** The sun appears to be rising further above the mountain ridge with increased light and brightness in the scene.\n\n**Atmosphere:**\n\nThe images evoke a sense of peace, beauty, and the powerful forces of nature. The bright colors suggest warmth, energy, and the start or end of a day."
+    },
+    {
+        "id": 16,
+        "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+        "hint": "",
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16,
+        "response": "Here's a breakdown of the content in the image and video:\n\n**Image A:**\n\n*   **Overall Scene:** The image depicts a beautiful sunset.\n*   **Key Elements:**\n    *   **Sun:** The sun is the focal point, appearing as a bright, glowing orb peeking over the top of a silhouette of a hillside.\n    *   **Sky:** The sky is filled with warm, orange and yellow hues, typical of a sunset. There are a few subtle cloud formations.\n    *   **Hillside:** A dark, silhouetted hillside runs diagonally across the image, topped with trees. The silhouette highlights the sun's presence.\n*   **Composition:** The composition is balanced and serene, with the sun placed in a way that draws the eye and emphasizes the beauty of the natural scene.\n\n**Video B:**\n\nThe video presents a time-lapse of a sunset over the hillside.\n\n*   **00:00:** The sun is just starting to appear over the silhouette of the hillside, creating the same visuals as Image A.\n*   **00:01:** The sun is emerging from behind the hillside.\n*   **00:02:** The sun rises fully, shining bright.\n*   **00:03:** The sun gets more bright.\n*   **00:04:** The sun appears fully above the hillside.\n\n**Common Themes:**\n\n*   **Sunset/Sunrise:** Both the image and the video are centered around the beautiful scene of the sun setting or rising over a landscape.\n*   **Natural Beauty:** The content evokes a sense of peace, warmth, and the beauty of the natural world.\n"
+    },
+    {
+        "id": 17,
+        "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+        "hint": "",
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17,
+        "response": "Here's a breakdown of the content in Video A and Image B:\n\n**Video A:**\n\nThis video shows a long-haired, orange tabby cat in a grassy field. The video progresses as follows:\n\n*   **00:00:** The cat is in a crouched position in the grass, nose down as if sniffing or exploring.\n*   **00:01:** The cat begins to stand and face the camera. It looks up from the grass.\n*   **00:02-00:04:** The cat is walking toward the camera, its body posture is relaxed. The cat has a fluffy tail and is in a grassy environment.\n\n**In summary, Video A features a single cat exploring and walking through tall grass.**\n\n**Image B:**\n\nSince I am unable to analyze Image B, I am unable to provide a description for this image.\n\nIf you have another image you'd like me to describe, feel free to share it."
+    }
+]
