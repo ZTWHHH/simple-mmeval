@@ -67,6 +67,8 @@ series_mapping = {
     "google_gemini": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-2.0-flash-lite"],
     "anthropic_claude": ["claude-sonnet-4-5", "claude-opus-4-1", "claude-haiku-4-5"],
     "xai_grok": ["grok-4-fast-reasoning", "grok-4-fast-non-reasoning", "grok-4-0709", "grok-2-vision-1212"],
+    "doubao_ark": ["doubao-seed-1-6-vision-250815"],
+    "hunyuan_vision": ["hunyuan-vision", "hunyuan-t1-vision", "hunyuan-turbos-vision", "hunyuan-large-vision"],
 }
 
 series_infer_env_mapping = {
@@ -273,5 +275,13 @@ series_infer_env_mapping = {
     "xai_grok": {
         "env": os.path.join(env_dir, "xai_grok"),
         "infer_file": "xai_grok.py",
+    },
+    "doubao_ark": {
+        "env": os.path.join(env_dir, "doubao_ark"),
+        "infer_file": "doubao_ark.py",
+    },
+    "hunyuan_vision": {
+        "env": os.path.join(env_dir, "hunyuan_vision"),
+        "infer_file": "hunyuan_vision.py",
     },
 }

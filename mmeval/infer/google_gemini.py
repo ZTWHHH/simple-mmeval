@@ -31,9 +31,31 @@ class TaskRunner(Task):
             raise ValueError("GOOGLE_API_KEY not found in environment variables")
         
         genai.configure(api_key=api_key, **self.model_kwargs)
-        self.model_name = args.model_name_or_path.split("/")[-1]
-        self.model = genai.GenerativeModel(self.model_name)
         self.client = genai
+        self.model_name = args.model_name_or_path.split("/")[-1]
+        self.model = self.client.GenerativeModel(self.model_name)
+        self.generation_config = genai.types.GenerationConfig(**self.gen_kwargs)
+
+    def _wait_for_file_active(self, video_file, timeout=120, poll_interval=2):
+        start_time = time.time()
+        file_name = video_file.name
+        
+        while time.time() - start_time < timeout:
+            file = self.client.get_file(file_name)
+            
+            if file.state.name == "ACTIVE":
+                return file
+            elif file.state.name == "FAILED":
+                raise RuntimeError(f"Video file processing failed: {file_name}")
+            
+            # Still processing, wait before checking again
+            time.sleep(poll_interval)
+        
+        # Timeout reached
+        raise TimeoutError(
+            f"Video file {file_name} did not become ACTIVE within {timeout} seconds. "
+            f"Current state: {file.state.name}"
+        )
 
     def parse_input(self, sample: dict):
         question = sample["prompt"]
@@ -47,17 +69,14 @@ class TaskRunner(Task):
                 continue
             if chunk == constants.image:
                 image = media_list.pop(0)
+                contents.append(image)
             elif chunk == constants.video:
                 video_path = media_list.pop(0)
+                print(f"Uploading video: {video_path}")
                 video_file = self.client.upload_file(path=video_path)
-                
-                while video_file.state.name == "PROCESSING":
-                    time.sleep(1)
-                    video_file = self.client.get_file(video_file.name)
-                
-                if video_file.state.name == "FAILED":
-                    raise ValueError(f"Video processing failed: {video_file.state.name}")
-                
+                print(f"Waiting for video file to become ACTIVE: {video_file.name}")
+                video_file = self._wait_for_file_active(video_file)
+                print(f"Video file is ready: {video_file.name}")
                 contents.append(video_file)
             else:
                 contents.append(chunk)
@@ -65,11 +84,9 @@ class TaskRunner(Task):
         return contents
 
     def _generate_response(self, contents):
-        generation_config = genai.types.GenerationConfig(**self.gen_kwargs)
-        
         response = self.model.generate_content(
             contents,
-            generation_config=generation_config
+            generation_config=self.generation_config
         )
         
         return response.text
