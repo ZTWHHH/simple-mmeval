@@ -1,5 +1,7 @@
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 env_dir = os.getenv('ENV_DIR') or ""
 
 series_mapping = {
@@ -7,8 +9,7 @@ series_mapping = {
     "cambrian": ["cambrian-8b", "cambrian-13b", "cambrian-34b", "cambrian-phi3-3b"],
     "fuyu": ["fuyu-8B"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
-    "blip2_flan_t5": ["blip2-flan-t5-xl", "blip2-flan-t5-xxl"],
-    "llama3_2_vision": ["Llama-3.2-11B-Vision-Instruct", "Llama-3.2-90B-Vision-Instruct"],
+    "llama3d2_vision": ["Llama-3.2-11B-Vision-Instruct", "Llama-3.2-90B-Vision-Instruct"],
     "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
@@ -63,11 +64,17 @@ series_mapping = {
     "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
     "r1_onevision": ["R1-Onevision-7B"],
     "wemm": ["WeMM", "WeMM-Chat-CN", "WeMM-Chat-2k-CN"],
+    "openai_gpt": ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "gpt-5.1", "gpt-5", "gpt-5-mini"],
+    "google_gemini": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-2.0-flash-lite"],
+    "anthropic_claude": ["claude-sonnet-4-5", "claude-opus-4-1", "claude-haiku-4-5"],
+    "xai_grok": ["grok-4-fast-reasoning", "grok-4-fast-non-reasoning", "grok-4-0709", "grok-2-vision-1212"],
+    "doubao_ark": ["doubao-seed-1-6-vision-250815"],
+    "hunyuan_vision": ["hunyuan-vision", "hunyuan-t1-vision", "hunyuan-turbos-vision", "hunyuan-large-vision"],
 }
 
 series_infer_env_mapping = {
     "blip2_flan_t5": {
-        "env": os.path.join(env_dir, "flan-t5"),
+        "env": os.path.join(env_dir, "blip2_flan_t5"),
         "infer_file": "blip2_flan_t5.py",
     },
     "cambrian": {
@@ -194,9 +201,9 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "moondream1"),
         "infer_file": "moondream1.py",
     }, 
-    "llama3_2_vision": {
-        "env": os.path.join(env_dir, "llama3-2-vision"),
-        "infer_file": "llama3_2_vision.py",
+    "llama3d2_vision": {
+        "env": os.path.join(env_dir, "llama3d2_vision"),
+        "infer_file": "llama3d2_vision.py",
     }, 
     "smolvlm": {
         "env": os.path.join(env_dir, "smolvlm"),
@@ -211,7 +218,7 @@ series_infer_env_mapping = {
         "infer_file": "bunnyllama3.py",
     },
     "xinyuanvl": {
-        "env": os.path.join(env_dir, "Xinyuan-VL-2B"),
+        "env": os.path.join(env_dir, "xinyuanvl"),
         "infer_file": "xinyuanvl.py",
     },
     "xgen": {
@@ -243,7 +250,7 @@ series_infer_env_mapping = {
         "infer_file": "phi3v.py",
     },
     "phi4mm": {
-        "env": os.path.join(env_dir, "phi4"),
+        "env": os.path.join(env_dir, "phi4mm"),
         "infer_file": "phi4mm.py",
     },
     "vlaa_thinking": {
@@ -257,5 +264,29 @@ series_infer_env_mapping = {
     "wemm": {
         "env": os.path.join(env_dir, "wemm"),
         "infer_file": "wemm.py",
+    },
+    "openai_gpt": {
+        "env": os.path.join(env_dir, "openai_gpt"),
+        "infer_file": "openai_gpt.py",
+    },
+    "google_gemini": {
+        "env": os.path.join(env_dir, "google_gemini"),
+        "infer_file": "google_gemini.py",
+    },
+    "anthropic_claude": {
+        "env": os.path.join(env_dir, "anthropic_claude"),
+        "infer_file": "anthropic_claude.py",
+    },
+    "xai_grok": {
+        "env": os.path.join(env_dir, "xai_grok"),
+        "infer_file": "xai_grok.py",
+    },
+    "doubao_ark": {
+        "env": os.path.join(env_dir, "doubao_ark"),
+        "infer_file": "doubao_ark.py",
+    },
+    "hunyuan_vision": {
+        "env": os.path.join(env_dir, "hunyuan_vision"),
+        "infer_file": "hunyuan_vision.py",
     },
 }
