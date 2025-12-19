@@ -1,0 +1,98 @@
+[
+    {
+        "id": 0,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0,
+        "response": "The image features a gray GMC truck driving on a dirt road, surrounded by a desert landscape. The truck is positioned in the center of the scene, with its front facing towards the right side of the image. The truck appears to be a GMC Canyon, as indicated by the visible GMC logo on the front. The surrounding environment consists of a dirt road and a desert landscape, with no other vehicles or people visible in the scene."
+    },
+    {
+        "id": 1,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1,
+        "response": "The image features a large, white boat speeding across the water, leaving a trail of water splashes behind it. The boat is moving at a high speed, creating a dynamic scene. The boat is positioned in the center of the image, with the water surrounding it on all sides. The overall atmosphere of the image is energetic and exciting, capturing the thrill of the boat's swift movement."
+    },
+    {
+        "id": 2,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2,
+        "response": "The first image features a gray GMC truck driving on a dirt road. The truck is positioned in the center of the image, and it appears to be in motion. The background of the image showcases a scenic landscape with mountains and a clear blue sky.\n\nThe second image displays a white boat speeding across the water. The boat is located in the center of the image, and it is moving at a high speed, creating a large wake behind it. The background of the image consists of a clear blue sky and a calm body of water, emphasizing the boat's speed and movement."
+    },
+    {
+        "id": 3,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3,
+        "response": "The first image features a white boat with a black stripe, speeding across the water. The boat is in motion, creating a large wake behind it. The second image showcases a gray GMC truck driving on a dirt road. The truck is positioned in the center of the image, with a mountainous landscape in the background. The scene appears to be set in a desert-like environment, with the truck being the main focus of the image."
+    },
+    {
+        "id": 4,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4,
+        "response": "The image is a promotional photograph of a gray GMC truck driving on a dirt road. The truck is positioned in the center of the frame, facing towards the right side of the image. It features a black grille with a distinctive GMC logo, and the headlights are on. The truck has a black bumper and black fender flares. The background shows a desert-like landscape with rocky terrain and a mountain range in the distance. The sky is clear, and the lighting suggests it is either early morning or late afternoon. There are no visible texts or branding on the truck, and the image is taken from a perspective that captures the vehicle in motion."
+    },
+    {
+        "id": 5,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5,
+        "response": "The image is a high-resolution photograph featuring a white powerboat in motion on the water. The boat is a large, multi-level vessel with a prominent cabin area and a flybridge, which is elevated and covered. The flybridge is equipped with a windshield and a radar arch. The boat is moving at a high speed, creating a large wake behind it. The water appears to be a deep blue, suggesting a clear day with good visibility.\n\nThe boat is oriented diagonally across the frame, with the bow (front) pointing to the left side of the image and the stern (back) towards the right. The image is taken from a low angle, looking up at the boat, which emphasizes the boat's size and speed. There are no visible texts or logos on the boat, and the background is primarily the expanse of the water and sky, with no other discernible objects or landmarks. The style of the image is dynamic and action-oriented, capturing the essence of a thrilling boating experience."
+    },
+    {
+        "id": 6,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6,
+        "response": "Image A:\nThe image features a gray GMC truck driving on a dirt road. The truck is positioned in the center of the frame, and it appears to be in motion. The background of the image showcases a scenic landscape with mountains and a clear blue sky. The truck is the main focus of the image, and there are no other vehicles or people visible. The overall scene suggests an outdoor adventure or a journey through a rugged terrain."
+    },
+    {
+        "id": 7,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7,
+        "response": "Image A:\nThe image features a large, white boat speeding across the water, creating a trail of spray behind it. The boat is a yacht with a sleek design, and it appears to be moving at a high speed. The water around the boat is disturbed, indicating the boat's swift movement. The boat is the main focus of the image, with the surrounding water and sky providing a clear view of the yacht's impressive speed and design."
+    }
+]

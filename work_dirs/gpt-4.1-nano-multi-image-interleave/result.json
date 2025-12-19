@@ -1,0 +1,98 @@
+[
+    {
+        "id": 0,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0,
+        "response": "The image shows a silver GMC pickup truck driving on a dirt or sandy terrain, kicking up dust behind it. The truck appears to be a modern, full-sized, four-door model with a crew cab configuration. It features a prominent front grille with the GMC logo, sleek and angular headlights, and a robust, aerodynamic design. The background suggests a rugged, outdoor setting, possibly a desert or canyon area, with reddish-brown rock formations and sparse vegetation. The overall scene conveys a sense of adventure and off-road capability."
+    },
+    {
+        "id": 1,
+        "question": "<image> Please provide a detailed description of the contents shown in the image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+        "hint": "",
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1,
+        "response": "The image shows a sleek, modern yacht cruising on calm, blue ocean waters. The yacht has a streamlined design with a pointed bow cutting smoothly through the water, creating a trail of white foam behind it. The yacht appears to be white with some black accents around the windows and deck area. In the background, the horizon stretches out under a clear blue sky, suggesting good weather conditions. The overall scene conveys a sense of luxury, speed, and leisure on the open sea."
+    },
+    {
+        "id": 2,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2,
+        "response": "The first image depicts a gray GMC pickup truck driving on a dirt or gravel surface, likely in a desert or canyon environment. The truck appears to be a modern model with a bold front grille, black accents, and four doors. The scene suggests an outdoor adventure or off-road activity, with the truck kicking up dust as it moves.\n\nThe second image shows a white yacht or motorboat cruising on the open ocean or sea. The yacht is moving at a high speed, creating a large wake behind it. The water appears calm, and the sky is clear with no visible clouds, indicating good weather conditions. In the background, the horizon and a stretch of open water are visible, emphasizing the boat's maritime setting."
+    },
+    {
+        "id": 3,
+        "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+        "hint": "",
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3,
+        "response": "The first image shows a sleek, white yacht speeding across a calm body of water, creating a trail of white foam behind it. The yacht appears modern and luxurious, with a streamlined design. The sky is clear, and the background shows a distant horizon, suggesting a peaceful, sunny day out on the open water.\n\nThe second image features a rugged gray pickup truck driving across a desert landscape with reddish-brown terrain and cliffs in the background. The truck has a bold, modern design with a prominent grille, and it appears to be built for off-road adventures. It is kicking up dust as it moves, indicating it's traversing rough terrain under bright sunlight, with clear skies overhead."
+    },
+    {
+        "id": 4,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4,
+        "response": "The first image shows a gray GMC pickup truck driving on a dirt or sandy terrain, likely in a desert or canyon area. The truck has a modern, bold design with a prominent front grille, large tires suitable for off-road driving, and a crew cab with four doors. It appears to be in motion, kicking up dust behind it, indicating its capability for rugged, off-road adventures.\n\nThe second image features a sleek, white yacht cruising on calm, open water. The yacht has a streamlined design with multiple decks and large windows, suggesting it is built for luxury and comfort. It is moving at a high speed, creating a significant wake behind it as it slices through the water, indicating powerful engine performance ideal for leisure cruising or luxury maritime travel."
+    },
+    {
+        "id": 5,
+        "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5,
+        "response": "The first image shows a luxury motorboat cruising on a calm body of water, likely the ocean or a sea. The boat is white with sleek, modern design features, and it is moving at a high speed, creating a spray of water behind it. The background features a clear sky and a distant horizon, emphasizing a peaceful and scenic maritime setting.\n\nThe second image depicts a rugged pickup truck driving on a dirt or gravel road through a desert landscape. The truck is a GMC model, with a dark gray or metallic finish, and designed for off-road capability. It appears powerful and capable, with large tires suited for rough terrain. The background shows rocky cliffs and sparse vegetation, characteristic of a remote, arid environment, highlighting a sense of adventure and outdoor exploration."
+    },
+    {
+        "id": 6,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6,
+        "response": "In the first image (Image A), there is a silver-colored GMC pickup truck driving across a desert landscape. The truck appears to be a modern, rugged model, likely designed for both on-road and off-road use. The background features a rocky canyon with warm, earthy tones, suggesting a setting typical of a southwestern desert region. The vehicle's tires are kicking up dust as it moves, indicating motion and the adventurous environment.\n\nIn the second image (Image B), there is a sleek, white motor yacht cruising on calm, open water. The yacht is creating a trail of white wake behind it, demonstrating its speed and power. The setting appears to be an ocean or large body of water, with a clear sky and distant horizon, suggesting a pleasant, sunny day. The yacht's design emphasizes luxury and performance, suitable for leisure or recreational boating."
+    },
+    {
+        "id": 7,
+        "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "answer": "",
+        "options": {},
+        "choices": [],
+        "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+        "hint": "",
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7,
+        "response": "Image A depicts a luxurious white yacht speeding across calm blue waters. The yacht has a modern design with a sleek, streamlined shape, multiple decks, and large windows. It is creating a trail of frothy white wake behind it, indicating high speed. The background shows a clear sky and a distant horizon, suggesting a pleasant, sunny day perfect for sailing.\n\nImage B features a rugged, grey GMC pickup truck driving across a scenic, arid landscape. The truck is a modern model with a bold front grille, prominent GMC emblem, and black accents including large tires suitable for off-road driving. It is kicking up dust as it moves, indicating it's traversing a dirt or sandy terrain. The background displays red rock formations and desert terrain, typical of a southwestern or national park setting, under a clear sky."
+    }
+]

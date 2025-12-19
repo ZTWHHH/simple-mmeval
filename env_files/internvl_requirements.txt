@@ -1,23 +1,5 @@
 # flash-attn==2.7.3
 
-gdown
-termcolor
-yacs
-open_clip_torch>=0.2.1
-opencv-python
-peft>=0.6.2
-protobuf
-pycocoevalcap
-pyyaml
-scikit-learn>=1.0,<2
-scikit-learn
-scipy
-task_adaptation
-tensorflow==2.11.0
-termcolor
-tqdm>=2
-webdataset>=0.2.31
-yacs
 accelerate<1
 bitsandbytes==0.42.0
 decord
@@ -26,7 +8,7 @@ einops==0.6.1
 einops-exts==0.0.4
 huggingface_hub
 imageio
-numpy<2.0.0
+numpy==1.26.4
 opencv-python
 orjson
 peft==0.10.0
@@ -45,14 +27,5 @@ torchvision>=0.15
 tqdm
 transformers==4.37.2
 yacs
-future
-importlib_metadata
-mmcv-full==1.6.2
-mmsegmentation==0.30.0
-openmim
-ordered-set
-platformdirs
-tensorboard
-tomli
-yapf==0.40.1
-datasets==3.6.0
+pandas
+datasets
