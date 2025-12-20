@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional, Set, Tuple, Union
-from jinja2 import Template, Environment
+from jinja2 import Environment
 
 
 
@@ -105,6 +105,15 @@ class BaseDataset(ABC):
         padded_image.paste(resized_image, (x_offset, y_offset))
         
         return padded_image
+
+    def _load_template(self, template_arg):
+        """Load template from file path or use string directly."""
+        if template_arg is None:
+            return None
+        if os.path.exists(template_arg):
+            with open(template_arg, "r") as f:
+                return f.read()
+        return template_arg
 
     def load_image(self, f) -> Image.Image:
         """Load image from path with PIL."""
@@ -208,8 +217,7 @@ class BaseDataset(ABC):
             sample = self._process_sample(idx)
             # TODO: add more checks later (mandatory fields)
             assert "eval-id" in sample, "eval-id is mandatory."
-            assert "prompt" in sample, "prompt is mandatory."
-            assert "media" in sample, "media is mandatory."
+            assert "messages" in sample, "messages is mandatory."
             yield sample
 
     def __getitem__(self, index):
@@ -228,8 +236,7 @@ class BaseDataset(ABC):
         sample = self._process_sample(self._get_idx(index))
         # TODO: add more checks later (mandatory fields)
         assert "eval-id" in sample, "eval-id is mandatory"
-        assert "prompt" in sample, "prompt is mandatory."
-        assert "media" in sample, "media is mandatory."
+        assert "messages" in sample, "messages is mandatory."
         return sample
 
     def __len__(self):

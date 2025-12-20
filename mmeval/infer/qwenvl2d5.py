@@ -31,11 +31,11 @@ class TaskRunner(Task):
         max_pixels = 1280 * 28 * 28
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path, min_pixels=min_pixels, max_pixels=max_pixels)
 
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def parse_input(self, msg):
+        question = msg["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        media_list = copy.deepcopy(sample['media'])
+        media_list = copy.deepcopy(msg["media"])
 
         messages = [
             {
@@ -87,8 +87,8 @@ class TaskRunner(Task):
 
         return output_text
 
-    def _score_choices(self, text, image_inputs, video_inputs, sample):
-        contents = sample.get("choices")
+    def _score_choices(self, text, image_inputs, video_inputs, msg):
+        contents = msg["choices"]
         full = [text + content for content in contents]
 
         full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device) for i in full]
@@ -104,31 +104,47 @@ class TaskRunner(Task):
         }
 
     def run_sample(self, sample: dict):
-        ori_sample = copy.deepcopy(sample)
-        messages = self.parse_input(ori_sample)
+        responses = []
+        conversation_history = []
         
-        text = self.processor.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
+        for msg in sample["messages"]:
+            user_message = self.parse_input(msg)
+            conversation_history.extend(user_message)
+            
+            text = self.processor.apply_chat_template(
+                conversation_history, tokenize=False, add_generation_prompt=True
+            )
 
-        image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
+            image_inputs, video_inputs, video_kwargs = process_vision_info(conversation_history, return_video_kwargs=True)
 
-        inputs = self.processor(
-            text=[text],
-            images=image_inputs,
-            videos=video_inputs,
-            padding=True,
-            return_tensors="pt",
-            **video_kwargs,
-        )
-        inputs = inputs.to(self.device)
+            inputs = self.processor(
+                text=[text],
+                images=image_inputs,
+                videos=video_inputs,
+                padding=True,
+                return_tensors="pt",
+                **video_kwargs,
+            )
+            inputs = inputs.to(self.device)
 
-        if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs)
-        else:
-            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, sample))
+            result = {
+                "eval-id": sample["eval-id"],
+                "messages": [{k: v for k, v in m.items() if k != "media"} for m in sample["messages"]],
+            }
 
-        return ori_sample
+            if not self.args.score_target:
+                response = self._generate_response(inputs)
+                responses.append(response)
+                conversation_history.append({
+                    "role": "assistant",
+                    "content": response[0]
+                })
+            else:
+                result.update(self._score_choices(text, image_inputs, video_inputs, msg))
+                return result
+
+        result["response"] = responses
+        return result
 
 
 if __name__ == "__main__":
