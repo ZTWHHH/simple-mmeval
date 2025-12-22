@@ -32,6 +32,8 @@ class BaseDataset(ABC):
         """Initialize the dataset with lazy loading and parallel processing support."""
         self.parallel_per_task = args.parallel_per_task
         self.rank = args.rank
+        self._shard_indices = []
+        self._shard_length = 0
         
         self._raw_dataset, self._prompt_template = self._load_raw_data(args)
         
@@ -107,45 +109,45 @@ class BaseDataset(ABC):
         
         return padded_image
 
-    def _load_template(self, template_arg):
+    def _load_template(self, template):
         """Load template from file path or use string directly."""
-        if template_arg is None:
+        if template is None:
             return None
-        if os.path.exists(template_arg):
-            with open(template_arg, "r") as f:
-                return f.read()
-        return template_arg
+        if os.path.exists(template):
+            with open(template, "r") as file:
+                return file.read()
+        return template
 
-    def _is_video(self, path: str) -> bool:
+    def _is_video(self, media_path: str) -> bool:
         """Check if the path is a video file by extension."""
-        ext = os.path.splitext(path.split('?')[0])[-1].lower()
+        ext = os.path.splitext(media_path.split('?')[0])[-1].lower()
         return ext in self.VIDEO_EXTENSIONS
 
-    def load_media(self, f) -> Union[Image.Image, str]:
-        """Load media from path. Returns PIL image object for images, path string for videos."""
-        if isinstance(f, Image.Image):
-            return f if f.mode == "RGB" else f.convert("RGB")
+    def load_media(self, media) -> Union[Image.Image, str]:
+        """Load media from path or return existing object. Returns PIL image for images, path for videos."""
+        if isinstance(media, Image.Image):
+            return media if media.mode == "RGB" else media.convert("RGB")
         
-        if not isinstance(f, str):
-            raise ValueError(f"Unsupported media type: {type(f)}")
+        if not isinstance(media, str):
+            raise ValueError(f"Unsupported media type: {type(media)}")
         
         # Video: return path/URL directly
-        if self._is_video(f):
-            return f
+        if self._is_video(media):
+            return media
         
         # Image: load with PIL
-        if os.path.exists(f):
-            return Image.open(f).convert("RGB")
+        if os.path.exists(media):
+            return Image.open(media).convert("RGB")
         
-        if f.startswith("http"):
-            return Image.open(requests.get(f, stream=True).raw).convert("RGB")
+        if media.startswith("http"):
+            return Image.open(requests.get(media, stream=True).raw).convert("RGB")
         
         # Try base64 decode
         try:
-            decoded = base64.b64decode(f)
+            decoded = base64.b64decode(media)
             return Image.open(BytesIO(decoded)).convert("RGB")
         except Exception:
-            raise ValueError(f"Unsupported media format: {f[:100]}...")
+            raise ValueError(f"Unsupported media format: {media[:100]}...")
     
     def build_prompt(self, prompt_template: str, sample: Dict[str, Any]) -> str:
         """Build prompt from Jinja template and sample data.
@@ -168,13 +170,13 @@ class BaseDataset(ABC):
         template = env.from_string(prompt_template)
         return template.render(**sample)
 
-    def _process_message(self, msg: dict) -> dict:
+    def _process_message(self, message: dict) -> dict:
         """Process a single message dict, building prompt and processing media."""
         # Build prompt: template priority -> existing prompt -> error
-        prompt = msg.get("prompt")
+        prompt = message.get("prompt")
         if self._prompt_template is not None:
             try:
-                prompt = self.build_prompt(self._prompt_template, msg)
+                prompt = self.build_prompt(self._prompt_template, message)
             except Exception as e:
                 if prompt is None:
                     raise ValueError(f"Template rendering failed: {e}")
@@ -182,28 +184,69 @@ class BaseDataset(ABC):
             raise ValueError("No prompt found and no template provided")
 
         # Get media list and apply path prefix if set (only to string paths)
-        media_paths = msg.get("media", [])
+        media_list = message.get("media", [])
         if getattr(self, 'media_dir', None):
-            media_paths = [os.path.join(self.media_dir, f) if isinstance(f, str) else f for f in media_paths]
+            media_list = [os.path.join(self.media_dir, media) if isinstance(media, str) else media for media in media_list]
 
         # Process media based on placeholder type
         placeholder_list = re.findall(r"<(video|image)>", prompt)
-        media = []
-        for i, tag in enumerate(placeholder_list):
-            if i >= len(media_paths):
+        processed_media_list = []
+        for i, placeholder in enumerate(placeholder_list):
+            if i >= len(media_list):
                 break
-            media_path = media_paths[i]
-            if tag == "image":
-                img = self.load_media(media_path)
+            media_path = media_list[i]
+            if placeholder == "image":
+                image = self.load_media(media_path)
                 if getattr(self, 'resize', None) is not None:
-                    img = self.resize_image(img, self.resize)
-                media.append(img)
+                    image = self.resize_image(image, self.resize)
+                processed_media_list.append(image)
             else:  # video
-                media.append(media_path)
+                processed_media_list.append(media_path)
 
-        msg["prompt"] = prompt
-        msg["media"] = media
-        return msg
+        message["prompt"] = prompt
+        message["media"] = processed_media_list
+        return message
+
+    def _process_messages(self, message_list: List[Dict], media_list: List = None) -> List[Dict]:
+        """Process all messages with sample-level media indexed by placeholder order."""
+        # Prepare media paths with prefix
+        media_list = media_list or []
+        if getattr(self, 'media_dir', None) and media_list:
+            media_list = [os.path.join(self.media_dir, media) if isinstance(media, str) else media for media in media_list]
+        
+        media_idx = 0
+        processed_message_list = []
+        
+        for message in message_list:
+            # Build prompt: template priority -> existing prompt -> error
+            prompt = message.get("prompt")
+            if self._prompt_template is not None:
+                try:
+                    prompt = self.build_prompt(self._prompt_template, message)
+                except Exception as e:
+                    if prompt is None:
+                        raise ValueError(f"No prompt found and template rendering failed: {e}")
+            if prompt is None:
+                raise ValueError("No prompt and template provided")
+            
+            # Load media for this message's placeholders (zip auto-stops at shorter list)
+            placeholder_list = re.findall(r"<(video|image)>", prompt)
+            processed_media_list = []
+            for placeholder, media in zip(placeholder_list, media_list[media_idx:]):
+                if placeholder == "image":
+                    image = self.load_media(media)
+                    if getattr(self, 'resize', None) is not None:
+                        image = self.resize_image(image, self.resize)
+                    processed_media_list.append(image)
+                else:  # video
+                    processed_media_list.append(media)
+            media_idx += len(processed_media_list)
+            
+            message["prompt"] = prompt
+            message["media"] = processed_media_list
+            processed_message_list.append(message)
+        
+        return processed_message_list
 
     def convert_circular(self, **kwargs) -> Any:
         """Prepare dataset for circular evaluation.

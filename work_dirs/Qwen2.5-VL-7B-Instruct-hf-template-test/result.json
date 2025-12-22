@@ -1,0 +1,252 @@
+[
+    {
+        "eval-id": 0,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Identify the question that Madelyn and Tucker's experiment can best answer.",
+                "answer": "B",
+                "options": {
+                    "A": "Does Madelyn's snowboard slide down a hill in less time when it has a thin layer of wax or a thick layer of wax?",
+                    "B": "Does Madelyn's snowboard slide down a hill in less time when it has a layer of wax or when it does not have a layer of wax?"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "The passage below describes an experiment. Read the passage and then follow the instructions below.\n\nMadelyn applied a thin layer of wax to the underside of her snowboard and rode the board straight down a hill. Then, she removed the wax and rode the snowboard straight down the hill again. She repeated the rides four more times, alternating whether she rode with a thin layer of wax on the board or not. Her friend Tucker timed each ride. Madelyn and Tucker calculated the average time it took to slide straight down the hill on the snowboard with wax compared to the average time on the snowboard without wax.\nFigure: snowboarding down a hill.",
+                "prompt": "<image>Hint: The passage below describes an experiment. Read the passage and then follow the instructions below.\n\nMadelyn applied a thin layer of wax to the underside of her snowboard and rode the board straight down a hill. Then, she removed the wax and rode the snowboard straight down the hill again. She repeated the rides four more times, alternating whether she rode with a thin layer of wax on the board or not. Her friend Tucker timed each ride. Madelyn and Tucker calculated the average time it took to slide straight down the hill on the snowboard with wax compared to the average time on the snowboard without wax.\nFigure: snowboarding down a hill.\nQuestion: Identify the question that Madelyn and Tucker's experiment can best answer.\nA: Does Madelyn's snowboard slide down a hill in less time when it has a thin layer of wax or a thick layer of wax?\nB: Does Madelyn's snowboard slide down a hill in less time when it has a layer of wax or when it does not have a layer of wax?\n"
+            }
+        ],
+        "response": [
+            [
+                "The question that Madelyn and Tucker's experiment can best answer is:\n\nB: Does Madelyn's snowboard slide down a hill in less time when it has a layer of wax or when it does not have a layer of wax?\n\nThis is because the experiment alternates between riding the snowboard with a thin layer of wax and without wax, allowing them to compare the times for both conditions directly."
+            ]
+        ]
+    },
+    {
+        "eval-id": 1,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which of the following could Laura and Isabella's test show?",
+                "answer": "B",
+                "options": {
+                    "A": "if the concrete from each batch took the same amount of time to dry",
+                    "B": "if a new batch of concrete was firm enough to use"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "People can use the engineering-design process to develop solutions to problems. One step in the process is testing if a potential solution meets the requirements of the design.\nThe passage below describes how the engineering-design process was used to test a solution to a problem. Read the passage. Then answer the question below.\n\nLaura and Isabella were making batches of concrete for a construction project. To make the concrete, they mixed together dry cement powder, gravel, and water. Then, they checked if each batch was firm enough using a test called a slump test.\nThey poured some of the fresh concrete into an upside-down metal cone. They left the concrete in the metal cone for 30 seconds. Then, they lifted the cone to see if the concrete stayed in a cone shape or if it collapsed. If the concrete in a batch collapsed, they would know the batch should not be used.\nFigure: preparing a concrete slump test.",
+                "prompt": "<image>Hint: People can use the engineering-design process to develop solutions to problems. One step in the process is testing if a potential solution meets the requirements of the design.\nThe passage below describes how the engineering-design process was used to test a solution to a problem. Read the passage. Then answer the question below.\n\nLaura and Isabella were making batches of concrete for a construction project. To make the concrete, they mixed together dry cement powder, gravel, and water. Then, they checked if each batch was firm enough using a test called a slump test.\nThey poured some of the fresh concrete into an upside-down metal cone. They left the concrete in the metal cone for 30 seconds. Then, they lifted the cone to see if the concrete stayed in a cone shape or if it collapsed. If the concrete in a batch collapsed, they would know the batch should not be used.\nFigure: preparing a concrete slump test.\nQuestion: Which of the following could Laura and Isabella's test show?\nA: if the concrete from each batch took the same amount of time to dry\nB: if a new batch of concrete was firm enough to use\n"
+            }
+        ],
+        "response": [
+            [
+                "The test that Laura and Isabella conducted, known as the slump test, is designed to assess the consistency and workability of fresh concrete. The purpose of this test is to determine whether the concrete has the right consistency to be used in construction without collapsing under its own weight. Therefore, the correct answer is:\n\nB: if a new batch of concrete was firm enough to use\n\nThis test does not measure the drying time of the concrete, so option A is incorrect."
+            ]
+        ]
+    },
+    {
+        "eval-id": 2,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which of the following was a dependent variable in this experiment?",
+                "answer": "A",
+                "options": {
+                    "A": "the temperature of the soda",
+                    "B": "the size of the ice pieces"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "The passage below describes an experiment. Read the passage and think about the variables that are described.\n\nArianna's brother thought that crushed ice would keep his soda cooler than whole ice cubes.\nTo test this idea, Arianna divided a large bottle of soda equally among six glasses. Arianna added five whole ice cubes to each of the first three glasses while her brother crushed five ice cubes into small pieces before adding them to each of the other three glasses. Ten minutes after all the ice had been added to the glasses, Arianna used a thermometer to measure the temperature of the soda in each glass.\nHint: An independent variable is a variable whose effect you are investigating. A dependent variable is a variable that you measure.\nFigure: glasses of soda with ice.",
+                "prompt": "<image>Hint: The passage below describes an experiment. Read the passage and think about the variables that are described.\n\nArianna's brother thought that crushed ice would keep his soda cooler than whole ice cubes.\nTo test this idea, Arianna divided a large bottle of soda equally among six glasses. Arianna added five whole ice cubes to each of the first three glasses while her brother crushed five ice cubes into small pieces before adding them to each of the other three glasses. Ten minutes after all the ice had been added to the glasses, Arianna used a thermometer to measure the temperature of the soda in each glass.\nHint: An independent variable is a variable whose effect you are investigating. A dependent variable is a variable that you measure.\nFigure: glasses of soda with ice.\nQuestion: Which of the following was a dependent variable in this experiment?\nA: the temperature of the soda\nB: the size of the ice pieces\n"
+            }
+        ],
+        "response": [
+            [
+                "In the experiment described, the dependent variable is the one that is measured to determine the effect of the independent variable. In this case:\n\n- The independent variable is the type of ice (whole ice cubes vs. crushed ice pieces).\n- The dependent variable is the temperature of the soda, as it is what is being measured to see if there is a difference due to the type of ice used.\n\nTherefore, the correct answer is:\nA: the temperature of the soda"
+            ]
+        ]
+    },
+    {
+        "eval-id": 3,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which of the following was an independent variable in this experiment?",
+                "answer": "B",
+                "options": {
+                    "A": "the distance the footballs traveled",
+                    "B": "the air pressure in the footballs"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "The passage below describes an experiment. Read the passage and think about the variables that are described.\n\nBryce noticed that some of the footballs his team used during practice were not fully inflated. He wondered whether fully inflated footballs would travel farther than footballs with a lower air pressure.\nTo find out, Bryce collected 20 standard footballs. He fully inflated ten of them to an air pressure of 13 pounds per square inch. He inflated the remaining ten to an air pressure of 10 pounds per square inch. Bryce used  to launch a ball across a football field. He measured the distance the football traveled and then launched the next ball. Bryce repeated this with all 20 balls.\nHint: An independent variable is a variable whose effect you are investigating. A dependent variable is a variable that you measure.\nFigure: a football launcher.",
+                "prompt": "<image>Hint: The passage below describes an experiment. Read the passage and think about the variables that are described.\n\nBryce noticed that some of the footballs his team used during practice were not fully inflated. He wondered whether fully inflated footballs would travel farther than footballs with a lower air pressure.\nTo find out, Bryce collected 20 standard footballs. He fully inflated ten of them to an air pressure of 13 pounds per square inch. He inflated the remaining ten to an air pressure of 10 pounds per square inch. Bryce used  to launch a ball across a football field. He measured the distance the football traveled and then launched the next ball. Bryce repeated this with all 20 balls.\nHint: An independent variable is a variable whose effect you are investigating. A dependent variable is a variable that you measure.\nFigure: a football launcher.\nQuestion: Which of the following was an independent variable in this experiment?\nA: the distance the footballs traveled\nB: the air pressure in the footballs\n"
+            }
+        ],
+        "response": [
+            [
+                "In the experiment described, the independent variable is the one that is manipulated or changed by the experimenter to observe its effect on the dependent variable. In this case, Bryce is changing the air pressure in the footballs to see how it affects the distance the footballs travel.\n\nThe dependent variable is the outcome that is measured to determine the effect of the independent variable. Here, the distance the footballs travel is being measured as the outcome.\n\nTherefore, the correct answer is:\n\nB: the air pressure in the footballs"
+            ]
+        ]
+    },
+    {
+        "eval-id": 4,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which of the following could Devin's test show?",
+                "answer": "A",
+                "options": {
+                    "A": "if the weather station would work when the temperature was 50\u00ac\u221eC",
+                    "B": "how well the weather station would work when it was windy"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "People can use the engineering-design process to develop solutions to problems. One step in the process is testing if a potential solution meets the requirements of the design.\nThe passage below describes how the engineering-design process was used to test a solution to a problem. Read the passage. Then answer the question below.\n\nDevin was a mechanical engineer who was designing  to record temperature, precipitation, and wind speed. The weather station would be used in a town where the highest recorded temperature was 40\u00ac\u221eC. Devin wanted to make sure the weather station would work even in unusually warm weather.\nSo, he set an indoor test chamber to 50\u00ac\u221eC with low moisture and no wind. He left the weather station in the chamber overnight. The next day, he checked to see if the weather station displayed accurate measurements after 24 hours at 50\u00ac\u221eC.\nFigure: a weather station.",
+                "prompt": "<image>Hint: People can use the engineering-design process to develop solutions to problems. One step in the process is testing if a potential solution meets the requirements of the design.\nThe passage below describes how the engineering-design process was used to test a solution to a problem. Read the passage. Then answer the question below.\n\nDevin was a mechanical engineer who was designing  to record temperature, precipitation, and wind speed. The weather station would be used in a town where the highest recorded temperature was 40\u00ac\u221eC. Devin wanted to make sure the weather station would work even in unusually warm weather.\nSo, he set an indoor test chamber to 50\u00ac\u221eC with low moisture and no wind. He left the weather station in the chamber overnight. The next day, he checked to see if the weather station displayed accurate measurements after 24 hours at 50\u00ac\u221eC.\nFigure: a weather station.\nQuestion: Which of the following could Devin's test show?\nA: if the weather station would work when the temperature was 50\u00ac\u221eC\nB: how well the weather station would work when it was windy\n"
+            }
+        ],
+        "response": [
+            [
+                "Devin's test showed:\n\nA: if the weather station would work when the temperature was 50\u00b0C\n\nThe test was conducted by setting the indoor test chamber to 50\u00b0C with low moisture and no wind, and then leaving the weather station in the chamber overnight. The purpose of this test was to check if the weather station could accurately measure temperature under these conditions, which is relevant to ensuring that the weather station would function correctly in unusually warm weather. The test did not involve wind, so it cannot demonstrate how well the weather station would work when it was windy."
+            ]
+        ]
+    },
+    {
+        "eval-id": 5,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Identify the question that Carson's experiment can best answer.",
+                "answer": "B",
+                "options": {
+                    "A": "Does the type of flour used in the muffins affect the number of muffins that turn brown after 30 minutes in the oven?",
+                    "B": "Do muffins made with white flour have larger volumes than muffins made with whole wheat flour?"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "The passage below describes an experiment. Read the passage and then follow the instructions below.\n\nCarson made six batches of muffins over the course of one day. He used whole wheat flour in three of the batches and white flour in the other three batches. He divided the batter into muffin tins, using two ounces of batter per muffin. He baked the muffins in a 350\u00ac\u221eF oven for 20 minutes. After allowing the muffins to cool, Carson measured the dimensions of the muffins and calculated their volumes. He compared the volumes of the muffins made with whole wheat flour to the volumes of the muffins made with white flour.\nFigure: muffins cooling.",
+                "prompt": "<image>Hint: The passage below describes an experiment. Read the passage and then follow the instructions below.\n\nCarson made six batches of muffins over the course of one day. He used whole wheat flour in three of the batches and white flour in the other three batches. He divided the batter into muffin tins, using two ounces of batter per muffin. He baked the muffins in a 350\u00ac\u221eF oven for 20 minutes. After allowing the muffins to cool, Carson measured the dimensions of the muffins and calculated their volumes. He compared the volumes of the muffins made with whole wheat flour to the volumes of the muffins made with white flour.\nFigure: muffins cooling.\nQuestion: Identify the question that Carson's experiment can best answer.\nA: Does the type of flour used in the muffins affect the number of muffins that turn brown after 30 minutes in the oven?\nB: Do muffins made with white flour have larger volumes than muffins made with whole wheat flour?\n"
+            }
+        ],
+        "response": [
+            [
+                "The question that Carson's experiment can best answer is:\n\nB: Do muffins made with white flour have larger volumes than muffins made with whole wheat flour?\n\nThis is because Carson varied the type of flour (whole wheat vs. white) and measured the volumes of the muffins to compare them. The other option does not align with the experimental design or the data collected by Carson."
+            ]
+        ]
+    },
+    {
+        "eval-id": 6,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which statement describes the Great Victoria Desert ecosystem?",
+                "answer": "B",
+                "options": {
+                    "A": "It has thick, moist soil.",
+                    "B": "It has dry, thin soil."
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "Figure: Great Victoria Desert.\nThe Great Victoria Desert is a hot desert ecosystem located in Western Australia and South Australia. It is the largest desert in Australia! The Great Victoria Desert is home to the rare great desert skink. To stay cool during the day, great desert skinks live in holes they dig in the ground.",
+                "prompt": "<image>Hint: Figure: Great Victoria Desert.\nThe Great Victoria Desert is a hot desert ecosystem located in Western Australia and South Australia. It is the largest desert in Australia! The Great Victoria Desert is home to the rare great desert skink. To stay cool during the day, great desert skinks live in holes they dig in the ground.\nQuestion: Which statement describes the Great Victoria Desert ecosystem?\nA: It has thick, moist soil.\nB: It has dry, thin soil.\n"
+            }
+        ],
+        "response": [
+            [
+                "The correct statement that describes the Great Victoria Desert ecosystem is:\n\nB: It has dry, thin soil.\n\nThis is consistent with the characteristics of a desert ecosystem, where the soil is typically dry and thin due to minimal rainfall and high evaporation rates."
+            ]
+        ]
+    },
+    {
+        "eval-id": 7,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which better describes the tide pool ecosystems in Tongue Point Marine Life Sanctuary?",
+                "answer": "B",
+                "options": {
+                    "A": "It has water that is poor in nutrients. It also has only a few types of organisms.",
+                    "B": "It has water that is rich in nutrients. It also has many different types of organisms."
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "Figure: Tongue Point Marine Life Sanctuary.\nTongue Point Marine Life Sanctuary is in western Washington State. The park is on the coast of the Pacific Ocean. It has many tide pool ecosystems.",
+                "prompt": "<image>Hint: Figure: Tongue Point Marine Life Sanctuary.\nTongue Point Marine Life Sanctuary is in western Washington State. The park is on the coast of the Pacific Ocean. It has many tide pool ecosystems.\nQuestion: Which better describes the tide pool ecosystems in Tongue Point Marine Life Sanctuary?\nA: It has water that is poor in nutrients. It also has only a few types of organisms.\nB: It has water that is rich in nutrients. It also has many different types of organisms.\n"
+            }
+        ],
+        "response": [
+            [
+                "The correct answer is:\n\nB: It has water that is rich in nutrients. It also has many different types of organisms.\n\nTide pools in marine life sanctuaries like Tongue Point Marine Life Sanctuary typically have water that is rich in nutrients due to the mixing of fresh and saltwater, as well as the presence of organic matter from the surrounding environment. This nutrient-rich water supports a diverse array of organisms, including starfish, sea urchins, and various types of algae and invertebrates. Therefore, option B better describes the tide pool ecosystems in Tongue Point Marine Life Sanctuary."
+            ]
+        ]
+    },
+    {
+        "eval-id": 8,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which part of an apple tree might grow into a new tree?",
+                "answer": "A",
+                "options": {
+                    "A": "a seed",
+                    "B": "a leaf"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "This diagram shows the life cycle of an apple tree.",
+                "prompt": "<image>Hint: This diagram shows the life cycle of an apple tree.\nQuestion: Which part of an apple tree might grow into a new tree?\nA: a seed\nB: a leaf\n"
+            }
+        ],
+        "response": [
+            [
+                "The part of an apple tree that might grow into a new tree is:\n\nA: a seed\n\nSeeds contain the genetic material necessary for the development of a new plant, which in this case would be a new apple tree."
+            ]
+        ]
+    },
+    {
+        "eval-id": 9,
+        "messages": [
+            {
+                "role": "user",
+                "question": "Which animal's limbs are also adapted for gliding?",
+                "answer": "A",
+                "options": {
+                    "A": "northern flying squirrel",
+                    "B": "ring-tailed lemur"
+                },
+                "choices": [
+                    "A",
+                    "B"
+                ],
+                "hint": "Sugar gliders live in the forests of Southeast Asia. They have two arms and two legs. They also have a thin layer of skin, called a patagium, stretched between their arms and legs.\nSugar gliders use the patagium to glide through the air from tree to tree. The 's limbs are adapted for gliding.\nFigure: sugar glider.",
+                "prompt": "<image>Hint: Sugar gliders live in the forests of Southeast Asia. They have two arms and two legs. They also have a thin layer of skin, called a patagium, stretched between their arms and legs.\nSugar gliders use the patagium to glide through the air from tree to tree. The 's limbs are adapted for gliding.\nFigure: sugar glider.\nQuestion: Which animal's limbs are also adapted for gliding?\nA: northern flying squirrel\nB: ring-tailed lemur\n"
+            }
+        ],
+        "response": [
+            [
+                "The animal whose limbs are adapted for gliding is:\n\nA: northern flying squirrel\n\nNorthern flying squirrels have a patagium, which is a thin layer of skin that stretches between their forelimbs and hind limbs, allowing them to glide from tree to tree. This adaptation is similar to the patagium found in sugar gliders."
+            ]
+        ]
+    }
+]

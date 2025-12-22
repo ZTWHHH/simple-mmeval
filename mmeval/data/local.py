@@ -12,7 +12,8 @@ class LocalJSONDataset(BaseDataset):
         super().__init__(args)
 
     def _load_raw_data(self, args):
-        data = json.load(open(self.data_file, "r"))
+        with open(self.data_file, "r") as f:
+            data = json.load(f)
         for i, sample in enumerate(data):
             assert "eval-id" not in sample, "eval-id already exists"
             sample["eval-id"] = i
@@ -21,9 +22,8 @@ class LocalJSONDataset(BaseDataset):
 
     def _process_sample(self, idx: int):
         sample = dict(self._raw_dataset[idx])
-        processed_messages = [self._process_message(msg) for msg in sample["messages"]]
-        sample["messages"] = processed_messages
-        
+        media_list = sample.pop("media", None)
+        sample["messages"] = self._process_messages(sample["messages"], media_list)
         return sample
 
     def __repr__(self):

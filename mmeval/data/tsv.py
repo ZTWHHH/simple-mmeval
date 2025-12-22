@@ -37,6 +37,7 @@ class TSVDataset(BaseDataset):
         self.dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
         self.dataset_url = None
         self.template_arg = args.template
+        self.resize = args.resize
         
         if args.dataset.startswith("http"):
             self.file_name = args.dataset.split('/')[-1].replace('.tsv', '')
@@ -121,14 +122,14 @@ class TSVDataset(BaseDataset):
             Processed sample with messages list
         """
         sample = self._raw_dataset.iloc[index].to_dict()
-        media_paths = self._extract_media_paths(sample)
+        media_list = self._extract_media_paths(sample)
         question = str(sample['question'])
 
         # Normalize image placeholders
         if IMG_PLACEHOLDER_RE.search(question):
             question = IMG_PLACEHOLDER_RE.sub("<image>", question)
-        elif media_paths:
-            question = f'{"<image>" * len(media_paths)} {question}'.strip()
+        elif media_list:
+            question = f'{"<image>" * len(media_list)} {question}'.strip()
 
         # Build choices dict
         choices = {
@@ -137,20 +138,20 @@ class TSVDataset(BaseDataset):
         }
 
         # Build message dict for template rendering
-        msg = {
+        message = {
             "question": question,
-            "media": media_paths,
+            "media": media_list,
         }
         if choices:
-            msg["choices"] = choices
+            message["choices"] = choices
         
         hint = sample.get("hint", None)
         if hint and pd.notna(hint):
-            msg["hint"] = hint
+            message["hint"] = hint
 
         # Process message using base class method
-        processed_msg = self._process_message(msg)
-        sample["messages"] = [processed_msg]
+        processed_message = self._process_message(message)
+        sample["messages"] = [processed_message]
         
         # Clean up original fields
         sample.pop("image", None)

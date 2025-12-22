@@ -41,21 +41,19 @@ class MMEvalHFDataset(BaseDataset):
         if "eval-id" not in sample:
             sample["eval-id"] = idx
         
-        # Get media from sample level (HF datasets store media at sample level)
-        sample_media = sample.get("media", None)
-        
         messages = sample["messages"]
-        messages_list = json.loads(messages) if isinstance(messages, str) else messages
+        message_list = json.loads(messages) if isinstance(messages, str) else messages
         
-        # Inject sample-level media into each message if not present
-        processed_messages = []
-        for msg in messages_list:
-            msg_dict = dict(msg)
-            if sample_media is not None and "media" not in msg_dict:
-                msg_dict["media"] = sample_media if isinstance(sample_media, list) else [sample_media]
-            processed_messages.append(self._process_message(msg_dict))
+        # Get media from sample level (HF datasets may store as single image or list)
+        media = sample.pop("media", None)
+        if media is None:
+            media_list = []
+        elif isinstance(media, list):
+            media_list = media
+        else:
+            media_list = [media]
 
-        sample.pop("media", None)
-        sample["messages"] = processed_messages
+        # Process all messages with sample-level media indexed by placeholder order
+        sample["messages"] = self._process_messages(message_list, media_list)
 
         return sample
