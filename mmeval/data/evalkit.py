@@ -46,6 +46,7 @@ VLMEVALKIT_DATASET_LIST = [
    'MMBench_dev_ar',
    'MMBench_dev_cn',
    'MMBench_dev_en',
+   'MMBench_dev_en-test',
    'MMBench_dev_pt',
    'MMBench_dev_ru',
    'MMBench_dev_tr',
@@ -135,18 +136,15 @@ VLMEVALKIT_CONCAT_DATASET_SETS = {
     ]
 }
 
-def load_single_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
-    """Load single dataset file for VLMEvalKit specific datasets.
+def load_single_dataset(dataset_name: str, dataset_dir: str) -> None:
+    """Download single dataset file for VLMEvalKit specific datasets if not exists.
     
     Parameters
     ----------
     dataset_name : str
         Name of the dataset to load
-
-    Returns
-    -------
-    pd.DataFrame
-        Loaded DataFrame from the single dataset file
+    dataset_dir : str
+        Directory to save the dataset file
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
@@ -154,18 +152,15 @@ def load_single_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{dataset_name}.tsv"
         download_tsv(dataset_url, file_path)
 
-def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
-    """Load multipart dataset files for VLMEvalKit specific datasets.
+def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> None:
+    """Download and merge multipart dataset files for VLMEvalKit specific datasets if not exists.
     
     Parameters
     ----------
     dataset_name : str
         Name of the dataset to load
-        
-    Returns
-    -------
-    pd.DataFrame
-        Loaded and merged DataFrame from all parts, saved as dataset_name.tsv
+    dataset_dir : str
+        Directory to save the dataset file
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
@@ -187,18 +182,15 @@ def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         combined_df = pd.concat(dataframe, ignore_index=True)
         combined_df.to_csv(file_path, sep='\t', index=False, chunksize=100000)
 
-def load_concat_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
-    """Load multiple datasets for VLMEvalKit composite datasets.
+def load_concat_dataset(dataset_name: str, dataset_dir: str) -> None:
+    """Download and concatenate multiple datasets for VLMEvalKit composite datasets if not exists.
     
     Parameters
     ----------
     dataset_name : str
         Name of the dataset to load
-    
-    Returns
-    -------
-    pd.DataFrame
-        Concatenated DataFrame from all parts, saved as dataset_name.tsv
+    dataset_dir : str
+        Directory to save the dataset file
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
