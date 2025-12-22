@@ -45,13 +45,16 @@ class MMEvalHFDataset(BaseDataset):
         message_list = json.loads(messages) if isinstance(messages, str) else messages
         
         # Get media from sample level (HF datasets may store as single image or list)
-        media = sample.pop("media", None)
+        media = sample.get("media")
         if media is None:
             media_list = []
         elif isinstance(media, list):
             media_list = media
         else:
             media_list = [media]
+        
+        # Ensure sample["media"] is always a list
+        sample["media"] = media_list
 
         # Process all messages with sample-level media indexed by placeholder order
         sample["messages"] = self._process_messages(message_list, media_list)

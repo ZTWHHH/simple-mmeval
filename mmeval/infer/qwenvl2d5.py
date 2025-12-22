@@ -104,10 +104,11 @@ class TaskRunner(Task):
         }
 
     def run_sample(self, sample: dict):
+        result = dict(sample)
         responses = []
         conversation_history = []
         
-        for msg in sample["messages"]:
+        for msg in result["messages"]:
             user_message = self.parse_input(msg)
             conversation_history.extend(user_message)
             
@@ -126,11 +127,6 @@ class TaskRunner(Task):
                 **video_kwargs,
             )
             inputs = inputs.to(self.device)
-
-            result = {
-                "eval-id": sample["eval-id"],
-                "messages": [{k: v for k, v in m.items() if k != "media"} for m in sample["messages"]],
-            }
 
             if not self.args.score_target:
                 response = self._generate_response(inputs)

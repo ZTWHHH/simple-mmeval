@@ -3,7 +3,7 @@ export PYTHONPATH=./:$PYTHONPATH
 # Test 1: Local JSON with template
 python mmeval/run.py \
     --dataset local@json \
-    --infile test_bed/modality_test/task/template_test.json \
+    --infile test_bed/modality_test/task/template.json \
     --img_dir test_bed/modality_test/media/512 \
     --template test_bed/modality_test/task/template.txt \
     --out_dir work_dirs/Qwen2.5-VL-7B-Instruct-local-template-test \

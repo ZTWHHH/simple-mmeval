@@ -22,7 +22,7 @@ class LocalJSONDataset(BaseDataset):
 
     def _process_sample(self, idx: int):
         sample = dict(self._raw_dataset[idx])
-        media_list = sample.pop("media", None)
+        media_list = sample.get("media")
         sample["messages"] = self._process_messages(sample["messages"], media_list)
         return sample
 

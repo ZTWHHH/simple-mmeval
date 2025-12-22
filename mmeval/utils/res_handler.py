@@ -49,10 +49,17 @@ class ResponseHandler:
         assert "eval-id" in result, "eval-id is required"
         assert "response" in result, f"no model response for sample {result}"
         
+        # Remove media from each message (contains PIL Image objects)
+        for msg in result.get("messages", []):
+            if "media" in msg:
+                del msg["media"]
+        
+        # Replace PIL Image objects in sample-level media with placeholder string
         if "media" in result and result["media"]:
-            # Check if any item is a PIL Image, if so, remove the entire media section
-            if any(isinstance(item, Image.Image) for item in result["media"]):
-                del result["media"]
+            result["media"] = [
+                "Image Object" if isinstance(m, Image.Image) else m
+                for m in result["media"]
+            ]
         
         if len(self.cache) % self.save_freq == 0:
             self.kvstore.put(str(result["eval-id"]), result)

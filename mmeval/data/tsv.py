@@ -122,6 +122,8 @@ class TSVDataset(BaseDataset):
             Processed sample with messages list
         """
         sample = self._raw_dataset.iloc[index].to_dict()
+        # Replace NaN values with None for JSON serialization
+        sample = {k: (None if pd.isna(v) else v) for k, v in sample.items()}
         media_list = self._extract_media_paths(sample)
         question = str(sample['question'])
 
@@ -156,6 +158,7 @@ class TSVDataset(BaseDataset):
         # Clean up original fields
         sample.pop("image", None)
         sample.pop("image_url", None)
+        sample["media"] = media_list
         
         return sample
 

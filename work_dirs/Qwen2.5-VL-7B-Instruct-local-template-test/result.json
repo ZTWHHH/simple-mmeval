@@ -1,6 +1,9 @@
 [
     {
-        "eval-id": 0,
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
         "messages": [
             {
                 "role": "user",
@@ -22,6 +25,8 @@
                 "prompt": "<image>Hint: Please choose the correct option. Question: What is shown in the image?\nA: A truck\nB: A dog\nC: A boat\nD: A plane\n"
             }
         ],
+        "comment": "Test template rendering with ABCD options and hint.",
+        "eval-id": 0,
         "response": [
             [
                 "The image shows a vehicle that is clearly a truck, specifically a GMC truck based on the logo on the front grille. Therefore, the correct answer is:\n\nA: A truck"
@@ -29,7 +34,10 @@
         ]
     },
     {
-        "eval-id": 1,
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
         "messages": [
             {
                 "role": "user",
@@ -51,6 +59,8 @@
                 "prompt": "<image>Hint: Please choose the correct option. Question: What is shown in the image?\nA: A truck\nB: A dog\nC: A boat\nD: A plane\n"
             }
         ],
+        "comment": "Test template rendering with ABCD options and hint.",
+        "eval-id": 1,
         "response": [
             [
                 "The image shows a boat. Therefore, the correct answer is:\n\nC: A boat"
