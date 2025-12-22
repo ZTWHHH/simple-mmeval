@@ -21,6 +21,7 @@ class ResponseHandler:
     def __init__(self, args):
         self.rank = args.rank
         self.save_freq = args.save_freq
+        self.out_dir = args.out_dir
         self.kvstore = SQLiteKVStore(os.path.join(args.out_dir, f"cache.db"))
         self.load_cache()
 
@@ -41,7 +42,7 @@ class ResponseHandler:
         for sample in dataset:
             if not self.in_cache(sample["eval-id"]):
                 return False
-        print(f"📖 [Shard {self.rank}] Results completed. Saved output file {self.output_file}.")
+        print(f"📖 [Shard {self.rank}] Results completed. Saved to {self.out_dir}.")
         return True
         
     def save(self, result:dict):

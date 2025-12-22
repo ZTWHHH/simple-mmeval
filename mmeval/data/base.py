@@ -1,4 +1,5 @@
 import os
+import re
 import base64
 import requests
 from PIL import Image
@@ -22,13 +23,13 @@ class BaseDataset(ABC):
     7. Circular data preparation placeholder
     """
     
+    VIDEO_EXTENSIONS = {
+        '.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv',
+        '.mpeg', '.mpg', '.m4v', '.3gp', '.3g2', '.ts', '.mts', '.vob'
+    }
+    
     def __init__(self, args):
-        """Initialize the dataset with lazy loading and parallel processing support.
-        
-        Parameters
-        ----------
-
-        """
+        """Initialize the dataset with lazy loading and parallel processing support."""
         self.parallel_per_task = args.parallel_per_task
         self.rank = args.rank
         
@@ -115,25 +116,36 @@ class BaseDataset(ABC):
                 return f.read()
         return template_arg
 
-    def load_image(self, f) -> Image.Image:
-        """Load image from path with PIL."""
+    def _is_video(self, path: str) -> bool:
+        """Check if the path is a video file by extension."""
+        ext = os.path.splitext(path.split('?')[0])[-1].lower()
+        return ext in self.VIDEO_EXTENSIONS
+
+    def load_media(self, f) -> Union[Image.Image, str]:
+        """Load media from path. Returns PIL image object for images, path string for videos."""
         if isinstance(f, Image.Image):
             return f if f.mode == "RGB" else f.convert("RGB")
         
-        if isinstance(f, str) and os.path.exists(f):
+        if not isinstance(f, str):
+            raise ValueError(f"Unsupported media type: {type(f)}")
+        
+        # Video: return path/URL directly
+        if self._is_video(f):
+            return f
+        
+        # Image: load with PIL
+        if os.path.exists(f):
             return Image.open(f).convert("RGB")
         
-        if isinstance(f, str) and f.startswith("http"):
+        if f.startswith("http"):
             return Image.open(requests.get(f, stream=True).raw).convert("RGB")
         
-        if isinstance(f, str):
-            try:
-                decoded = base64.b64decode(f)
-                return Image.open(BytesIO(decoded)).convert("RGB")
-            except Exception:
-                pass
-        
-        raise NotImplementedError(f"Unsupported image format: {f}")
+        # Try base64 decode
+        try:
+            decoded = base64.b64decode(f)
+            return Image.open(BytesIO(decoded)).convert("RGB")
+        except Exception:
+            raise ValueError(f"Unsupported media format: {f[:100]}...")
     
     def build_prompt(self, prompt_template: str, sample: Dict[str, Any]) -> str:
         """Build prompt from Jinja template and sample data.
@@ -155,7 +167,44 @@ class BaseDataset(ABC):
         'dict': dict, 'str': str, 'int': int, 'float': float, 'bool': bool, 'sum': sum, 'max': max, 'min': min})
         template = env.from_string(prompt_template)
         return template.render(**sample)
-    
+
+    def _process_message(self, msg: dict) -> dict:
+        """Process a single message dict, building prompt and processing media."""
+        # Build prompt: template priority -> existing prompt -> error
+        prompt = msg.get("prompt")
+        if self._prompt_template is not None:
+            try:
+                prompt = self.build_prompt(self._prompt_template, msg)
+            except Exception as e:
+                if prompt is None:
+                    raise ValueError(f"Template rendering failed: {e}")
+        if prompt is None:
+            raise ValueError("No prompt found and no template provided")
+
+        # Get media list and apply path prefix if set (only to string paths)
+        media_paths = msg.get("media", [])
+        if getattr(self, 'media_dir', None):
+            media_paths = [os.path.join(self.media_dir, f) if isinstance(f, str) else f for f in media_paths]
+
+        # Process media based on placeholder type
+        placeholder_list = re.findall(r"<(video|image)>", prompt)
+        media = []
+        for i, tag in enumerate(placeholder_list):
+            if i >= len(media_paths):
+                break
+            media_path = media_paths[i]
+            if tag == "image":
+                img = self.load_media(media_path)
+                if getattr(self, 'resize', None) is not None:
+                    img = self.resize_image(img, self.resize)
+                media.append(img)
+            else:  # video
+                media.append(media_path)
+
+        msg["prompt"] = prompt
+        msg["media"] = media
+        return msg
+
     def convert_circular(self, **kwargs) -> Any:
         """Prepare dataset for circular evaluation.
         

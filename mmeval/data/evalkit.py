@@ -4,6 +4,12 @@ from typing import Any
 from mmeval.data.tsv import TSVDataset
 from mmeval.data.utils import download_tsv
 
+
+def get_hf_base_url():
+    """Get HuggingFace base URL from environment or use default."""
+    return os.getenv('HF_ENDPOINT', 'https://huggingface.co')
+
+
 # VLMEvalKit supported datasets
 VLMEVALKIT_DATASET_LIST = [
    '3DSRBench',
@@ -145,7 +151,7 @@ def load_single_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
     if not os.path.exists(file_path):
-        dataset_url = f"https://huggingface.co/datasets/mm-eval/VLMEvalKit/resolve/main/{dataset_name}.tsv"
+        dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{dataset_name}.tsv"
         download_tsv(dataset_url, file_path)
 
 def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
@@ -172,7 +178,7 @@ def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         for part_idx in range(config["start_idx"], config["end_idx"]+1):
             sub_file_path = os.path.join(dataset_dir, f"{pattern.format(part_idx)}.tsv")
             if not os.path.exists(sub_file_path):
-                sub_dataset_url = f"https://huggingface.co/datasets/mm-eval/VLMEvalKit/resolve/main/{pattern.format(part_idx)}.tsv"
+                sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{pattern.format(part_idx)}.tsv"
                 download_tsv(sub_dataset_url, sub_file_path)
             sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
             dataframe.append(sub_dataframe)
@@ -202,7 +208,7 @@ def load_concat_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         for sub_dataset_name in dataset_list:
             sub_file_path = os.path.join(dataset_dir, f"{sub_dataset_name}.tsv")
             if not os.path.exists(sub_file_path):
-                sub_dataset_url = f"https://huggingface.co/datasets/mm-eval/VLMEvalKit/resolve/main/{sub_dataset_name}.tsv"
+                sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{sub_dataset_name}.tsv"
                 download_tsv(sub_dataset_url, sub_file_path)
             sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
             sub_dataframe['sub_dataset'] = [sub_dataset_name] * len(sub_dataframe)

@@ -3,7 +3,6 @@
         "eval-id": 0,
         "messages": [
             {
-                "prompt": "<image>Hint: Please choose the correct option. Question: What is shown in the image?\nA: A truck\nB: A dog\nC: A boat\nD: A plane\n",
                 "role": "user",
                 "question": "What is shown in the image?",
                 "answer": "A",
@@ -19,7 +18,8 @@
                     "C",
                     "D"
                 ],
-                "hint": "Please choose the correct option."
+                "hint": "Please choose the correct option.",
+                "prompt": "<image>Hint: Please choose the correct option. Question: What is shown in the image?\nA: A truck\nB: A dog\nC: A boat\nD: A plane\n"
             }
         ],
         "response": [
@@ -32,7 +32,6 @@
         "eval-id": 1,
         "messages": [
             {
-                "prompt": "<image>Hint: Please choose the correct option. Question: What is shown in the image?\nA: A truck\nB: A dog\nC: A boat\nD: A plane\n",
                 "role": "user",
                 "question": "What is shown in the image?",
                 "answer": "C",
@@ -48,7 +47,8 @@
                     "C",
                     "D"
                 ],
-                "hint": "Please choose the correct option."
+                "hint": "Please choose the correct option.",
+                "prompt": "<image>Hint: Please choose the correct option. Question: What is shown in the image?\nA: A truck\nB: A dog\nC: A boat\nD: A plane\n"
             }
         ],
         "response": [

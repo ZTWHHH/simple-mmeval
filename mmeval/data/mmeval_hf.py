@@ -1,4 +1,3 @@
-import re
 import json
 from datasets import load_dataset
 from mmeval.data.base import BaseDataset
@@ -11,7 +10,7 @@ class MMEvalHFDataset(BaseDataset):
         self.dataset_name = args.dataset.split("@")[1] if "@" in args.dataset else args.dataset
         self.split = args.split
         self.circular = args.circular
-        self.resize = args.resize
+        self.resize = args.resize  # Used by base._process_message for image resizing
         self.template_arg = args.template
         if self.resize is not None:
             print(f"Resizing images to {self.resize}x{self.resize}")
@@ -35,81 +34,28 @@ class MMEvalHFDataset(BaseDataset):
         """Prepare dataset for circular evaluation."""
         raise NotImplementedError("convert_circular not implemented.")
 
-    def _process_message(self, msg: dict):
-        """Process a single message dict, building prompt and processing media."""
-        # Priority: user template -> existing prompt -> error
-        prompt = msg.get("prompt")
-        if self._prompt_template is not None:
-            try:
-                prompt = self.build_prompt(self._prompt_template, msg)
-            except Exception as e:
-                if prompt is None:
-                    raise ValueError(f"Template rendering failed: {e}")
-        if prompt is None:
-            raise ValueError("No prompt found and no template provided")
-
-        # Normalize to list
-        image = msg.get("image", None)
-        video = msg.get("video", None)
-
-        if image is None:
-            image_list = []
-        elif isinstance(image, list):
-            image_list = [self.load_image(img) for img in image]
-        else:
-            image_list = [self.load_image(image)]
-
-        if video is None:
-            video_list = []
-        elif isinstance(video, list):
-            video_list = video
-        else:
-            video_list = [video]
-
-        media = []
-        placeholder_list = re.findall(r"<(video|image)>", prompt)
-        for tag in placeholder_list:
-            if tag == "image" and image_list:
-                img = image_list.pop(0)
-                # Resize image if resize parameter is set
-                if self.resize is not None:
-                    img = self.resize_image(img, self.resize)
-                media.append(img)
-            elif tag == "video" and video_list:
-                media.append(video_list.pop(0))
-
-        return {
-            "prompt": prompt,
-            "media": media,
-            **{k: v for k, v in msg.items() if k not in ("prompt", "image", "video")}
-        }
-
     def _process_sample(self, idx: int):
-        sample = self._raw_dataset[idx]
+        sample = dict(self._raw_dataset[idx])
         
-        # Get image from sample level (HF datasets store image at sample level)
-        sample_image = sample.get("image", None)
+        # Add eval-id if not present
+        if "eval-id" not in sample:
+            sample["eval-id"] = idx
         
-        # Handle different message field names: "messages" or "conversation"
-        if "messages" in sample:
-            messages_list = sample["messages"]
-        elif "conversation" in sample:
-            conv = sample["conversation"]
-            # Parse JSON string if needed
-            messages_list = json.loads(conv) if isinstance(conv, str) else conv
-        else:
-            # Wrap sample itself as single message
-            messages_list = [dict(sample)]
+        # Get media from sample level (HF datasets store media at sample level)
+        sample_media = sample.get("media", None)
         
-        # Inject sample-level image into each message if not present
+        messages = sample["messages"]
+        messages_list = json.loads(messages) if isinstance(messages, str) else messages
+        
+        # Inject sample-level media into each message if not present
         processed_messages = []
         for msg in messages_list:
-            msg_dict = dict(msg)  # Always make a copy
-            if sample_image is not None and "image" not in msg_dict:
-                msg_dict["image"] = sample_image
+            msg_dict = dict(msg)
+            if sample_media is not None and "media" not in msg_dict:
+                msg_dict["media"] = sample_media if isinstance(sample_media, list) else [sample_media]
             processed_messages.append(self._process_message(msg_dict))
 
-        return {
-            "eval-id": idx,
-            "messages": processed_messages,
-        }
+        sample.pop("media", None)
+        sample["messages"] = processed_messages
+
+        return sample

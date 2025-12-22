@@ -36,6 +36,7 @@ class TSVDataset(BaseDataset):
         """
         self.dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
         self.dataset_url = None
+        self.template_arg = args.template
         
         if args.dataset.startswith("http"):
             self.file_name = args.dataset.split('/')[-1].replace('.tsv', '')
@@ -52,8 +53,8 @@ class TSVDataset(BaseDataset):
         
         Returns
         -------
-        Any
-            Pandas DataFrame containing the dataset
+        Tuple[pd.DataFrame, str]
+            Pandas DataFrame containing the dataset and prompt template
         """
         data_file = os.path.join(self.dataset_dir, f"{self.file_name}.tsv")
 
@@ -65,52 +66,49 @@ class TSVDataset(BaseDataset):
         if "eval-id" not in dataset.columns:
             dataset["eval-id"] = range(len(dataset))
         
-        return dataset
+        # Load template: user template > default template
+        template = self._load_template(self.template_arg)
+        if template is None:
+            default_template_path = os.path.join(os.path.dirname(__file__), "tsv_default_template.txt")
+            template = self._load_template(default_template_path)
+        
+        return dataset, template
 
-    def _extract_media(self, sample: Dict[str, Any]) -> list:
-        """Extract media from sample using image_url or base64 image data.
+    def _extract_media_paths(self, sample: Dict[str, Any]) -> list:
+        """Extract media paths/data from sample without loading.
         
         Parameters
         ----------
         sample : Dict[str, Any]
             Sample dictionary
-        index : int
-            Sample index for error reporting
             
         Returns
         -------
         list
-            List of PIL Image objects
+            List of media paths or base64 strings
         """
-        media = []
+        media_paths = []
         
         # Priority 1: Check for image_url
         if 'image_url' in sample and pd.notna(sample['image_url']):
             image_url = sample['image_url']
-            # Handle multiple image paths stored as string representation of list
             if image_url.startswith('[') and image_url.endswith(']'):
-                image_url_list = ast.literal_eval(image_url)
-                for image_url in image_url_list:
-                    media.append(self.load_image(image_url))
+                media_paths = ast.literal_eval(image_url)
             else:
-                # Single image url
-                media.append(self.load_image(image_url))
+                media_paths = [image_url]
                         
         # Priority 2: Check for base64 image data
         elif 'image' in sample and pd.notna(sample['image']):
             image = sample['image']
             if image.startswith('[') and image.endswith(']'):
-                image_list = ast.literal_eval(image)
-                for image in image_list:
-                    media.append(self.load_image(image))
+                media_paths = ast.literal_eval(image)
             else:
-                # Single base64 image
-                media.append(self.load_image(image))
+                media_paths = [image]
         
-        return media
+        return media_paths
 
     def _process_sample(self, index: int) -> Dict[str, Any]:
-        """Process a raw TSV sample to match format.
+        """Process a raw TSV sample to match unified format.
         
         Parameters
         ----------
@@ -120,38 +118,43 @@ class TSVDataset(BaseDataset):
         Returns
         -------
         Dict[str, Any]
-            Processed sample with unified format
+            Processed sample with messages list
         """
         sample = self._raw_dataset.iloc[index].to_dict()
-        media = self._extract_media(sample)
+        media_paths = self._extract_media_paths(sample)
         question = str(sample['question'])
 
         # Normalize image placeholders
         if IMG_PLACEHOLDER_RE.search(question):
-            prompt = IMG_PLACEHOLDER_RE.sub("<image>", question)
-        elif media:
-            prompt = f'{"<image>" * len(media)} {question}'.strip()
+            question = IMG_PLACEHOLDER_RE.sub("<image>", question)
+        elif media_paths:
+            question = f'{"<image>" * len(media_paths)} {question}'.strip()
 
-        # Build choices prompt
+        # Build choices dict
         choices = {
             choice_index: sample[choice_index] for choice_index in string.ascii_uppercase
             if choice_index in sample and not pd.isna(sample[choice_index])
         }
 
+        # Build message dict for template rendering
+        msg = {
+            "question": question,
+            "media": media_paths,
+        }
         if choices:
-            prompt = prompt + "\nOptions:\n" + "\n".join(f"{k}. {v}" for k, v in choices.items())
-            sample["choices"] = choices
-
-        # Add hint if available
-        hint = sample.get("hint", None)
-        if hint:
-            prompt += f"\nHint: {hint}"
-
-        sample['media'] = media
-        sample['prompt'] = prompt
+            msg["choices"] = choices
         
-        # Clean up original fields to reduce memory usage
-        sample.pop("image", None) 
+        hint = sample.get("hint", None)
+        if hint and pd.notna(hint):
+            msg["hint"] = hint
+
+        # Process message using base class method
+        processed_msg = self._process_message(msg)
+        sample["messages"] = [processed_msg]
+        
+        # Clean up original fields
+        sample.pop("image", None)
+        sample.pop("image_url", None)
         
         return sample
 
