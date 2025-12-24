@@ -10,7 +10,7 @@ class MMEvalHFDataset(BaseDataset):
         self.dataset_name = args.dataset.split("@")[1] if "@" in args.dataset else args.dataset
         self.split = args.split
         self.circular = args.circular
-        self.resize = args.resize  # Used by base._process_message for image resizing
+        self.resize = args.resize  # Used by base._process_messages for image resizing
         self.template_arg = args.template
         if self.resize is not None:
             print(f"Resizing images to {self.resize}x{self.resize}")

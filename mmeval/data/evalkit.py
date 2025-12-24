@@ -46,7 +46,7 @@ VLMEVALKIT_DATASET_LIST = [
    'MMBench_dev_ar',
    'MMBench_dev_cn',
    'MMBench_dev_en',
-   'MMBench_dev_en-test',
+   'MMBench_dev_en_test',
    'MMBench_dev_pt',
    'MMBench_dev_ru',
    'MMBench_dev_tr',

@@ -170,43 +170,6 @@ class BaseDataset(ABC):
         template = env.from_string(prompt_template)
         return template.render(**sample)
 
-    def _process_message(self, message: dict) -> dict:
-        """Process a single message dict, building prompt and processing media."""
-        # Build prompt: template priority -> existing prompt -> error
-        prompt = message.get("prompt")
-        if self._prompt_template is not None:
-            try:
-                prompt = self.build_prompt(self._prompt_template, message)
-            except Exception as e:
-                if prompt is None:
-                    raise ValueError(f"Template rendering failed: {e}")
-        if prompt is None:
-            raise ValueError("No prompt found and no template provided")
-
-        # Get media list and apply path prefix if set (only to string paths)
-        media_list = message.get("media", [])
-        if getattr(self, 'media_dir', None):
-            media_list = [os.path.join(self.media_dir, media) if isinstance(media, str) else media for media in media_list]
-
-        # Process media based on placeholder type
-        placeholder_list = re.findall(r"<(video|image)>", prompt)
-        processed_media_list = []
-        for i, placeholder in enumerate(placeholder_list):
-            if i >= len(media_list):
-                break
-            media_path = media_list[i]
-            if placeholder == "image":
-                image = self.load_media(media_path)
-                if getattr(self, 'resize', None) is not None:
-                    image = self.resize_image(image, self.resize)
-                processed_media_list.append(image)
-            else:  # video
-                processed_media_list.append(media_path)
-
-        message["prompt"] = prompt
-        message["media"] = processed_media_list
-        return message
-
     def _process_messages(self, message_list: List[Dict], media_list: List = None) -> List[Dict]:
         """Process all messages with sample-level media indexed by placeholder order."""
         # Prepare media paths with prefix

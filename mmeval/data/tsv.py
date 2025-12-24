@@ -140,10 +140,7 @@ class TSVDataset(BaseDataset):
         }
 
         # Build message dict for template rendering
-        message = {
-            "question": question,
-            "media": media_list,
-        }
+        message = {"question": question}
         if choices:
             message["choices"] = choices
         
@@ -151,9 +148,8 @@ class TSVDataset(BaseDataset):
         if hint and pd.notna(hint):
             message["hint"] = hint
 
-        # Process message using base class method
-        processed_message = self._process_message(message)
-        sample["messages"] = [processed_message]
+        # Process message using base class method with sample-level media
+        sample["messages"] = self._process_messages([message], media_list)
         
         # Clean up original fields
         sample.pop("image", None)
