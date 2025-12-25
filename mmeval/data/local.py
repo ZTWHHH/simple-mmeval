@@ -1,3 +1,4 @@
+import os
 import json
 from mmeval.data.base import BaseDataset
 
@@ -18,6 +19,9 @@ class LocalJSONDataset(BaseDataset):
             assert "eval-id" not in sample, "eval-id already exists"
             sample["eval-id"] = i
         template = self._load_template(self.template_arg)
+        if template is None:
+            default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
+            template = self._load_template(default_template_path)
         return data, template
 
     def _process_sample(self, idx: int):

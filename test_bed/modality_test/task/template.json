@@ -7,7 +7,7 @@
         "messages": [
             {
                 "role": "user",
-                "question": "What is shown in the image?",
+                "question": "<image> What is shown in the image?",
                 "answer": "A",
                 "options": {"A": "A truck", "B": "A dog", "C": "A boat", "D": "A plane"},
                 "choices": ["A", "B", "C", "D"],
@@ -24,7 +24,7 @@
         "messages": [
             {
                 "role": "user",
-                "question": "What is shown in the image?",
+                "question": "<image> What is shown in the image?",
                 "answer": "C",
                 "options": {"A": "A truck", "B": "A dog", "C": "A boat", "D": "A plane"},
                 "choices": ["A", "B", "C", "D"],

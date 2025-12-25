@@ -17,12 +17,18 @@
         "messages": [
             {
                 "question": "<image> Can you identify the season in which the picture was taken?",
-                "choices": {
+                "options": {
                     "A": "summer",
                     "B": "fall",
                     "C": "winter",
                     "D": "spring"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> Can you identify the season in which the picture was taken?\nOptions:\nA. summer\nB. fall\nC. winter\nD. spring"
             }
         ],
@@ -53,12 +59,18 @@
         "messages": [
             {
                 "question": "<image> what landmark is this? and where is it?",
-                "choices": {
+                "options": {
                     "A": "St. Basil\u2019s Cathedral in Moscow, Russia",
                     "B": "Blue Domed Church in Santorini, Greece",
                     "C": "The Statue of Liberty in New York, USA",
                     "D": "The Eiffel Tower in Paris, France"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> what landmark is this? and where is it?\nOptions:\nA. St. Basil\u2019s Cathedral in Moscow, Russia\nB. Blue Domed Church in Santorini, Greece\nC. The Statue of Liberty in New York, USA\nD. The Eiffel Tower in Paris, France"
             }
         ],
@@ -67,7 +79,7 @@
         ],
         "response": [
             [
-                "The landmark in the picture is:\n\nD. The Eiffel Tower in Paris, France\n\nThis can be identified by its distinctive iron lattice structure, which is a hallmark of the Eiffel Tower. The surrounding area, including the greenery and the red bus, is also consistent with the Eiffel Tower's location in Paris, France."
+                "The landmark in the picture is:\n\nD. The Eiffel Tower in Paris, France\n\nThis can be identified by its distinctive iron lattice structure, which is a hallmark of the Eiffel Tower. The surrounding area, including the greenery and the red bus, is also characteristic of the area around the Eiffel Tower in Paris."
             ]
         ]
     },
@@ -89,12 +101,18 @@
         "messages": [
             {
                 "question": "<image> Which of the following captions best describes this image?",
-                "choices": {
+                "options": {
                     "A": "A plane flying through clouds",
                     "B": "A boat sailing on a lake",
                     "C": "A car driving on a highway at night",
                     "D": "A train traveling through a tunnel"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> Which of the following captions best describes this image?\nOptions:\nA. A plane flying through clouds\nB. A boat sailing on a lake\nC. A car driving on a highway at night\nD. A train traveling through a tunnel"
             }
         ],
@@ -125,12 +143,18 @@
         "messages": [
             {
                 "question": "<image> Who is the person in this image?",
-                "choices": {
+                "options": {
                     "A": "Steve Jobs",
                     "B": "Donald Trump",
                     "C": "Lionel Messi",
                     "D": "Bill Gates"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> Who is the person in this image?\nOptions:\nA. Steve Jobs\nB. Donald Trump\nC. Lionel Messi\nD. Bill Gates"
             }
         ],
@@ -161,12 +185,18 @@
         "messages": [
             {
                 "question": "<image> What's the profession of the people in this picture?",
-                "choices": {
+                "options": {
                     "A": "pilot",
                     "B": "policeman",
                     "C": "mason",
                     "D": "nurse"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> What's the profession of the people in this picture?\nOptions:\nA. pilot\nB. policeman\nC. mason\nD. nurse"
             }
         ],
@@ -197,12 +227,18 @@
         "messages": [
             {
                 "question": "<image> Which option describe the object relationship in the image correctly?",
-                "choices": {
+                "options": {
                     "A": "The cat is in the sink.",
                     "B": "The toilet is below the cat.",
                     "C": "The cat is attached to the sink.",
                     "D": "The sink is surrounding the cat."
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> Which option describe the object relationship in the image correctly?\nOptions:\nA. The cat is in the sink.\nB. The toilet is below the cat.\nC. The cat is attached to the sink.\nD. The sink is surrounding the cat."
             }
         ],
@@ -233,12 +269,18 @@
         "messages": [
             {
                 "question": "<image> What's the profession of the people in this picture?",
-                "choices": {
+                "options": {
                     "A": "baker",
                     "B": "butcher",
                     "C": "carpenter",
                     "D": "designer"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> What's the profession of the people in this picture?\nOptions:\nA. baker\nB. butcher\nC. carpenter\nD. designer"
             }
         ],
@@ -247,7 +289,7 @@
         ],
         "response": [
             [
-                "The person in the picture appears to be applying a finish to a piece of wood, which is a common task for a carpenter. Therefore, the most likely profession of the person in the picture is:\n\nC. carpenter"
+                "The person in the picture appears to be applying a finish to a piece of wood, which is a common task for a carpenter. Therefore, the correct answer is:\n\nC. carpenter"
             ]
         ]
     },
@@ -269,12 +311,18 @@
         "messages": [
             {
                 "question": "<image> What's the function of the demonstrated object?",
-                "choices": {
+                "options": {
                     "A": "cut",
                     "B": "deposit",
                     "C": "refrigeration",
                     "D": "Draw"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> What's the function of the demonstrated object?\nOptions:\nA. cut\nB. deposit\nC. refrigeration\nD. Draw"
             }
         ],
@@ -305,12 +353,18 @@
         "messages": [
             {
                 "question": "<image> Which category does this image belong to?",
-                "choices": {
+                "options": {
                     "A": "digital art",
                     "B": "photo",
                     "C": "oil painting",
                     "D": "sketch"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> Which category does this image belong to?\nOptions:\nA. digital art\nB. photo\nC. oil painting\nD. sketch"
             }
         ],
@@ -341,12 +395,18 @@
         "messages": [
             {
                 "question": "<image> Which art style is showcased in this image?",
-                "choices": {
+                "options": {
                     "A": "pencil",
                     "B": "vector art",
                     "C": "Baroque",
                     "D": "depth of field"
                 },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
                 "prompt": "<image> Which art style is showcased in this image?\nOptions:\nA. pencil\nB. vector art\nC. Baroque\nD. depth of field"
             }
         ],

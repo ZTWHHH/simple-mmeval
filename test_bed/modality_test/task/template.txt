@@ -1,3 +1,0 @@
-<image>{% if hint %}Hint: {{ hint }} {% endif %}Question: {{ question }}
-{% for idx, content in options.items() %}{{ idx }}: {{ content }}
-{% endfor %}

@@ -70,7 +70,7 @@ class TSVDataset(BaseDataset):
         # Load template: user template > default template
         template = self._load_template(self.template_arg)
         if template is None:
-            default_template_path = os.path.join(os.path.dirname(__file__), "tsv_default_template.txt")
+            default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
             template = self._load_template(default_template_path)
         
         return dataset, template
@@ -133,16 +133,17 @@ class TSVDataset(BaseDataset):
         elif media_list:
             question = f'{"<image>" * len(media_list)} {question}'.strip()
 
-        # Build choices dict
-        choices = {
+        # Build options dict and choices list
+        options = {
             choice_index: sample[choice_index] for choice_index in string.ascii_uppercase
             if choice_index in sample and not pd.isna(sample[choice_index])
         }
 
         # Build message dict for template rendering
         message = {"question": question}
-        if choices:
-            message["choices"] = choices
+        if options:
+            message["options"] = options
+            message["choices"] = list(options.keys())
         
         hint = sample.get("hint", None)
         if hint and pd.notna(hint):
