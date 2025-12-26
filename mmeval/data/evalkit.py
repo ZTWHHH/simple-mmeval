@@ -4,6 +4,12 @@ from typing import Any
 from mmeval.data.tsv import TSVDataset
 from mmeval.data.utils import download_tsv
 
+
+def get_hf_base_url():
+    """Get HuggingFace base URL from environment or use default."""
+    return os.getenv('HF_ENDPOINT', 'https://huggingface.co')
+
+
 # VLMEvalKit supported datasets
 VLMEVALKIT_DATASET_LIST = [
    '3DSRBench',
@@ -40,6 +46,7 @@ VLMEVALKIT_DATASET_LIST = [
    'MMBench_dev_ar',
    'MMBench_dev_cn',
    'MMBench_dev_en',
+   'MMBench_dev_en_test',
    'MMBench_dev_pt',
    'MMBench_dev_ru',
    'MMBench_dev_tr',
@@ -129,37 +136,31 @@ VLMEVALKIT_CONCAT_DATASET_SETS = {
     ]
 }
 
-def load_single_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
-    """Load single dataset file for VLMEvalKit specific datasets.
+def load_single_dataset(dataset_name: str, dataset_dir: str) -> None:
+    """Download single dataset file for VLMEvalKit specific datasets if not exists.
     
     Parameters
     ----------
     dataset_name : str
         Name of the dataset to load
-
-    Returns
-    -------
-    pd.DataFrame
-        Loaded DataFrame from the single dataset file
+    dataset_dir : str
+        Directory to save the dataset file
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
     if not os.path.exists(file_path):
-        dataset_url = f"https://huggingface.co/datasets/mm-eval/VLMEvalKit/resolve/main/{dataset_name}.tsv"
+        dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{dataset_name}.tsv"
         download_tsv(dataset_url, file_path)
 
-def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
-    """Load multipart dataset files for VLMEvalKit specific datasets.
+def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> None:
+    """Download and merge multipart dataset files for VLMEvalKit specific datasets if not exists.
     
     Parameters
     ----------
     dataset_name : str
         Name of the dataset to load
-        
-    Returns
-    -------
-    pd.DataFrame
-        Loaded and merged DataFrame from all parts, saved as dataset_name.tsv
+    dataset_dir : str
+        Directory to save the dataset file
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
@@ -172,7 +173,7 @@ def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         for part_idx in range(config["start_idx"], config["end_idx"]+1):
             sub_file_path = os.path.join(dataset_dir, f"{pattern.format(part_idx)}.tsv")
             if not os.path.exists(sub_file_path):
-                sub_dataset_url = f"https://huggingface.co/datasets/mm-eval/VLMEvalKit/resolve/main/{pattern.format(part_idx)}.tsv"
+                sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{pattern.format(part_idx)}.tsv"
                 download_tsv(sub_dataset_url, sub_file_path)
             sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
             dataframe.append(sub_dataframe)
@@ -181,18 +182,15 @@ def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         combined_df = pd.concat(dataframe, ignore_index=True)
         combined_df.to_csv(file_path, sep='\t', index=False, chunksize=100000)
 
-def load_concat_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
-    """Load multiple datasets for VLMEvalKit composite datasets.
+def load_concat_dataset(dataset_name: str, dataset_dir: str) -> None:
+    """Download and concatenate multiple datasets for VLMEvalKit composite datasets if not exists.
     
     Parameters
     ----------
     dataset_name : str
         Name of the dataset to load
-    
-    Returns
-    -------
-    pd.DataFrame
-        Concatenated DataFrame from all parts, saved as dataset_name.tsv
+    dataset_dir : str
+        Directory to save the dataset file
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
@@ -202,7 +200,7 @@ def load_concat_dataset(dataset_name: str, dataset_dir: str) -> pd.DataFrame:
         for sub_dataset_name in dataset_list:
             sub_file_path = os.path.join(dataset_dir, f"{sub_dataset_name}.tsv")
             if not os.path.exists(sub_file_path):
-                sub_dataset_url = f"https://huggingface.co/datasets/mm-eval/VLMEvalKit/resolve/main/{sub_dataset_name}.tsv"
+                sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{sub_dataset_name}.tsv"
                 download_tsv(sub_dataset_url, sub_file_path)
             sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
             sub_dataframe['sub_dataset'] = [sub_dataset_name] * len(sub_dataframe)

@@ -1,0 +1,5 @@
+{{ question }}{% if options %}
+Options:
+{% for k, v in options.items() %}{{ k }}. {{ v }}{% if not loop.last %}
+{% endif %}{% endfor %}{% endif %}{% if hint %}
+Hint: {{ hint }}{% endif %}

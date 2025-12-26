@@ -1,43 +1,34 @@
 import os
-import re
 import json
-from PIL import Image
-
 from mmeval.data.base import BaseDataset
 
+
 class LocalJSONDataset(BaseDataset):
-    """Dataset class for loading local JSON files.
-    """
+    """Dataset class for loading local JSON files."""
     
     def __init__(self, args):
         self.data_file = args.infile
-        self.img_dir = args.img_dir
+        self.media_dir = args.img_dir 
+        self.template_arg = args.template
         super().__init__(args)
 
     def _load_raw_data(self, args):
-        data = json.load(open(self.data_file, "r"))
-
-        data_list = []
+        with open(self.data_file, "r") as f:
+            data = json.load(f)
         for i, sample in enumerate(data):
             assert "eval-id" not in sample, "eval-id already exists"
             sample["eval-id"] = i
-            sample["media"] = [os.path.join(self.img_dir, f) for f in sample["media"]]
-            data_list.append(sample)
-        
-        return data_list
-    
-    def _process_sample(self, idx: int):
-        sample = self._raw_dataset[idx]
-        placeholder_list = re.findall(r"<(?:video|image)>", sample["prompt"])
-        assert len(placeholder_list) == len(sample["media"]), "Number of media placeholders does not match number of media files"
-        
-        sample["media"] = [
-            self.load_image(f) if placeholder == "<image>" else f
-            for placeholder, f in zip(placeholder_list, sample["media"])
-        ]
+        template = self._load_template(self.template_arg)
+        if template is None:
+            default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
+            template = self._load_template(default_template_path)
+        return data, template
 
+    def _process_sample(self, idx: int):
+        sample = dict(self._raw_dataset[idx])
+        media_list = sample.get("media")
+        sample["messages"] = self._process_messages(sample["messages"], media_list)
         return sample
-    
 
     def __repr__(self):
         if self.parallel_per_task > 1:
@@ -47,4 +38,3 @@ class LocalJSONDataset(BaseDataset):
     
     def __str__(self):
         return self.__repr__()
-    

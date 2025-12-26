@@ -1,10 +1,12 @@
 import os
+import re
 import base64
 import requests
 from PIL import Image
 from io import BytesIO
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional, Set, Tuple, Union
+from jinja2 import Environment
 
 
 
@@ -21,17 +23,19 @@ class BaseDataset(ABC):
     7. Circular data preparation placeholder
     """
     
+    VIDEO_EXTENSIONS = {
+        '.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv',
+        '.mpeg', '.mpg', '.m4v', '.3gp', '.3g2', '.ts', '.mts', '.vob'
+    }
+    
     def __init__(self, args):
-        """Initialize the dataset with lazy loading and parallel processing support.
-        
-        Parameters
-        ----------
-
-        """
+        """Initialize the dataset with lazy loading and parallel processing support."""
         self.parallel_per_task = args.parallel_per_task
         self.rank = args.rank
+        self._shard_indices = []
+        self._shard_length = 0
         
-        self._raw_dataset = self._load_raw_data(args)
+        self._raw_dataset, self._prompt_template = self._load_raw_data(args)
         
         # self._setup_parallel()
 
@@ -105,26 +109,108 @@ class BaseDataset(ABC):
         
         return padded_image
 
-    def load_image(self, f) -> Image.Image:
-        """Load image from path with PIL."""
-        if isinstance(f, Image.Image):
-            return f if f.mode == "RGB" else f.convert("RGB")
+    def _load_template(self, template):
+        """Load template from file path or use string directly."""
+        if template is None:
+            return None
+        if os.path.exists(template):
+            with open(template, "r") as file:
+                return file.read()
+        return template
+
+    def _is_video(self, media_path: str) -> bool:
+        """Check if the path is a video file by extension."""
+        ext = os.path.splitext(media_path.split('?')[0])[-1].lower()
+        return ext in self.VIDEO_EXTENSIONS
+
+    def load_media(self, media) -> Union[Image.Image, str]:
+        """Load media from path or return existing object. Returns PIL image for images, path for videos."""
+        if isinstance(media, Image.Image):
+            return media if media.mode == "RGB" else media.convert("RGB")
         
-        if isinstance(f, str) and os.path.exists(f):
-            return Image.open(f).convert("RGB")
+        if not isinstance(media, str):
+            raise ValueError(f"Unsupported media type: {type(media)}")
         
-        if isinstance(f, str) and f.startswith("http"):
-            return Image.open(requests.get(f, stream=True).raw).convert("RGB")
+        # Video: return path/URL directly
+        if self._is_video(media):
+            return media
         
-        if isinstance(f, str):
-            try:
-                decoded = base64.b64decode(f)
-                return Image.open(BytesIO(decoded)).convert("RGB")
-            except Exception:
-                pass
+        # Image: load with PIL
+        if os.path.exists(media):
+            return Image.open(media).convert("RGB")
         
-        raise NotImplementedError(f"Unsupported image format: {f}")
+        if media.startswith("http"):
+            return Image.open(requests.get(media, stream=True).raw).convert("RGB")
+        
+        # Try base64 decode
+        try:
+            decoded = base64.b64decode(media)
+            return Image.open(BytesIO(decoded)).convert("RGB")
+        except Exception:
+            raise ValueError(f"Unsupported media format: {media[:100]}...")
     
+    def build_prompt(self, prompt_template: str, sample: Dict[str, Any]) -> str:
+        """Build prompt from Jinja template and sample data.
+        
+        Parameters
+        ----------
+        prompt_template : str
+            Jinja template string
+        sample : Dict[str, Any]
+            Sample variables for template rendering
+            
+        Returns
+        -------
+        str
+            Rendered template string
+        """
+        env = Environment()
+        env.globals.update({'zip': zip, 'enumerate': enumerate, 'len': len, 'range': range, 'list': list, 
+        'dict': dict, 'str': str, 'int': int, 'float': float, 'bool': bool, 'sum': sum, 'max': max, 'min': min})
+        template = env.from_string(prompt_template)
+        return template.render(**sample)
+
+    def _process_messages(self, message_list: List[Dict], media_list: List = None) -> List[Dict]:
+        """Process all messages with sample-level media indexed by placeholder order."""
+        # Prepare media paths with prefix
+        media_list = media_list or []
+        if getattr(self, 'media_dir', None) and media_list:
+            media_list = [os.path.join(self.media_dir, media) if isinstance(media, str) else media for media in media_list]
+        
+        media_idx = 0
+        processed_message_list = []
+        
+        for message in message_list:
+            # Build prompt: template priority -> existing prompt -> error
+            prompt = message.get("prompt")
+            if self._prompt_template is not None:
+                try:
+                    prompt = self.build_prompt(self._prompt_template, message)
+                except Exception as e:
+                    if prompt is None:
+                        raise ValueError(f"No prompt found and template rendering failed: {e}")
+            if prompt is None:
+                raise ValueError("No prompt and template provided")
+            
+            # Load media for this message's placeholders (zip auto-stops at shorter list)
+            placeholder_list = re.findall(r"<(video|image)>", prompt)
+            processed_media_list = []
+            for placeholder, media in zip(placeholder_list, media_list[media_idx:]):
+                if placeholder == "image":
+                    image = self.load_media(media)
+                    if getattr(self, 'resize', None) is not None:
+                        image = self.resize_image(image, self.resize)
+                    processed_media_list.append(image)
+                else:  # video
+                    processed_media_list.append(media)
+            media_idx += len(processed_media_list)
+            
+            message["prompt"] = prompt
+            message["media"] = processed_media_list
+            processed_message_list.append(message)
+        
+        return processed_message_list
+
     def convert_circular(self, **kwargs) -> Any:
         """Prepare dataset for circular evaluation.
         
@@ -186,8 +272,7 @@ class BaseDataset(ABC):
             sample = self._process_sample(idx)
             # TODO: add more checks later (mandatory fields)
             assert "eval-id" in sample, "eval-id is mandatory."
-            assert "prompt" in sample, "prompt is mandatory."
-            assert "media" in sample, "media is mandatory."
+            assert "messages" in sample, "messages is mandatory."
             yield sample
 
     def __getitem__(self, index):
@@ -206,8 +291,7 @@ class BaseDataset(ABC):
         sample = self._process_sample(self._get_idx(index))
         # TODO: add more checks later (mandatory fields)
         assert "eval-id" in sample, "eval-id is mandatory"
-        assert "prompt" in sample, "prompt is mandatory."
-        assert "media" in sample, "media is mandatory."
+        assert "messages" in sample, "messages is mandatory."
         return sample
 
     def __len__(self):
