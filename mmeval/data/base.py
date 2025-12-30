@@ -181,14 +181,13 @@ class BaseDataset(ABC):
         processed_message_list = []
         
         for message in message_list:
-            # Build prompt: template priority -> existing prompt -> error
+            # Build prompt: existing prompt priority -> template -> error
             prompt = message.get("prompt")
-            if self._prompt_template is not None:
+            if prompt is None and self._prompt_template is not None:
                 try:
                     prompt = self.build_prompt(self._prompt_template, message)
                 except Exception as e:
-                    if prompt is None:
-                        raise ValueError(f"No prompt found and template rendering failed: {e}")
+                    raise ValueError(f"No prompt found and template rendering failed: {e}")
             if prompt is None:
                 raise ValueError("No prompt and template provided")
             
