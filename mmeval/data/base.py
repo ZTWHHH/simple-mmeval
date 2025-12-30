@@ -35,7 +35,7 @@ class BaseDataset(ABC):
         self._shard_indices = []
         self._shard_length = 0
         
-        self._raw_dataset, self._prompt_template = self._load_raw_data(args)
+        self._raw_dataset, self._prompt_template, self._has_user_template = self._load_raw_data(args)
         
         # self._setup_parallel()
 
@@ -181,13 +181,27 @@ class BaseDataset(ABC):
         processed_message_list = []
         
         for message in message_list:
-            # Build prompt: existing prompt priority -> template -> error
+            # Build prompt priority: user template > existing prompt > default template (with fallback)
             prompt = message.get("prompt")
-            if prompt is None and self._prompt_template is not None:
+            
+            # 1. Try user template if provided
+            if self._has_user_template:
                 try:
                     prompt = self.build_prompt(self._prompt_template, message)
-                except Exception as e:
-                    raise ValueError(f"No prompt found and template rendering failed: {e}")
+                except Exception:
+                    pass  # Fallback to existing prompt
+            
+            # 2. If no prompt yet, try default template
+            if prompt is None:
+                default_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
+                default_template = self._load_template(default_path)
+                if default_template:
+                    try:
+                        prompt = self.build_prompt(default_template, message)
+                    except Exception as e:
+                        raise ValueError(f"Default template rendering failed: {e}")
+            
+            # 3. Final check
             if prompt is None:
                 raise ValueError("No prompt and template provided")
             

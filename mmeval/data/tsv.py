@@ -68,12 +68,14 @@ class TSVDataset(BaseDataset):
             dataset["eval-id"] = range(len(dataset))
         
         # Load template: user template > default template
-        template = self._load_template(self.template_arg)
-        if template is None:
+        has_user_template = self.template_arg is not None
+        if has_user_template:
+            template = self._load_template(self.template_arg)
+        else:
             default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
             template = self._load_template(default_template_path)
         
-        return dataset, template
+        return dataset, template, has_user_template
 
     def _extract_media_paths(self, sample: Dict[str, Any]) -> list:
         """Extract media paths/data from sample without loading.

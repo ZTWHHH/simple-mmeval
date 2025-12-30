@@ -1,3 +1,4 @@
+import os
 import json
 from datasets import load_dataset
 from mmeval.data.base import BaseDataset
@@ -19,16 +20,18 @@ class MMEvalHFDataset(BaseDataset):
     def _load_raw_data(self, args):
         # Load metadata subset to get jinja_template for the current split
         metadata_ds = load_dataset(self.dataset_name, name="metadata", split=self.split)
-        jinja_template = metadata_ds[0]["jinja_template"] if len(metadata_ds) > 0 else None
+        default_template = metadata_ds[0]["jinja_template"] if len(metadata_ds) > 0 else None
         
         # User template takes priority
-        user_template = self._load_template(self.template_arg)
-        if user_template is not None:
-            jinja_template = user_template
+        has_user_template = self.template_arg is not None
+        if has_user_template:
+            template = self._load_template(self.template_arg)
+        else:
+            template = default_template
         
         # Load default subset with the current split for data
         ds = load_dataset(self.dataset_name, name="default", split=self.split)
-        return ds, jinja_template
+        return ds, template, has_user_template
 
     def convert_circular(self, **kwargs) -> any:
         """Prepare dataset for circular evaluation."""

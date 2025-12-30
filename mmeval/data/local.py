@@ -18,11 +18,15 @@ class LocalJSONDataset(BaseDataset):
         for i, sample in enumerate(data):
             assert "eval-id" not in sample, "eval-id already exists"
             sample["eval-id"] = i
-        template = self._load_template(self.template_arg)
-        if template is None:
+        
+        has_user_template = self.template_arg is not None
+        if has_user_template:
+            template = self._load_template(self.template_arg)
+        else:
             default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
             template = self._load_template(default_template_path)
-        return data, template
+        
+        return data, template, has_user_template
 
     def _process_sample(self, idx: int):
         sample = dict(self._raw_dataset[idx])
