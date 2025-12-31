@@ -188,8 +188,8 @@ class BaseDataset(ABC):
             if self._has_user_template:
                 try:
                     prompt = self.build_prompt(self._prompt_template, message)
-                except Exception:
-                    pass  # Fallback to existing prompt
+                except Exception as e:
+                    raise ValueError(f"User template rendering failed: {e}")
             
             # 2. If no prompt yet, try default template
             if prompt is None:
@@ -200,10 +200,8 @@ class BaseDataset(ABC):
                         prompt = self.build_prompt(default_template, message)
                     except Exception as e:
                         raise ValueError(f"Default template rendering failed: {e}")
-            
-            # 3. Final check
-            if prompt is None:
-                raise ValueError("No prompt and template provided")
+                else:
+                    raise ValueError("No prompt and template provided")
             
             # Load media for this message's placeholders (zip auto-stops at shorter list)
             placeholder_list = re.findall(r"<(video|image)>", prompt)
