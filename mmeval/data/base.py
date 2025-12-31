@@ -35,7 +35,7 @@ class BaseDataset(ABC):
         self._shard_indices = []
         self._shard_length = 0
         
-        self._raw_dataset, self._prompt_template = self._load_raw_data(args)
+        self._raw_dataset, self._prompt_template, self._has_user_template = self._load_raw_data(args)
         
         # self._setup_parallel()
 
@@ -181,16 +181,27 @@ class BaseDataset(ABC):
         processed_message_list = []
         
         for message in message_list:
-            # Build prompt: template priority -> existing prompt -> error
+            # Build prompt priority: user template > existing prompt > default template (with fallback)
             prompt = message.get("prompt")
-            if self._prompt_template is not None:
+            
+            # 1. Try user template if provided
+            if self._has_user_template:
                 try:
                     prompt = self.build_prompt(self._prompt_template, message)
                 except Exception as e:
-                    if prompt is None:
-                        raise ValueError(f"No prompt found and template rendering failed: {e}")
+                    raise ValueError(f"User template rendering failed: {e}")
+            
+            # 2. If no prompt yet, try default template
             if prompt is None:
-                raise ValueError("No prompt and template provided")
+                default_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
+                default_template = self._load_template(default_path)
+                if default_template:
+                    try:
+                        prompt = self.build_prompt(default_template, message)
+                    except Exception as e:
+                        raise ValueError(f"Default template rendering failed: {e}")
+                else:
+                    raise ValueError("No prompt and template provided")
             
             # Load media for this message's placeholders (zip auto-stops at shorter list)
             placeholder_list = re.findall(r"<(video|image)>", prompt)
