@@ -13,11 +13,8 @@ series_mapping = {
     "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
-    "glm_4d6v": ["GLM-4.6V", "GLM-4.6V-Flash"],
     "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
     "internlm_xcomposer": ["internlm-xcomposer-7b"],
-    "internlm_xcomposer2_vl": ["internlm-xcomposer2-vl-7b", "internlm-xcomposer2-vl-1_8b"],
-    "internlm_xcomposer2_4khd": ["internlm-xcomposer2-4khd-7b"],
     "internvl_chat": ["InternVL-Chat-V1-1", "InternVL-Chat-V1-2", "InternVL-Chat-V1-2-Plus"],
     "internvl_chat1d5": ["Mini-InternVL-Chat-2B-V1-5", "Mini-InternVL-Chat-4B-V1-5", "InternVL-Chat-V1-5"],
     "internvl2": ["InternVL2-1B", "InternVL2-2B", "InternVL2-4B", "InternVL2-8B", "InternVL2-26B", "InternVL2-40B", "InternVL2-Llama3-76B"],
@@ -102,10 +99,6 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "glm_4v"),
         "infer_file": "glm_4v.py",
     },
-    "glm_4d6v": {
-        "env": os.path.join(env_dir, "glm_4d6v"),
-        "infer_file": "glm_4d6v.py",
-    },
     "instructblip": {
         "env": os.path.join(env_dir, "instructblip"),
         "infer_file": "instructblip.py",
@@ -113,14 +106,6 @@ series_infer_env_mapping = {
     "internlm_xcomposer": {
         "env": os.path.join(env_dir, "internlm"),
         "infer_file": "internlm_xcomposer.py",
-    },
-    "internlm_xcomposer2_vl": {
-        "env": os.path.join(env_dir, "internlm_xcomposer2"),
-        "infer_file": "internlm_xcomposer2_vl.py",
-    },
-    "internlm_xcomposer2_4khd": {
-        "env": os.path.join(env_dir, "internlm_xcomposer2"),
-        "infer_file": "internlm_xcomposer2_4khd.py",
     },
     "internvl2": {
         "env": os.path.join(env_dir, "internvl"),
@@ -230,10 +215,6 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "llama3d2_vision"),
         "infer_file": "llama3d2_vision.py",
     },
-    "llama4": {
-        "env": os.path.join(env_dir, "llama4"),
-        "infer_file": "llama4.py",
-    }, 
     "smolvlm": {
         "env": os.path.join(env_dir, "smolvlm"),
         "infer_file": "smolvlm.py",
@@ -273,10 +254,6 @@ series_infer_env_mapping = {
     "qwen3_vl": {
         "env": os.path.join(env_dir, "qwen3_vl"),
         "infer_file": "qwen3_vl.py",
-    },
-    "qwen3_omni": {
-        "env": os.path.join(env_dir, "qwen3_vl"),
-        "infer_file": "qwen3_omni.py",
     },
     "videollama2": {
         "env": os.path.join(env_dir, "videollama2"),
