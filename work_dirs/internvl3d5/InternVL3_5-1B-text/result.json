@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user is asking, \"What is the result of 1 plus 1?\" Hmm, that seems straightforward. At first glance, it's a simple addition problem. But maybe I should double-check to make sure there's no trick here.\n\nWait, sometimes people might think of this in a different context, like in a different number system or with some other operations. But the question specifically says \"1 plus 1,\" which is base 10. In standard arithmetic, 1 + 1 equals 2. \n\nBut let me consider if there's any possible misunderstanding. For example, if this was part of a larger problem or if there's a cultural context where the answer might differ. However, without additional information, the default assumption is that it's a basic addition. \n\nAlternatively, maybe the user is testing if I can handle simple arithmetic questions. Since the question is very direct, the answer should be 2. There's no indication of any hidden steps or complexities here. \n\nI should also make sure there's no typo or misinterpretation. The question is written as \"1 plus 1,\" which is unambiguous. So, unless there's a language barrier or a different interpretation, the answer remains 2. \n\nAnother angle: in some educational contexts, they might use this to teach basic addition. So, the answer is a fundamental concept. \n\nTherefore, after considering all possibilities and ensuring there's no trick, the correct answer is 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\n**Step-by-Step Explanation:**  \n1. Start with the number 1.  \n2. Add 1 to it: 1 + 1 = 2.  \n\nThis is a basic arithmetic operation. If there's any additional context or complexity, please provide more details!"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, the user is asking, \"What is the capital city of China?\" Let me think about this. I know that China has several major cities, but the capital is a well-known fact. I remember that Beijing is the capital. But wait, sometimes people might confuse it with other cities like Shanghai or Guangzhou. Let me double-check to make sure I'm not mixing things up. Yes, Beijing is definitely the capital. It's also the largest city in China and has been the political and cultural center for centuries. I should make sure there's no recent change, but I don't think so. The user probably just wants a straightforward answer. So the answer should be straightforward: Beijing. Maybe mention that it's the capital to provide context. Alright, that's the information I need to provide.\n</think>\n\nThe capital city of China is **Beijing**. It serves as the political, cultural, and historical center of the country and is home to many of its most significant landmarks, institutions, and historical sites."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]
