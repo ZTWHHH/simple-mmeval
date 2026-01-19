@@ -10,11 +10,15 @@ series_mapping = {
     "fuyu": ["fuyu-8B"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "llama3d2_vision": ["Llama-3.2-11B-Vision-Instruct", "Llama-3.2-90B-Vision-Instruct"],
+    "llama4": ["Llama-4-Scout-17B-16E-Instruct", "Llama-4-Scout-17B-16E", "Llama-4-Maverick-17B-128E-Instruct", "Llama-4-Maverick-17B-128E", "Llama-Guard-4-12B"],
     "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
+    "glm_4d6v": ["GLM-4.6V", "GLM-4.6V-Flash"],
     "instructblip": ["instructblip-vicuna-7b", "instructblip-vicuna-13b", "instructblip-flan-t5-xl", "instructblip-flan-t5-xxl"],
     "internlm_xcomposer": ["internlm-xcomposer-7b"],
+    "internlm_xcomposer2_vl": ["internlm-xcomposer2-vl-7b", "internlm-xcomposer2-vl-1_8b"],
+    "internlm_xcomposer2_4khd": ["internlm-xcomposer2-4khd-7b"],
     "internvl_chat": ["InternVL-Chat-V1-1", "InternVL-Chat-V1-2", "InternVL-Chat-V1-2-Plus"],
     "internvl_chat1d5": ["Mini-InternVL-Chat-2B-V1-5", "Mini-InternVL-Chat-4B-V1-5", "InternVL-Chat-V1-5"],
     "internvl2": ["InternVL2-1B", "InternVL2-2B", "InternVL2-4B", "InternVL2-8B", "InternVL2-26B", "InternVL2-40B", "InternVL2-Llama3-76B"],
@@ -51,6 +55,7 @@ series_mapping = {
     "xgen": ["xgen-mm-phi3-mini-instruct-interleave-r-v1.5"],
     "ovis1d6": ["Ovis1.6-Llama3.2-3B", "Ovis1.6-Gemma2-9B"],
     "ovis1d6_27b": ["Ovis1.6-Gemma2-27B"],
+    "ovis2d5": ["Ovis2.5-2B", "Ovis2.5-9B"],
     # "qwenvl2": ["Qwen2-VL-2B-Instruct", "Qwen2-VL-7B-Instruct", "Qwen2-VL-72B-Instruct",
     #             "Qwen2-VL-2B-Instruct-AWQ", "Qwen2-VL-7B-Instruct-AWQ", "Qwen2-VL-72B-Instruct-AWQ",
     #             "Qwen2-VL-2B-Instruct-GPTQ-Int4", "Qwen2-VL-7B-Instruct-GPTQ-Int4", "Qwen2-VL-72B-Instruct-GPTQ-Int4"],
@@ -60,6 +65,37 @@ series_mapping = {
     "qwenvl2": ["Qwen2-VL-2B-Instruct", "Qwen2-VL-7B-Instruct", "Qwen2-VL-72B-Instruct"],
     "qwenvl2d5": ["Qwen2.5-VL-3B-Instruct", "Qwen2.5-VL-7B-Instruct", "Qwen2.5-VL-32B-Instruct", "Qwen2.5-VL-72B-Instruct"],
     "qwenvl2d5_omni": ["Qwen2.5-Omni-3B", "Qwen2.5-Omni-7B"],
+    "qwen3_vl": [
+        "Qwen3-VL-2B-Instruct",
+        "Qwen3-VL-2B-Thinking",
+        "Qwen3-VL-2B-Instruct-FP8",
+        "Qwen3-VL-2B-Thinking-FP8",
+        "Qwen3-VL-4B-Instruct",
+        "Qwen3-VL-4B-Thinking",
+        "Qwen3-VL-4B-Instruct-FP8",
+        "Qwen3-VL-4B-Thinking-FP8",
+        "Qwen3-VL-8B-Instruct",
+        "Qwen3-VL-8B-Thinking",
+        "Qwen3-VL-8B-Instruct-FP8",
+        "Qwen3-VL-8B-Thinking-FP8",
+        "Qwen3-VL-30B-A3B-Instruct",
+        "Qwen3-VL-30B-A3B-Thinking",
+        "Qwen3-VL-30B-A3B-Instruct-FP8",
+        "Qwen3-VL-30B-A3B-Thinking-FP8",
+        "Qwen3-VL-32B-Instruct",
+        "Qwen3-VL-32B-Thinking",
+        "Qwen3-VL-32B-Instruct-FP8",
+        "Qwen3-VL-32B-Thinking-FP8",
+        "Qwen3-VL-235B-A22B-Instruct",
+        "Qwen3-VL-235B-A22B-Thinking",
+        "Qwen3-VL-235B-A22B-Instruct-FP8",
+        "Qwen3-VL-235B-A22B-Thinking-FP8",
+    ],
+    "qwen3_omni": [
+        "Qwen3-Omni-30B-A3B-Instruct",
+        "Qwen3-Omni-30B-A3B-Thinking",
+        "Qwen3-Omni-30B-A3B-Captioner",
+    ],
     "videollama2": ["VideoLLaMA2-7B"],
     "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
     "r1_onevision": ["R1-Onevision-7B"],
@@ -70,6 +106,7 @@ series_mapping = {
     "xai_grok": ["grok-4-fast-reasoning", "grok-4-fast-non-reasoning", "grok-4-0709", "grok-2-vision-1212"],
     "doubao_ark": ["doubao-seed-1-6-vision-250815"],
     "hunyuan_vision": ["hunyuan-vision", "hunyuan-t1-vision", "hunyuan-turbos-vision", "hunyuan-large-vision"],
+    "cosmos_reason2": ["Cosmos-Reason2-2B", "Cosmos-Reason2-8B"],
 }
 
 series_infer_env_mapping = {
@@ -93,6 +130,10 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "glm_4v"),
         "infer_file": "glm_4v.py",
     },
+    "glm_4d6v": {
+        "env": os.path.join(env_dir, "glm_4d6v"),
+        "infer_file": "glm_4d6v.py",
+    },
     "instructblip": {
         "env": os.path.join(env_dir, "instructblip"),
         "infer_file": "instructblip.py",
@@ -100,6 +141,14 @@ series_infer_env_mapping = {
     "internlm_xcomposer": {
         "env": os.path.join(env_dir, "internlm"),
         "infer_file": "internlm_xcomposer.py",
+    },
+    "internlm_xcomposer2_vl": {
+        "env": os.path.join(env_dir, "internlm_xcomposer2"),
+        "infer_file": "internlm_xcomposer2_vl.py",
+    },
+    "internlm_xcomposer2_4khd": {
+        "env": os.path.join(env_dir, "internlm_xcomposer2"),
+        "infer_file": "internlm_xcomposer2_4khd.py",
     },
     "internvl2": {
         "env": os.path.join(env_dir, "internvl"),
@@ -193,6 +242,10 @@ series_infer_env_mapping = {
         "env": os.path.join(env_dir, "ovis1d6_27b"),
         "infer_file": "ovis1d6.py",
     },
+    "ovis2d5": {
+        "env": os.path.join(env_dir, "ovis2d5"),
+        "infer_file": "ovis2d5.py",
+    },
     "vintern": {
         "env": os.path.join(env_dir, "vintern"),
         "infer_file": "vintern.py",
@@ -204,6 +257,10 @@ series_infer_env_mapping = {
     "llama3d2_vision": {
         "env": os.path.join(env_dir, "llama3d2_vision"),
         "infer_file": "llama3d2_vision.py",
+    },
+    "llama4": {
+        "env": os.path.join(env_dir, "llama4"),
+        "infer_file": "llama4.py",
     }, 
     "smolvlm": {
         "env": os.path.join(env_dir, "smolvlm"),
@@ -240,6 +297,14 @@ series_infer_env_mapping = {
     "qwenvl2d5_omni": {
         "env": os.path.join(env_dir, "qwenvl2d5_omni"),
         "infer_file": "qwenvl2d5_omni.py",
+    },
+    "qwen3_vl": {
+        "env": os.path.join(env_dir, "qwen3_vl"),
+        "infer_file": "qwen3_vl.py",
+    },
+    "qwen3_omni": {
+        "env": os.path.join(env_dir, "qwen3_vl"),
+        "infer_file": "qwen3_omni.py",
     },
     "videollama2": {
         "env": os.path.join(env_dir, "videollama2"),
@@ -288,5 +353,9 @@ series_infer_env_mapping = {
     "hunyuan_vision": {
         "env": os.path.join(env_dir, "hunyuan_vision"),
         "infer_file": "hunyuan_vision.py",
+    },
+    "cosmos_reason2": {
+        "env": os.path.join(env_dir, "cosmos_reason2"),
+        "infer_file": "cosmos_reason2.py",
     },
 }

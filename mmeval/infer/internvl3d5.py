@@ -160,13 +160,13 @@ class TaskRunner(Task):
         self.model.system_message = R1_SYSTEM_PROMPT
         self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path, trust_remote_code=True, use_fast=False)
         
-    def _parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def _parse_input(self, message:dict):
+        question = message["prompt"]
         q_chunks = re.split(r'(<(?:image|video)>)', question)
         question = question.replace("<image>", "<image>\n")
         question = question.replace("<video>", ''.join([f'Frame{i+1}: <image>\n' for i in range(self.num_segments)]))
 
-        media_list = copy.deepcopy(sample['media'])
+        media_list = copy.deepcopy(message['media'])
         pixel_values_list = []
         num_patches_list = []
         for chunk in q_chunks:
@@ -183,6 +183,10 @@ class TaskRunner(Task):
                 pixel_values_list.extend(video_pixel_values_list)
                 num_patches_list.extend(video_num_patches_list)
 
+        # Handle text-only input when no media is present
+        if len(pixel_values_list) == 0:
+            return question, None, None
+
         pixel_values = torch.cat(pixel_values_list, dim=0).to(self.dtype).to(self.device)  
                 
         return question, pixel_values, num_patches_list
@@ -194,11 +198,13 @@ class TaskRunner(Task):
         return response
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        question, pixel_values, num_patches_list = self._parse_input(ori_sample)
+        question, pixel_values, num_patches_list = self._parse_input(message)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(question, pixel_values, num_patches_list)
+            response = self._generate_response(question, pixel_values, num_patches_list)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 
@@ -209,3 +215,4 @@ if __name__ == "__main__":
     args = parse_args()
     model_evaluator = TaskRunner(args)
     model_evaluator.inference_dataset()
+

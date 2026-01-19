@@ -1,3 +1,7 @@
+import os
+# Disable TorchDynamo before importing torch to avoid FailOnRecompileLimitHit error
+os.environ["TORCHDYNAMO_DISABLE"] = "1"
+
 import re
 import copy
 import torch
@@ -26,11 +30,11 @@ class TaskRunner(Task):
         ).eval()
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', prompt)
-        media = copy.deepcopy(sample['media'])
+        media = copy.deepcopy(message['media'])
 
         messages = [
             {
@@ -74,8 +78,9 @@ class TaskRunner(Task):
         return decoded
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self._parse_input(ori_sample)
+        messages = self._parse_input(message)
 
         inputs = self.processor.apply_chat_template(
             messages, add_generation_prompt=True, tokenize=True,
@@ -85,7 +90,8 @@ class TaskRunner(Task):
         input_len = inputs["input_ids"].shape[-1]
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs, input_len)
+            response = self._generate_response(inputs, input_len)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 
@@ -96,3 +102,4 @@ if __name__ == "__main__":
     args = parse_args()
     model_evaluator = TaskRunner(args)
     model_evaluator.inference_dataset()
+

@@ -47,7 +47,16 @@ class ResponseHandler:
         
     def save(self, result:dict):
         assert "eval-id" in result, "eval-id is required"
-        assert "response" in result, f"no model response for sample {result}"
+        
+        # Validate message structure: each user prompt must be followed by assistant response
+        messages = result.get("messages", [])
+        for i, msg in enumerate(messages):
+            if msg.get("role") == "user":
+                if i + 1 >= len(messages):
+                    raise AssertionError(f"User message at index {i} has no assistant response for sample {result['eval-id']}")
+                next_msg = messages[i + 1]
+                if next_msg.get("role") != "assistant" or "response" not in next_msg:
+                    raise AssertionError(f"User message at index {i} has no assistant response for sample {result['eval-id']}")
         
         # Remove media from each message (contains PIL Image objects)
         for msg in result.get("messages", []):
