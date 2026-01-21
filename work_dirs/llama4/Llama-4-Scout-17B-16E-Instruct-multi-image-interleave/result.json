@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a dark gray GMC pickup truck driving on a dirt road, kicking up dust as it moves. The truck is positioned at an angle, with its front end facing the right side of the image and its rear end slightly angled towards the left.\n\n**Key Features:**\n\n* **Truck:** The truck is dark gray in color and has a black grill with red lettering that reads \"GMC.\" It features a black bumper and black rims.\n* **Background:** The background of the image shows a rocky cliffside with sparse greenery, suggesting a desert or canyon-like environment.\n* **Road:** The truck is driving on a dirt road, which appears to be rough and uneven.\n* **Dust:** As the truck moves, it kicks up dust behind its tires, creating a cloud of dirt and debris.\n\n**Overall Impression:**\n\nThe image conveys a sense of power and adventure, showcasing the capabilities of the GMC pickup truck in a rugged outdoor setting. The use of a desert or canyon-like environment adds to the sense of excitement and exploration, suggesting that the truck is capable of handling challenging terrain.<|eot|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a white yacht navigating through calm waters, leaving a trail of churned-up water in its wake. The vessel is positioned at an angle, with its bow pointing towards the bottom-right corner of the frame and its stern towards the top-left.\n\nThe yacht features a sleek design, characterized by a black stripe running along its side and a white superstructure adorned with windows. A railing encircles the upper deck, while a smaller cabin is situated atop the main hull. The boat's wake is visible behind it, indicating that it is moving at a moderate speed.\n\nIn the background, the sky appears clear and blue, with only a few wispy clouds visible on the horizon. The overall atmosphere suggests a sunny day, perfect for boating or other water activities. The image conveys a sense of freedom and adventure, as the yacht glides effortlessly across the calm waters.<|eot|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image on the left shows a gray GMC pickup truck driving on a dirt road, kicking up dust as it moves. The truck is positioned at an angle, with its front end facing the right side of the image and its rear end slightly angled toward the left. It has a black grill with red lettering that reads \"GMC\" in the center. The truck's tires are black, and it appears to be in motion, with dust trailing behind it.\n\nIn contrast, the image on the right depicts a white boat speeding across the water, leaving a trail of white foam in its wake. The boat is viewed from above, showcasing its sleek design and large windows along its side. A black stripe runs along the side of the boat, adding a touch of elegance to its overall appearance. The surrounding water is calm and blue, providing a serene backdrop for the boat's dynamic movement.\n\nOverall, the two images present distinct scenes: one featuring a rugged vehicle navigating rough terrain and the other showcasing a luxurious boat gliding effortlessly across the water.<|eom|>"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image on the left depicts a white yacht navigating through calm, dark blue waters. The vessel is positioned at an angle, with its bow pointing towards the bottom-right corner of the frame. A black stripe runs along the side of the boat, and it appears to be moving quickly, as evidenced by the large wake behind it.\n\nIn contrast, the image on the right shows a gray GMC pickup truck driving on a dirt road or trail. The truck is also angled, facing the bottom-right corner of the frame. It features a black grill with red lettering that reads \"GMC\" and has a rugged appearance, suggesting it is designed for off-road use. The truck kicks up dust as it drives, indicating its movement.\n\nBoth images are set against a clear blue sky, which provides a striking backdrop for the vehicles. Overall, the two images showcase different modes of transportation in distinct environments, highlighting their unique characteristics and capabilities.<|eom|>"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC truck and a boat.\n\n**Image 1: GMC Truck**\n\n*   The truck is dark gray with black wheels and a black grill.\n*   The GMC logo is red on the grill.\n*   The truck is driving on a dirt road, kicking up dust.\n*   The background is a rocky cliffside.\n\n**Image 2: Boat**\n\n*   The boat is white with a black stripe along the side.\n*   The boat is moving quickly through the water, creating a large wake.\n*   The background is a calm body of water and a clear blue sky.<|eot|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image on the left shows a large white boat speeding across the water, leaving a trail of white foam in its wake. The boat is positioned at an angle, with its bow pointing towards the bottom-right corner of the image. It features a sleek design with a black stripe running along its side and a railing around the top deck. The background of the image is a calm blue sea, with a clear blue sky above.\n\nIn contrast, the image on the right depicts a gray GMC pickup truck driving on a dirt road, kicking up dust as it moves. The truck is also angled, facing the bottom-right corner of the image. It has a rugged appearance, with a black grill and red lettering that reads \"GMC.\" The background of this image is a rocky cliffside, with some greenery visible in the distance.\n\nOverall, the two images showcase different modes of transportation - a boat for water travel and a truck for land travel - each with its unique characteristics and environments.<|eot|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image presents a striking contrast between two distinct modes of transportation, each showcasing a unique vehicle in its respective environment.\n\n**Image A: GMC Truck**\n\n*   The truck is positioned on a dirt road or trail, with its front wheels slightly lifted off the ground as it navigates through the terrain.\n*   The vehicle features a dark gray body and black accents, including the grill, wheels, and trim.\n*   A red \"GMC\" logo is prominently displayed on the front grill.\n*   The truck appears to be in motion, kicking up dust from the dirt road behind it.\n*   In the background, a rocky cliff face rises, set against a clear blue sky.\n\n**Image B: Boat**\n\n*   The boat is situated in the middle of a large body of water, likely an ocean or sea, with its bow pointing towards the right side of the frame.\n*   The vessel boasts a sleek white hull with a black stripe running along its side, complemented by a white superstructure and a black windshield.\n*   A wake trails behind the boat, indicating that it is moving at a significant speed.\n*   The surrounding water is a deep blue color, with a clear blue sky above featuring only a few wispy clouds on the horizon.\n\nOverall, the image effectively juxtaposes the rugged, off-road capabilities of the GMC truck with the sleek, high-performance characteristics of the boat, highlighting their respective strengths in different environments.<|eot|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image presents a striking contrast between two distinct modes of transportation, showcasing a boat and a truck in their respective environments.\n\n**Image A: The Boat**\n\n*   **Vehicle:** A white boat with a sleek design, featuring a black stripe along its side.\n*   **Environment:** The boat is situated in the middle of a large body of water, likely an ocean or sea, characterized by its deep blue color.\n*   **Action:** The boat is moving at a high speed, as indicated by the significant wake it creates behind it.\n*   **Skyline:** The sky above is clear and blue, with only a few clouds visible on the horizon.\n\n**Image B: The Truck**\n\n*   **Vehicle:** A gray GMC pickup truck with a modern design, equipped with a black grill and red lettering that reads \"GMC.\"\n*   **Environment:** The truck is driving on a dirt road, surrounded by rocky terrain and sparse vegetation.\n*   **Action:** The truck appears to be in motion, kicking up dust as it drives through the dirt.\n*   **Background:** The background features a rugged landscape with rocky outcroppings and sparse greenery.\n\nIn summary, the image juxtaposes a high-speed boat navigating through open water with a truck traversing a rugged dirt road, highlighting their different environments and modes of operation.<|eot|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]
