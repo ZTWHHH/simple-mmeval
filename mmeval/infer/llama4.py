@@ -11,7 +11,7 @@ class TaskRunner(Task):
     def __init__(self, args):
         self.args = args
         self.dtype = getattr(args, "dtype") or torch.bfloat16
-        self.default_model_kwargs = {"attn_implementation": "flex_attention", "device_map": "auto", "torch_dtype": torch.bfloat16}
+        self.default_model_kwargs = {"device_map": "auto", "torch_dtype": torch.bfloat16}
         self.default_gen_kwargs = {"max_new_tokens": 256}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
@@ -25,6 +25,7 @@ class TaskRunner(Task):
             **self.model_kwargs
         )
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
+        print("hf_device_map =", getattr(self.model, "hf_device_map", None))
         
     def _parse_input(self, message:dict):
         prompt = message["prompt"]

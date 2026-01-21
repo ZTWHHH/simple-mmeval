@@ -10,7 +10,7 @@ series_mapping = {
     "fuyu": ["fuyu-8B"],
     "gemma3": ["gemma-3-4b-it", "gemma-3-12b-it", "gemma-3-27b-it"],
     "llama3d2_vision": ["Llama-3.2-11B-Vision-Instruct", "Llama-3.2-90B-Vision-Instruct"],
-    "llama4": ["Llama-4-Scout-17B-16E-Instruct", "Llama-4-Scout-17B-16E", "Llama-4-Maverick-17B-128E-Instruct", "Llama-4-Maverick-17B-128E", "Llama-Guard-4-12B"],
+    "llama4": ["Llama-4-Scout-17B-16E-Instruct", "Llama-4-Scout-17B-16E", "Llama-4-Maverick-17B-128E-Instruct", "Llama-4-Maverick-17B-128E"],
     "smolvlm": ["SmolVLM-Instruct", "SmolVLM-Instruct-DPO", "SmolVLM-Instruct-Base","SmolVLM-Sythetic"],
     "llava_ov_1d5": ["LLaVA-OneVision-1.5-8B-Instruct"],
     "glm_4v": ["glm-4v-9b"],
