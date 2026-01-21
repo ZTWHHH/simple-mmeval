@@ -25,7 +25,6 @@ class TaskRunner(Task):
             **self.model_kwargs
         )
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
-        print("hf_device_map =", getattr(self.model, "hf_device_map", None))
         
     def _parse_input(self, message:dict):
         prompt = message["prompt"]
