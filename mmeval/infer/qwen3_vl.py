@@ -2,14 +2,12 @@ import re
 import copy
 
 import torch
-import numpy as np
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
+from transformers import AutoModelForImageTextToText, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
 from mmeval.infer.task import Task
 from mmeval.utils import constants
 from mmeval.utils.argparser import parse_args, parse_model_kwargs, parse_gen_kwargs
-from mmeval.utils.scorer import IncrementalLMScorer, target_tokens
 
 
 class TaskRunner(Task):
@@ -17,7 +15,7 @@ class TaskRunner(Task):
         self.args = args
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.dtype = getattr(args, "dtype") or "auto"
-        self.default_model_kwargs = {"attn_implementation":"flash_attention_2", "device_map": "auto"}
+        self.default_model_kwargs = {"device_map": "auto"}
         self.default_gen_kwargs = {"max_new_tokens": 128}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
@@ -25,15 +23,15 @@ class TaskRunner(Task):
         super().__init__(args)
         
     def load_model(self, args):
-        self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.model_name_or_path, torch_dtype=self.dtype, **self.model_kwargs)
-        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
-        min_pixels = 256 * 28 * 28
-        max_pixels = 1280 * 28 * 28
-        self.processor = AutoProcessor.from_pretrained(args.model_name_or_path, min_pixels=min_pixels, max_pixels=max_pixels)
+        self.model = AutoModelForImageTextToText.from_pretrained(
+            args.model_name_or_path, 
+            dtype=self.dtype, 
+            **self.model_kwargs
+        )
+        self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
 
     def parse_input(self, message):
         question = message["prompt"]
-        # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
         media_list = copy.deepcopy(message["media"])
 
@@ -52,7 +50,9 @@ class TaskRunner(Task):
                 messages[0]["content"].append(
                     {
                         "type": "image",
-                        "image": media
+                        "image": media,
+                        "min_pixels": 4 * 32 * 32,
+                        "max_pixels": 256 * 32 * 32,
                     }
                 )       
             elif chunk == constants.video:
@@ -61,8 +61,9 @@ class TaskRunner(Task):
                     {
                         "type": "video",
                         "video": media,
-                        "max_pixels": 360 * 420,
-                        "fps": 1.0,
+                        "min_pixels": 4 * 32 * 32,
+                        "max_pixels": 256 * 32 * 32,
+                        "total_pixels": 20480 * 32 * 32,
                     }
                 )
             else:
@@ -72,7 +73,7 @@ class TaskRunner(Task):
                         "text": chunk
                     }
                 )
-
+        
         return messages
 
     def _generate_response(self, inputs):
@@ -87,22 +88,6 @@ class TaskRunner(Task):
 
         return output_text
 
-    def _score_choices(self, text, image_inputs, video_inputs, message):
-        contents = message["choices"]
-        full = [text + content for content in contents]
-
-        full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device) for i in full]
-        prompt_encoded = self.processor(text=text, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device)
-        target_toks = target_tokens(self.tokenizer, contents)
-
-        scorer = IncrementalLMScorer(self.model, self.device, tokenizer=self.tokenizer)
-        scores = scorer.conditional_score(target_toks, full_encoded, prompt_encoded)
-        
-        return {
-            "score": scores,
-            "response": contents[np.argmax(scores)]
-        }
-
     def run_sample(self, sample: dict):
         ori_sample = copy.deepcopy(sample)
         message = sample["messages"][0]
@@ -113,23 +98,30 @@ class TaskRunner(Task):
             user_message, tokenize=False, add_generation_prompt=True
         )
 
-        image_inputs, video_inputs, video_kwargs = process_vision_info(user_message, return_video_kwargs=True)
+        images, videos, video_kwargs = process_vision_info(
+            user_message, image_patch_size=16, return_video_kwargs=True, return_video_metadata=True
+        )
+
+        if videos is not None:
+            videos, video_metadatas = zip(*videos)
+            videos, video_metadatas = list(videos), list(video_metadatas)
+        else:
+            video_metadatas = None
 
         inputs = self.processor(
-            text=[text],
-            images=image_inputs,
-            videos=video_inputs,
-            padding=True,
-            return_tensors="pt",
-            **video_kwargs,
+            text=text, 
+            images=images, 
+            videos=videos, 
+            video_metadata=video_metadatas,
+            return_tensors="pt", 
+            do_resize=False, 
+            **video_kwargs
         )
-        inputs = inputs.to(self.device)
+        inputs = inputs.to(self.model.device)
 
         if not self.args.score_target:
             response = self._generate_response(inputs)
             ori_sample["messages"].append({"role": "assistant", "response": response})
-        else:
-            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, message))
 
         return ori_sample
 
@@ -138,3 +130,5 @@ if __name__ == "__main__":
     args = parse_args()
     model_evaluator = TaskRunner(args)
     model_evaluator.inference_dataset()
+
+
