@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a dark gray or black GMC truck driving on a dirt road. The truck is positioned towards the center of the frame, moving from left to right. It appears to be a four-door pickup truck with black wheels. The truck is kicking up a cloud of dust as it travels, indicating that it might be driving at high speed or on rough terrain. The background of the image showcases a mountainous landscape, providing a scenic backdrop for the truck's journey."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "A white yacht is sailing across the ocean, leaving a trail of wake behind it. The yacht is positioned towards the center of the image, cutting through the blue water and creating a strong wake that contrasts with the surrounding calmness. The scene is captured during daytime, emphasizing the yacht's sleek design and powerful presence as it moves through the water."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

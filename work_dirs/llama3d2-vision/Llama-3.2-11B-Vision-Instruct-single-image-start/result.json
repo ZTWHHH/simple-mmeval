@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a dark gray GMC pickup truck driving on a dirt road, with the front of the vehicle facing the right side of the frame. The truck is positioned in the center of the image, with its front end slightly angled towards the camera.\n\n*   **Truck:**\n    *   The truck is dark gray in color and has a black grill with the GMC logo in red and white.\n    *   It has a black bumper and black wheels.\n    *   The truck is driving on a dirt road, with dust kicked up behind the tires.\n*   **Background:**\n    *   The background of the image is blurry, but it appears to be a desert or mountainous area.\n    *   There are some green plants visible in the distance, but they are not clearly defined.\n    *   The overall atmosphere of the image suggests a rugged and adventurous setting.\n\nIn summary, the image shows a dark gray GMC pickup truck driving on a dirt road in a desert or mountainous area. The truck is the main focus of the image, and it appears to be in motion, with dust kicked up behind the tires. The background is blurry, but it suggests a rugged and adventurous setting."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a white speedboat in motion, with its wake visible behind it. The boat is positioned at an angle, with its bow pointing towards the right side of the frame and its stern facing the left. It appears to be moving at a high speed, as evidenced by the large amount of water being churned up behind it.\n\nThe boat's hull is white with a dark stripe running along its side, and it has a small cabin on top. There are several antennas and other features on the roof of the cabin, but they are not clearly visible due to the distance from the camera. The boat's wake is white and foamy, indicating that it is moving quickly through the water.\n\nIn the background, the sky is blue and clear, with no clouds visible. The water is calm and peaceful, with only a few ripples disturbing its surface. The overall atmosphere of the image is one of speed and power, as the boat cuts through the water with ease.\n\nOverall, the image captures the thrill and excitement of being on a fast-moving boat, with the speed and power of the vessel creating a sense of energy and dynamism."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]
