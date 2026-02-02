@@ -23,13 +23,14 @@ class TaskRunner(Task):
         super().__init__(args)
     
     def load_model(self, args):
-        self.model = AutoModelForCausalLM.from_pretrained(args.model_name_or_path, **self.model_kwargs)
+        self.model = AutoModelForCausalLM.from_pretrained(args.model_name_or_path, **self.model_kwargs, trust_remote_code=True)
         self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self.parse_input(sample)
+        messages = self.parse_input(message)
         
     
         text = self.processor.apply_chat_template(
@@ -38,9 +39,10 @@ class TaskRunner(Task):
         image_inputs, video_inputs = process_vision_info(messages)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(text, image_inputs, video_inputs)
+            response = self._generate_response(text, image_inputs, video_inputs)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, sample))
+            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, message))
 
         return ori_sample
 
@@ -67,8 +69,8 @@ class TaskRunner(Task):
 
         return output_text
 
-    def _score_choices(self, text, image_inputs, video_inputs, sample):
-        contents = sample.get("choices")
+    def _score_choices(self, text, image_inputs, video_inputs, message):
+        contents = message.get("choices")
         full = [text + content for content in contents]
 
         full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.model.device) for i in full]
@@ -84,11 +86,11 @@ class TaskRunner(Task):
         }
 
 
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def parse_input(self, message:dict):
+        question = message["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        images = copy.deepcopy(sample.get('media', []))
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -97,6 +99,7 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
@@ -105,7 +108,8 @@ class TaskRunner(Task):
                 
                 assert chunk == constants.image or chunk == constants.video, f"Unsupported placeholder {chunk}"
 
-                media_file = images.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 if chunk == constants.image:
                     messages[0]["content"].append(
                         {

@@ -24,25 +24,30 @@ class TaskRunner(Task):
         self.model, self.processor, self.tokenizer = model_init(args.model_name_or_path)
 
     def run_sample(self, sample:dict):
-
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        question, modality = self.parse_input(sample)
 
-        image_file = sample["media"][0]
-
-        media_tensor = self.processor[modality](image_file)
+        media_list = message.get("media", [])
+        if media_list:
+            question, modality = self.parse_input(message)
+            image_file = media_list[0]
+            media_tensor = self.processor[modality](image_file)
+        else:
+            # Text-only input
+            question = message["prompt"]
+            modality = "text"
+            media_tensor = None
 
         if not self.args.score_target:
             output_text = mm_infer(media_tensor, question, model=self.model, tokenizer=self.tokenizer, do_sample=False, modal=modality).strip()
-            ori_sample["response"] = output_text
-
+            ori_sample["messages"].append({"role": "assistant", "response": output_text})
         else:
-            ori_sample.update(self._score_choices(ori_sample, modality, question, media_tensor))
+            ori_sample.update(self._score_choices(message, modality, question, media_tensor))
         
         return ori_sample
     
-    def _score_choices(self, sample, modality, question, media_tensor):
-        contents = sample.get("choices")
+    def _score_choices(self, message, modality, question, media_tensor):
+        contents = message.get("choices")
 
         target_toks = target_tokens(self.tokenizer, contents)
         if modality == 'image':
@@ -94,8 +99,8 @@ class TaskRunner(Task):
             "response": contents[np.argmax(scores)]
         }
     
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def parse_input(self, message:dict):
+        question = message["prompt"]
         # extract placeholder
         placeholders = re.findall(r'<(?:image|video)>', question)
         assert len(placeholders) == 1, f"VideoLLaMA2 supports one image or video, but got {len(placeholder)}"

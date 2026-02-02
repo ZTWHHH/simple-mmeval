@@ -34,10 +34,10 @@ class TaskRunner(Task):
             self.model = self.model.cuda()
         self.tokenizer = Tokenizer.from_pretrained(args.model_name_or_path)
     
-    def _parse_input(self, sample: dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message: dict):
+        prompt = message["prompt"]
         q_chunks = re.split(r'(<(?:image|video)>)', prompt)
-        media = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -46,11 +46,13 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                media_file = media.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "image",
@@ -83,22 +85,36 @@ class TaskRunner(Task):
             with torch.inference_mode():
                 enc_image = self.model.encode_image(image)
                 output = self.model.answer_question(enc_image, text, self.tokenizer)
-            return output
         else:
-            raise ValueError("Moondream1 requires an image input")
+            # Text-only generation - use generate() directly without <image> tag
+            with torch.inference_mode():
+                prompt = f"Question: {text}\n\nAnswer: "
+                output = self.model.generate(
+                    image_embeds=None,
+                    prompt=prompt,
+                    tokenizer=self.tokenizer,
+                    eos_text="<END>",
+                    **self.gen_kwargs
+                )[0]
+                # Clean up the output like answer_question does
+                output = re.sub("<$", "", re.sub("END$", "", output)).strip()
+                
+        return output
 
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        prompt, image_path = self._parse_input(ori_sample)
+        prompt, image_path = self._parse_input(message)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(prompt, image_path)
+            response = self._generate_response(prompt, image_path)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(prompt, image_path, sample))
+            ori_sample.update(self._score_choices(prompt, image_path, message))
 
         return ori_sample
 
-    def _score_choices(self, text, image_path, sample):
+    def _score_choices(self, text, image_path, message):
         pass
 
     

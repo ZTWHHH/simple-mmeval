@@ -51,13 +51,16 @@ class TaskRunner(Task):
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages, modality = self.parse_input(sample)
+        media_list = message.get('media', [])
+        messages, modality = self.parse_input(message)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(messages, modality)
+            response = self._generate_response(messages, modality)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(messages, modality, sample['media'], sample))
+            ori_sample.update(self._score_choices(messages, modality, media_list, message))
 
         return ori_sample
 
@@ -86,8 +89,8 @@ class TaskRunner(Task):
 
         return output_text
 
-    def _score_choices(self, messages, modality, media, sample):
-        contents = sample.get("choices")
+    def _score_choices(self, messages, modality, media, message):
+        contents = message.get("choices")
         if modality == "image":
             text = self.processor.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
@@ -127,11 +130,11 @@ class TaskRunner(Task):
         }
 
 
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def parse_input(self, message:dict):
+        question = message["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        images = copy.deepcopy(sample.get('media', []))
+        media_list = message.get('media', [])
         modality = "text"
 
         messages = [
@@ -141,6 +144,7 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
@@ -154,17 +158,19 @@ class TaskRunner(Task):
                     messages[0]["content"].append(
                     {
                         "type": modality,
-                        modality: images.pop(0)
+                        modality: media_list[media_idx]
                     }
-                )      
+                )
+                    media_idx += 1
                 elif chunk == constants.video:
                     modality = "video"
                     messages[0]["content"].append(
                     {
                         "type": modality,
-                        "path": images.pop(0)
+                        "path": media_list[media_idx]
                     }
                 )
+                    media_idx += 1
 
             else:
                 messages[0]["content"].append(

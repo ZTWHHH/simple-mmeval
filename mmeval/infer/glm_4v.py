@@ -31,8 +31,8 @@ class TaskRunner(Task):
             **self.model_kwargs
         ).to(self.device).eval()
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         query = prompt.replace("<image>", "")
 
         return query
@@ -45,12 +45,13 @@ class TaskRunner(Task):
         return self.tokenizer.decode(outputs[0])
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        query = self._parse_input(ori_sample)
-        image = ori_sample['media'][0] if ori_sample['media'] else None
+        query = self._parse_input(message)
+        media = message.get('media', [])
         
-        if image:
-            inputs = self.tokenizer.apply_chat_template([{"role": "user", "image": image, "content": query}],
+        if media:
+            inputs = self.tokenizer.apply_chat_template([{"role": "user", "image": media[0], "content": query}],
                                                 add_generation_prompt=True, tokenize=True, return_tensors="pt",
                                                 return_dict=True)  # chat mode
         else:
@@ -61,7 +62,8 @@ class TaskRunner(Task):
         inputs = inputs.to(self.device)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs)
+            response = self._generate_response(inputs)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 
