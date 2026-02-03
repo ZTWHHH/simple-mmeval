@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a GMC truck in a dynamic outdoor setting. The truck is in motion, kicking up a trail of dust, suggesting it is driving on a rough, possibly unpaved terrain. The truck has a four-door crew cab design, which means it has a larger cabin that provides more interior space for passengers, typically accommodating five or six people comfortably.\n\nThe GMC truck is painted in a metallic, dark color that gives it a sleek and modern appearance. The truck bed is not visible, which could suggest that the photo was taken from a front three-quarter angle or that the truck bed is covered or not in view. The GMC emblem is prominently displayed on the grille, which is a signature feature of GMC vehicles. The grille itself has a bold, angular design with a black mesh insert that adds to the truck's aggressive look.\n\nThe truck's wheels are large and appear to be off-road tires, which are suitable for rough terrain and can provide better traction. The tires are black, matching the overall dark color scheme of the truck.\n\nThe background of the image is blurred, but it appears to be a natural landscape with rocky formations, which could suggest that the truck is in a desert or canyon area. The lighting in the image is bright, indicating it might be taken during the daytime. The overall composition of the image gives a sense of adventure and the capability of the truck for off-road driving. <|endoftext|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a sleek, white yacht cutting through the calm blue waters of the sea. The yacht is captured from an aerial perspective, with the bow leading the way and the stern trailing behind, leaving a frothy wake in its wake. The wake is a clear indication of the yacht's speed and the power of its engines.\n\nThe yacht's design is modern and streamlined, with a low profile that suggests high performance. The superstructure is minimal, with a radar dome atop the flybridge, which is a common feature for navigation and monitoring. The flybridge also houses what appears to be a helm station, where the captain would steer the vessel.\n\nThe yacht's deck is uncluttered, with a clear pathway leading from the helm station to the bow. The deck is finished in what looks like teak, a common choice for luxury yachts due to its durability and aesthetic appeal.\n\nThe sea around the yacht is serene, with no other vessels or landmarks in sight, emphasizing the yacht's solitary journey. The water is a deep blue, indicating a depth that would allow for the yacht to navigate safely. The sky above is clear, with a gradient of light blue that suggests it could be either early morning or late afternoon.\n\nOverall, the image conveys a sense of luxury, leisure, and the freedom of the open sea. The yacht is a symbol of affluence and the ability to travel in style and comfort. <|endoftext|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

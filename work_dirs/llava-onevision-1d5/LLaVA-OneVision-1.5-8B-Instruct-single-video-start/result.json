@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC Sierra pickup truck driving on a dirt road with a rugged, rocky landscape in the background. The vehicle is captured from a side angle, showcasing its design and features. Here's a detailed description:\n\n1. **Vehicle**: \n   - The truck is a GMC Sierra, identifiable by the prominent \"GMC\" logo on the front grille.\n   - It appears to be a modern model, likely within the last few years given the contemporary design elements.\n   - The truck has a four-door configuration, indicating it might be a crew cab or double cab model.\n\n2. **Design Features**:\n   - The front grille is large and rectangular, with horizontal slats that give it a bold appearance.\n   - The headlights are sleek and angular, contributing to the truck's aggressive look.\n   - The hood has raised contours, adding to the muscular aesthetic of the vehicle.\n   - The side mirrors are body-colored, and there are visible door handles and windows.\n   - The wheels are black with a multi-spoke design, which complements the overall rugged style of the truck.\n\n3. **Environment**:\n   - The setting is outdoors, with a backdrop of red rock formations typical of desert landscapes.\n   - The ground is covered in loose dirt and small rocks, suggesting an off-road environment.\n   - There is dust being kicked up by the tires, indicating that the truck is moving at a moderate speed.\n\n4. **Lighting and Shadows**:\n   - The lighting suggests either early morning or late afternoon, as the shadows are long and the light is warm.\n   - The sunlight highlights the contours and details of the truck, enhancing its visual appeal.\n\n5. **Additional Elements**:\n   - There are no other vehicles or people visible in the image, focusing all attention on the GMC Sierra.\n   - The sky is clear, with no visible clouds, emphasizing the open and expansive nature of the terrain.\n\nIn summary, the image captures a GMC Sierra pickup truck in motion on a dirt road, set against a striking desert backdrop. The truck's design is modern and robust, suitable for both on-road and off-road conditions. The lighting and environment contribute to a sense of adventure and ruggedness associated with such vehicles."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, sleek white yacht moving swiftly through the water. The yacht is captured from an aerial perspective, showcasing its streamlined design and the wake it creates as it cuts through the ocean. The hull of the yacht is predominantly white with some black detailing near the bottom. The deck appears to be well-maintained and features several windows along the sides, likely providing ample natural light inside the vessel.\n\nThe yacht has a prominent bow, which is pointed and designed for speed. There are railings around the perimeter of the deck, ensuring safety for those on board. On the stern (rear) part of the yacht, there are visible structures that might include a helm station or possibly a small cabin area. The yacht also has a radar dome and other navigational equipment mounted on top, indicating advanced technology for navigation and communication.\n\nThe surrounding water is a deep blue, suggesting clear weather conditions and calm seas. The sky above is mostly clear with a few scattered clouds, contributing to the serene atmosphere of the scene. The wake created by the yacht's movement is a frothy white, contrasting sharply with the deep blue of the ocean, emphasizing the speed at which the yacht is traveling.\n\nIn summary, the image captures a luxurious and high-speed yacht in motion, set against a backdrop of tranquil ocean waters under a clear sky. The yacht\u2019s design and the wake it generates highlight its capability for swift travel, while the overall setting conveys a sense of leisure and adventure."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts an orange tabby cat walking through a lush green grassy field. The cat has a fluffy tail and appears to be focused on something ahead, possibly sniffing or observing its surroundings. The sunlight casts shadows on the grass, indicating it might be either morning or late afternoon. The overall scene is serene and natural, with no other objects or animals visible in the frame."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a breathtaking sunset scene with the sun partially obscured by a hill or mountain. The sky is painted in vibrant shades of orange and yellow, creating a warm and serene atmosphere. The sun appears as a bright, glowing orb, casting a radiant light that illuminates the surrounding clouds and landscape. The silhouette of the hill or mountain is visible against the backdrop of the colorful sky, adding depth and contrast to the scene. The overall composition evokes a sense of tranquility and natural beauty, capturing the essence of a peaceful evening."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]
