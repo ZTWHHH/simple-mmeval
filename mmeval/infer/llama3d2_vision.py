@@ -28,11 +28,11 @@ class TaskRunner(Task):
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
         self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', prompt)
-        media = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -41,11 +41,13 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                media_file = media.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "image",
@@ -72,8 +74,9 @@ class TaskRunner(Task):
         return decoded
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self._parse_input(ori_sample)
+        messages = self._parse_input(message)
 
         inputs = self.processor.apply_chat_template(
             messages, add_generation_prompt=True, tokenize=True,
@@ -83,22 +86,22 @@ class TaskRunner(Task):
         input_len = inputs["input_ids"].shape[-1]
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs, input_len)
+            response = self._generate_response(inputs, input_len)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(messages, "image", ori_sample))
+            ori_sample.update(self._score_choices(messages, "image", media_list, message))
 
         return ori_sample
     
-    def _score_choices(self, messages, modality, sample):
-        media = copy.deepcopy(sample['media'])
-        contents = sample.get("choices")
+    def _score_choices(self, messages, modality, media_list, message):
+        contents = message.get("choices")
         if modality == "image":
             text = self.processor.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
             )
             full = [text + content for content in contents]
-            full_encoded = [self.processor(text=i, images=media, return_tensors="pt").to(self.device) for i in full]
-            prompt_encoded = self.processor(text=text, images=media, return_tensors="pt").to(self.device)
+            full_encoded = [self.processor(text=i, images=media_list, return_tensors="pt").to(self.device) for i in full]
+            prompt_encoded = self.processor(text=text, images=media_list, return_tensors="pt").to(self.device)
 
         target_toks = target_tokens(self.tokenizer, contents)
 
