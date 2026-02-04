@@ -55,11 +55,11 @@ class TaskRunner(Task):
             **self.model_kwargs
         )
         
-    def _parse_input(self, sample: dict):
-        question = sample["prompt"]
+    def _parse_input(self, message: dict):
+        question = message["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        images = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -79,12 +79,14 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             
             if chunk == constants.image:
-                media_file = images.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 messages[1]["content"].append(
                     {
                         "type": "image",
@@ -129,12 +131,13 @@ class TaskRunner(Task):
         return output_text[0]
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self._parse_input(ori_sample)
+        messages = self._parse_input(message)
 
         if not self.args.score_target:
             response = self._generate_response(messages)
-            ori_sample["response"] = response
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             # Handle scoring if needed
             pass

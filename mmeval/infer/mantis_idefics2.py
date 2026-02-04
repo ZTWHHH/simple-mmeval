@@ -35,8 +35,8 @@ class TaskRunner(Task):
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path) # do_image_splitting is False by default
         self.model = AutoModelForVision2Seq.from_pretrained(args.model_name_or_path, **self.model_kwargs)
 
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', prompt)
 
@@ -65,25 +65,25 @@ class TaskRunner(Task):
         return messages
 
     def _generate_response(self, inputs):
-        if not images:
-            images = None
         generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         response = self.processor.batch_decode(generated_ids[:, inputs["input_ids"].shape[1]:], skip_special_tokens=True)
 
         return response[0]
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
+        images = message.get("media", [])
         
-        messages = self._parse_input(ori_sample)
+        messages = self._parse_input(message)
         prompt = self.processor.apply_chat_template(messages, add_generation_prompt=True)
 
-        images = sample.get("media", [])
-        inputs = self.processor(text=prompt, images=images, return_tensors="pt")
+        inputs = self.processor(text=prompt, images=images if images else None, return_tensors="pt")
         inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs)
+            response = self._generate_response(inputs)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 

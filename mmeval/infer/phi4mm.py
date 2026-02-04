@@ -34,26 +34,24 @@ class TaskRunner(Task):
             trust_remote_code=True
         )
 
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         # placeholder <>, can be image
         q_chunks = re.split(r'(<image>)', prompt)
-        media = copy.deepcopy(sample['media'])
-
+        media_list = message.get('media', [])
         # Build the prompt with image placeholders for Phi-4
         text_content = []
         placeholder_content = []
-        image_counter = 1
         images = []
+        media_idx = 0
 
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                if media:
-                    images.append(media.pop(0))
-                    placeholder_content.append(f"<|image_{image_counter}|>")
-                    image_counter += 1
+                images.append(media_list[media_idx])
+                placeholder_content.append(f"<|image_{media_idx + 1}|>")
+                media_idx += 1
             else:
                 text_content.append(chunk)
 
@@ -88,8 +86,9 @@ class TaskRunner(Task):
         return response
 
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages, images = self._parse_input(ori_sample)
+        messages, images = self._parse_input(message)
 
         # Apply chat template
         prompt = self.processor.tokenizer.apply_chat_template(
@@ -105,7 +104,8 @@ class TaskRunner(Task):
             inputs = self.processor(prompt, return_tensors="pt").to(self.model.device)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs)
+            response = self._generate_response(inputs)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 
