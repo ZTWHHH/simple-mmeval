@@ -37,8 +37,8 @@ class TaskRunner(Task):
         self.visual_tokenizer = self.model.get_visual_tokenizer()
         self.conversation_formatter = self.model.get_conversation_formatter()
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         query = prompt.replace("<image>", "<image>\n")
 
         return query
@@ -55,19 +55,24 @@ class TaskRunner(Task):
         return output
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
 
-        query = self._parse_input(ori_sample)
+        query = self._parse_input(message)
         prompt, input_ids = self.conversation_formatter.format_query(query)
         input_ids = torch.unsqueeze(input_ids, dim=0).to(device=self.model.device)
         attention_mask = torch.ne(input_ids, self.text_tokenizer.pad_token_id).to(device=self.model.device)
         
-        image = ori_sample['media'][0]
-        pixel_values = [self.visual_tokenizer.preprocess_image(image).to(
-            dtype=self.visual_tokenizer.dtype, device=self.visual_tokenizer.device)]
+        media = message.get('media', [])
+        if media:
+            pixel_values = [self.visual_tokenizer.preprocess_image(media[0]).to(
+                dtype=self.visual_tokenizer.dtype, device=self.visual_tokenizer.device)]
+        else:
+            pixel_values = [None]
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(input_ids, attention_mask, pixel_values)
+            response = self._generate_response(input_ids, attention_mask, pixel_values)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 

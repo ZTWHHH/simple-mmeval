@@ -37,8 +37,8 @@ class TaskRunner(Task):
         self.text_tokenizer = self.model.get_text_tokenizer()
         self.visual_tokenizer = self.model.get_visual_tokenizer()
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         query = prompt.replace("<image>", "<image>\n")
 
         return query
@@ -55,20 +55,27 @@ class TaskRunner(Task):
         return output
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
 
-        query = self._parse_input(ori_sample)
-        images = ori_sample['media']
+        query = self._parse_input(message)
+        images = message.get('media', [])
+        if images:
+            # format conversation with images
+            prompt, input_ids, pixel_values = self.model.preprocess_inputs(query, images)
+            pixel_values = [pixel_values.to(dtype=self.visual_tokenizer.dtype, device=self.visual_tokenizer.device)]
+        else:
+            # text-only input
+            prompt, input_ids, pixel_values = self.model.preprocess_inputs(query, None)
+            pixel_values = [None]
 
-        # format conversation
-        prompt, input_ids, pixel_values = self.model.preprocess_inputs(query, images)
         attention_mask = torch.ne(input_ids, self.text_tokenizer.pad_token_id)
         input_ids = input_ids.unsqueeze(0).to(device=self.model.device)
         attention_mask = attention_mask.unsqueeze(0).to(device=self.model.device)
-        pixel_values = [pixel_values.to(dtype=self.visual_tokenizer.dtype, device=self.visual_tokenizer.device)]
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(input_ids, pixel_values, attention_mask)
+            response = self._generate_response(input_ids, pixel_values, attention_mask)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 
