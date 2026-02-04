@@ -1,0 +1,96 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a silver Chevrolet truck driving on a dirt road, kicking up dust as it moves. The truck is positioned in the center of the scene, with a clear view of its front and side. The surroundings include a rocky hillside and a grassy area, giving the impression of a rugged, outdoor environment. The truck appears to be in motion, possibly on a trail or off-road adventure."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a large white yacht speeding through the water, creating a large wake behind it. The yacht is moving towards the right side of the image, and its size is quite impressive compared to the surrounding water. The water appears to be a deep blue, and the yacht is the main focus of the scene. There are no other boats or objects visible in the image, emphasizing the yacht's prominence."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image features a silver Chevrolet truck driving on a dirt road. The truck is positioned in the center of the image, with its front facing towards the right side of the frame. The truck is surrounded by a natural landscape with a rocky hillside in the background. The truck's tires are kicking up dirt as it moves along the road.\n\nThe second image showcases a white yacht speeding through the water. The yacht is in the center of the image, with its bow pointed towards the right side. The water around the yacht is disturbed, indicating its high speed. The sky above is clear, and the horizon is visible in the background, suggesting an open sea."
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image features a white yacht speeding through the water, leaving a trail of white foam behind it. The yacht is positioned in the center of the image, with the water surrounding it on all sides. The sky above is clear, and the overall scene suggests a sunny day.\n\nThe second image showcases a gray Chevrolet truck driving on a dirt road. The truck is in the center of the image, with the dirt road stretching out in front of it. The surroundings include a rocky hillside and a grassy area, giving the impression of a rugged, outdoor setting. The truck's motion is captured as it kicks up dust and dirt as it moves along the road."
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 3
+    }
+]

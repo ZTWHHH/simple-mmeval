@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, rugged pickup truck driving on a dirt road. The truck is a GMC model, as indicated by the prominent GMC logo on the front grille. The vehicle is painted in a dark, metallic color, likely a shade of gray or black, which gives it a robust and sturdy appearance. The truck features a high ground clearance, evident from the raised suspension and large, off-road tires. The tires are black and appear to be designed for off-road conditions, with deep treads suitable for handling rough terrain. The truck is equipped with a spare tire mounted on the back, which is also visible in the image. The background shows a rocky, mountainous landscape, suggesting that the truck is being driven in a rugged, outdoor environment. The overall scene conveys a sense of adventure and capability, highlighting the truck's suitability for off-road driving."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a sleek, modern yacht cruising through a body of water. The yacht is predominantly white with a black stripe running along its side. It has a streamlined, aerodynamic design, featuring a pointed bow and a flat, wide deck. The yacht is moving at a high speed, as evidenced by the large, white wake trailing behind it. The water appears calm and deep, with a clear blue hue, suggesting a sunny day. The sky is clear with a few wispy clouds, indicating good weather conditions. The yacht is equipped with a superstructure at the rear, which includes a cabin and possibly a helipad. The overall scene conveys a sense of luxury and adventure, typical of high-end yachting."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image depicts a rugged, off-road pickup truck, specifically a GMC model, driving through a dusty, rocky terrain. The vehicle is shown in a dynamic pose, suggesting movement and power, with a focus on its robust design and off-road capabilities. The environment is arid, with a clear sky and minimal vegetation, emphasizing the truck's suitability for tough, outdoor conditions. The second image shows a sleek, modern yacht cruising on calm, blue waters. The yacht is white with a streamlined design, featuring a luxurious cabin and a pointed bow. It is captured in motion, with water splashing around its hull, indicating speed and elegance. The background is a serene ocean under a clear sky, highlighting the yacht's elegance and the peacefulness of its setting."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image depicts a sleek, modern yacht cruising through a body of water. The yacht is predominantly white with a black stripe running along its side, and it features a streamlined design with a pointed bow and a cabin that appears to be equipped with a large windshield. The water around the yacht is a deep blue, and the wake behind the yacht suggests it is moving at a considerable speed. The sky is clear, and the overall scene conveys a sense of luxury and leisure. The second image shows a rugged, off-road pickup truck, specifically a GMC, driving on a dirt road. The truck is a dark gray color with a bold front grille and a muscular build, indicating it is designed for durability and performance in rough terrain. The background features a rocky landscape with sparse vegetation, and the truck is kicking up dust as it moves, which adds to the dynamic and adventurous feel of the image."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image shows a pickup truck with a rugged design, featuring a prominent GMC logo on the front grille. The truck is depicted in a desert environment, kicking up dust as it moves, suggesting a powerful and robust build suitable for off-road conditions. The second image displays a sleek, modern yacht cruising through calm waters. The yacht has a streamlined design with a white hull and a blue upper structure, indicating a luxurious and high-performance vessel. Both images showcase vehicles designed for specific environments and purposes, with the truck built for rugged terrain and the yacht for leisurely maritime travel."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image shows a white speedboat cruising through the ocean, leaving a trail of white foam in its wake. The boat has a sleek design with a pointed bow and a cabin with windows. The water is a deep blue, and the sky is clear with a few clouds. The second image depicts a dark-colored pickup truck driving on a dirt road. The truck has a robust build with a prominent front grille, headlights, and a bed with a tailgate. The background features a rocky landscape with some greenery."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image 1 shows a dark-colored pickup truck with a rugged design, driving on a dirt road with a rocky landscape in the background. The truck has a prominent front grille with the GMC logo, and it is equipped with off-road tires. The vehicle is kicking up dust as it moves, indicating a rough terrain. Image 2 depicts a sleek, white speedboat cruising on calm blue waters under a clear sky. The boat has a streamlined design with a pointed bow and a cabin with windows. It is moving at a high speed, creating a trail of white foam in the water behind it."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image 1 shows a white speedboat cruising through a body of water, leaving a trail of white foam behind it. The boat is sleek and appears to be designed for high-speed travel. The water is a deep blue, and the sky is clear, suggesting a sunny day. The boat is equipped with a cabin and appears to be a luxury model, possibly used for leisure or racing. Image 2 depicts a dark-colored pickup truck, specifically a GMC, driving on a dirt road. The truck is in motion, kicking up dust as it moves. The environment appears to be a rugged, possibly mountainous area with rocky outcrops and sparse vegetation. The truck is a modern model with a robust build, likely designed for off-road use."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

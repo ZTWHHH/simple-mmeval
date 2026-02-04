@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a GMC Sierra pickup truck in a striking desert setting. The truck is a four-door model with a sleek, modern design featuring a prominent front grille and bold headlights. Its color is a dark gray, complemented by black rims and a black bumper, giving it a rugged yet stylish appearance.\n\nThe truck is captured in motion, kicking up a cloud of dust behind it as it drives on a dirt road. This dynamic pose emphasizes the vehicle's power and capability, suggesting it's well-suited for off-road adventures.\n\nThe background reveals a stunning desert landscape with reddish-brown rock formations, typical of areas like the Grand Canyon. The sky is clear and blue, adding to the overall picturesque scene.\n\nThe GMC logo is prominently displayed on the front grille, clearly identifying the make of the vehicle. The truck's design and the desert backdrop together create an image that highlights both the vehicle's performance and its ability to handle challenging terrains.\n\nOverall, the image presents a powerful GMC Sierra in a breathtaking natural setting, showcasing the truck's capabilities and the beauty of the desert environment."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a luxurious white yacht cruising through the deep blue ocean. The yacht is moving at a high speed, creating a dramatic wake of white water behind it. Its sleek design features a black stripe running along the side, with a black front and a black stripe near the top. The vessel has a large, curved windshield and a small cabin area with windows.\n\nThe yacht is equipped with a railing around the deck and a small antenna on top, adding to its sophisticated appearance. The ocean surrounding the yacht is a vibrant blue, with the horizon visible in the distance. The sky above is clear and blue, indicating a sunny day.\n\nThe composition of the image is striking, with the yacht positioned slightly to the right of center. The wake of water behind the yacht adds a dynamic element to the scene, emphasizing its speed and power. The overall effect is one of luxury and freedom, capturing the essence of high-end ocean cruising."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video features an orange tabby cat in a grassy outdoor setting, initially seen sniffing or investigating the ground. The cat's fur is a mix of orange and white, with a bushy tail, and it appears alert and curious. The grass is lush and green, indicating a well-maintained lawn. The cat then begins to walk towards the camera, maintaining its curious demeanor. As it approaches, the cat's tail is raised, and its ears are perked up, suggesting attentiveness. The lighting is natural, likely from sunlight, casting soft shadows on the grass. The cat's movement is steady and purposeful, with its head turned slightly to the side, possibly observing something off-camera. The video captures the cat's journey from a stationary position to a closer view, highlighting its inquisitive nature and the serene outdoor environment."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video captures a serene sunset scene, beginning with a vibrant sky painted in shades of orange and yellow, with the sun partially visible near the horizon. The silhouette of a mountain range is visible against the colorful sky, with trees and foliage creating a dark outline. As the video progresses, the sun gradually rises higher, becoming more prominent and casting a warm glow over the landscape. The colors of the sky intensify, with the orange and yellow hues becoming more vivid. The sun's rays become more pronounced, illuminating the surrounding area and creating a radiant effect. The video concludes with the sun almost fully visible, casting a bright light over the mountain range and the surrounding landscape, with the sky transitioning to deeper shades of orange and yellow."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]
