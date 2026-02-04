@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a silver GMC Sierra 1500 truck driving on a dirt road. The truck is driving on sand, and it seems to be moving at a moderate speed. The truck's front grille, headlights, and bumper are all visible, along with some text on the truck's body. The truck appears to be equipped with off-road tires, which contribute to its rugged appearance. The background of the image features a rugged landscape, possibly mountains, providing a stark contrast to the truck's robust appearance."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a large, luxurious motor yacht sailing on a vast body of water. The yacht is predominantly white, with a black stripe running along its side. It appears to be moving at a considerable speed, creating a wake behind it. The boat is positioned centrally in the image, spanning from the left side to almost the right side.\n\nThe yacht is surrounded by a vast expanse of blue water, extending from the foreground to the background. In the background, there is a small island visible, adding depth to the scene. The sky above is a clear blue, providing a beautiful backdrop to the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a silver truck driving on a dirt road. The truck is positioned on the left side of the image, moving towards the right. The road is surrounded by rocky terrain on one side, and grassy terrain on the other. The truck appears to be moving at a moderate speed, with a slight blur indicating motion. The background of the image features a clear blue sky, suggesting a sunny day. There are no other vehicles or objects visible on the road. The truck's design and color suggest it could be used for off-road activities or transportation in challenging terrain."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a silver GMC Sierra 1500 truck driving on a dirt road. The truck is equipped with a quad-cab configuration, large fender flares, and a prominent grille. The truck appears to be in motion, driving on an unpaved road. The background of the image features a rugged terrain, with rocky cliffs and mountains visible. The truck's design and features suggest it is designed for off-road adventures, possibly in a desert or mountainous region."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a silver GMC Sierra 1500 pickup truck driving on a dirt road. The truck is positioned in the center of the frame, moving at a moderate speed. The truck's grille, headlights, and taillights are visible, along with some text on the truck's body. The background of the image reveals a rocky terrain, possibly indicating a desert or mountainous region. The truck appears to be in motion, driving towards the left side of the frame."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a large, luxurious yacht sailing on a vast body of water. The yacht is predominantly silver in color, with a contrasting black accent running along its side. It appears to be moving at a considerable speed, creating a wake behind it. The boat is positioned centrally in the image, drawing the viewer's attention with its size and speed. The background of the image reveals a serene landscape, with mountains visible on the horizon. The sky above is a clear blue, suggesting a bright and sunny day."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A depicts a silver GMC Sierra 1500 pickup truck driving on a dirt road. Image B shows a luxury yacht sailing in the ocean."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A depicts a luxury yacht sailing on calm waters, with mountains in the background. Image B showcases a silver GMC Sierra 1500 pickup truck driving on a dirt road."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

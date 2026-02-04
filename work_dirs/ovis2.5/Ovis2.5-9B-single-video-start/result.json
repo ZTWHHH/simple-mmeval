@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a GMC pickup truck in action, driving through a desert landscape. The truck is a four-door model with a gray exterior and black wheels, creating a striking contrast. It's kicking up a cloud of dust behind it, emphasizing its powerful performance.\n\nThe truck's front grille prominently displays the GMC logo in red, surrounded by a black frame. The headlights are sleek and modern, with a distinctive design that includes a black section in the middle. The truck's body features a black bumper and black side mirrors, adding to its rugged appearance.\n\nThe desert setting is characterized by reddish-brown sand and rocky formations in the background, creating a dramatic backdrop for the vehicle. The scene is captured from a low angle, which accentuates the truck's size and power.\n\nThe image is framed by a black border at the top and bottom, focusing attention on the truck and its surroundings. Overall, the photograph effectively conveys the GMC's capability to handle challenging off-road conditions while maintaining a stylish and modern aesthetic."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a luxurious white yacht cruising through deep blue waters. The yacht is moving at high speed, creating a large, frothy white wake behind it. Its sleek, modern design features a prominent black stripe running along its side, complemented by a black front section. The vessel has multiple decks, including a spacious top deck with a railing, and a smaller upper deck with a white railing. The yacht's windows are tinted, and it's equipped with various antennas and a radar dome on its roof.\n\nThe surrounding water is a vibrant blue, with the yacht's reflection visible on the surface. The sky above is clear and blue, with a few wispy clouds near the horizon. The horizon line is straight, indicating a calm sea.\n\nThe image is framed by black borders at the top and bottom, giving it a cinematic quality. The yacht is positioned slightly to the left of center, moving towards the right side of the frame, emphasizing its speed and direction.\n\nOverall, the scene captures the essence of luxury and freedom, with the yacht appearing to glide effortlessly through the open sea on a beautiful, sunny day."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video features a ginger cat with a fluffy tail and white paws walking through a lush green grassy field. The cat is seen sniffing the ground, likely exploring its surroundings, and then begins to walk towards the camera. As it approaches, the cat's tail sways gently, and its eyes are focused on the camera. The grass is vibrant and well-maintained, providing a natural and serene backdrop for the cat's movements. The lighting is bright and natural, suggesting that the video was taken during the day. The cat's fur is a warm orange color, and its white paws stand out against the green grass. The cat's movements are slow and deliberate, indicating a sense of curiosity and exploration. The video captures the cat's journey from sniffing the ground to walking towards the camera, showcasing its natural behavior in a peaceful outdoor setting."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video captures a serene and picturesque sunset scene, showcasing the sun descending behind a silhouette of a hill or mountain. The sky is painted in warm hues of orange and yellow, with the sun's rays creating a radiant glow that illuminates the clouds and the landscape below. The sun's position gradually lowers, casting a soft, golden light that enhances the tranquil atmosphere. The silhouette of the hill or mountain remains consistent throughout, providing a striking contrast against the vibrant sky. The video maintains a steady focus on the sunset, emphasizing the natural beauty and peaceful ambiance of the moment."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]

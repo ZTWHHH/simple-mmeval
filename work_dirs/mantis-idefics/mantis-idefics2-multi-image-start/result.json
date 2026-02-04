@@ -1,0 +1,96 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a large, shiny gray pickup truck driving on a dirt road. The truck is positioned in the center of the scene, occupying a significant portion of the image. The truck appears to be in motion, as it is kicking up dust as it travels along the dirt road. The overall atmosphere of the image is dynamic and adventurous, with the truck being the main focus."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a large white yacht sailing on the ocean. The boat is moving through the water, creating a wake behind it. The yacht is positioned in the center of the image, occupying a significant portion of the scene. The ocean extends to the horizon, giving a sense of the vastness of the water body. The yacht's motion and the wake it leaves behind suggest that it is in the process of making a turn."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image features a gray GMC truck driving on a dirt road, with a mountainous landscape in the background. The truck appears to be in motion, as it is covered in dust. The second image showcases a white yacht cutting through the ocean, creating a large wake behind it. The yacht is moving at a high speed, and the ocean is calm with a clear blue sky above."
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image features a large white yacht cutting through the water at high speed, creating a wake behind it. The boat is positioned in the center of the image, with the ocean surrounding it.\n\nThe second image showcases a gray GMC truck driving on a dirt road. The truck is in the middle of the image, with the dirt road beneath it and a mountainous landscape in the background. The truck appears to be moving at a high speed, as indicated by the dust it kicks up."
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 3
+    }
+]
