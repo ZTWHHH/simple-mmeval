@@ -57,31 +57,36 @@ class TaskRunner(Task):
         self.model_name = get_model_name_from_path(model_path)
         self.tokenizer, self.model, self.image_processor, self.context_len = load_pretrained_model(model_path, None, self.model_name, **self.model_kwargs, device_map=self.device)
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         prompt = prompt.replace("<image>", "")
 
         return prompt
     
-    def process(self, image, question):
-        qs = question
-
-        if self.model.config.mm_use_im_start_end:
-            qs = DEFAULT_IM_START_TOKEN + DEFAULT_IMAGE_TOKEN + DEFAULT_IM_END_TOKEN + '\n' + qs
+    def process(self, question, image):
+        if image:
+            if self.model.config.mm_use_im_start_end:
+                qs = DEFAULT_IM_START_TOKEN + DEFAULT_IMAGE_TOKEN + DEFAULT_IM_END_TOKEN + '\n' + question
+            else:
+                qs = DEFAULT_IMAGE_TOKEN + '\n' + question
         else:
-            qs = DEFAULT_IMAGE_TOKEN + '\n' + qs
+            qs = question
 
         conv = conv_templates[conv_mode_map[self.model_name]].copy()
         conv.append_message(conv.roles[0], qs)
         conv.append_message(conv.roles[1], None)
         prompt = conv.get_prompt()
         
-        image_size = [image.size]
-        image_tensor = process_images([image], self.image_processor, self.model.config)
+        if image:
+            image_sizes = [image.size]
+            image_tensor = process_images([image], self.image_processor, self.model.config)
+            input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).to(self.model.device)
+        else:
+            image_sizes = None
+            image_tensor = None
+            input_ids = self.tokenizer(prompt, return_tensors='pt').input_ids.to(self.model.device)
 
-        input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).to(self.model.device)
-
-        return input_ids, image_tensor, image_size, prompt
+        return input_ids, image_tensor, image_sizes, prompt
     
     def _generate_response(self, input_ids, image_tensor, image_sizes):
         with torch.inference_mode():
@@ -96,14 +101,17 @@ class TaskRunner(Task):
         return outputs
 
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        question = self._parse_input(ori_sample)
-        image = ori_sample["media"][0]
-        input_ids, image_tensor, image_sizes, prompt = self.process(image, question)
-        input_ids = input_ids.to(device=self.model.device, non_blocking=True)
+        question = self._parse_input(message)
+        media_list = message.get("media", [])
+        image = media_list[0] if media_list else None
+        
+        input_ids, image_tensor, image_sizes, prompt = self.process(question, image)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(input_ids, image_tensor, image_sizes)
+            response = self._generate_response(input_ids, image_tensor, image_sizes)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 

@@ -31,11 +31,11 @@ class TaskRunner(Task):
         max_pixels = 1280 * 28 * 28
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path, min_pixels=min_pixels, max_pixels=max_pixels)
 
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def parse_input(self, message:dict):
+        question = message["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        media_list = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -44,11 +44,13 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                media = media_list.pop(0)
+                media = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "image",
@@ -56,7 +58,8 @@ class TaskRunner(Task):
                     }
                 )       
             elif chunk == constants.video:
-                media = media_list.pop(0)
+                media = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "video",
@@ -87,8 +90,8 @@ class TaskRunner(Task):
 
         return output_text
 
-    def _score_choices(self, text, image_inputs, video_inputs, sample):
-        contents = sample.get("choices")
+    def _score_choices(self, text, image_inputs, video_inputs, message):
+        contents = message.get("choices")
         full = [text + content for content in contents]
 
         full_encoded = [self.processor(text=i, images=image_inputs, videos=video_inputs, return_tensors="pt").to(self.device) for i in full]
@@ -104,8 +107,9 @@ class TaskRunner(Task):
         }
 
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self.parse_input(ori_sample)
+        messages = self.parse_input(message)
         
         text = self.processor.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
@@ -123,9 +127,10 @@ class TaskRunner(Task):
         inputs = inputs.to(self.device)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs)
+            response = self._generate_response(inputs)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, sample))
+            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, message))
 
         return ori_sample
 

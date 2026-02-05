@@ -25,16 +25,17 @@ class TaskRunner(Task):
             args.model_name_or_path, trust_remote_code=True,  **self.model_kwargs
         ).eval().to(device="cuda", dtype=self.dtype)
         
-    def _parse_input(self, sample):
-        prompt = sample["prompt"]
+    def _parse_input(self, message):
+        prompt = message["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', prompt)
-        media = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
-        if len(media) > 1:
-            raise ValueError("WEMM only supports one image input")
+        if len(media_list) > 1:
+            raise ValueError("WEMM only supports single image input")
         
-        image = media[0]
+        image = media_list[0] if media_list else None
+        query = ""
 
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
@@ -42,7 +43,7 @@ class TaskRunner(Task):
             if chunk == constants.image:
                 pass  
             elif chunk == constants.video:
-                raise ValueError("WEMM only supports image input")
+                raise ValueError("WEMM only supports single image input")
             else:
                 query = chunk
 
@@ -50,15 +51,19 @@ class TaskRunner(Task):
 
     def _generate_response(self, image, query):
         pred = self.model.mm_generate(image, query)
-
         return pred
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        image, query = self._parse_input(ori_sample)
+        image, query = self._parse_input(message)
+
+        if image is None:
+            raise ValueError("WEMM requires an image input, but no image was provided in the sample")
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(image, query)
+            response = self._generate_response(image, query)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 
