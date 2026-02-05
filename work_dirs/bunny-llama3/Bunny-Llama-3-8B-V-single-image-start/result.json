@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a large, grey pickup truck driving down a dirt road. The truck is a GMC model, as indicated by the logo on the front. The truck is detailed with a black grill, a black bumper, and a black tire. The headlights are turned on, illuminating the path ahead. The truck's windshield is clear, and the side mirrors are visible. The truck's door handle is also noticeable.\nThe truck is driving on a dirt road, which is covered in dust. The road is surrounded by a desert landscape, with rocks and sand visible in the background. The rocks are brown and appear to be scattered around the area. The sand is brown and covers the ground, creating a dusty environment.\nThe truck's tires are black and appear to be made of rubber. The front tire is particularly noticeable. The truck's wheels are also black and seem to be sturdy, designed for off-road driving.\nThe image captures the ruggedness of the desert landscape and the power of the GMC pickup truck as it navigates through the dusty terrain."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a vibrant scene of a large white yacht sailing across a vast body of water. The yacht is quite prominent, taking up a significant portion of the frame. It's a sleek, modern design with a white and black color scheme, and it's adorned with several windows, including a large windshield at the front. The yacht also features a black stripe running along its side, adding a touch of contrast to its otherwise pristine white exterior.\nThe yacht is equipped with a tall mast, which stands out against the backdrop of the sky. The mast is accompanied by a white pole, possibly a part of the yacht's rigging system. The yacht also has a black and white lifeboat, which is securely attached to the side of the boat.\nThe water around the yacht is a beautiful shade of blue, with small waves rippling across its surface. The yacht is leaving a trail of white foam behind it, indicating its speed and direction. The foam is particularly noticeable in the wake of the boat, which is a testament to the yacht's power and speed.\nIn the background, the sky is a clear blue, with a few white clouds scattered across it. The clouds are relatively small and don't obstruct the view of the sky. The horizon line is visible, marking the boundary between the sky and the water.\nOverall, the image conveys a sense of freedom and adventure, as the yacht cuts through the water, leaving a trail of white foam in its wake. The clear blue sky and the vast body of water add to the sense of openness and tranquility, making it a truly captivating scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

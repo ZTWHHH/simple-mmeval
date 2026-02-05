@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC Sierra 1500 pickup truck in motion on a dirt road. The truck is equipped with off-road tires, indicating it's designed for rough terrain. It's moving towards the right side of the image, suggesting it's driving away from the camera. The truck has a sleek design with a black grille and LED headlamps. The background features a rocky hillside, adding to the ruggedness of the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of intense action on the high seas. A white speedboat, sleek and streamlined, is in the midst of a powerful turn, leaving a trail of white water in its wake. The boat's design is modern and aerodynamic, with a flat bottom that allows it to slice through the water with ease. The color scheme is monochromatic, with the boat's body painted in a pristine white that contrasts beautifully with the deep blue of the ocean. The perspective of the image is from above, looking down at the boat as it navigates the choppy waters. The sky above is a clear blue, devoid of any clouds, suggesting a bright, sunny day. The overall composition of the image is dynamic and visually striking, highlighting the speed and power of the speedboat against the vast expanse of the sea."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

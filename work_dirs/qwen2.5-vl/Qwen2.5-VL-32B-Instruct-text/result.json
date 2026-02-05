@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The result of $ 1 + 1 $ is:\n\n$$\n\\boxed{2}\n$$"
+                ]
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The capital city of China is **Beijing**. It is one of the oldest and most historically significant cities in the country, serving as the political, cultural, and educational center of China. Beijing is home to many important landmarks, including the Forbidden City, Tiananmen Square, the Great Hall of the People, and the Summer Palace. It also hosts major international events, such as the 2008 Summer Olympics and the 2022 Winter Olympics."
+                ]
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]
