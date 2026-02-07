@@ -16,7 +16,12 @@ class TaskRunner(Task):
     def __init__(self, args):
         self.args = args
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.dtype = getattr(args, "dtype") or "auto"
+
+        if "AWQ" in args.model_name_or_path or "GPTQ" in args.model_name_or_path:
+            self.dtype = torch.float16
+        else:
+            self.dtype = getattr(args, "dtype") or "auto"
+            
         self.default_model_kwargs = {"attn_implementation":"flash_attention_2", "device_map": "auto"}
         self.default_gen_kwargs = {"max_new_tokens": 128}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
@@ -35,7 +40,7 @@ class TaskRunner(Task):
         question = message["prompt"]
         # placeholder <>, can be image, video, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        media_list = copy.deepcopy(message["media"])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -44,11 +49,13 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                media = media_list.pop(0)
+                media = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "image",
@@ -56,7 +63,8 @@ class TaskRunner(Task):
                     }
                 )       
             elif chunk == constants.video:
-                media = media_list.pop(0)
+                media = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "video",

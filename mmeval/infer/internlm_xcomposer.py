@@ -36,19 +36,20 @@ class TaskRunner(Task):
         self.model.tokenizer = self.tokenizer
         self.model.eval()
 
-    def _parse_input(self, sample: dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message: dict):
+        prompt = message["prompt"]
         q_chunks = re.split(r'(<image>)', prompt)
-        media = copy.deepcopy(sample['media'])
-
+        media_list = message.get('media', [])
         text_content = ""
         image = None
+        media_idx = 0
 
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                media_file = media.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 if isinstance(media_file, Image.Image):
                     image = media_file.convert('RGB')
                 else:
@@ -68,8 +69,8 @@ class TaskRunner(Task):
         
         return {"text": text_content, "image": image}
 
-    def generate_output(self, sample, **generation_kwargs):
-        parsed_input = self._parse_input(sample)
+    def generate_output(self, message, **generation_kwargs):
+        parsed_input = self._parse_input(message)
         text_content = parsed_input["text"]
         image = parsed_input["image"]
         
@@ -92,10 +93,12 @@ class TaskRunner(Task):
         return response
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
         
         if not self.args.score_target:
-            ori_sample["response"] = self.generate_output(ori_sample)
+            response = self.generate_output(message)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             # Handle scoring target if needed
             pass

@@ -123,10 +123,12 @@ class TaskRunner(Task):
             use_fast=False
         )
         
-    def _parse_input(self, sample: dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message: dict):
+        prompt = message["prompt"]
+        media_list = message.get('media', [])
         prompt = prompt.replace("<image>", "")
-        prompt = "<image>\n" + prompt
+        if media_list:
+            prompt = "<image>\n" + prompt
         return prompt
 
     def _generate_response(self, pixel_values, question):
@@ -141,16 +143,21 @@ class TaskRunner(Task):
         return response
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        question = self._parse_input(ori_sample)
+        media_list = message.get("media", [])
+        question = self._parse_input(message)
         
         # Process images using the new load_image function
-        image = ori_sample["media"][0]
-        pixel_values = load_image(image, max_num=6).to(self.dtype).cuda()
+        if media_list:
+            image = media_list[0]
+            pixel_values = load_image(image, max_num=6).to(self.dtype).cuda()
+        else:
+            pixel_values = None
 
         if not self.args.score_target:
             response = self._generate_response(pixel_values, question)
-            ori_sample["response"] = response
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             # Handle scoring if needed
             pass
