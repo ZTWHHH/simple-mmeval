@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a dynamic scene featuring a GMC pickup truck in motion on a dirt road. The truck, painted in a sleek shade of gray, is a four-door model with a short bed. It's equipped with black rims and a black grille, adding to its rugged appeal. The truck is moving towards the right side of the frame, kicking up a cloud of dust in its wake, suggesting a sense of speed and power.\n\nThe backdrop of the image is a desert landscape, characterized by rocky terrain and sparse vegetation. The clear blue sky overhead contrasts with the earthy tones of the desert, creating a visually striking scene. The truck, the road, and the desert all come together to create a sense of adventure and exploration. The image does not contain any discernible text. The relative positions of the objects confirm that the truck is the main subject of the image, with the desert landscape serving as a dramatic backdrop. The image does not contain any other objects that can be confidently identified. The description is based solely on the visible content of the image, without any added imagination or aesthetic interpretation."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a sleek, white yacht cutting through the deep blue waters, creating a dynamic wake behind it. The yacht's design is modern and streamlined, with a low profile that suggests speed and luxury. The deck is visible, and it appears to be spacious, likely designed for leisure and entertainment. The sky is clear, indicating good weather conditions for a day out on the water. The image does not contain any text or other discernible objects. The relative position of the yacht to the water and the sky suggests it is moving away from the viewer, further into the open sea. The image does not provide any information about the yacht's size or the number of people on board. The focus is solely on the yacht and its interaction with the water, creating a sense of motion and freedom."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]
