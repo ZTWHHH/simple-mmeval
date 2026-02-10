@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "A GMC truck is driving on a dirt road with a rocky background."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a white yacht on the water. The yacht is moving at a high speed, creating a large wake behind it. The yacht has a sleek design with a black stripe along the side. The water is calm and blue, and the sky is clear with a few clouds."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a white and black boat on the water."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image is of a GMC truck driving on a dirt road. The truck is a dark grey color and has a black grill. The truck is also very large and has a lot of features. The second image is of the same truck driving on the water. The truck is in the middle of the water and is surrounded by a lot of water. The truck is also very large and has a lot of features."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a sleek, modern yacht speeding across the water, creating a significant wake behind it. The yacht is white with black accents and has a streamlined design, indicating it's built for speed and luxury. The background features a clear blue sky and calm waters, suggesting a pleasant day for sailing. The yacht appears to be in motion, emphasizing its capability to navigate at high speeds."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC truck driving on a dirt path or off-road terrain. The truck appears to be in motion, as indicated by the dust being kicked up behind it. The background features a clear sky and some distant landforms, suggesting an outdoor, possibly rural setting. The truck is a modern model, likely designed for both on-road and off-road use."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a large white yacht on the water. The yacht has a sleek design and is moving at a high speed, creating a large wake behind it. The yacht has a black stripe along the side and a black roof. The yacht is surrounded by blue water and there is a clear blue sky in the background."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In the image, there is a large white truck with a black grill and a red logo on the front. The truck is driving on a dirt road, and there is a man driving the truck. The truck has a black tire on the front and a black tire on the back. The truck is also driving on a dirt road, and there is a man driving the truck. The truck has a black and red logo on the front, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a black and red logo on the back, and there is a black and red logo on the side. The truck has a"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

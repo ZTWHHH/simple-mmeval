@@ -1,0 +1,96 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": " The image depicts a GMC pickup truck, specifically a four-door model with a large grille and prominent GMC logo. The truck is positioned on a sandy or dusty terrain, likely indicating it is parked or driving on a dirt road. The truck's body is primarily gray, with black accents on its wheels, front bumper, and side mirrors. The truck has a rugged appearance, suggesting it is designed for off-road use or heavy-duty work.\n\nThe GMC logo is prominently displayed on the front of the truck, featuring a stylized \"G\" and \"M\" letters in red, which are often associated with GMC vehicles. The logo is centered on the grille, adding to the truck's rugged aesthetic. The truck also has a large, square headlight on each side, providing ample illumination for visibility while driving.\n\nThe truck's front bumper is visible, showing a strong, robust design typical of GMC trucks. The bumper appears to be made of metal, possibly stainless steel, given its silver color. The truck's wheels are black and have a rugged, all-terrain design, suitable for various terrains.\n\nIn the background, there is a rocky landscape with sparse vegetation, suggesting that the truck is in an outdoor setting, possibly in a rural or semi-rural area. The ground is covered with loose sand or dirt, indicating that the truck might be driving through a sandy or dusty environment.\n\nThere is no visible text within the image itself, but the presence of the GMC logo and the rugged appearance of the truck suggest that this vehicle is likely a GMC brand pickup truck.\n\n### Analysis and Description:\n1. **Truck Type**: The truck is a GMC pickup truck, characterized by its large grille, prominent GMC logo, and rugged design.\n2. **Environment**: The truck is parked or driving on a sandy or dusty terrain, indicative of off-road use or heavy-duty work.\n3. **Looks**: The truck has a strong, robust appearance, typical of GMC vehicles, which are known for their durability and performance.\n4. **Features**: The truck has a large, square headlight on each side, providing ample illumination for visibility.\n5. **Background**: The background shows a rocky landscape with sparse vegetation, suggesting that the truck is in an outdoor setting, possibly in a rural or semi-rural area.\n\n### Relevant Knowledge:\nGMC (General Motors"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": " The image depicts a white speedboat cruising on the ocean. The boat is moving at a high speed, creating a large wake behind it. The water appears to be calm and blue-green in color, with some small waves visible around the boat. The boat itself is sleek and modern, with a long, narrow design that allows for quick acceleration and maneuverability. It has a black stripe running along its side, which may indicate a specific model or brand.\n\nThe boat's wake is quite wide, suggesting that it is moving at a significant speed. The water is clear, allowing for a good view of the boat's reflection and the surrounding environment. The sky above is clear, with no clouds visible, indicating fair weather conditions.\n\nThere are no other boats or structures visible in the image, providing a serene and isolated view of the ocean. The overall composition of the image emphasizes the speed and power of the boat, as well as the natural beauty of the ocean.\n\n### Analysis and Description:\n1. **Boat Type**: The boat is a speedboat, characterized by its sleek design and high acceleration capabilities.\n2. **Water Environment**: The water is calm and blue-green, typical of a clear day without strong winds.\n3. **Wake**: The wake created by the boat indicates high speed, with small waves visible behind the boat.\n4. **Sky**: The sky is clear, suggesting fair weather conditions.\n5. **Environment**: The image captures a serene moment in the ocean, highlighting the speed and power of the boat.\n\n### Relevant Knowledge:\nSpeedboats are designed for high-speed travel, often used for recreational purposes such as racing, touring, or offshore work. They typically have a streamlined hull and powerful engines to achieve high speeds. The presence of a wake behind the boat indicates that it is moving quickly, which can be dangerous if not handled properly.\n\n### Conclusion:\nThis image effectively conveys the speed and power of a speedboat while also showcasing the natural beauty of the ocean. The clear, calm water and the minimal distractions from other vessels or structures highlight the tranquility of the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": " Image 1:\nThe image shows a GMC pickup truck driving on a dirt road. The truck is brown and has a large grille with the letters \"GMC\" in red and white. The truck also has black rims and a black bumper. The truck is driving on a dirt road, surrounded by dry grass. There are no other vehicles or people visible in the image. The background includes a mountain range in the distance. The sky appears clear with a few clouds.\n\nImage 2:\nThis image depicts a white yacht cruising on a calm sea. The yacht is sleek and modern, with a low profile and a large deck area. It has a white hull and a black superstructure. The yacht is moving through the water, leaving a small wake behind it. The yacht is surrounded by a vast expanse of ocean, with no landmasses visible in the distance. The sky is clear, with a few wisps of cloud."
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": " Image 1: The image shows a white boat on the water, with a large wake behind it. The boat is moving quickly, and there are no people visible on board. The water is calm, and the sky is clear with a few clouds. The boat has a sleek design, and its hull is visible above the waterline. The boat's wake is wide and turbulent, indicating that it is moving at a high speed. The boat is white, and it appears to be made of fiberglass or another lightweight material. The boat has a long, narrow shape, and it is likely designed for speed and performance. The boat is also equipped with a number of features, including a large engine, a rudder, and a sail. The boat is currently moving through the water, and it is not clear where it is headed. The image is taken from a low angle, which makes the boat appear larger and more imposing. The image is clear and well-lit, and the colors are vibrant and realistic.\n\nImage 2: The image shows a GMC pickup truck driving down a dirt road. The truck is brown and black, and it has a large grille with the word \"GMC\" in red letters. The truck is moving quickly, and there are no other vehicles visible on the road. The road is unpaved, and it is surrounded by a flat, sandy landscape. The truck is moving at a high speed, and it is kicking up dust as it drives. The image is taken from a low angle, which makes the truck appear larger and more imposing. The image is clear and well-lit, and the colors are vibrant and realistic."
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 3
+    }
+]
