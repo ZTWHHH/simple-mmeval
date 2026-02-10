@@ -45,28 +45,27 @@ class TaskRunner(Task):
         )
         self.vl_gpt = self.vl_gpt.to(self.dtype).cuda().eval()
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
-        images = sample["media"]
-
-        content = prompt.replace("<image>", "<image_placeholder>\n")
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
+        media_list = message.get('media', [])
+        content = prompt.replace("<image>", "<image_placeholder>")
 
         conversation = [
             {
                 "role": "<|User|>",
                 "content": content,
-                "images": images,
+                "images": media_list,
             },
             {"role": "<|Assistant|>", "content": ""},
         ]
 
         return conversation
 
-    def _generate_response(self, inputs_embeds, prepare_inputs):
+    def _generate_response(self, inputs_embeds, attention_mask):
         # run the model to get the response
         outputs = self.vl_gpt.language_model.generate(
             inputs_embeds=inputs_embeds,
-            attention_mask=prepare_inputs.attention_mask,
+            attention_mask=attention_mask,
             pad_token_id=self.tokenizer.eos_token_id,
             bos_token_id=self.tokenizer.bos_token_id,
             eos_token_id=self.tokenizer.eos_token_id,
@@ -78,20 +77,31 @@ class TaskRunner(Task):
         return answer
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        conversation = self._parse_input(ori_sample)
+        pil_images = message.get("media", [])
+        conversation = self._parse_input(message)
 
         # load images and prepare for inputs
-        pil_images = ori_sample["media"]
-        prepare_inputs = self.vl_chat_processor(
-            conversations=conversation, images=pil_images, force_batchify=True
-        ).to(self.vl_gpt.device)
-
-        # run image encoder to get the image embeddings
-        inputs_embeds = self.vl_gpt.prepare_inputs_embeds(**prepare_inputs)
+        if pil_images:
+            prepare_inputs = self.vl_chat_processor(
+                conversations=conversation, images=pil_images, force_batchify=True
+            ).to(self.vl_gpt.device, self.dtype)
+            inputs_embeds = self.vl_gpt.prepare_inputs_embeds(**prepare_inputs)
+            attention_mask = prepare_inputs.attention_mask
+        else:
+            sft_format = self.vl_chat_processor.apply_sft_template_for_multi_turn_prompts(
+                conversations=conversation,
+                sft_format=self.vl_chat_processor.sft_format,
+                system_prompt=self.vl_chat_processor.system_prompt,
+            )
+            input_ids = torch.LongTensor(self.tokenizer.encode(sft_format)).unsqueeze(0).to(self.vl_gpt.device)
+            inputs_embeds = self.vl_gpt.language_model.get_input_embeddings()(input_ids)
+            attention_mask = torch.ones_like(input_ids)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs_embeds, prepare_inputs)
+            response = self._generate_response(inputs_embeds, attention_mask)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             pass
 

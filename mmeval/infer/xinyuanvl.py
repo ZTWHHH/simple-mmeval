@@ -24,8 +24,9 @@ class TaskRunner(Task):
         self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self.parse_input(sample)
+        messages = self.parse_input(message)
         
         text = self.processor.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
@@ -33,9 +34,10 @@ class TaskRunner(Task):
         image_inputs, video_inputs = process_vision_info(messages)
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(text, image_inputs, video_inputs)
+            response = self._generate_response(text, image_inputs, video_inputs)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, sample))
+            ori_sample.update(self._score_choices(text, image_inputs, video_inputs, message))
 
         return ori_sample
 
@@ -59,14 +61,14 @@ class TaskRunner(Task):
 
         return output_text
 
-    def _score_choices(self, text, image_inputs, video_inputs, sample):
+    def _score_choices(self, text, image_inputs, video_inputs, message):
         raise NotImplementedError("Scoring is not supported.")
 
-    def parse_input(self, sample:dict):
-        question = sample["prompt"]
+    def parse_input(self, message:dict):
+        question = message["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', question)
-        images = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -75,12 +77,14 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
 
             if chunk == constants.image:
-                media_file = images.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "image",
