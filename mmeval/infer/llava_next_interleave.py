@@ -103,8 +103,8 @@ class TaskRunner(Task):
             **self.model_kwargs
         )
         
-    def _parse_input(self, sample: dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message: dict):
+        prompt = message["prompt"]
         # Replace <image> placeholders with actual image processing
         conversations = []
         
@@ -139,12 +139,14 @@ class TaskRunner(Task):
         return outputs
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        conversations = self._parse_input(ori_sample)
+        images = message.get("media", [])
+        conversations = self._parse_input(message)
         
         # Process images
-        images = ori_sample["media"]
         image_tensors = []
+        has_image = bool(images)
         for image in images:
             image_tensor = self.image_processor.preprocess(image, return_tensors='pt')['pixel_values']
             image_tensors.append(image_tensor.half().cuda())
@@ -159,11 +161,11 @@ class TaskRunner(Task):
         conv.append_message(conv.roles[1], None)
         
         # Preprocess input
-        input_ids = preprocess_qwen([conversations[0], {'from': 'gpt', 'value': None}], self.tokenizer, has_image=True).cuda()
+        input_ids = preprocess_qwen([conversations[0], {'from': 'gpt', 'value': None}], self.tokenizer, has_image=has_image).cuda()
 
         if not self.args.score_target:
-            response = self._generate_response(input_ids, image_tensors, conv)
-            ori_sample["response"] = response
+            response = self._generate_response(input_ids, image_tensors if image_tensors else None, conv)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             # Handle scoring if needed
             pass

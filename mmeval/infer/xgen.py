@@ -65,40 +65,48 @@ class TaskRunner(Task):
         self.tokenizer.padding_side = "left"
         self.tokenizer.eos_token = '<|end|>'
         
-    def _parse_input(self, sample: dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message: dict):
+        prompt = message["prompt"]
         return apply_prompt_template(prompt)
 
     def _generate_response(self, inputs, image_sizes):
-        generated_text = self.model.generate(
-            **inputs, 
-            image_size=[image_sizes],
-            pad_token_id=self.tokenizer.pad_token_id,
-            eos_token_id=self.tokenizer.eos_token_id,
-            **self.gen_kwargs
-        )
+        if image_sizes:
+            generated_text = self.model.generate(
+                **inputs, 
+                image_size=[image_sizes],
+                pad_token_id=self.tokenizer.pad_token_id,
+                eos_token_id=self.tokenizer.eos_token_id,
+                **self.gen_kwargs
+            )
+        else:
+            generated_text = self.model.generate(
+                **inputs, 
+                pad_token_id=self.tokenizer.pad_token_id,
+                eos_token_id=self.tokenizer.eos_token_id,
+                **self.gen_kwargs
+            )
         
         prediction = self.tokenizer.decode(generated_text[0], skip_special_tokens=True).split("<|end|>")[0]
         
         return prediction
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        prompt = self._parse_input(ori_sample)
+        prompt = self._parse_input(message)
         
         # Process images
-        images = ori_sample["media"]
+        images = message.get("media", [])
         image_list = []
         image_sizes = []
         
-        for img in images:
-            image_list.append(self.image_processor([img], image_aspect_ratio='anyres')["pixel_values"].to(device='cuda', dtype=self.dtype))
-            image_sizes.append(img.size)
-        
-        # Prepare inputs
-        inputs = {
-            "pixel_values": [image_list]
-        }
+        if images:
+            for img in images:
+                image_list.append(self.image_processor([img], image_aspect_ratio='anyres')["pixel_values"].to(device='cuda', dtype=self.dtype))
+                image_sizes.append(img.size)
+                inputs = {"pixel_values": [image_list]}
+        else:
+            inputs = {"pixel_values": None}
         
         # Process text
         language_inputs = self.tokenizer([prompt], return_tensors="pt")
@@ -110,8 +118,8 @@ class TaskRunner(Task):
                 inputs[name] = value.to(device='cuda')
 
         if not self.args.score_target:
-            response = self._generate_response(inputs, image_sizes)
-            ori_sample["response"] = response
+            response = self._generate_response(inputs, image_sizes if images else None)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
             # Handle scoring if needed
             pass

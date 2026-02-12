@@ -14,25 +14,48 @@ class TaskRunner(Task):
         self.args = args
         self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.default_model_kwargs = {"device_map": "auto"}
-        self.default_gen_kwargs = {"max_new_tokens": 100, "do_sample": False}
+        self.default_gen_kwargs = {
+            "max_new_tokens": 100,
+            "do_sample": False,
+            "repetition_penalty": 1.06, 
+        }
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
+        
+        # Detect DPO adapter and cache base model path
+        self.is_peft = "dpo" in args.model_name_or_path.lower()
+        if self.is_peft:
+            from peft import PeftConfig
+            self.peft_config = PeftConfig.from_pretrained(args.model_name_or_path)
+            self.base_model_path = self.peft_config.base_model_name_or_path
+            self.tokenizer = AutoTokenizer.from_pretrained(self.base_model_path)
+        else:
+            self.tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
 
         super().__init__(args)
         
     def load_model(self, args):
-        self.model = AutoModelForVision2Seq.from_pretrained(
-            args.model_name_or_path, **self.model_kwargs
-        ).eval()
-        self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
+        if self.is_peft:
+            from peft import PeftModel
+            base_model = AutoModelForVision2Seq.from_pretrained(
+                self.base_model_path, **self.model_kwargs
+            )
+            self.model = PeftModel.from_pretrained(
+                base_model, args.model_name_or_path
+            ).eval()
+            self.processor = AutoProcessor.from_pretrained(self.base_model_path)
+        else:
+            self.model = AutoModelForVision2Seq.from_pretrained(
+                args.model_name_or_path, **self.model_kwargs
+            ).eval()
+            self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
         
-    def _parse_input(self, sample:dict):
-        prompt = sample["prompt"]
+    def _parse_input(self, message:dict):
+        prompt = message["prompt"]
         # placeholder <>, can be image, video, audio, etc.
         q_chunks = re.split(r'(<(?:image|video)>)', prompt)
-        media = copy.deepcopy(sample['media'])
+        media_list = message.get('media', [])
 
         messages = [
             {
@@ -41,11 +64,13 @@ class TaskRunner(Task):
             }
         ]
 
+        media_idx = 0
         for chunk in q_chunks:
             if len(chunk.strip()) == 0:
                 continue
             if chunk == constants.image:
-                media_file = media.pop(0)
+                media_file = media_list[media_idx]
+                media_idx += 1
                 messages[0]["content"].append(
                     {
                         "type": "image",
@@ -72,8 +97,9 @@ class TaskRunner(Task):
         return decoded
     
     def run_sample(self, sample: dict):
+        message = sample["messages"][0]
         ori_sample = copy.deepcopy(sample)
-        messages = self._parse_input(ori_sample)
+        messages = self._parse_input(message)
 
         inputs = self.processor.apply_chat_template(
             messages, add_generation_prompt=True, tokenize=True,
@@ -83,22 +109,22 @@ class TaskRunner(Task):
         input_len = inputs["input_ids"].shape[-1]
 
         if not self.args.score_target:
-            ori_sample["response"] = self._generate_response(inputs, input_len)
+            response = self._generate_response(inputs, input_len)
+            ori_sample["messages"].append({"role": "assistant", "response": response})
         else:
-            ori_sample.update(self._score_choices(messages, "image", ori_sample))
+            ori_sample.update(self._score_choices(messages, "image", media_list, message))
 
         return ori_sample
     
-    def _score_choices(self, messages, modality, sample):
-        media = copy.deepcopy(sample['media'])
-        contents = sample.get("choices")
+    def _score_choices(self, messages, modality, media_list, message):
+        contents = message.get("choices")
         if modality == "image":
             text = self.processor.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
             )
             full = [text + content for content in contents]
-            full_encoded = [self.processor(text=i, images=media, return_tensors="pt").to(self.device) for i in full]
-            prompt_encoded = self.processor(text=text, images=media, return_tensors="pt").to(self.device)
+            full_encoded = [self.processor(text=i, images=media_list, return_tensors="pt").to(self.device) for i in full]
+            prompt_encoded = self.processor(text=text, images=media_list, return_tensors="pt").to(self.device)
 
         target_toks = target_tokens(self.tokenizer, contents)
 
