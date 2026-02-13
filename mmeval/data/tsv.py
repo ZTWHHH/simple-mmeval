@@ -36,7 +36,6 @@ class TSVDataset(BaseDataset):
         """
         self.dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
         self.dataset_url = None
-        self.template_arg = args.template
         self.resize = args.resize
         
         if args.dataset.startswith("http"):
@@ -49,13 +48,13 @@ class TSVDataset(BaseDataset):
 
         super().__init__(args)
     
-    def _load_raw_data(self, args) -> Any:
+    def _load_raw_data(self, args) -> tuple:
         """Load raw data from TSV files.
         
         Returns
         -------
-        Tuple[pd.DataFrame, str]
-            Pandas DataFrame containing the dataset and prompt template
+        tuple[pd.DataFrame, None]
+            (dataset, None) - TSV has no dataset-specific template
         """
         data_file = os.path.join(self.dataset_dir, f"{self.file_name}.tsv")
 
@@ -67,15 +66,7 @@ class TSVDataset(BaseDataset):
         if "eval-id" not in dataset.columns:
             dataset["eval-id"] = range(len(dataset))
         
-        # Load template: user template > default template
-        has_user_template = self.template_arg is not None
-        if has_user_template:
-            template = self._load_template(self.template_arg)
-        else:
-            default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
-            template = self._load_template(default_template_path)
-        
-        return dataset, template, has_user_template
+        return dataset, None  # No dataset-specific template
 
     def _extract_media_paths(self, sample: Dict[str, Any]) -> list:
         """Extract media paths/data from sample without loading.
