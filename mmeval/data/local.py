@@ -1,4 +1,3 @@
-import os
 import json
 from mmeval.data.base import BaseDataset
 
@@ -9,7 +8,6 @@ class LocalJSONDataset(BaseDataset):
     def __init__(self, args):
         self.data_file = args.infile
         self.media_dir = args.img_dir 
-        self.template_arg = args.template
         super().__init__(args)
 
     def _load_raw_data(self, args):
@@ -19,14 +17,7 @@ class LocalJSONDataset(BaseDataset):
             assert "eval-id" not in sample, "eval-id already exists"
             sample["eval-id"] = i
         
-        has_user_template = self.template_arg is not None
-        if has_user_template:
-            template = self._load_template(self.template_arg)
-        else:
-            default_template_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
-            template = self._load_template(default_template_path)
-        
-        return data, template, has_user_template
+        return data, None  # No dataset-specific template
 
     def _process_sample(self, idx: int):
         sample = dict(self._raw_dataset[idx])

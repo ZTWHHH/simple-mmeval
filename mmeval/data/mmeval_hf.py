@@ -1,4 +1,3 @@
-import os
 import json
 from datasets import load_dataset
 from mmeval.data.base import BaseDataset
@@ -12,26 +11,18 @@ class MMEvalHFDataset(BaseDataset):
         self.split = args.split
         self.circular = args.circular
         self.resize = args.resize  # Used by base._process_messages for image resizing
-        self.template_arg = args.template
         if self.resize is not None:
             print(f"Resizing images to {self.resize}x{self.resize}")
         super().__init__(args)
 
-    def _load_raw_data(self, args):
+    def _load_raw_data(self, args) -> tuple:
         # Load metadata subset to get jinja_template for the current split
         metadata_ds = load_dataset(self.dataset_name, name="metadata", split=self.split)
-        default_template = metadata_ds[0]["jinja_template"] if len(metadata_ds) > 0 else None
-        
-        # User template takes priority
-        has_user_template = self.template_arg is not None
-        if has_user_template:
-            template = self._load_template(self.template_arg)
-        else:
-            template = default_template
+        dataset_template = metadata_ds[0]["jinja_template"] if len(metadata_ds) > 0 else None
         
         # Load default subset with the current split for data
         ds = load_dataset(self.dataset_name, name="default", split=self.split)
-        return ds, template, has_user_template
+        return ds, dataset_template  # Return HF's jinja_template as dataset template
 
     def convert_circular(self, **kwargs) -> any:
         """Prepare dataset for circular evaluation."""

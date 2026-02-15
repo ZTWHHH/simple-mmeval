@@ -35,9 +35,12 @@ class BaseDataset(ABC):
         self._shard_indices = []
         self._shard_length = 0
         
-        self._raw_dataset, self._prompt_template, self._has_user_template = self._load_raw_data(args)
+        # Load raw data and dataset's own template
+        self._raw_dataset, self._dataset_template = self._load_raw_data(args)
         
-        # self._setup_parallel()
+        # Load user template if provided
+        user_template_path = getattr(args, 'template', None)
+        self._user_template = self._load_template(user_template_path) if user_template_path else None
 
     def setup_parallel(self, cache=None):
         if self._raw_dataset is None:
@@ -50,8 +53,7 @@ class BaseDataset(ABC):
             indices_to_run = [idx for idx in indices_to_run if idx not in cache.keys()]
             
         self._shard_indices = indices_to_run[self.rank::self.parallel_per_task]
-        self._shard_length = len(self._shard_indices)
-        
+        self._shard_length = len(self._shard_indices)    
     
     def _get_idx(self, index: int) -> int:
         assert index >= 0, "index must be non-negative"
@@ -177,31 +179,34 @@ class BaseDataset(ABC):
         if getattr(self, 'media_dir', None) and media_list:
             media_list = [os.path.join(self.media_dir, media) if isinstance(media, str) else media for media in media_list]
         
+        # Load default template (used as fallback)
+        default_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
+        default_template = self._load_template(default_path)
+        
         media_idx = 0
         processed_message_list = []
         
         for message in message_list:
-            # Build prompt priority: user template > existing prompt > default template (with fallback)
             prompt = message.get("prompt")
             
-            # 1. Try user template if provided
-            if self._has_user_template:
-                try:
-                    prompt = self.build_prompt(self._prompt_template, message)
-                except Exception as e:
-                    raise ValueError(f"User template rendering failed: {e}")
+            # Determine template and source (priority: user > dataset > default)
+            if self._user_template:
+                template, source = self._user_template, "User"
+            elif prompt is None and self._dataset_template:
+                template, source = self._dataset_template, "Dataset"
+            elif prompt is None and default_template:
+                template, source = default_template, "Default"
+            elif prompt is None:
+                raise ValueError("No prompt and template provided")
+            else:
+                template, source = None, None  # Use existing prompt
             
-            # 2. If no prompt yet, try default template
-            if prompt is None:
-                default_path = os.path.join(os.path.dirname(__file__), "default_template.txt")
-                default_template = self._load_template(default_path)
-                if default_template:
-                    try:
-                        prompt = self.build_prompt(default_template, message)
-                    except Exception as e:
-                        raise ValueError(f"Default template rendering failed: {e}")
-                else:
-                    raise ValueError("No prompt and template provided")
+            # Build prompt from template if needed
+            if template:
+                try:
+                    prompt = self.build_prompt(template, message)
+                except Exception as e:
+                    raise ValueError(f"{source} template rendering failed: {e}")
             
             # Load media for this message's placeholders (zip auto-stops at shorter list)
             placeholder_list = re.findall(r"<(video|image)>", prompt)
@@ -239,11 +244,8 @@ class BaseDataset(ABC):
         raise NotImplementedError("convert_circular not implemented.")
 
     @abstractmethod
-    def _load_raw_data(self, args) -> Any:
-        """Load raw data from the data source.
-        
-        Returns a dataset object that supports indexing and length,
-        but doesn't necessarily load all data into memory at once.
+    def _load_raw_data(self, args) -> tuple:
+        """Load raw data and dataset-specific template.
         
         Parameters
         ----------
@@ -252,8 +254,10 @@ class BaseDataset(ABC):
             
         Returns
         -------
-        Any
-            Dataset object that supports indexing (dataset[i]) and len()
+        tuple[Any, str | None]
+            (dataset, dataset_template) where:
+            - dataset: object that supports indexing (dataset[i]) and len()
+            - dataset_template: dataset's own template (e.g., HF jinja_template) or None
         """
 
     @abstractmethod
