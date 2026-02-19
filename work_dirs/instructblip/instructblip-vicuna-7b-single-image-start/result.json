@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a silver 2020 GMC Sierra Denali pickup truck driving on a dirt road in the desert. The truck is parked on the right side of the image, with its front end facing towards the viewer. There are two people visible in the scene, one standing on the left side of the truck and the other standing on the right side of the truck. In total, there are three people present in the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large white motor yacht sailing on the open ocean, surrounded by a vast expanse of blue water. The yacht appears to be traveling at a moderate speed, leaving a wake behind it as it moves through the water. There are several people visible on the yacht, likely enjoying the ride and taking in the breathtaking scenery around them. In addition to the main yacht, there are smaller boats scattered throughout the scene, adding to the overall nautical atmosphere."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

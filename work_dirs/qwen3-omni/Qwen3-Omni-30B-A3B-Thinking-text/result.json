@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "<think>\nOkay, the user is asking what 1 plus 1 equals. Hmm, this seems like a very basic math question. Let me think... \n\nFirst, I should confirm the obvious answer: 1 + 1 = 2. But why would someone ask this? Maybe they're testing if I'm paying attention, or perhaps they're a young child learning addition. Could also be someone checking if I'm a real AI or just spouting pre-programmed answers. \n\nI wonder if there's any trick here. Like, in some contexts like binary math or set theory, but no\u2014the question doesn't specify any special context. It's just plain arithmetic. \n\nThe user's tone feels neutral, no urgency or frustration. Probably not a trick question. Maybe they're just bored and want a quick confirmation. Or... could it be a language barrier thing? Like if \"plus\" means something else in their dialect? But unlikely\u2014standard math notation is universal. \n\nShould I overcomplicate it? Nah. Best to keep it simple: state the answer clearly, then briefly explain why it's 2. No need for advanced math unless they follow up. \n\n...Wait, is there a chance they're trolling? Like, \"1+1=3\" meme stuff? But the question seems genuine. Better assume good faith. \n\nFinal decision: Answer directly, add a tiny bit of educational context (counting objects), and leave the door open for deeper questions. Keep it warm but precise.\n</think>\n\nThe result of **1 + 1 is 2**.  \n\nThis is a fundamental arithmetic operation based on the **definition of addition** in basic mathematics:  \n- When you combine one object with another object, you have a total of **two objects**.  \n- For example:  \n  - One apple + one apple = **two apples**.  \n  - One finger + one finger = **two fingers**.  \n\n### Why is this true?  \n- In the **decimal system** (base-10), numbers represent quantities.  \n- The number **2** is defined as the successor of **1** (i.e., the next number after 1).  \n- This is consistent across all standard mathematical systems (e.g., integers, real numbers).  \n\n### Special Cases?  \n- **Binary (base-2)**: 1 + 1 = **10** (which equals 2 in decimal).  \n- **Set theory**: The union of two disjoint sets with one element each has **two elements**.  \n- **Physics**: In most contexts (e.g., counting objects), 1 + 1 = 2. However, in *relativistic physics* or *quantum mechanics*, energy/mass interactions might behave differently\u2014but this doesn\u2019t change basic arithmetic.  \n\n**Conclusion**: For all practical purposes in everyday math, **1 + 1 = 2**. If you\u2019re exploring deeper concepts (like abstract algebra or non-standard systems), feel free to ask! \ud83d\ude0a"
+                ]
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "<think>\nOkay, the user is asking about the capital city of China. That seems straightforward, but let me think carefully. \n\nHmm, Beijing has been the capital since 1949 when the People's Republic was established. But wait\u2014should I mention historical capitals too? Like Nanjing or Xi'an? No, the question specifically asks for the current capital. \n\nThe user might be a student doing homework, a traveler planning a trip, or just someone curious. Since they didn't provide context, I'll keep it simple and factual. \n\nI recall some people confuse Shanghai as the capital because it's a major financial hub, but no\u2014definitely Beijing. Better clarify that to avoid confusion. \n\nAlso, should I add a bit about Beijing's significance? Like it being the political center with the Great Hall of the People and Zhongnanhai? Yeah, that adds useful context without overcomplicating. \n\n...Double-checking: Yep, official sources confirm Beijing. No recent changes. \n\nThe answer should be clear, concise, and include why it's the capital to preempt follow-up questions. No need for fluff\u2014just helpful accuracy.\n</think>\n\nThe capital city of the People's Republic of China is **Beijing** (\u5317\u4eac).  \n\n### Key Details:\n- **Established as Capital**: 1949 (after the founding of the PRC).  \n- **Role**: Serves as China's political, cultural, and educational center.  \n- **Significance**:  \n  - Home to the **Great Hall of the People** (seat of the National People's Congress).  \n  - Contains the **Zhongnanhai** compound (residence of top leadership).  \n  - Hosts major international events (e.g., the 2008 Summer Olympics).  \n\n### Common Misconceptions:\n- **Shanghai** is often mistaken as the capital due to its economic prominence, but it is **not** the political center.  \n- Historically, cities like **Nanjing** (1927\u20131949) and **Xi'an** (during ancient dynasties) served as capitals, but Beijing has been the capital since 1949.  \n\nBeijing remains the undisputed administrative heart of modern China. \ud83c\udde8\ud83c\uddf3"
+                ]
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

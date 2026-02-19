@@ -1,0 +1,208 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The image is a professionally staged, high-resolution photograph of a modern GMC pickup truck, captured in a dynamic, action-oriented pose. The truck is the central subject, positioned at a three-quarter front angle that showcases its aggressive styling and muscular build. It is a four-door crew cab model, painted in a metallic dark gray or charcoal color that gleams under the warm, directional sunlight. The vehicle is in motion, kicking up a cloud of fine dust from a dry, sandy or gravelly surface, which emphasizes its off-road capability and power.\n\nThe truck\u2019s design is bold and contemporary. Its front end features a large, black, textured grille with a prominent red \"GMC\" logo at the center. The grille is flanked by sharp, angular LED headlights and integrated fog lights, contributing to a modern and assertive look. The hood is sculpted with pronounced creases, and the front bumper is robust, with a visible skid plate and a tow hitch receiver. The side profile reveals a high ground clearance, large black off-road tires mounted on multi-spoke black alloy wheels, and a raised suspension, all of which reinforce its rugged, adventure-ready character. The windows are tinted, and the side mirrors are body-colored. A small antenna is visible on the roof, and the truck\u2019s bed is partially visible, with a black tonneau cover and a red accent line running along the top edge.\n\nThe background is a dramatic desert landscape, characterized by layered, reddish-brown rock formations and sparse, dry vegetation. The setting is bathed in the warm, golden light of either sunrise or sunset, which casts long shadows and highlights the textures of both the truck and the terrain. The lighting and composition are carefully controlled, with a shallow depth of field that keeps the truck in sharp focus while softly blurring the background, drawing the viewer\u2019s attention to the vehicle. The overall impression is one of power, adventure, and modern design, typical of a commercial or promotional photograph intended to appeal to consumers interested in rugged, capable trucks.\n\nIn summary, the image presents a detailed and dynamic portrayal of a modern GMC pickup truck in a desert environment, emphasizing its design, performance, and adventurous spirit through professional photography and careful staging."
+                ]
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The image is a professionally composed, high-resolution photograph capturing a modern luxury motor yacht in motion on a calm, open body of water under a clear sky. The yacht is the central subject, positioned at a dynamic three-quarter angle that showcases its sleek, contemporary design. It is painted white with a dark, likely black, hull and features a multi-level superstructure with large, tinted windows and a glass-enclosed wheelhouse. The upper deck is equipped with a metal safety railing, and a small radar or communication mast is visible at the stern.\n\nThe yacht is moving at high speed, evidenced by the substantial, foamy wake trailing behind it and the spray kicked up by its hull. The water is a deep, vibrant blue, with the wake and spray appearing bright white, indicating strong sunlight. The sky above is a clear, light blue, devoid of clouds, suggesting fair weather and a bright day. The horizon is visible in the distance, where the water meets the sky, and a faint landmass or coastline can be seen far off to the left.\n\nThe photograph is framed with thick black bars at the top and bottom, indicating it is a cropped or letterboxed image, likely intended for use in a digital format such as a website, social media post, or advertisement. The overall impression is one of luxury, speed, and leisure, with the yacht presented as a symbol of high-end lifestyle and adventure on the water. There are no other vessels, people, or signs of activity in the image, focusing all attention on the yacht and its impressive movement through the serene seascape."
+                ]
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The two images provided are high-quality, professionally staged photographs, each showcasing a different type of vehicle in a dynamic setting.\n\nThe first image features a modern, dark gray GMC pickup truck, likely a Sierra or Canyon model, captured from a front three-quarter angle. The truck is in motion, kicking up a cloud of dust from a dry, sandy surface, which emphasizes its off-road capabilities. Its design is characterized by a bold, blacked-out grille with the red \"GMC\" logo, sharp, angular LED headlights, and a rugged front bumper. The vehicle is equipped with large, black off-road tires and a lifted suspension, further highlighting its adventurous nature. The background consists of a blurred, arid landscape with reddish-brown rock formations, suggesting a desert or canyon environment. The lighting is bright and warm, indicating a sunny day, and the overall composition is dynamic and action-oriented.\n\nThe second image presents a sleek, white luxury motor yacht speeding across a calm, deep blue ocean under a clear sky. The yacht is captured from a side angle, moving from left to right, and is creating a large, foamy wake that trails behind it. Its design is modern and streamlined, with a glass-enclosed cabin, a spacious open deck, and a metallic railing. The hull is predominantly white with a dark stripe along the waterline, and the vessel appears to be a high-end model, possibly a custom or premium brand. The setting is serene and open, with no other boats or land in sight, conveying a sense of freedom and exclusivity. The lighting is bright and natural, suggesting a sunny day, and the overall mood is one of leisure and sophistication.\n\nIn summary, the first image portrays a rugged, powerful pickup truck in an adventurous, off-road setting, while the second image depicts a luxurious yacht in a tranquil, open-sea environment. Both images are professionally executed, with each vehicle presented in a context that highlights its unique characteristics and intended use."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The two images provided are high-quality, professionally staged photographs, each featuring a different vehicle in a dynamic setting.\n\nThe first image displays a large, white luxury motor yacht speeding across a calm, deep blue ocean under a clear sky. The yacht is captured from a side angle, emphasizing its sleek, modern design with a streamlined hull and a multi-level superstructure. A prominent wake of white water trails behind it, indicating high speed. The vessel is equipped with a radar arch, multiple antennas, and a spacious flybridge with a glass windshield. The overall impression is one of opulence and high-performance leisure travel.\n\nThe second image features a modern, dark gray GMC pickup truck, likely a Sierra or Canyon model, driving at speed on a dusty, unpaved road. The truck is shown from a front three-quarter angle, highlighting its aggressive styling, including a large, blacked-out grille with the red \"GMC\" logo, sharp LED headlights, and a robust front bumper. The vehicle is kicking up a cloud of dust, and its tires are partially lifted off the ground, suggesting it is traversing rough terrain. The background consists of a rocky, arid landscape, possibly a canyon or desert, which reinforces the truck's rugged, off-road capabilities. The lighting and composition are typical of a commercial advertisement, designed to convey power and adventure."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The image is a composite of two distinct, high-quality photographs, each showcasing a different vehicle in an action-oriented setting. The overall presentation is clean and professional, with each photograph framed by a black border, suggesting a digital or print layout designed for comparison or thematic juxtaposition.\n\n**First Image (Left):**\nThis photograph features a modern, dark gray GMC Sierra pickup truck, likely a high-end trim such as the AT4 or Denali, captured in motion on a rugged, unpaved desert road. The truck is angled to display its front and driver\u2019s side, emphasizing its aggressive styling. Key design elements include a large, black, textured grille with the red \"GMC\" logo, sleek LED headlights, and a robust front bumper with integrated skid plates. The vehicle is equipped with large, black off-road tires and matching wheels, and a roof-mounted antenna is visible. The truck is kicking up a cloud of dust, indicating movement and off-road capability. The background consists of blurred desert rock formations under a bright sky, with warm, golden lighting that suggests either sunrise or sunset. The truck\u2019s glossy finish and the clarity of the image highlight its premium features and rugged aesthetic.\n\n**Second Image (Right):**\nThis photograph presents a white luxury motor yacht speeding across a calm, deep blue ocean under a clear sky. The yacht is captured from a side angle, moving from left to right, and is creating a prominent V-shaped wake with white spray trailing behind. The vessel\u2019s design is sleek and modern, with a streamlined hull, a multi-level deck, and a glass-enclosed cabin. The upper deck features a sunpad, railings, and a small radar or communication mast. The yacht\u2019s white hull and superstructure contrast sharply with the vibrant blue water, and the bright, direct sunlight enhances the sense of speed and luxury. The scene is serene and expansive, with no other vessels or land in sight, focusing attention on the yacht\u2019s performance and elegance.\n\n**Overall Composition:**\nThe two images are presented side by side, each occupying half of the frame, with a black border separating them. The juxtaposition of the rugged, earthbound GMC truck and the luxurious, waterborne yacht creates a thematic contrast between land and sea, power and elegance, and adventure and leisure. The professional quality of both photographs, along with their clean presentation, suggests they are intended for promotional, editorial, or comparative purposes, highlighting the capabilities and appeal of these vehicles in their respective environments."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The two images provided are high-quality, professionally staged photographs, each featuring a different vehicle in a dynamic setting. They are presented as separate, full-bleed images, each with a black bar at the top and bottom, suggesting they are intended for digital display or as part of a larger presentation.\n\n---\n\n**Image 1: Luxury Yacht**\n\nThis image captures a modern, white luxury motor yacht in motion on a calm, open body of water, likely the ocean or a large sea. The yacht is the central subject, shown from a dynamic, low-angle perspective that emphasizes its speed and sleek design. The vessel is moving from left to right, creating a large, foamy wake that trails behind it, indicating high velocity. The hull is predominantly white with a dark accent stripe running along the waterline, and the superstructure features large windows and a glass-enclosed bridge. The deck is equipped with metallic railings, and a small flag is visible at the stern. The sky above is clear and blue, and the water is a deep, vibrant blue, reflecting the bright sunlight. The overall impression is one of luxury, power, and leisure, with the yacht appearing to be in a pristine, open-water environment.\n\n---\n\n**Image 2: GMC Sierra HD**\n\nThis image showcases a modern, dark gray GMC Sierra HD pickup truck, presented in a rugged, off-road setting. The truck is captured from a front three-quarter angle, highlighting its aggressive styling and robust build. It is moving across a dusty, unpaved terrain, kicking up a cloud of fine dust behind its rear wheels, which emphasizes its power and capability. The truck features a bold front grille with the \"GMC\" logo, modern LED headlights, and a prominent front bumper with integrated skid plates. The vehicle is equipped with large, black alloy wheels and all-terrain tires, and the suspension appears to be lifted for enhanced ground clearance. The background consists of a rocky, arid landscape, possibly a canyon or desert, with warm, earthy tones and a hazy, sunlit atmosphere. The overall mood is one of strength, adventure, and readiness for challenging environments, with the truck positioned as a symbol of rugged utility and performance.\n\n---\n\nIn summary, the first image portrays a luxury motor yacht speeding across open water, evoking themes of elegance and leisure, while the second image features a powerful GMC Sierra HD truck traversing a dusty, rugged landscape, conveying a sense of strength and adventure. Both images are professionally composed to highlight the vehicles' design and capabilities in their respective environments."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The two images provided are professionally staged photographs, each highlighting a different type of vehicle in a dynamic setting.\n\n---\n\n**Image A:**\nThis image features a modern, dark gray GMC Sierra pickup truck, likely a high-end trim such as the AT4X, captured in motion on a dusty, unpaved road. The truck is angled to display its front and driver's side, with its front wheels turned slightly to the left. It is kicking up a cloud of dust, indicating movement across a dry, sandy surface. The vehicle's design is aggressive and contemporary, characterized by a large, black, textured grille with the red \"GMC\" logo, sleek, angular headlights, and a robust front bumper with integrated skid plates. The truck is equipped with large, black off-road tires and matching black wheels, and it has a short bed. The background consists of a blurred, arid landscape with reddish-brown rock formations, suggesting a desert or canyon environment. The lighting is bright and directional, casting sharp highlights and shadows that accentuate the truck's muscular contours and glossy finish. The overall composition is dynamic and action-oriented, designed to convey power, capability, and ruggedness.\n\n---\n\n**Image B:**\nThis image showcases a large, white luxury motor yacht speeding across a calm, deep blue ocean under a clear sky. The yacht is captured from a side angle, moving from left to right, and is creating a prominent, foamy wake that trails behind it. The vessel is modern and sleek, with a streamlined hull and a multi-level superstructure. The upper deck features a glass-enclosed bridge, a spacious open-air area with a light-colored teak or composite deck, and a metal safety railing. The yacht's design includes a dark accent stripe along the hull and a small flag or pennant at the top of the mast. The water is a vibrant blue, and the sky is a clear, light blue, indicating fair weather. The photograph is taken from a distance, emphasizing the yacht's size and the expansive ocean setting. The overall impression is one of speed, luxury, and leisure, with the yacht appearing as a symbol of high-end recreation and adventure on the water."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The two images provided are professionally staged, high-resolution photographs, each highlighting a different type of vehicle in a dynamic setting. The following is a detailed description of each image.\n\n---\n\n### Image A: High-Performance Motor Yacht\n\nThis image captures a modern, high-end motor yacht in motion on a calm, open body of water, likely the ocean or a large sea. The scene is set under a clear, bright blue sky, indicating fair weather and strong sunlight.\n\n- **The Yacht:** The central subject is a large, white motor yacht with a sleek, contemporary design. It features a multi-level structure, including a main deck and a raised flybridge at the stern, which is equipped with a radar arch and navigation lights. The yacht's hull is predominantly white, accented with a dark, possibly black, stripe running along the waterline. The windows are tinted, and the upper deck appears to have a light-colored, possibly teak, flooring. The vessel is moving at high speed, as evidenced by the significant wake it creates.\n- **The Water:** The water is a deep, vibrant blue, with a smooth surface except for the area disturbed by the yacht. A large, foamy white wake trails behind the yacht, indicating its rapid movement. The water's color and clarity suggest a clean, open marine environment.\n- **Composition and Style:** The photograph is taken from a slightly elevated angle, emphasizing the yacht's speed and the expansive nature of the setting. The composition is clean and focused, with the yacht positioned slightly off-center to the left, allowing the wake to sweep across the frame. The overall impression is one of luxury, power, and leisure, typical of promotional material for high-end yachts.\n\n---\n\n### Image B: GMC Sierra HD Pickup Truck\n\nThis image showcases a modern GMC Sierra HD pickup truck, presented in a rugged, off-road environment. The truck is captured in motion, kicking up dust as it traverses a dirt or gravel surface, with a rocky, arid landscape in the background.\n\n- **The Truck:** The vehicle is a four-door, crew cab pickup truck, finished in a metallic gray or silver paint. It features a bold, aggressive front-end design with a large, black grille that has a honeycomb pattern and the \"GMC\" logo prominently displayed in red. The headlights are modern, likely LED, with a distinctive daytime running light signature. The truck is equipped with large, black off-road tires mounted on dark alloy wheels, and it has a raised suspension, indicating its heavy-duty capabilities. The side mirrors are body-colored, and the windows are tinted. The truck is shown in motion, with dust trailing from the rear wheels, emphasizing its power and off-road prowess.\n- **The Environment:** The setting is a dry, rocky, and arid landscape, possibly a desert or canyon, with reddish-brown rock formations visible in the background. The ground is unpaved and dusty, reinforcing the truck's rugged, adventurous character. The lighting is bright and natural, suggesting a sunny day.\n- **Composition and Style:** The photograph is taken from a low, front-three-quarter angle, which accentuates the truck's size, stance, and aggressive design. The background is slightly blurred, drawing focus to the truck. The overall aesthetic is one of strength, capability, and adventure, aligning with the marketing of heavy-duty pickup trucks designed for challenging terrains.\n\n---\n\nIn summary, the two images present contrasting yet equally dynamic scenes: one of luxury and speed on the water with a high-performance motor yacht, and the other of rugged power and capability on land with a GMC Sierra HD pickup truck. Both are professionally executed to highlight the vehicles' design and performance in their respective environments."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

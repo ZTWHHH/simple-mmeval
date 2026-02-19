@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a silver GMC Sierra pickup truck in motion on a dirt road. The truck is positioned at an angle, with the front facing slightly to the left of the frame. It has a rugged, off-road design with large, black tires and a raised suspension. The GMC logo is prominently displayed on the front grille. The background features a rocky landscape with patches of greenery, suggesting a remote or natural setting. The lighting indicates it is either dawn or dusk, as the sky is not visible and the light appears to be coming from the horizon."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a luxury yacht cutting through the water, creating a large wake behind it. The yacht is predominantly white with some black detailing and has a sleek, modern design. It appears to be moving at a high speed, as indicated by the size of the wake. The surrounding water is a deep blue, suggesting a clear, sunny day. There are no visible people or other objects in the image, and the horizon is visible in the distance."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

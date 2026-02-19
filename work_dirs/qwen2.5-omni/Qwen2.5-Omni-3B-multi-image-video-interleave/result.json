@@ -1,0 +1,466 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "Well, the image shows a GMC truck. It's a dark gray color. The front grille is quite prominent, with the GMC logo in the center. The headlights are sleek and modern. The truck is driving on a dirt road, and you can see some dust being kicked up by the tires. The background has a rocky, desert - like landscape. It looks like it's designed for off - road use. What do you think about this truck? Do you have any other questions about it?"
+                ]
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "Well, the image shows a white motor yacht speeding across the water. It's got a sleek design with a curved front and a small cabin area. The water behind it is creating a big splash, which tells you it's moving really fast. The sky is clear and blue, and there's a bit of land in the distance. It looks like a really nice day for sailing. What do you think about yachts? Have you ever been on one?"
+                ]
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "Well, in the first image, you've got a GMC truck. It's a dark color, probably black or dark gray. It's driving on a dirt road, and you can see some dust being kicked up behind it. The background looks like a desert or a rocky area. It's got that rugged look, you know? And the GMC logo is right there on the front.In the second image, there's a white yacht speeding across the water. The water is a nice blue, and the yacht is leaving a trail of white foam behind it. It's got a sleek design with a cabin and a deck area. The sky is clear and blue, so it seems like a nice day for sailing.So, what do you think about these images? Do you have any other questions?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "Well, in the first image, you've got a white speedboat cutting through the water. It's got a sleek design, and you can see the wake it's creating behind it. The water looks really blue and calm, and the sky is clear and blue too.In the second image, there's a gray GMC truck. It's on a dirt road, and there's some dust flying up behind it. The background has some rocky hills, so it seems like it's in a more rugged area. The truck looks pretty sturdy and well - built.So, what do you think about these images? Do you have any other questions?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The first image shows a GMC truck. It's a dark gray color. The truck is in a desert-like environment, with red sand and rocky cliffs in the background. The truck is driving on a dirt road, kicking up some dust. The front grille has the GMC logo on it.The second image is of a speedboat on the water. It's white with some red and black accents. The boat is moving quickly, creating a lot of white water behind it. The water is a deep blue, and the sky is clear and blue. There are some small waves around the boat.If you want to know more about these images or have any other questions, feel free to ask."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The first image shows a white speedboat speeding across the water. It has a sleek design with a pointed bow and a cabin area. The water behind it is creating a lot of white spray, which shows how fast it's going. The sky is clear and blue, and the horizon is visible in the background.The second image is of a GMC truck. It's a dark gray color and is driving on a dirt road. The truck has a large front grille with the GMC logo in the center. The wheels are big and look like they're designed for off - road use. There's some dust being kicked up behind the truck, which suggests it's moving at a good speed.If you want to know more about these images or have any other questions, feel free to ask."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In Image A, there's a pickup truck. It's a dark color, maybe black or dark gray. The truck is on a dirt road, and you can see some dust being kicked up by its tires. The background looks like a rocky, desert - like area. The GMC logo is on the front of the truck.In Image B, there's a speedboat on the water. It's white with some red and black details. The boat is moving fast, creating a lot of white water behind it. The water looks calm, and the sky is clear and blue.So, what do you think about these images? Do you have any other questions about them?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In Image A, there's a white speedboat cutting through the water. It's moving at a pretty fast pace, as you can see the wake behind it. The water looks calm, and the sky is clear and blue.In Image B, there's a gray GMC truck. It's on a dirt road, and there's some dust being kicked up by the tires. The background shows a rocky landscape, like a canyon or something similar.So, what do you think about these images? Do you have any other questions about them?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    },
+    {
+        "id": 8,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The video shows an orange cat walking on a grassy field. The cat has a fluffy tail and its fur looks really soft. It's moving forward with a steady pace, and the grass around it is green and well - maintained. The lighting in the video is bright, suggesting it might be a sunny day. What do you think about cats? Do you have a favorite breed?"
+                ]
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8
+    },
+    {
+        "id": 9,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "Well, the video shows a beautiful sunset. You can see the sun is setting behind a mountain. The sky is filled with warm, orange and yellow colors. There are some clouds in the sky too. The mountain has a silhouette of trees on it. It's a really peaceful and serene scene. What do you think about sunsets? Do you like them?"
+                ]
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9
+    },
+    {
+        "id": 10,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In the first image, there's an orange cat walking on a grassy field. The cat has a fluffy tail and its fur looks really soft. It seems to be moving forward, maybe exploring or just enjoying the outdoors.In the second image, it's a beautiful sunset scene. The sun is setting behind a mountain range. The sky is filled with warm, orange and yellow colors. The sun looks really big and bright, casting a warm glow over the whole scene. There are some silhouettes of trees on the mountains, which add to the beauty of the picture.So, what do you think about these images? Do you like the cat or the sunset more?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10
+    },
+    {
+        "id": 11,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In the first image, you can see a beautiful sunset. The sky is filled with warm, orange and yellow hues. The sun is low on the horizon, casting a soft glow. There are silhouettes of trees and hills in the foreground, which adds to the serene and peaceful atmosphere.In the second image, there's a cat walking on a grassy field. The cat has a light brown and white coat. It's moving forward, and you can see its tail slightly raised. The grass looks green and well - maintained. It gives a sense of calmness and freedom.What do you think about these images? Do you have any other questions about them?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11
+    },
+    {
+        "id": 12,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In Video A, there's an orange cat walking on a grassy field. The cat has a fluffy tail and is moving forward with its head down, looking like it's exploring or hunting something. It's a really cute and natural scene.In Video B, it's a beautiful sunset. The sun is setting behind a mountain, and the sky is filled with warm orange and yellow colors. The silhouette of the mountain and some trees can be seen against the vibrant backdrop. It's a really peaceful and stunning view.So, what do you think about these videos? Do you have any other questions about them?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12
+    },
+    {
+        "id": 13,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In Video A, you see a beautiful sunset. The sun is setting behind a mountain, and the sky is filled with warm, orange and yellow hues. The silhouette of the mountain and some trees can be seen against the vibrant backdrop. It's a really peaceful and serene scene.In Video B, there's a cat walking on a grassy field. The cat has a light brown and white coat. It's moving forward, and you can see its tail wagging a bit. The grass looks really green and healthy. It's a nice, simple scene of a cat enjoying its time outdoors.If you want to know more about these videos or have any other questions, feel free to ask."
+                ]
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13
+    },
+    {
+        "id": 14,
+        "media": [
+            "truck.png",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The first image shows a GMC truck. It's a dark gray color. The truck is in a desert or rocky area, with some dust being kicked up by its tires. The front grille has the GMC logo on it. The truck looks pretty rugged and is designed for off - road use.The second image is of an orange cat walking on a grassy field. The cat has a fluffy tail and is looking forward. The grass is green and the background is a bit blurry, which makes the cat stand out more.If you want to know more about these images or have other questions, feel free to ask."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14
+    },
+    {
+        "id": 15,
+        "media": [
+            "sun.mp4",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The first image shows a beautiful sunset. The sun is low on the horizon, casting a warm, orange glow across the sky. There are silhouettes of trees and hills in the foreground, which are also bathed in the orange light. It looks really peaceful and serene.The second image is of a GMC truck. It's a dark gray color and is shown in a desert-like environment. The truck is driving on a dirt road, kicking up some dust. The background has rocky formations, which adds to the rugged look of the scene.If you want to know more about these images or have any other questions, feel free to ask."
+                ]
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15
+    },
+    {
+        "id": 16,
+        "media": [
+            "boat.png",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In Image A, there's a white yacht speeding across the water. You can see the wake it's creating behind it. The water looks calm, and the sky is clear with a bit of a blue tint. It gives off a really nice, peaceful vibe.In Video B, it's a sunset. The sun is setting behind some hills or mountains. The sky is a beautiful orange and yellow color, and the sun is almost touching the horizon. It's a really serene and beautiful scene.So, what do you think about these images and videos? Do you have any other questions about them?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16
+    },
+    {
+        "id": 17,
+        "media": [
+            "cat.mp4",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "In Video A, there's a cat walking on a grassy field. The cat has a light brown and white fur pattern. It's moving forward, and you can see its tail wagging a bit. The grass looks really green and well - maintained.In Image B, there's a speedboat on the water. It's white with some red and black details. The boat is moving at a high speed, creating a lot of white water behind it. The water is a deep blue, and the sky is clear and blue too.So, what do you think about these two? Do you have any other questions about them?"
+                ]
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17
+    }
+]

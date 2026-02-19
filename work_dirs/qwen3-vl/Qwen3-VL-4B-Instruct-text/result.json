@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The result of **1 plus 1** is **2**.\n\nThis is a fundamental arithmetic operation in mathematics. In basic addition:\n\n> **1 + 1 = 2**\n\nIt holds true in standard arithmetic, and also in many other mathematical systems (like binary, where 1 + 1 = 10 \u2014 but that\u2019s in base 2, not the decimal system you\u2019re likely asking about).\n\n\u2705 So, the answer is: **2**"
+                ]
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "The capital city of China is **Beijing**.\n\nBeijing is located in northern China and has been the capital since the Ming Dynasty (14th century) and continues to serve as the political, cultural, and administrative center of the People's Republic of China. It is home to the Forbidden City, the Great Wall, the Tiananmen Square, and many other iconic landmarks. The city also hosts the headquarters of the Chinese government and major state institutions.\n\nNote: While **Beijing** is the capital, **Shanghai** is often considered the economic and financial center of China, and **Tianjin** is a major port city and administrative center for the northern region.\n\n\u2705 So, the official capital city of China is: **Beijing**."
+                ]
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]
