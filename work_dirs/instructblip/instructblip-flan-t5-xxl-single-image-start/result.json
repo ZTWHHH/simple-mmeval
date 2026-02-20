@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a gray 2020 GMC Canyon pickup truck driving on a deserted road. The truck is surrounded by rocks and dirt, providing a sense of ruggedness and adventure. There are several other vehicles in the scene, including a Jeep Wrangler, a motorcycle, and a mountain bike. In addition to the truck, there are several other vehicles in the background, including a Jeep Wrangler, a motorcycle, and a mountain bike."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a white motorboat speeding through the open water. The boat is traveling at a high speed, creating a large wake behind it. There are two other boats in the scene, one of which is located on the left side of the image. The boat on the left side of the image appears to be a smaller version of the motorboat on the right side of the image. The boat on the left side of the image appears to be a smaller version of the motorboat on the right side of the image. The boat on the left side of the image appears to be a smaller version of the motorboat on the right side of the image."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

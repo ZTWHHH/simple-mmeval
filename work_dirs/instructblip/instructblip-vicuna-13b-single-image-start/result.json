@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "There is a gray 2020 GMC truck driving down a dirt road in the desert. The truck is parked on the side of the road, and there is a rocky terrain in the background. The truck's wheels are spinning as it drives down the road. There are two other trucks visible in the image, both parked on the side of the road. One of the trucks is parked closer to the camera, while the other is farther away."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a luxurious white motorboat cruising across a large body of water. The motorboat appears to be traveling at a high speed, leaving a trail of water behind it as it moves forward. The motorboat is the main focus of the scene, with other boats visible in the background. There are several people on board the motorboat, enjoying the ride and taking in the scenic views around them."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]
