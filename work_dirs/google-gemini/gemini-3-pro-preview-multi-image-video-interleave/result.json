@@ -1,0 +1,430 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the image provided, here is a detailed description:\n\n**Subject and Action**\nThe image features a dark metallic gray GMC pickup truck, likely a GMC Canyon, captured in a dynamic, three-quarter front view. The vehicle is driving off-road on a reddish-brown dirt track. It appears to be moving at a moderate speed, evidenced by the plumes of dust kicking up behind the rear tires and slightly around the front wheels. The front wheels are turned slightly to the viewer's right, indicating the truck is navigating a gentle curve or adjusting its path.\n\n**Vehicle Details**\n*   **Front Fascia:** The truck has a bold, aggressive front end. It features a large, rectangular black grille with a geometric mesh pattern. The red \"GMC\" lettering is prominently centered on the grille.\n*   **Lighting:** The headlights have a distinctive split design. There are thin, horizontal LED daytime running lights at the top edge of the hood line, with the main headlight clusters situated below them in angular housings. Small fog lights are visible in the lower black bumper area.\n*   **Body:** It is a crew cab model with four full doors. The paint is a glossy, dark charcoal gray or metallic silver. Black plastic cladding outlines the wheel arches, adding to the rugged aesthetic. There is a small rectangular badge on the lower front door.\n*   **Wheels:** The truck rides on black, multi-spoke alloy wheels fitted with aggressive, knobby all-terrain tires suitable for off-roading.\n*   **Other Features:** A black antenna is visible on the roof, and the side mirrors are finished in black.\n\n**Setting and Background**\nThe environment appears to be an arid, desert landscape, reminiscent of the American Southwest.\n*   **Foreground:** The ground is composed of loose, reddish-tan dirt and small rocks. The surface is uneven, typical of an unpaved trail.\n*   **Background:** In the distance, out-of-focus red rock formations and bluffs rise up, suggesting a canyon or desert valley setting. There is some sparse green vegetation visible near the base of the cliffs.\n*   **Lighting:** The scene is lit by bright, natural daylight, casting distinct shadows beneath the truck and highlighting the contours of the vehicle's hood and fenders."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the image provided, here is a detailed description of the contents:\n\n**The Yacht**\nThe central subject is a large, luxury motor yacht, gleaming white in color with a sleek, aerodynamic design. It appears to be an express cruiser or sport yacht style.\n*   **Hull:** The hull is white with a distinct dark (likely black or navy) stripe running horizontally along the side, just below the gunwale. The bow (front) is sharp and is currently lifted out of the water as the vessel planes at high speed. A stainless steel anchor is visible recessed into the bow.\n*   **Deck:** The foredeck features a large, tan-colored sun pad area for lounging. Stainless steel safety rails line the perimeter of the bow.\n*   **Superstructure:** The cabin has a curved, streamlined shape with dark, tinted windows that wrap around the sides. On top of the roof, there is a collection of navigation equipment, including radar domes and antennas.\n\n**Movement and Water**\nThe yacht is moving rapidly from the left background toward the right foreground.\n*   **Wake:** A massive, frothy white wake is trailing behind the vessel. The water is being churned up violently at the stern and sides, creating a thick spray of foam that contrasts sharply with the deep blue of the ocean.\n*   **Ocean:** The surrounding water is a rich, deep blue, transitioning to a slightly lighter teal hue near the boat where the water is disturbed. The surface is relatively calm with small ripples, suggesting a fair-weather day.\n\n**Background and Sky**\n*   **Sky:** The sky is a clear, gradient blue\u2014paler near the horizon and deepening as it goes up. There are no clouds visible.\n*   **Horizon:** A distinct horizon line separates the sea and sky. In the far distance to the left, a faint, dark strip of land or an island is visible.\n\n**Composition**\nThe image is shot from an elevated, aerial perspective, looking down at the starboard bow of the boat. The lighting is bright and sunny, casting distinct shadows on the water to the right of the hull. The image is framed with black bars at the top and bottom, giving it a cinematic, widescreen aspect ratio."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the images provided, here is a detailed description of their contents:\n\n**First Image: The Pickup Truck**\nThe first image showcases a modern, charcoal-gray **GMC pickup truck** (resembling the GMC Canyon model) driving off-road. The vehicle is captured in a three-quarter view, angled toward the right.\n*   **Action:** The truck is in motion, traversing a reddish dirt track. Dust is being kicked up behind the wheels, indicating speed and dry terrain.\n*   **Design Details:** Prominent features include a large, black rectangular grille with the red \"GMC\" logo in the center, sleek C-shaped LED daytime running lights, and rugged black alloy wheels with off-road tires. The truck has a crew-cab configuration with four doors and black cladding around the wheel arches.\n*   **Setting:** The background is a desert landscape featuring blurred reddish-brown rock formations and cliffs, suggesting a canyon or arid environment typical of the American Southwest. The lighting suggests late afternoon sun.\n\n**Second Image: The Luxury Yacht**\nThe second image features a sleek, white **luxury motor yacht** cruising at speed through the open ocean. The shot is taken from an elevated, front-facing angle.\n*   **Action:** The vessel is cutting through the water, creating a massive, foamy white wake that trails far behind it. The bow is lifted slightly out of the water, creating a spray on either side as it moves forward.\n*   **Design Details:** The yacht has a streamlined, aerodynamic profile with dark, tinted windows along the hull and cabin. The front deck (bow) features a sunbathing area with cushions, and shiny metal railings run along the perimeter. A radar arch with navigation equipment is visible on the roof.\n*   **Setting:** The surrounding water is a deep, rich blue, contrasting with the bright white of the boat and the wake. The sky is a clear, gradient blue with no clouds. In the far distance on the left horizon, a faint strip of land is visible."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the images provided, here is a detailed description of their contents:\n\n**First Image: The Luxury Yacht**\nThis image depicts a sleek, white luxury motor yacht speeding across the open ocean.\n*   **The Vessel:** The yacht features a modern, streamlined design with a sharp bow that is lifted out of the water, indicating high speed. It has tinted, dark windows wrapping around the cabin and a distinct black stripe running horizontally along the side of the hull. The foredeck includes a sunbathing area with tan cushions, surrounded by stainless steel railings. On the roof, there is a radar arch equipped with navigation domes and antennas.\n*   **The Action:** The boat is cutting through the water aggressively, creating a massive, foamy white wake that fans out behind it and sprays water from the sides of the bow.\n*   **The Setting:** It is a bright, sunny day with a clear blue sky. The ocean water is a deep blue, transitioning to a lighter turquoise near the boat due to the disturbance. A faint horizon line is visible in the distance.\n\n**Second Image: The GMC Pickup Truck**\nThis image showcases a dark grey GMC pickup truck driving off-road through a rugged landscape.\n*   **The Vehicle:** The truck is a modern mid-size pickup, identifiable as a GMC by the large red \"GMC\" lettering on the black front grille. It has a metallic grey paint job, black fender flares, and black alloy wheels fitted with off-road tires. The headlights feature distinctive C-shaped LED running lights. It appears to be a crew cab model with four doors.\n*   **The Setting:** The truck is traversing a dirt track in a desert-like environment. The ground is reddish-brown earth and loose gravel. In the background, there are blurred formations of red rock cliffs and sparse green vegetation, suggesting a canyon or arid wilderness setting.\n*   **The Atmosphere:** Dust is being kicked up behind the rear wheels, conveying motion. The lighting suggests it is daytime with strong sunlight casting distinct shadows and highlighting the metallic finish of the truck."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here are the detailed descriptions of the contents shown in the two images:\n\n**First Image: The Off-Road Truck**\n\n*   **Subject:** The central focus is a rugged, dark grey pickup truck, specifically a GMC Canyon (identifiable by the prominent red \"GMC\" logo on the front grille). It appears to be an AT4 or AT4X off-road trim based on its stance and aggressive styling.\n*   **Action:** The vehicle is in motion, driving swiftly over a dirt track. The movement is emphasized by the clouds of dust kicking up around the tires and trailing behind the rear of the truck.\n*   **Vehicle Details:**\n    *   **Front:** It features a large, rectangular black grille with a honeycomb pattern. On either side are distinct C-shaped LED daytime running lights and lower headlights. The bumper is rugged, featuring visible fog lights and a skid plate underneath.\n    *   **Side:** The truck is a crew cab configuration with four doors. It has black cladding around the wheel arches and is equipped with black alloy wheels wrapped in knobby off-road tires.\n*   **Environment:** The background depicts an arid, canyon-like landscape, likely in the American Southwest. There are blurred reddish-brown rock formations and cliffs in the distance, along with sparse desert vegetation.\n*   **Lighting:** The scene is lit by bright, natural sunlight, casting sharp shadows underneath the vehicle and highlighting the metallic sheen of the paint.\n\n**Second Image: The Luxury Yacht**\n\n*   **Subject:** The image features a sleek, white luxury motor yacht cruising at high speed.\n*   **Action:** The boat is cutting through the water aggressively, generating a massive, frothy white wake and spray that trails far behind it. The bow is lifted slightly out of the water, indicating high velocity.\n*   **Vessel Details:**\n    *   **Design:** The yacht has a streamlined, aerodynamic profile. It features a long foredeck with a sunbathing area (sun pad) and stainless steel railings running along the perimeter.\n    *   **Structure:** The superstructure includes a dark, wraparound windshield for the bridge area. On top of the roof, there is a radar arch equipped with navigation domes and antennas. The hull has dark, elongated windows near the waterline.\n*   **Environment:** The setting is the open ocean on a clear day. The water is a deep, rich blue, contrasting sharply with the white of the boat and the sea foam. The sky is a gradient of light to medium blue, completely cloudless. A faint strip of land is visible on the far left horizon.\n*   **Perspective:** The shot is taken from an elevated, aerial angle (likely a drone), positioned to the front-right of the vessel, looking back diagonally along its path."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image 1 Description:**\n\nThe first image captures a sleek, white luxury motor yacht speeding across a calm, deep blue ocean. The vessel is captured from a high, frontal angle as it cuts through the water, moving from the left background toward the right foreground. It generates a massive, frothy white wake that trails dramatically behind it on the left side of the frame. The yacht features a modern design with dark, tinted windows, stainless steel railings running along the bow, and a radar arch on top equipped with various navigation domes and antennas. The water is a rich azure color, transitioning to a lighter blue near the horizon, where a faint strip of land is visible in the distance. Above, the sky is a clear, cloudless gradient of blue, indicating a bright, sunny day. The sunlight reflects off the smooth hull of the boat and the surface of the water.\n\n**Image 2 Description:**\n\nThe second image depicts a dark grey GMC pickup truck driving off-road on a dusty dirt trail. The truck is shown in a three-quarter front view, angled towards the right. It appears to be in motion, kicking up a cloud of light brown dust from its rear tires. The vehicle features a bold, black rectangular grille with prominent red \"GMC\" lettering in the center, flanked by C-shaped LED headlights and fog lights lower on the bumper. It has a crew cab configuration and rides on black, rugged wheels with off-road tires. The background is a soft-focus landscape of reddish-brown rock formations and cliffs, typical of a desert environment like the American Southwest. The lighting is warm and directional, highlighting the contours of the truck's hood and side panels, suggesting it is either early morning or late afternoon."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the images provided, here are detailed descriptions of each:\n\n**Image A**\nImage A features a rugged, dark gray GMC pickup truck in motion off-road. The vehicle is a four-door crew cab model with blacked-out wheels and prominent black fender flares. The front grille is large and rectangular with a honeycomb pattern, prominently displaying red \"GMC\" lettering in the center. The truck is driving over reddish, sandy terrain, kicking up a cloud of dust behind the rear wheels, indicating speed. The background showcases a desert landscape with reddish rock formations and bluffs under natural daylight, suggesting an adventurous, outdoor setting.\n\n**Image B**\nImage B depicts a large, sleek white luxury motor yacht cruising at high speed across a deep blue ocean. The boat has a streamlined design with a pointed bow that is cutting through the water, creating a large, foamy white wake that trails behind and splashes up the sides. The yacht features a raked windshield, stainless steel railings along the bow, and visible radar or navigation equipment on the roof arch. The sky above is a clear, bright blue, meeting the horizon line in the distance, conveying a sense of open water and sunny weather."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the images provided, here are detailed descriptions of each:\n\n**Image A**\nThe image captures a sleek, white luxury motor yacht cruising at high speed across a deep blue ocean. The vessel is angled diagonally, moving from the left background toward the right foreground. It is cutting through the water aggressively, creating a massive, frothy white wake and spray on either side of the hull. The yacht features a streamlined design with dark tinted windows along the cabin and bridge, a dark horizontal stripe running along the side, and a spacious sun deck area on the bow equipped with tan cushions. Silver railings line the perimeter of the bow. The background shows a vast expanse of calm water meeting a clear, light blue sky at the horizon, suggesting a sunny day with perfect cruising conditions.\n\n**Image B**\nThis image features a modern, dark grey GMC pickup truck driving off-road on a reddish-brown dirt track. The truck is captured in a three-quarter front view, facing toward the right. It appears to be in motion, as dust is being kicked up around the tires. The vehicle has a rugged, aggressive design, characterized by a large, blocky black grille with prominent red \"GMC\" lettering in the center. It sports C-shaped LED headlights, black wheel arch moldings, and black off-road wheels. The background depicts a desert landscape, likely a canyon, with red rock formations, cliffs, and sparse green vegetation bathed in warm natural sunlight."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    },
+    {
+        "id": 8,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video shows a fluffy, orange tabby cat outdoors in a field of lush, green grass on a sunny day.\n\n*   **At the start (00:00):** The cat is stopped with its head lowered close to the ground, appearing to sniff or investigate a scent in the grass. Its body is angled slightly to the side.\n*   **Transition (00:01):** The cat lifts its head, shifts its attention forward, and begins to take a step.\n*   **Movement (00:02 - 00:04):** The cat walks directly toward the camera with a steady, confident gait. Its large, fluffy tail is held high in the air behind it as it closes the distance to the viewer. The sunlight highlights the texture of its fur and casts a shadow to its side on the grass."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8
+    },
+    {
+        "id": 9,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This video depicts a timelapse sequence of a vibrant sunrise occurring over a mountainous landscape.\n\n**Scene Composition:**\nThe frame is dominated by a diagonal silhouette of a mountain or hill ridge sloping downwards from the left side to the right. The foreground is entirely in shadow, appearing as solid black. Above this ridge, the sky is filled with warm, intense hues of deep orange, gold, and yellow, indicating the early morning light.\n\n**Progression of the Sunrise:**\n*   **00:00 - 00:01:** The sequence begins with the sun just barely cresting the edge of the mountain ridge. It appears as a small, intense point of light peeking through the trees or uneven terrain of the ridge line.\n*   **00:02:** The sun rises higher, revealing a distinct semi-circle shape. The light intensifies, creating a glowing halo around the rising orb.\n*   **00:03 - 00:04:** The sun continues its upward trajectory. By the end of the clip, it has emerged significantly from behind the mountain, appearing as a large, bright, white-yellow sphere that dominates the center of the frame. The intensity of the light creates a slight lens flare effect and washes out the immediate surrounding sky into a bright yellow glow.\n\nThroughout the video, faint, wispy clouds are visible in the orange sky, illuminated from below by the rising sun. The overall atmosphere is peaceful and dramatic, focusing on the high contrast between the dark earth and the brilliant light of the new day."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9
+    },
+    {
+        "id": 10,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed description of the events in the two video clips provided:\n\n**First Clip (00:00 - 00:04)**\nThis sequence features a fluffy, orange tabby cat in a lush, green grassy field.\n*   **00:00:** The cat is captured in profile, low to the ground with its head buried in the grass, sniffing or investigating something specific. Its bushy tail is raised high.\n*   **00:01 - 00:04:** The cat lifts its head and turns its body to face the camera. It begins walking steadily forward with a focused gaze. The sunlight illuminates its ginger fur, and it moves with a confident, prowling gait towards the viewer, keeping its tail upright the entire time.\n\n**Second Clip (00:00 - 00:04)**\nThis sequence depicts a vibrant sunrise over a silhouetted landscape.\n*   **00:00:** The scene is dominated by a deep orange and gold sky. A dark, black silhouette of a mountain ridge or hill cuts diagonally across the bottom left. The sun is not yet visible, but a bright glow indicates it is just behind the ridge.\n*   **00:01 - 00:04:** The sun begins to crest over the mountain ridge. It starts as a small sliver of bright light and rapidly ascends. By the final frame, the sun appears as a large, blindingly bright white and yellow orb fully peeking over the hilltop, casting a strong glare and illuminating the orange sky further."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10
+    },
+    {
+        "id": 11,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed description of the contents shown in the two video clips:\n\n**First Video (Sunrise)**\nThis clip captures a vibrant sunrise sequence over a natural landscape.\n*   **Setting:** The foreground features the dark, silhouetted outline of a mountain or hill ridge covered in trees. The background is a sky filled with warm, monochromatic tones ranging from deep amber to bright yellow.\n*   **Action:** The video depicts the progression of the sun rising. It begins with the sun just barely peeking over the crest of the hill, creating a \"starburst\" effect with rays of light shooting upward. As the clip progresses, the sun rises higher, transitioning from a small semi-circle to a full, blindingly bright white-yellow orb.\n*   **Atmosphere:** The scene evokes a sense of warmth and morning calm. As the sun ascends, the surrounding sky brightens significantly, shifting from a dark orange to a luminous gold.\n\n**Second Video (Orange Cat)**\nThis clip follows the movement of a domestic cat outdoors.\n*   **Subject:** The main subject is a fluffy, ginger (orange) tabby cat with white markings on its muzzle and chest.\n*   **Setting:** The cat is walking through a lawn of lush, medium-length green grass. The lighting suggests it is a sunny day.\n*   **Action:** At the beginning of the clip, the cat has its head lowered, sniffing the grass. It then lifts its head and begins walking directly toward the camera with a confident stride. Its fluffy tail is held high in the air, often interpreted as a sign of friendliness or confidence. The camera keeps the cat centered in the frame as it approaches."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11
+    },
+    {
+        "id": 12,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed description of the contents shown in each video:\n\n**Video A**\nThis video features a fluffy, orange tabby cat in an outdoor setting.\n*   **Setting:** A field of lush, green grass under bright sunlight.\n*   **Action:** The video begins with the cat crouching low, sniffing the grass near the ground. It then lifts its head and begins to walk confidently toward the camera.\n*   **Details:** The cat has a very fluffy tail which is held high in the air as it moves. It has white markings around its mouth and chest. The camera tracks the cat as it approaches, keeping the animal in focus while the grass blurs slightly in the background.\n\n**Video B**\nThis video depicts a scenic sunrise sequence.\n*   **Setting:** A silhouette of a steep mountain or hill slope covered in trees dominates the lower left of the frame against a vast sky.\n*   **Action:** The sun is seen emerging from behind the mountain ridgeline. At the start (00:00), only a small sliver of light is visible. Over the course of the seconds shown, the sun rises higher, revealing its full, bright circular shape.\n*   **Details:** The sky is saturated in deep, warm colors\u2014primarily vibrant oranges and golds. The contrast is high, with the foreground land completely blacked out in shadow and the sun acting as an intense source of light that creates a glowing halo effect around the trees on the ridge."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12
+    },
+    {
+        "id": 13,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Based on the images provided, here is a detailed description of the contents of each video:\n\n**Video A**\nThis video depicts a scenic sunrise over a mountain range.\n*   **Setting:** The foreground features the dark, black silhouette of a mountain or hill ridge sloping upwards from left to right. The background is a vibrant sky filled with hues of deep orange and gold.\n*   **Action:** Over the course of the frames, a bright sun slowly emerges from behind the mountain ridge. It begins as a small sliver of light peaking over the edge and progressively rises until the full, bright circular disk of the sun is visible.\n*   **Lighting:** As the sun rises, the intensity of the light increases, creating a blinding white and yellow glow that dominates the center of the frame, contrasting sharply with the dark terrain below.\n\n**Video B**\nThis video shows a medium-haired ginger (orange) cat walking through a grassy field.\n*   **Subject:** The main subject is an orange tabby cat with a fluffy tail and white markings on its chest and face.\n*   **Setting:** The cat is outdoors on a lush, green lawn with sunlight casting shadows on the grass.\n*   **Action:** At the beginning (00:00), the cat has its head lowered, appearing to sniff or investigate something in the grass. As the video progresses, the cat lifts its head, looks forward, and walks steadily toward the camera with its tail held high. The cat appears alert and is moving with a confident stride."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13
+    },
+    {
+        "id": 14,
+        "media": [
+            "truck.png",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The following provides a detailed description of the image and video content.\n\n**Image Description**\nThe image captures a rugged, metallic grey GMC pickup truck, likely a Canyon model, driving off-road through a desert landscape. The vehicle is shown from a front three-quarter angle, emphasizing its aggressive front fascia. Key features include a large, rectangular black grille with bold red \"GMC\" lettering in the center, slim horizontal LED daytime running lights near the hood line, and larger driving headlights situated below them on the bumper. The truck features black fender flares, black alloy wheels, and off-road tires that are kicking up a cloud of dust as it traverses a reddish dirt path. The background consists of blurred, towering red rock formations and cliffs, typical of a southwestern canyon environment, under natural daylight.\n\n**Video Description**\nThe video features a fluffy, orange and white tabby cat walking through a field of vibrant green grass.\n*   **00:00 - 00:01:** The clip begins with the cat in profile, facing left with its body low to the ground as if stalking or sniffing something in the grass. Its long, bushy tail is raised high behind it.\n*   **00:01 - 00:03:** The cat turns its head and body towards the camera and begins to walk forward. As it approaches, you can see white markings on its chest and muzzle. The lighting is sunny, casting soft shadows on the grass to the right.\n*   **00:03 - 00:05:** The cat continues its confident stride directly toward the viewer, navigating through the tall blades of grass with focused eyes. The camera tracks its movement as it gets closer, filling more of the frame before the clip ends."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14
+    },
+    {
+        "id": 15,
+        "media": [
+            "sun.mp4",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video features two distinct visual sequences:\n\n**Sunrise Time-Lapse (00:00 - 00:04)**\nThe first section of the video displays a serene time-lapse of a sunrise. A dark, silhouetted mountain ridge slopes downward from the left side of the frame against a backdrop of a vibrant orange and yellow sky.\n*   **At 00:00:** The sun is just beginning to peek over the crest of the mountain, appearing as a small sliver of intense light.\n*   **From 00:01 to 00:03:** The sun rapidly rises, revealing its full circular shape. As it ascends, the light intensifies, glowing brightly and casting a radiant warmth over the scene.\n*   **At 00:04:** The sun is fully above the ridge line, shining brilliantly and creating a lens flare effect, dominating the center of the frame.\n\n**Off-Road Vehicle Scene (Final Image)**\nThe final image abruptly transitions to an automotive shot featuring a dark grey GMC pickup truck (likely a GMC Canyon). The truck is shown driving on a dirt track in a rugged, desert-like environment with reddish rock formations in the background. Dust is being kicked up around the tires, indicating motion, and the vehicle is captured from a front three-quarter angle, highlighting its front grille with the red \"GMC\" logo and its off-road tires."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15
+    },
+    {
+        "id": 16,
+        "media": [
+            "boat.png",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed description of the media provided:\n\n**Image A**\nThis image captures a dynamic, aerial view of a large, white luxury yacht speeding across the open ocean. The vessel is cutting through the deep blue water at high velocity, generating a massive, frothy white wake that trails far behind it and splashes up heavily around the bow. The yacht features a sleek, modern design with tinted windows, a sun deck on the bow, and radar equipment visible on the roof. The sky is a clear, cloudless blue, and a faint landmass is visible on the distant horizon on the left side. The scene conveys a sense of speed, luxury, and clear summer weather.\n\n**Video B**\nThis video is a time-lapse sequence depicting a vibrant sunrise over a mountain ridge.\n*   **00:00 - 00:01:** The scene begins with a dark, silhouetted hill slope slanting upwards from right to left. The sky behind it is a deep, saturated orange. The sun is just beginning to peek over the crest of the hill, appearing as a small, bright fragment of light.\n*   **00:02 - 00:03:** As the video progresses, the sun rises rapidly. It transitions from a sliver of light to a distinct, glowing orb. The intensity of the light increases, turning the surrounding sky from deep orange to a brighter golden yellow.\n*   **00:04:** By the final frame, the sun has fully crested the hill. It is now a blazing white-yellow sphere hovering just above the silhouetted treeline, bathing the sky in intense, warm light. The contrast between the black foreground and the fiery background is stark and dramatic."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16
+    },
+    {
+        "id": 17,
+        "media": [
+            "cat.mp4",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed description of the contents in the provided video and image:\n\n**Video A**\nThe video features a fluffy, orange tabby cat moving through a vibrant green lawn.\n*   **00:00:** The cat begins with its head lowered, sniffing intently at the grass, investigating a spot on the ground. Its tail is raised high behind it.\n*   **00:01 - 00:04:** The cat lifts its head and begins walking confidently toward the camera. It moves with a steady gait, navigating through the tall blades of grass. The lighting suggests a sunny day, highlighting the texture of the cat's fur and the green of the grass. Throughout the clip, the cat maintains an alert expression with its tail held upright.\n\n**Image B**\nThe image displays a large, sleek white luxury yacht speeding across the open ocean.\n*   **The Vessel:** The yacht features a modern design with dark tinted windows and a streamlined hull. It is angled slightly toward the viewer (starboard bow view).\n*   **Movement:** The boat is moving at a high speed, evidenced by the bow rising out of the water and the massive, churning white wake of foam trailing behind and alongside the hull.\n*   **Environment:** The water is a deep, rich blue, contrasting with the white foam. The sky is a clear, bright blue, indicating sunny weather. In the far distance, a faint strip of land can be seen on the horizon."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17
+    }
+]

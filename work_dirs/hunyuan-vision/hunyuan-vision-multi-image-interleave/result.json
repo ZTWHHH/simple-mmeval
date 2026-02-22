@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC pickup truck in motion, set against a rugged, outdoor backdrop that appears to be a desert or rocky terrain. The truck is colored in a dark shade, likely gray or black, and is captured in a dynamic pose that suggests it is either accelerating or driving off-road.\n\n### Key Features:\n1. Brand and Model:\n   - The vehicle is a GMC pickup truck, as identified by the prominent GMC logo on the front grille.\n2. Design and \u5916\u89c2:\n   - The truck has a robust and muscular design, with a high ground clearance indicative of off-road capability.\n   - The bodywork appears to be well-defined with sleek lines and a sturdy build.\n3. Tires and Suspension:\n   - The tires are large and rugged, suitable for off-road conditions.\n   - The suspension system seems to be designed to handle uneven terrain, providing stability and control.\n4. Environment:\n   - The background shows a dusty or sandy terrain, with rocky structures, suggesting the truck is being used in an off-road environment.\n   - There is dust being kicked up by the tires, further emphasizing the vehicle's motion and off-road capabilities.\n\n### Additional Information:\n- Usage Scenario: This type of truck is typically used for activities such as off-road driving, construction, or outdoor adventures.\n- Performance: GMC pickup trucks are known for their powerful engines and robust performance, capable of handling heavy loads and challenging terrains.\n\n### Summary:\nThe image\u5c55\u793a\u4e86 aGMC pickup truck\u5728\u5d0e\u5c96\u5730\u5f62\u4e2d\u884c\u9a76\u7684\u573a\u666f\uff0c\u7a81\u663e\u4e86\u5176\u5f3a\u5927\u7684\u8d8a\u91ce\u6027\u80fd\u548c\u575a\u56fa\u7684\u8bbe\u8ba1\uff0c\u9002\u5408\u5404\u79cd\u6237\u5916\u548c\u91cd\u8f7d\u7528\u9014\u3002"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "\u8fd9\u662f\u4e00\u5f20\u5c55\u793a\u4e00\u8258\u9ad8\u901f\u884c\u9a76\u7684\u6e38\u8247\u5728\u5e7f\u9614\u6d77\u9762\u4e0a\u822a\u884c\u7684\u7167\u7247\uff0c\u6e38\u8247\u8bbe\u8ba1\u73b0\u4ee3\uff0c\u822a\u884c\u59ff\u6001\u4f18\u7f8e\uff0c\u80cc\u666f\u662f\u5e73\u9759\u7684\u6d77\u9762\u548c\u6674\u6717\u7684\u5929\u7a7a\u3002\n\n\u4e00\u8258\u9ad8\u901f\u884c\u9a76\u7684\u6e38\u8247\u5728\u5e7f\u9614\u7684\u6d77\u9762\u4e0a\u822a\u884c\u3002\u6e38\u8247\u8bbe\u8ba1\u73b0\u4ee3\uff0c\u8239\u4f53\u5448\u6d41\u7ebf\u578b\uff0c\u663e\u5f97\u975e\u5e38\u65f6\u5c1a\u548c\u52a8\u611f\u3002\u8239\u4f53\u4e3b\u8981\u662f\u767d\u8272\uff0c\u642d\u914d\u4e00\u4e9b\u7cbe\u81f4\u7684\u88c5\u9970\u7ec6\u8282\uff0c\u589e\u6dfb\u4e86\u9ad8\u7aef\u611f\u548c\u5962\u534e\u611f\u3002\u6e38\u8247\u6b63\u5728\u5feb\u901f\u524d\u8fdb\uff0c\u8239\u5c3e\u6fc0\u8d77\u5927\u91cf\u6c34\u82b1\uff0c\u5f62\u6210\u4e00\u9053\u767d\u8272\u7684\u6c34\u75d5\uff0c\u663e\u793a\u51fa\u5176\u901f\u5ea6\u548c\u52a8\u529b\u4e4b\u5f3a\u3002\u80cc\u666f\u662f\u5e73\u9759\u7684\u6d77\u9762\uff0c\u6d77\u6c34\u5448\u73b0\u51fa\u7f8e\u4e3d\u7684\u84dd\u7eff\u8272\uff0c\u6ce2\u5149\u7cbc\u7cbc\uff0c\u8fdc\u5904\u7684\u5929\u7a7a\u6674\u6717\u65e0\u4e91\uff0c\u84dd\u5929\u4e0e\u6d77\u6c34\u76f8\u63a5\u3002\u6574\u4e2a\u753b\u9762\u4f20\u9012\u51fa\u4e00\u79cd\u81ea\u7531\u3001\u5192\u9669\u548c\u4eab\u53d7\u751f\u6d3b\u7684\u611f\u89c9\uff0c\u4eff\u4f5b\u5728\u9080\u8bf7\u4eba\u4eec\u4e00\u540c\u51fa\u6d77\uff0c\u4f53\u9a8c\u8fd9\u7247\u5b81\u9759\u800c\u5145\u6ee1\u6d3b\u529b\u7684\u6d77\u57df\u3002\n\n\u8fd9\u5f20\u56fe\u7247\u98ce\u683c\u73b0\u4ee3\u65f6\u5c1a\uff0c\u6c1b\u56f4\u81ea\u7531\u5192\u9669\uff0c\u5185\u6db5\u4f20\u9012\u51fa\u4eab\u53d7\u751f\u6d3b\u548c\u9ad8\u7aef\u5962\u534e\u7684\u611f\u89c9\u3002"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image One:**\nThe image depicts a GMC pickup truck in motion, driving through a dusty or sandy terrain. The truck appears to be a high-performance model, featuring a robust design with large tires and a sturdy body. The vehicle is kicking up dust behind it, indicating it is moving at a considerable speed. The background shows a natural landscape, possibly a desert or a rocky area, with clear skies or a distant horizon.\n\n**Image Two:**\nThe image shows a white yacht speeding on the water. The yacht is designed for luxury and comfort, with multiple levels anddecks. It is cutting through the water, creating a significant wake behind it, indicating its fast speed. The water is a clear blue, and the sky appears to be calm with no visible clouds, suggesting a sunny day. The yacht's design and size suggest it is intended for leisure and possibly long-distance cruising.\n\n**Summary:**\n- **Image One:** showcasing a GMC pickup truck in a dusty or sandy outdoor environment, emphasizing its powerful performance.\n- **Image Two:** featuring a luxury yacht speeding on the water, highlighting its sleek design and leisure purpose.\n\nBoth images highlight different modes of transportation, one being a land vehicle and the other a watercraft, each serving distinct functions and environments."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image One:**\n- The image features a white yacht speeding on the open sea.\n- The yacht has a modern design with sleek lines and a streamlined hull.\n- It is moving at a high speed, as evidenced by the significant wake it is creating in the water.\n- The background shows a clear blue sky and calm sea, indicating good weather conditions.\n\n**Image Two:**\n- The image depicts a gray GMC pickup truck driving on a dusty, off-road terrain.\n- The truck appears to be a high-performance model with off-road capabilities, as indicated by its raised suspension and rugged tires.\n- The truck is kicking up dust as it moves, suggesting it is moving at a\u8f83\u5feb\u7684\u901f\u5ea6 on uneven ground.\n- The background features rocky landscapes, indicating a remote or wilderness area.\n\n**Summary:**\n- Image One showcases a luxury yacht in motion on the open sea, emphasizing speed and leisure.\n- Image Two features a GMC pickup truck in an off-road environment, highlighting its robustness and off-road capabilities."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image Description:**\n\n**\u56fe\u4e00:**\n- \u8fd9\u5f20\u56fe\u7247\u5c55\u793a\u4e86\u4e00\u8f86GMC\u54c1\u724c\u7684\u76ae\u5361\u8f66\u3002\n- \u76ae\u5361\u8f66\u884c\u9a76\u5728\u5c18\u571f\u98de\u626c\u7684\u5730\u9762\u4e0a\uff0c\u80cc\u666f\u662f\u4e00\u4e9b\u5ca9\u77f3\u5730\u5f62\uff0c\u53ef\u80fd\u662f\u5728\u6c99\u6f20\u6216\u8352\u91ce\u5730\u533a\u3002\n- \u8f66\u8f86\u7684\u5916\u89c2\u8bbe\u8ba1\u73b0\u4ee3\uff0c\u8f66\u8eab\u989c\u8272\u4e3a\u6df1\u8272\uff0c\u8f6e\u80ce\u8f83\u5927\uff0c\u9002\u5408\u8d8a\u91ce\u884c\u9a76\u3002\n\n**\u56fe\u4e8c:**\n- \u8fd9\u5f20\u56fe\u7247\u5c55\u793a\u4e86\u4e00\u8258\u767d\u8272\u7684\u6e38\u8247\u5728\u6d77\u4e0a\u9ad8\u901f\u884c\u9a76\u3002\n- \u6e38\u8247\u5728\u6c34\u9762\u4e0a\u5feb\u901f\u524d\u8fdb\uff0c\u6fc0\u8d77\u4e86\u5927\u91cf\u7684\u6c34\u82b1\uff0c\u663e\u793a\u51fa\u5176\u901f\u5ea6\u548c\u52a8\u529b\u3002\n- \u6e38\u8247\u8bbe\u8ba1\u8c6a\u534e\uff0c\u8239\u4f53\u6d41\u7ebf\u578b\uff0c\u7532\u677f\u4e0a\u6709\u591a\u4e2a\u8bbe\u65bd\u548c\u7ed3\u6784\uff0c\u9002\u5408\u957f\u9014\u822a\u884c\u6216\u5a31\u4e50\u6d3b\u52a8\u3002\n\n**Summary:**\n- \u56fe\u4e00\u4e2d\u7684GMC\u76ae\u5361\u8f66\u9002\u5408\u5728\u5d0e\u5c96\u5730\u5f62\u6216\u91ce\u5916\u73af\u5883\u4e2d\u4f7f\u7528\uff0c\u4f53\u73b0\u4e86\u5f3a\u70c8\u7684\u8d8a\u91ce\u6027\u80fd\u3002\n- \u56fe\u4e8c\u4e2d\u7684\u6e38\u8247\u5219\u9002\u5408\u5728\u6d77\u6d0b\u6216\u5927\u578b\u6c34\u57df\u4e2d\u8fdb\u884c\u9ad8\u901f\u822a\u884c\u548c\u5a31\u4e50\u6d3b\u52a8\uff0c\u4f53\u73b0\u4e86\u8c6a\u534e\u548c\u8212\u9002\u7684\u7279\u70b9\u3002"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image Description:**\n\n**\u56fe\u4e00:**\n-\u8fd9\u662f\u4e00\u5f20\u5c55\u793a\u4e00\u8258\u8c6a\u534e\u6e38\u8247\u7684\u56fe\u7247\u3002\n- \u6e38\u8247\u5728\u6d77\u4e0a\u5feb\u901f\u884c\u9a76\uff0c\u6c34\u9762\u88ab\u8239\u4f53\u6fc0\u8d77\uff0c\u5f62\u6210\u4e86\u660e\u663e\u7684\u6ce2\u6d6a\u548c\u6c34\u82b1\u3002\n- \u6e38\u8247\u5916\u89c2\u73b0\u4ee3\uff0c\u8bbe\u8ba1\u6d41\u7ebf\u578b\uff0c\u8239\u4f53\u4e3b\u8981\u662f\u767d\u8272\uff0c\u5e26\u6709\u4e00\u4e9b\u9ed1\u8272\u6216\u6df1\u8272\u7684\u88c5\u9970\u3002\n- \u80cc\u666f\u662f\u5f00\u9614\u7684\u6d77\u9762\uff0c\u5929\u7a7a\u6674\u6717\uff0c\u6d77\u6c34\u5448\u73b0\u51fa\u84dd\u7eff\u8272\u3002\n\n**\u56fe\u4e8c:**\n-\u8fd9\u662f\u4e00\u5f20\u5c55\u793a\u4e00\u8f86GMC\u76ae\u5361\u7684\u56fe\u7247\u3002\n- \u76ae\u5361\u5728\u4e00\u4e2a\u5c18\u571f\u98de\u626c\u7684\u73af\u5883\u4e2d\u884c\u9a76\uff0c\u53ef\u80fd\u662f\u5728\u6c99\u6f20\u6216\u8352\u91ce\u5730\u533a\u3002\n- \u76ae\u5361\u5916\u89c2\u575a\u56fa\uff0c\u8bbe\u8ba1\u5f3a\u58ee\uff0c\u8f66\u8eab\u989c\u8272\u4e3a\u6df1\u8272\uff0c\u53ef\u80fd\u662f\u7070\u8272\u6216\u9ed1\u8272\u3002\n- \u8f66\u5934\u6709\u660e\u663e\u7684GMC\u6807\u5fd7\uff0c\u8f66\u8f6e\u8f83\u5927\uff0c\u9002\u5408\u8d8a\u91ce\u884c\u9a76\u3002\n- \u80cc\u666f\u662f\u4e00\u4e9b\u5ca9\u77f3\u548c\u5e72\u71e5\u7684\u5730\u5f62\uff0c\u663e\u793a\u51fa\u8f66\u8f86\u5728\u6076\u52a3\u73af\u5883\u4e2d\u7684\u9002\u5e94\u6027\u3002\n\n**\u603b\u7ed3:**\n- \u56fe\u4e00\u5c55\u793a\u4e86\u4e00\u8258\u5728\u6d77\u4e0a\u5feb\u901f\u884c\u9a76\u7684\u8c6a\u534e\u6e38\u8247\uff0c\u4f53\u73b0\u4e86\u6d77\u6d0b\u4ea4\u901a\u5de5\u5177\u7684\u4f18\u96c5\u548c\u901f\u5ea6\u3002\n- \u56fe\u4e8c\u5c55\u793a\u4e86\u4e00\u8f86\u5728\u8352\u6f20\u4e2d\u884c\u9a76\u7684GMC\u76ae\u5361\uff0c\u4f53\u73b0\u4e86\u8d8a\u91ce\u8f66\u8f86\u7684\u575a\u56fa\u548c\u9002\u5e94\u80fd\u529b\u3002\n\n\u8fd9\u4e24\u5f20\u56fe\u7247\u5206\u522b\u5c55\u793a\u4e86\u4e0d\u540c\u7c7b\u578b\u7684\u6c34\u9646\u4ea4\u901a\u5de5\u5177\uff0c\u7a81\u663e\u4e86\u5b83\u4eec\u5728\u4e0d\u540c\u73af\u5883\u4e2d\u7684\u529f\u80fd\u548c\u7f8e\u611f\u3002"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image A:**\nThe image shows a GMC pickup truck, specifically a model that appears to be designed for off-road or rugged use. The truck is captured in motion, driving on a dusty or sandy terrain, kicking up a trail of dust behind it. The vehicle is colored in a dark shade, possibly gray or black, and features a prominent front grille with the GMC logo. The truck has a robust and sturdy appearance, with large tires and a high ground clearance, ideal for off-road conditions.\n\n**Image B:**\nThe image depicts a luxury yacht sailing on the open sea. The yacht is white and designed with modern aesthetics, featuring multiple levels and possibly some amenities on board. The yacht is moving at a high speed, as evidenced by the significant wake it is creating in the water. The sea is calm and blue, and the sky is clear, suggesting a sunny day. The yacht's design and size indicate it is intended for leisure and possibly long-distance travel.\n\n**Summary:**\n- Image A features a GMC pickup truck in an off-road setting, showcasing its rugged design and capability.\n- Image B shows a luxury yacht speedily sailing on the open sea, highlighting its modern design and leisure purpose."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image A:**\nThe image depicts a luxury yacht speedily traversing the ocean. The yacht is white, with a sleek and modern design, featuring multiple levels and deck areas. It is moving at a high speed, as evidenced by the significant wake it is creating in the water. The ocean is calm and blue, and the sky appears clear, suggesting a sunny day. The yacht's design and size indicate it is likely intended for leisure and entertainment, capable of accommodating a large number of passengers for luxurious cruising.\n\n**Image B:**\nThe image shows a GMC pickup truck, specifically a high-performance model, driving through a dusty, off-road environment. The truck is colored in a dark shade, possibly gray or black, and is equipped with large off-road tires and a robust suspension system. It is kicking up dust as it moves, indicating it is being driven at a\u8f83\u5feb speed on uneven terrain. The background features rocky landscapes, suggesting a desert or canyon area. The truck's design and features\u8868\u660e\u5b83\u9002\u5408\u8d8a\u91ce\u548c\u91cd\u8f7d\u4efb\u52a1\uff0c\u5177\u6709\u5f3a\u5927\u7684\u52a8\u529b\u548c\u8010\u7528\u6027\u3002\n\n**Summary:**\n- **Image A:** A luxury yacht speedily sailing on calm ocean waters, designed for leisure and entertainment.\n- **Image B:** A GMC pickup truck driving through a dusty off-road environment, equipped for rugged terrain and high-performance tasks."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

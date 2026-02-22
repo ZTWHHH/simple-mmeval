@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a **GMC pickup truck** (likely a model from the Sierra series, such as the AT4 or similar off - road - oriented variant) in a dynamic, off - road setting.\n\n### Vehicle Details:\n- **Exterior Color and Style**: The truck has a sleek, metallic gray (or silver - toned) exterior. It features a modern, rugged design with sharp lines and a bold front grille. The GMC logo is prominently displayed in red on the black front grille, which has a mesh - like pattern.\n- **Wheels and Tires**: The truck is equipped with large, black alloy wheels and all - terrain tires, suitable for off - road driving. The tires appear to be in motion, as there is dust being kicked up around the wheels, indicating that the vehicle is either driving or has just driven through the area.\n- **Body Design**: It is a crew - cab pickup, meaning it has four full - size doors. The side mirrors are black, matching the wheels and the lower trim of the vehicle. The body has a muscular look, with defined wheel arches and a slightly raised suspension, emphasizing its off - road capabilities.\n- **Lighting**: The front headlights are modern, with a LED - like appearance, featuring a distinctive design that complements the aggressive front fascia.\n\n\n### Background and Setting:\n- **Environment**: The truck is situated in a desert - like or arid landscape. The ground is covered with reddish - brown dirt or sand, and there is dust being displaced by the vehicle's movement. In the background, there are rocky formations and sparse vegetation (some green shrubs or small trees), typical of a desert or canyon environment (similar to areas like the American Southwest).\n- **Lighting and Atmosphere**: The lighting suggests it might be during the day, with natural light illuminating the scene. The overall atmosphere conveys a sense of adventure and off - road capability, highlighting the truck's ability to handle rough terrain.\n\n\n### Composition:\n- The truck is positioned at an angle, facing slightly towards the right side of the image, which gives a good view of its front and side profile. The dust around the wheels adds a sense of motion and dynamism to the image, emphasizing the vehicle's active use in an off - road setting. The contrast between the modern, polished look of the truck and the rugged, natural background further accentuates the vehicle's off - road prowess."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a **white luxury motor yacht** in motion on a vast expanse of deep blue ocean water. The yacht is sleek and modern, with a streamlined design that suggests speed and elegance. It features large windows along its side, likely for the cabin area, and a spacious deck at the front (bow) with railings. The hull has a dark stripe running along its length, adding to its sophisticated appearance.  \n\nAs the yacht moves forward, it creates a dramatic **wake** of white, frothy water trailing behind it, emphasizing its speed. The water around the yacht is a rich, vibrant blue, indicating clear and calm seas. In the background, the horizon is visible, with a faint outline of land or possibly distant islands under a bright, clear sky with minimal clouds. The overall scene conveys a sense of luxury, freedom, and adventure, typical of high-end yachting experiences. The lighting is bright, suggesting a sunny day, which enhances the vivid colors of the water and the yacht\u2019s white exterior."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1: GMC Pickup Truck  \n\nThe image features a **GMC pickup truck** (likely a mid-size model like the Canyon or Colorado) in an outdoor, rugged setting. Here\u2019s a detailed breakdown:  \n\n- **Vehicle Details**:  \n  - The truck is dark gray (or charcoal) with black accents (wheels, trim, and front bumper).  \n  - It has a bold, modern design with a prominent front grille displaying the \u201cGMC\u201d logo in red and silver.  \n  - The headlights are sleek and angular, contributing to a rugged yet refined appearance.  \n  - It\u2019s a crew cab (four full doors) with visible side mirrors and door handles.  \n  - The wheels are black with off-road tires, suggesting it\u2019s built for both on-road and off-road use.  \n\n- **Environment**:  \n  - The truck is driving on a dusty, sandy terrain (likely a desert or rocky landscape), kicking up dust behind it, indicating motion.  \n  - In the background, there are reddish-brown rock formations (mesas or cliffs) and sparse greenery, typical of a desert or canyon environment (e.g., the American Southwest).  \n\n\n### Image 2: Luxury Speedboat  \n\nThe image shows a **luxury speedboat** moving at high speed across a body of water (ocean or large lake). Here\u2019s a detailed breakdown:  \n\n- **Boat Details**:  \n  - The boat is white with black accents (a black stripe along the hull and a black bow detail).  \n  - It has a sleek, aerodynamic design with a cabin featuring large windows (for visibility) and a railing along the deck.  \n  - The boat is creating a significant wake (white, frothy water) as it moves, emphasizing its speed.  \n\n- **Environment**:  \n  - The water is a deep blue, calm except for the wake generated by the boat.  \n  - The sky is clear and blue, suggesting a sunny day with good weather.  \n  - In the distance, there\u2019s a faint outline of land (possibly a coastline or island), adding context to the open-water setting.  \n\n\n### Overall Context  \n- The first image highlights a **rugged, off-road capable vehicle** (GMC truck) in a natural, desert-like environment, emphasizing adventure and utility.  \n- The second image showcases a **luxury, high-speed boat** in a marine setting, emphasizing leisure, speed, and elegance.  \n\nBoth images contrast land-based (truck) and water-based (boat) modes of transportation, each designed for different environments and purposes."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1: Speedboat on the Ocean  \nThe first image depicts a **white luxury speedboat** (or motor yacht) moving at high speed across a calm, deep blue ocean. The boat has a sleek, aerodynamic design with a dark blue or black stripe running along its side. It creates a dramatic spray of white water (wake) behind it, emphasizing its speed and power. The sky above is clear and light blue, with a few faint clouds, and the horizon shows a distant landmass (possibly a coastline or small island) under the bright, sunny sky. The overall scene conveys a sense of luxury, adventure, and freedom on the open water.  \n\n\n### Image 2: GMC Pickup Truck on a Dirt Trail  \nThe second image features a **gray (or silver) GMC pickup truck** (likely a mid-size or full-size model) driving on a dusty, reddish-brown dirt trail. The truck has a rugged, off-road design with black wheels, a bold front grille displaying the \u201cGMC\u201d logo in red, and modern, angular headlights. Dust is kicked up around the wheels, indicating motion and off-road capability. The background shows a rocky, desert-like landscape with layered rock formations (resembling a canyon or desert terrain) and sparse greenery, suggesting an arid, outdoor environment. The scene conveys toughness, adventure, and the truck\u2019s suitability for off-road or rugged driving conditions.  \n\n\nBoth images highlight vehicles (a boat and a truck) in dynamic, action-oriented settings\u2014one on water, the other on land\u2014emphasizing speed, power, and adventure."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Description of the First Image (GMC Truck)  \n\nThe image features a **GMC pickup truck** (likely a mid-size or full-size model, such as a Canyon or Sierra) in an outdoor, desert-like environment. Here\u2019s a detailed breakdown:  \n\n- **Vehicle Details**:  \n  - The truck is dark gray (or charcoal) with a rugged, off-road-ready design. It has a bold front grille with the \u201cGMC\u201d logo prominently displayed in red and silver.  \n  - The headlights are sleek and modern, with LED accents. The front bumper is black (or dark gray) with a rugged, utilitarian look, possibly featuring tow hooks or off-road protection.  \n  - The truck has four doors (crew cab) and a short bed. The wheels are large, black (or dark gray) alloy wheels with all-terrain tires, suitable for off-roading.  \n  - Dust is visible around the wheels, indicating the truck is in motion (driving on a dirt or sandy surface), emphasizing its off-road capability.  \n\n- **Environment**:  \n  - The background shows a rocky, desert landscape with red/brown rock formations (resembling a canyon or desert terrain) and sparse greenery. The ground is dry, dusty, and reddish-brown, typical of a desert or arid region.  \n  - The lighting suggests it\u2019s daytime, with natural sunlight highlighting the truck\u2019s contours and the surrounding landscape.  \n\n\n### Description of the Second Image (Yacht/Speedboat)  \n\nThe image shows a **luxury speedboat (or yacht)** moving at high speed on the ocean. Here\u2019s a detailed breakdown:  \n\n- **Vessel Details**:  \n  - The boat is predominantly white with a sleek, aerodynamic design (typical of a high-performance speedboat or luxury yacht). It has a black or dark trim line running along the hull.  \n  - The boat is in motion, creating a large, white wake (spray) behind it, indicating high speed. The water around the boat is a deep blue, contrasting with the white wake.  \n  - The deck features railings (for safety) and a cabin area with windows (suggesting a enclosed or semi-enclosed interior space). The bow (front) is pointed, optimized for cutting through water.  \n  - The boat has a modern, luxurious appearance, likely designed for leisure or high-speed travel on the water.  \n\n- **Environment**:  \n  - The background is an open ocean with a clear, light blue sky (few clouds). The horizon is visible, showing a distant landmass or coastline (subtle, but present).  \n  - The water is calm except for the wake created by the boat, emphasizing the vessel\u2019s speed and the serene yet dynamic nature of the scene.  \n\n\nBoth images showcase vehicles (truck and boat) in their respective environments, highlighting performance (off-road for the truck, high-speed travel for the boat) and design aesthetics."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1: Speeding Yacht  \nThe image showcases a **white luxury yacht** (or motorboat) moving at high speed across a calm, deep - blue ocean. The yacht has a sleek, modern design with a dark (likely black or dark blue) stripe running along its side. As it moves, it creates a large, frothy white wake that fans out behind it, indicating its high velocity. The deck of the yacht is visible, with railings and what appears to be a control area or cabin structure at the front/center. The sky above is clear and light blue, with a few faint clouds, and the horizon shows a distant landmass (possibly an island or coastline) on the left - hand side. The overall scene conveys a sense of luxury, speed, and freedom on the open water.  \n\n\n### Image 2: GMC Pickup Truck  \nThe image features a **GMC pickup truck** (specifically a modern, rugged - looking model, likely a mid - size or full - size truck) driving on a dusty, reddish - brown dirt road. The truck is colored in a dark gray (or charcoal) hue. It has a bold, aggressive front grille with the \u201cGMC\u201d logo prominently displayed in red (or a similar bold color) on a black background. The truck is equipped with large, black alloy wheels and off - road - style tires, and there is dust being kicked up behind and around the wheels, suggesting it is in motion (either driving or accelerating). The background consists of a rugged, desert - like landscape with rocky cliffs and sparse vegetation, giving the impression of an off - road or outdoor adventure setting. The overall scene emphasizes the truck\u2019s ruggedness, power, and capability in a rough, natural environment."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A: GMC Pickup Truck  \nThe image showcases a **GMC pickup truck** (likely a mid-size or full-size model) in motion on a dusty, earthy terrain (possibly a desert or rocky landscape). The truck is colored in a dark gray or charcoal shade with black accents (wheels, trim, etc.). Key details include:  \n- **Design & Branding**: The front grille prominently displays the \u201cGMC\u201d logo in red. The truck has a rugged, modern design with angular headlights, a bold front bumper, and black alloy wheels.  \n- **Setting**: The background features reddish-brown rock formations (suggesting a canyon or desert environment) with sparse greenery. Dust is kicked up around the tires, emphasizing the truck\u2019s off-road capability.  \n- **Atmosphere**: The scene conveys a sense of power and adventure, highlighting the truck\u2019s suitability for rough, outdoor environments.  \n\n\n### Image B: Luxury Speedboat  \nThe image depicts a **white luxury speedboat** moving at high speed across a calm, deep-blue ocean. Key details include:  \n- **Design & Features**: The boat has a sleek, aerodynamic design with a white hull, black accents (trim, possibly a logo or detail on the bow), and a modern cabin with large windows. It creates a dramatic wake (white foam) as it moves, indicating speed.  \n- **Setting**: The background shows a clear blue sky with minimal clouds and a distant horizon (possibly land or another vessel). The ocean is calm except for the wake generated by the boat.  \n- **Atmosphere**: The scene conveys luxury, speed, and leisure, emphasizing the boat\u2019s performance and elegant design in a serene marine environment.  \n\n\nBoth images contrast terrestrial (truck) and aquatic (boat) modes of transportation, each highlighting power, design, and their respective environments (off-road/desert vs. open ocean)."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A (Yacht/Boat)  \nThe image depicts a **luxury motor yacht** (or speedboat) moving at high speed across a calm, deep - blue ocean. The yacht is predominantly white with a sleek, aerodynamic design. It has a dark (likely black or dark gray) stripe running along the side of its hull. As the yacht moves, it creates a large, frothy white wake behind it, indicating its high velocity. The bow (front) of the yacht is pointed, and there is a railing along the deck, suggesting an area for passengers to stand or move around. The sky above is clear and light blue, with a few faint clouds, and the horizon shows a distant, low - lying landmass (possibly a coastline or an island). The overall scene conveys a sense of luxury, speed, and freedom on the open water.  \n\n\n### Image B (GMC Truck)  \nThe image shows a **GMC pickup truck** (specifically a modern, rugged - looking model, likely a mid - size or full - size truck) driving on a dusty, reddish - brown dirt or sandy terrain, possibly in a desert or canyon - like environment. The truck is painted in a dark gray (or charcoal) color. It has a bold, aggressive front grille with the \u201cGMC\u201d logo prominently displayed in red and silver. The headlights are sleek and modern, with a distinctive design. The truck has large, black alloy wheels with off - road - style tires, and there is dust being kicked up behind and around the wheels, emphasizing its off - road capability. The background features rocky, reddish - brown cliffs or rock formations, with some sparse green vegetation, creating a rugged, outdoor, and adventurous setting. The overall impression is one of a powerful, capable vehicle designed for both on - road and off - road use, set in a dramatic, natural landscape."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

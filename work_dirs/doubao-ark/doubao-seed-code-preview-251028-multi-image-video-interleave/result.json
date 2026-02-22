@@ -1,0 +1,430 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image showcases a **GMC pickup truck** (specifically a mid-size model, likely the GMC Canyon AT4 or a similar off-road variant) driving on a dusty dirt road in an arid, desert-like landscape. Here\u2019s a detailed breakdown:\n\n\n### **Truck Details**\n- **Color & Finish**: The truck is painted in a dark gray (metallic) hue, with a rugged, industrial design aesthetic.\n- **Exterior Features**:\n  - **Grille**: A prominent, blacked-out grille with the *GMC* logo (in red, white, and blue) at the center.\n  - **Headlights**: Sleek, angular LED headlights with a modern, aggressive shape.\n  - **Bumper**: A heavy-duty black bumper with red accents and integrated fog/driving lights.\n  - **Wheels & Tires**: Large, black alloy wheels wrapped in all-terrain tires (with rugged tread patterns), emphasizing off-road capability.\n  - **Body Style**: A crew-cab configuration (4 doors) with a short bed, suitable for both passenger comfort and cargo.\n  - **Design Elements**: Hood scoops, raised suspension, and flared wheel arches enhance its tough, adventurous look.\n\n\n### **Setting & Environment**\n- **Location**: The truck drives on a **dirt road** in a desert/arid landscape, with **red rock formations** (typical of the American Southwest, e.g., Utah or Arizona) in the background.\n- **Action**: The truck is in motion, kicking up a trail of dust behind it, suggesting a moderate speed.\n- **Lighting**: Warm, natural lighting (likely late afternoon) creates a dramatic, rugged atmosphere.\n\n\n### **Atmosphere**\nThe scene conveys a sense of **adventure and rugged performance**, highlighting the truck\u2019s ability to navigate off-road terrain. The dusty environment and rock formations emphasize the vehicle\u2019s durability and off-road prowess.\n\n\nOverall, the image captures the GMC pickup as a capable, stylish off-road vehicle in a striking desert setting."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In the image, a **sleek, modern white yacht** cuts through calm, turquoise-blue seas under a bright, clear sky. The yacht\u2019s design features clean lines and a dark - hulled bow, and it creates a prominent, frothy white wake behind it, suggesting it is moving at a steady or brisk pace. The horizon stretches out in the background, merging the deep blue of the sky with the lighter blue of the sea, emphasizing the open and vast nature of the ocean. The overall scene conveys a sense of luxury, freedom, and the serenity of being out on the water."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "- **Left image: GMC pickup truck in a desert or rocky terrain**  \n  - The truck is gray, with a bold GMC grille, rugged tires, and a muscular design.  \n  - It drives on a dusty road, with red rock formations in the background.  \n  - Dust is kicked up by the tires, suggesting movement and an off-road-ready nature.  \n\n\n- **Right image: Luxury yacht at high speed on the open ocean**  \n  - The yacht is white with black accents, featuring a sleek, modern design.  \n  - It cruises through deep blue water, creating a large wake behind it.  \n  - The clear sky indicates good weather, and the scene exudes luxury and serenity.  \n\n\nThese images contrast land-based ruggedness with ocean - going elegance, highlighting different modes of high - performance travel."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here are detailed descriptions of the two images:\n\n\n### **First Image: Luxury Yacht on the Ocean**  \nA sleek, **white luxury yacht** with a black stripe along its hull glides through deep blue ocean waters. The yacht\u2019s modern design features a curved cabin and a spacious deck, creating a dynamic, fast-moving impression as it leaves a large, frothy white wake behind. The sky above is clear and bright blue, dotted with a few faint clouds, enhancing the sense of calm and sophistication. The scene conveys a feeling of luxury, freedom, and adventure on the open sea.  \n\n\n### **Second Image: GMC Pickup Truck in a Desert Landscape**  \nA **gray GMC pickup truck** (with the GMC logo prominently displayed on the grille) drives along a dusty, reddish-brown dirt road. The truck\u2019s rugged, muscular design\u2014including large tires and a bold front fascia\u2014emphasizes its off-road capabilities. Dust billows from the tires, suggesting the truck is moving at a steady speed. The background features a dramatic desert landscape with rocky, red-brown cliffs and sparse green vegetation, under a clear, bright sky. The scene evokes a sense of power, resilience, and readiness for adventure in harsh, rugged terrain.  \n\n\nBoth images highlight themes of strength, adventure, and high performance\u2014one on water, the other on land."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### \u7b2c\u4e00\u5f20\u56fe\u7247\uff1aGMC \u76ae\u5361\u8f66\u5728\u8352\u6f20\u4e2d\u884c\u9a76\n\n\u8fd9\u5f20\u56fe\u7247\u5c55\u793a\u4e86\u4e00\u8f86**\u7070\u8272\u7684 GMC \u76ae\u5361\u8f66**\u5728\u8352\u6f20\u73af\u5883\u4e2d\u884c\u9a76\u7684\u573a\u666f\u3002\n\n- **\u4e3b\u4f53\u8f66\u8f86**\uff1a\n  - \u8f66\u8eab\u4e3a\u7070\u8272\uff0c\u8bbe\u8ba1\u98ce\u683c\u786c\u6717\uff0c\u5177\u6709\u5178\u578b\u7684\u7f8e\u5f0f\u76ae\u5361\u7279\u5f81\u3002\n  - \u8f66\u5934\u90e8\u5206\uff0c\u9ed1\u8272\u7684\u8fdb\u6c14\u683c\u6805\u4e0a\u6709\u9192\u76ee\u7684\u7ea2\u8272 GMC \u6807\u5fd7\uff0c\u4e24\u4fa7\u662f\u9510\u5229\u7684 LED \u5927\u706f\uff0c\u6574\u4f53\u663e\u5f97\u9738\u6c14\u5341\u8db3\u3002\n  - \u8f66\u8eab\u4fa7\u9762\u7ebf\u6761\u6d41\u7545\uff0c\u8d27\u8231\u548c\u4e58\u5458\u8231\u7684\u6bd4\u4f8b\u534f\u8c03\uff0c\u8f66\u8f6e\u4e3a\u9ed1\u8272\u5927\u5c3a\u5bf8\u8d8a\u91ce\u8f6e\u80ce\uff0c\u9002\u5408\u590d\u6742\u5730\u5f62\u884c\u9a76\u3002\n\n- **\u73af\u5883\u4e0e\u6c1b\u56f4**\uff1a\n  - \u80cc\u666f\u662f\u7ea2\u8272\u7684\u5ca9\u77f3\u548c\u8352\u6f20\u5730\u8c8c\uff0c\u5730\u9762\u4e3a\u6c99\u5730\uff0c\u8f66\u8f86\u884c\u9a76\u65f6\u626c\u8d77\u4e00\u7247\u5c18\u571f\uff0c\u589e\u52a0\u4e86\u753b\u9762\u7684\u52a8\u611f\u548c\u91ce\u6027\u3002\n  - \u8fdc\u5904\u7684\u5ca9\u77f3\u548c\u7a00\u758f\u7684\u690d\u88ab\u8fdb\u4e00\u6b65\u7a81\u51fa\u4e86\u8352\u6f20\u73af\u5883\u7684\u8352\u51c9\u4e0e\u58ee\u7f8e\u3002\n  - \u6574\u4f53\u6c1b\u56f4\u5145\u6ee1\u529b\u91cf\u611f\u548c\u5192\u9669\u7cbe\u795e\uff0c\u5c55\u73b0\u4e86\u76ae\u5361\u8f66\u5728\u6781\u7aef\u5730\u5f62\u4e2d\u7684\u884c\u9a76\u80fd\u529b\u3002\n\n\n### \u7b2c\u4e8c\u5f20\u56fe\u7247\uff1a\u8c6a\u534e\u6e38\u8247\u5728\u6d77\u9762\u9ad8\u901f\u884c\u9a76\n\n\u8fd9\u5f20\u56fe\u7247\u5c55\u793a\u4e86\u4e00\u8258**\u767d\u8272\u7684\u8c6a\u534e\u6e38\u8247**\u5728\u84dd\u8272\u6d77\u9762\u4e0a\u9ad8\u901f\u884c\u9a76\u7684\u573a\u666f\u3002\n\n- **\u4e3b\u4f53\u6e38\u8247**\uff1a\n  - \u6e38\u8247\u5916\u89c2\u4e3a\u767d\u8272\uff0c\u8bbe\u8ba1\u6d41\u7ebf\u578b\uff0c\u5177\u6709\u73b0\u4ee3\u611f\u548c\u5962\u534e\u611f\u3002\n  - \u8239\u8eab\u7ebf\u6761\u4f18\u7f8e\uff0c\u7532\u677f\u4e0a\u6709\u91d1\u5c5e\u680f\u6746\uff0c\u9a7e\u9a76\u8231\u548c\u4e58\u5ba2\u533a\u57df\u8bbe\u8ba1\u7cbe\u81f4\uff0c\u663e\u793a\u51fa\u5176\u9ad8\u7aef\u5b9a\u4f4d\u3002\n  - \u6e38\u8247\u884c\u9a76\u65f6\uff0c\u8239\u5c3e\u6fc0\u8d77\u5de8\u5927\u7684\u767d\u8272\u6d6a\u82b1\uff0c\u5f62\u6210\u660e\u663e\u7684\u6c34\u75d5\uff0c\u7a81\u51fa\u4e86\u5176\u9ad8\u901f\u884c\u9a76\u7684\u72b6\u6001\u3002\n\n- **\u73af\u5883\u4e0e\u6c1b\u56f4**\uff1a\n  - \u80cc\u666f\u662f\u5e7f\u9614\u7684\u84dd\u8272\u6d77\u9762\uff0c\u5929\u7a7a\u6674\u6717\uff0c\u6d77\u9762\u5e73\u9759\uff0c\u8fdc\u5904\u7684\u5929\u9645\u7ebf\u6e05\u6670\u53ef\u89c1\uff0c\u7ed9\u4eba\u4e00\u79cd\u5f00\u9614\u548c\u81ea\u7531\u7684\u611f\u89c9\u3002\n  - \u9633\u5149\u6d12\u5728\u6d77\u9762\u4e0a\uff0c\u5149\u5f71\u6548\u679c\u67d4\u548c\uff0c\u8fdb\u4e00\u6b65\u589e\u5f3a\u4e86\u753b\u9762\u7684\u7f8e\u611f\u548c\u8212\u9002\u611f\u3002\n  - \u6574\u4f53\u6c1b\u56f4\u5145\u6ee1\u4e86\u5962\u534e\u3001\u4f11\u95f2\u548c\u6109\u60a6\u7684\u5ea6\u5047\u6c14\u606f\uff0c\u4eff\u4f5b\u8ba9\u4eba\u611f\u53d7\u5230\u6d77\u98ce\u7684\u8f7b\u62c2\u548c\u6d77\u6d6a\u7684\u97f5\u5f8b\u3002\n\n\n\u4e24\u5f20\u56fe\u7247\u5206\u522b\u5c55\u73b0\u4e86\u9646\u5730\u548c\u6d77\u6d0b\u4e24\u79cd\u4e0d\u540c\u573a\u666f\u4e0b\u7684\u4ea4\u901a\u5de5\u5177\uff0c\u4e00\u4e2a\u5145\u6ee1\u529b\u91cf\u4e0e\u5192\u9669\uff0c\u4e00\u4e2a\u5145\u6ee1\u5962\u534e\u4e0e\u60a0\u95f2\uff0c\u5f62\u6210\u4e86\u9c9c\u660e\u7684\u5bf9\u6bd4\u3002"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### \u7b2c\u4e00\u5f20\u56fe\u7247\uff08\u6e38\u8247\uff09\n\u753b\u9762\u4e2d\u662f\u4e00\u8258**\u767d\u8272\u8c6a\u534e\u6e38\u8247**\u5728**\u5e7f\u9614\u7684\u84dd\u8272\u6d77\u9762**\u4e0a**\u9ad8\u901f\u884c\u9a76**\u3002\u6e38\u8247\u8bbe\u8ba1\u73b0\u4ee3\u3001\u7ebf\u6761\u6d41\u7545\uff0c\u8239\u8eab\u4ee5\u767d\u8272\u4e3a\u4e3b\uff0c\u8f85\u4ee5\u9ed1\u8272\u548c\u6df1\u84dd\u8272\u88c5\u9970\u6761\u7eb9\u3002\u5b83\u5728\u6d77\u9762\u4e0a\u7281\u51fa\u4e00\u9053**\u767d\u8272\u6d6a\u82b1**\uff0c\u5c55\u73b0\u51fa\u5f3a\u52b2\u7684\u52a8\u529b\u611f\u3002\u80cc\u666f\u662f**\u6674\u6717\u7684\u84dd\u5929**\uff0c\u6d77\u9762\u5e73\u9759\u4e14\u5e7f\u9614\uff0c\u6574\u4f53\u6c1b\u56f4\u5145\u6ee1**\u52a8\u611f\u4e0e\u5962\u534e**\uff0c\u4f20\u9012\u51fa\u81ea\u7531\u60ec\u610f\u7684\u5ea6\u5047\u6216\u822a\u884c\u4f53\u9a8c\u3002\n\n\n### \u7b2c\u4e8c\u5f20\u56fe\u7247\uff08\u76ae\u5361\u8f66\uff09\n\u8fd9\u662f\u4e00\u8f86**\u7070\u8272\u7684 GMC \u76ae\u5361\u8f66**\u5728**\u7ea2\u8272\u6c99\u5730**\u4e0a\u884c\u9a76\u3002\u76ae\u5361\u9020\u578b**\u786c\u6717\u5927\u6c14**\uff0c\u8f66\u8eab\u7ebf\u6761\u7c97\u72b7\uff0c\u8f66\u5934\u5e26\u6709\u9c9c\u660e\u7684\u54c1\u724c\u6807\u8bc6\u4e0e\u73b0\u4ee3\u706f\u5149\u8bbe\u8ba1\u3002\u8f66\u8f6e\u626c\u8d77**\u7ec6\u788e\u6c99\u5c18**\uff0c\u5448\u73b0\u51fa\u52a8\u6001\u884c\u9a76\u7684\u72b6\u6001\u3002\u80cc\u666f\u662f**\u7ea2\u8910\u8272\u7684\u5ca9\u77f3\u5730\u8c8c**\u4e0e\u70b9\u7f00\u7684**\u7eff\u8272\u690d\u88ab**\uff0c\u8425\u9020\u51fa**\u8352\u91ce\u63a2\u9669**\u7684\u6c1b\u56f4\uff0c\u76ae\u5361\u7684\u786c\u6d3e\u98ce\u683c\u4e0e\u81ea\u7136\u73af\u5883\u76f8\u5f97\u76ca\u5f70\uff0c\u4f20\u9012\u51fa**\u529b\u91cf\u611f\u4e0e\u5192\u9669\u7cbe\u795e**\u3002\n\n\n\u4e24\u5f20\u56fe\u7247\u5206\u522b\u5c55\u73b0\u4e86**\u6c34\u4e0a\u5962\u534e\u51fa\u884c**\u4e0e**\u9646\u5730\u8d8a\u91ce\u63a2\u9669**\u7684\u573a\u666f\uff0c\u98ce\u683c\u4e00\u52a8\u4e00\u9759\uff0c\u5374\u90fd\u4f20\u9012\u51fa\u201c\u81ea\u7531\u63a2\u7d22\u201d\u7684\u751f\u6d3b\u6001\u5ea6\u3002"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A\nThis image features a **gray GMC pickup truck** driving on a dusty dirt road in a rugged, arid landscape. The truck has a robust, off-road design with large, black wheels that are kicking up clouds of dust as it moves. The vehicle\u2019s grille prominently displays the GMC logo in red lettering. The background includes rocky hills and sparse green vegetation, suggesting a desert or semi-arid region. The overall scene conveys a sense of adventure and off-road exploration.\n\n\n### Image B\nThis image depicts a **sleek, white luxury yacht** speeding through the open ocean. The yacht has a modern, streamlined design with black accents and a curved hull. As it moves at high speed, it creates a large, frothy wake behind it. The ocean water is a vibrant blue, and the sky above is clear with a few scattered clouds. The horizon line is visible in the distance, emphasizing the vastness of the sea. The scene exudes a sense of luxury, speed, and the freedom of the open water."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### \u56fe\u7247 A \u63cf\u8ff0\n\u56fe\u4e2d\u5c55\u793a\u4e86\u4e00\u8258**\u767d\u8272\u8c6a\u534e\u6e38\u8247**\u5728**\u6df1\u84dd\u8272\u6d77\u9762\u4e0a\u9ad8\u901f\u884c\u9a76**\u7684\u573a\u666f\u3002\u6e38\u8247\u5916\u89c2\u8bbe\u8ba1\u73b0\u4ee3\uff0c\u7ebf\u6761\u6d41\u7545\uff0c\u8239\u8eab\u5e26\u6709\u9ed1\u8272\u88c5\u9970\u6761\uff0c\u663e\u5f97\u65f6\u5c1a\u5927\u6c14\u3002\u6e38\u8247\u884c\u9a76\u65f6\uff0c\u8239\u5c3e\u6fc0\u8d77**\u767d\u8272\u7684\u5de8\u5927\u6d6a\u82b1**\uff0c\u5f70\u663e\u51fa\u5176\u5f3a\u52b2\u7684\u52a8\u529b\u4e0e\u901f\u5ea6\u611f\u3002\u6d77\u9762\u5e73\u9759\u5f00\u9614\uff0c\u8fdc\u5904\u6d77\u5929\u76f8\u63a5\uff0c\u5929\u7a7a\u6674\u6717\u65e0\u4e91\uff0c\u6574\u4f53\u753b\u9762\u4f20\u9012\u51fa\u81ea\u7531\u3001\u5962\u534e\u4e14\u5145\u6ee1\u6d3b\u529b\u7684\u6c1b\u56f4\uff0c\u4eff\u4f5b\u6b63\u8fdb\u884c\u4e00\u573a\u60ec\u610f\u7684\u6d77\u4e0a\u822a\u884c\u3002\n\n\n### \u56fe\u7247 B \u63cf\u8ff0\n\u56fe\u4e2d\u662f\u4e00\u8f86**\u7070\u8272\u7684 GMC \u76ae\u5361\u8f66**\u5728**\u7ea2\u8272\u6c99\u5730\u4e0a\u884c\u9a76**\u7684\u573a\u666f\u3002\u76ae\u5361\u8f66\u9020\u578b\u786c\u6717\uff0c\u524d\u8138\u5e26\u6709\u663e\u8457\u7684 GMC \u54c1\u724c\u6807\u8bc6\uff0c\u9ed1\u8272\u8f6e\u6bc2\u4e0e\u8f66\u8eab\u9ed1\u8272\u88c5\u9970\u4ef6\u589e\u5f3a\u4e86\u529b\u91cf\u611f\u3002\u8f66\u8f86\u884c\u9a76\u65f6\u626c\u8d77**\u9635\u9635\u5c18\u571f**\uff0c\u5c55\u73b0\u51fa\u51fa\u8272\u7684\u8d8a\u91ce\u6027\u80fd\u4e0e\u52a8\u529b\u3002\u80cc\u666f\u662f**\u7ea2\u8272\u5ca9\u77f3\u5730\u8c8c**\uff0c\u95f4\u6742\u7740\u5c11\u91cf\u7eff\u8272\u690d\u88ab\uff0c\u6574\u4f53\u73af\u5883\u7c97\u72b7\u58ee\u4e3d\uff0c\u8425\u9020\u51fa\u5192\u9669\u3001\u63a2\u7d22\u7684\u6c1b\u56f4\uff0c\u51f8\u663e\u51fa\u76ae\u5361\u8f66\u7684\u786c\u6c49\u6c14\u8d28\u4e0e\u6237\u5916\u9002\u5e94\u6027\u3002"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    },
+    {
+        "id": 8,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In the video, a ginger cat with a fluffy tail walks through green grass, moving forward slowly and looking around. The grass is thick and lush, and the cat's fur is a warm orange color. The scene is bright, probably during the day, suggesting the cat is exploring the grassy area."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8
+    },
+    {
+        "id": 9,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This video depicts a sunset scene. The sun is slowly descending behind a mountain range, casting a golden glow. The sky is painted in warm orange and yellow hues, with some wispy clouds scattered. The mountain range appears as a dark silhouette against the bright sky, with sparse vegetation visible on the slopes. The sun's light intensifies gradually as it lowers, creating a serene and picturesque atmosphere."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9
+    },
+    {
+        "id": 10,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### \u573a\u666f\u4e00\uff1a\u8349\u5730\u4e0a\u7684\u6a58\u732b\n\u753b\u9762\u4e2d\uff0c\u4e00\u53ea\u6a59\u9ec4\u8272\u7684\u732b\u6b63\u6f2b\u6b65\u5728\u4e00\u7247\u7eff\u610f\u76ce\u7136\u7684\u8349\u5730\u4e0a\u3002\u5b83\u7684\u6bdb\u53d1\u84ec\u677e\u67d4\u8f6f\uff0c\u5c3e\u5df4\u9ad8\u9ad8\u7ad6\u8d77\uff0c\u663e\u5f97\u60a0\u95f2\u4e14\u8b66\u89c9\u3002\u732b\u7684\u59ff\u6001\u8f7b\u76c8\uff0c\u4f3c\u4e4e\u5728\u63a2\u7d22\u5468\u56f4\u7684\u73af\u5883\uff0c\u9633\u5149\u900f\u8fc7\u8349\u53f6\uff0c\u5728\u5b83\u7684\u8eab\u4e0a\u6295\u4e0b\u67d4\u548c\u7684\u5149\u5f71\uff0c\u6574\u4e2a\u573a\u666f\u5145\u6ee1\u4e86\u81ea\u7136\u7684\u751f\u673a\u4e0e\u6d3b\u529b\u3002\n\n### \u573a\u666f\u4e8c\uff1a\u5c71\u5ce6\u95f4\u7684\u65e5\u843d\n\u5c55\u73b0\u7684\u662f\u4e00\u5e45\u58ee\u4e3d\u7684\u65e5\u843d\u666f\u8c61\u3002\u5929\u7a7a\u88ab\u67d3\u6210\u4e86\u6e29\u6696\u7684\u6a59\u9ec4\u8272\uff0c\u592a\u9633\u6b63\u7f13\u7f13\u4ece\u5c71\u5ce6\u7684\u526a\u5f71\u540e\u65b9\u843d\u4e0b\uff0c\u6d12\u4e0b\u67d4\u548c\u800c\u8f89\u714c\u7684\u5149\u8292\u3002\u5149\u7ebf\u7a7f\u8fc7\u4e91\u5c42\uff0c\u5f62\u6210\u4e86\u7f8e\u4e3d\u7684\u5149\u6655\u6548\u679c\uff0c\u5c71\u5ce6\u7684\u8f6e\u5ed3\u5728\u5915\u9633\u7684\u6620\u886c\u4e0b\u663e\u5f97\u683c\u5916\u6e05\u6670\u3002\u6574\u4e2a\u753b\u9762\u5b81\u9759\u800c\u58ee\u7f8e\uff0c\u4eff\u4f5b\u65f6\u95f4\u90fd\u5728\u6b64\u523b\u9759\u6b62\u3002"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10
+    },
+    {
+        "id": 11,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### \u7b2c\u4e00\u4e2a\u89c6\u9891\u7247\u6bb5\uff08\u65e5\u843d\u666f\u8c61\uff09\n\u753b\u9762\u5c55\u73b0\u4e86\u65e5\u843d\u65f6\u5206\u7684\u58ee\u4e3d\u666f\u8272\u3002\u5929\u7a7a\u88ab\u67d3\u6210\u6e29\u6696\u7684\u6a59\u9ec4\u8272\uff0c\u5c42\u5c42\u4e91\u5f69\u5728\u5915\u9633\u7684\u7167\u8000\u4e0b\u6cdb\u7740\u67d4\u548c\u91d1\u5149\u3002\u592a\u9633\u7684\u4e00\u90e8\u5206\u88ab\u5c71\u5ce6\u906e\u6321\uff0c\u4ec5\u9732\u51fa\u660e\u4eae\u7684\u5706\u76d8\uff0c\u5149\u7ebf\u7a7f\u900f\u4e91\u5c42\u5f62\u6210\u6591\u6593\u5149\u6655\u3002\u5c71\u5ce6\u8f6e\u5ed3\u5728\u5915\u9633\u6620\u886c\u4e0b\u5982\u9ed1\u8272\u526a\u5f71\uff0c\u589e\u6dfb\u4e86\u753b\u9762\u5c42\u6b21\u611f\u3002\u6574\u4e2a\u573a\u666f\u5b81\u9759\u6e29\u99a8\uff0c\u4eff\u4f5b\u65f6\u95f4\u9759\u6b62\u3002\n\n\n### \u7b2c\u4e8c\u4e2a\u89c6\u9891\u7247\u6bb5\uff08\u8349\u5730\u4e0a\u7684\u732b\u54aa\uff09\n\u89c6\u9891\u4e2d\uff0c\u4e00\u53ea\u6a59\u8272\u732b\u54aa\u5728\u7fe0\u7eff\u8349\u5730\u4e0a\u884c\u8d70\u3002\u732b\u54aa\u6bdb\u53d1\u84ec\u677e\uff0c\u5c3e\u5df4\u9ad8\u9ad8\u7ad6\u8d77\uff0c\u6b65\u4f10\u8f7b\u76c8\uff0c\u4f4e\u5934\u55c5\u7740\u8349\u5730\uff0c\u4f3c\u5728\u63a2\u7d22\u3002\u9633\u5149\u7ed9\u5b83\u7684\u6bdb\u53d1\u9540\u4e0a\u91d1\u8272\u5149\u8f89\uff0c\u4e0e\u5468\u56f4\u7eff\u8349\u5f62\u6210\u9c9c\u660e\u5bf9\u6bd4\u3002\u732b\u54aa\u773c\u795e\u4e13\u6ce8\uff0c\u8033\u6735\u7ad6\u8d77\uff0c\u5c3d\u663e\u5bf9\u73af\u5883\u7684\u654f\u9510\u611f\u77e5\uff0c\u753b\u9762\u5145\u6ee1\u751f\u673a\u6d3b\u529b\uff0c\u5c55\u73b0\u4e86\u732b\u54aa\u5728\u81ea\u7136\u4e2d\u7684\u7075\u52a8\u59ff\u6001\u3002"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11
+    },
+    {
+        "id": 12,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Video A\n\u89c6\u9891\u4e2d\u662f\u4e00\u53ea**\u6a58\u8272\u7684\u732b**\u5728**\u7eff\u8272\u7684\u8349\u5730\u4e0a**\u6d3b\u52a8\u3002\u8d77\u521d\uff0c\u732b\u4f4e\u5934\u9760\u8fd1\u8349\u5730\uff0c\u4f3c\u4e4e\u5728\u55c5\u95fb\u6216\u67e5\u770b\u8349\u4e1b\u4e2d\u7684\u4e8b\u7269\uff1b\u968f\u540e\uff0c\u732b\u62ac\u8d77\u5934\uff0c\u5f00\u59cb**\u7f13\u6162\u5730\u5411\u524d\u884c\u8d70**\uff0c\u5c3e\u5df4\u9ad8\u9ad8\u7fd8\u8d77\uff0c\u663e\u5f97\u60a0\u95f2\u81ea\u5728\u3002\u8349\u5730\u7684\u9c9c\u7eff\u8272\u4e0e\u732b\u7684\u6696\u6a58\u8272\u5f62\u6210\u9c9c\u660e\u5bf9\u6bd4\uff0c\u6574\u4f53\u753b\u9762\u5b81\u9759\u800c\u751f\u52a8\uff0c\u5c55\u73b0\u4e86\u732b\u5728\u6237\u5916\u63a2\u7d22\u7684\u81ea\u7136\u573a\u666f\u3002\n\n\n### Video B\n\u89c6\u9891\u5448\u73b0\u4e86\u4e00\u5e45**\u58ee\u4e3d\u7684\u65e5\u843d\uff08\u6216\u65e5\u51fa\uff09\u666f\u8c61**\u3002\u592a\u9633\u4f4d\u4e8e\u753b\u9762\u4e0b\u65b9\uff0c\u88ab\u9ed1\u8272\u7684**\u5c71\u5ce6**\u90e8\u5206\u906e\u6321\uff0c\u53d1\u51fa**\u660e\u4eae\u7684\u91d1\u8272\u5149\u8292**\uff0c\u5149\u7ebf\u5411\u56db\u5468\u6563\u5c04\u3002\u5929\u7a7a\u88ab\u67d3\u6210**\u6696\u6a59\u8272\u4e0e\u9ec4\u8272\u6e10\u53d8**\u7684\u8272\u8c03\uff0c\u4e91\u5c42\u5728\u5149\u5f71\u7684\u6620\u886c\u4e0b\u663e\u5f97\u683c\u5916\u67d4\u548c\u3002\u5c71\u5ce6\u7684\u8f6e\u5ed3\u5728\u6697\u8272\u4e2d\u82e5\u9690\u82e5\u73b0\uff0c\u4e0e\u660e\u4eae\u7684\u5929\u7a7a\u5f62\u6210\u5f3a\u70c8\u7684\u89c6\u89c9\u5bf9\u6bd4\uff0c\u6574\u4e2a\u573a\u666f\u5145\u6ee1\u4e86\u5b81\u9759\u800c\u6e29\u6696\u7684\u6c1b\u56f4\uff0c\u4eff\u4f5b\u65f6\u95f4\u5728\u8fd9\u4e00\u523b\u9759\u6b62\u3002"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12
+    },
+    {
+        "id": 13,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first video shows the sun setting behind a mountain range, casting a warm orange glow across the sky. The second video features a ginger cat walking through a grassy area, with the cat\u2019s fur contrasting against the green grass."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13
+    },
+    {
+        "id": 14,
+        "media": [
+            "truck.png",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### \u7b2c\u4e00\u5f20\u56fe\u7247\u5185\u5bb9\u63cf\u8ff0\n\u753b\u9762\u4e2d\u662f\u4e00\u8f86**\u7070\u8272\u7684 GMC \u76ae\u5361\u8f66**\uff0c\u884c\u9a76\u5728\u6c99\u5730\u4e0a\uff0c\u8f66\u8f6e\u626c\u8d77\u4e86\u7ec6\u788e\u7684\u6c99\u5c18\u3002\u76ae\u5361\u8f66\u7684\u524d\u8138\u8bbe\u8ba1\u786c\u6717\uff0c\u5e26\u6709\u6807\u5fd7\u6027\u7684\u7ea2\u8272 GMC \u6807\u5fd7\uff0c\u9ed1\u8272\u7684\u4fdd\u9669\u6760\u548c\u7ea2\u8272\u88c5\u9970\u6761\u589e\u6dfb\u4e86\u91ce\u6027\u6c14\u606f\u3002\u8f66\u8eab\u7ebf\u6761\u808c\u8089\u611f\u5341\u8db3\uff0c\u9ed1\u8272\u7684\u8f6e\u6bc2\u642d\u914d\u5bbd\u5927\u7684\u8f6e\u80ce\uff0c\u5c3d\u663e\u8d8a\u91ce\u98ce\u8303\u3002\n\n\u80cc\u666f\u662f**\u7ea2\u8272\u7684\u5ca9\u58c1**\u548c\u96f6\u661f\u7684\u7eff\u8272\u690d\u88ab\uff0c\u7ea2\u5ca9\u4e0e\u7eff\u8349\u5f62\u6210\u5f3a\u70c8\u8272\u5f69\u5bf9\u6bd4\uff0c\u8425\u9020\u51fa\u8352\u91ce\u7684\u82cd\u832b\u611f\u3002\u6574\u4f53\u6c1b\u56f4\u5145\u6ee1\u529b\u91cf\u4e0e\u5192\u9669\uff0c\u4eff\u4f5b\u5c55\u73b0\u4e86\u76ae\u5361\u8f66\u5728\u91ce\u5916\u7684\u786c\u6838\u6027\u80fd\u3002\n\n\n### \u7b2c\u4e8c\u5f20\u56fe\u7247\u5185\u5bb9\u63cf\u8ff0\n\u4e00\u53ea**\u6a58\u8272\u7684\u732b**\u5728**\u9c9c\u7eff\u8272\u7684\u8349\u5730\u4e0a\u884c\u8d70**\u3002\u732b\u54aa\u7684\u6bdb\u53d1\u4ee5\u6a58\u8272\u4e3a\u4e3b\uff0c\u5c3e\u7aef\u5e26\u6709\u767d\u8272\u7684\u84ec\u677e\u6bdb\u53d1\uff0c\u8033\u6735\u7ad6\u8d77\uff0c\u773c\u775b\u660e\u4eae\uff0c\u6b63\u4e13\u6ce8\u5730\u89c2\u5bdf\u524d\u65b9\u3002\u5b83\u7684\u5f71\u5b50\u6295\u5c04\u5728\u8349\u5730\u4e0a\uff0c\u8f6e\u5ed3\u6e05\u6670\u3002\n\n\u8349\u5730\u7684\u8349\u53f6\u8302\u5bc6\u4e14\u8272\u6cfd\u9c9c\u7eff\uff0c\u751f\u673a\u76ce\u7136\uff0c\u4e0e\u732b\u54aa\u6e29\u6696\u7684\u6a58\u8272\u5f62\u6210\u548c\u8c10\u914d\u8272\u3002\u6574\u4f53\u753b\u9762\u5b81\u9759\u81ea\u7136\uff0c\u4f20\u9012\u51fa\u60a0\u95f2\u3001\u8212\u9002\u7684\u6c1b\u56f4\uff0c\u4eff\u4f5b\u80fd\u611f\u53d7\u5230\u732b\u54aa\u5728\u8349\u5730\u4e2d\u6f2b\u6b65\u7684\u60ec\u610f\u3002\n\n\n\u4e24\u5f20\u56fe\u7247\u98ce\u683c\u8fe5\u5f02\uff1a\u524d\u8005\u5c55\u73b0\u673a\u68b0\u529b\u91cf\u4e0e\u8352\u91ce\u5192\u9669\uff0c\u540e\u8005\u5219\u662f\u52a8\u7269\u4e0e\u81ea\u7136\u7684\u6e29\u67d4\u4e92\u52a8\u3002"
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14
+    },
+    {
+        "id": 15,
+        "media": [
+            "sun.mp4",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here are the detailed descriptions of the two images:\n\n\n### **First Image**  \nThis is a **sunset scene**. The sky is painted in warm, glowing hues of orange and yellow, creating a serene and majestic atmosphere. The sun, a bright, radiant orb, is partially hidden behind a dark, silhouetted mountain range. The mountain is adorned with sparse trees, also in silhouette, which add texture to the landscape. The overall effect is calm and breathtaking, capturing the transition from day to night.\n\n\n### **Second Image**  \nThis image features a **gray GMC pickup truck** driving on a dirt road. The truck has a rugged, bold design with a prominent grille and aggressive headlights. It is kicking up dust as it moves, suggesting motion and adventure. The background showcases a rocky, desert - like terrain with some greenery, indicating a remote, outdoor setting. The truck's stance and the dusty road emphasize its off - road capability.\n\n\nBoth images evoke a sense of nature and adventure\u2014one through the tranquility of a sunset and the other through the ruggedness of a pickup truck in an off - road environment."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15
+    },
+    {
+        "id": 16,
+        "media": [
+            "boat.png",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "\u4ee5\u4e0b\u662f\u5bf9\u56fe\u50cf\u548c\u89c6\u9891\u5185\u5bb9\u7684\u8be6\u7ec6\u63cf\u8ff0\uff1a\n\n---\n\n### **\u56fe\u7247 A\uff1a\u6e38\u8247\u5728\u6d77\u4e0a\u884c\u9a76**\n\u8fd9\u5f20\u56fe\u7247\u5c55\u793a\u4e86\u4e00\u8258\u767d\u8272\u7684\u8c6a\u534e\u6e38\u8247\u5728\u84dd\u8272\u7684\u6d77\u9762\u4e0a\u5feb\u901f\u884c\u9a76\u3002\u6e38\u8247\u7684\u5916\u89c2\u8bbe\u8ba1\u73b0\u4ee3\u4e14\u52a8\u611f\uff0c\u8239\u8eab\u7ebf\u6761\u6d41\u7545\uff0c\u8239\u5934\u5fae\u5fae\u7fd8\u8d77\uff0c\u8239\u5c3e\u6fc0\u8d77\u4e86\u767d\u8272\u7684\u6d6a\u82b1\uff0c\u663e\u793a\u51fa\u6e38\u8247\u6b63\u4ee5\u8f83\u9ad8\u7684\u901f\u5ea6\u822a\u884c\u3002\u80cc\u666f\u4e2d\uff0c\u6d77\u6c34\u5448\u73b0\u51fa\u6df1\u6d45\u4e0d\u4e00\u7684\u84dd\u8272\uff0c\u5929\u7a7a\u6674\u6717\uff0c\u6709\u5c11\u91cf\u7684\u767d\u4e91\uff0c\u6574\u4f53\u753b\u9762\u5145\u6ee1\u4e86\u6d3b\u529b\u548c\u5962\u534e\u611f\u3002\n\n---\n\n### **\u89c6\u9891 B\uff1a\u65e5\u843d\u65f6\u5206\u7684\u5c71\u666f**\n\u8fd9\u6bb5\u89c6\u9891\u63cf\u7ed8\u4e86\u4e00\u4e2a\u58ee\u4e3d\u7684\u65e5\u843d\u573a\u666f\u3002\u753b\u9762\u4e2d\uff0c\u592a\u9633\u6b63\u7f13\u7f13\u5730\u4ece\u8fdc\u5904\u7684\u5c71\u5ce6\u80cc\u540e\u843d\u4e0b\uff0c\u5929\u7a7a\u88ab\u67d3\u6210\u4e86\u6a59\u9ec4\u8272\u548c\u7ea2\u8272\u7684\u6e10\u53d8\uff0c\u4e91\u5c42\u5728\u9633\u5149\u7684\u7167\u5c04\u4e0b\u5448\u73b0\u51fa\u67d4\u548c\u7684\u8272\u5f69\u3002\u5c71\u5ce6\u7684\u8f6e\u5ed3\u5728\u5915\u9633\u7684\u6620\u886c\u4e0b\u663e\u5f97\u683c\u5916\u6e05\u6670\uff0c\u6811\u6728\u7684\u526a\u5f71\u70b9\u7f00\u5728\u5c71\u811a\u4e0b\uff0c\u6574\u4e2a\u573a\u666f\u5145\u6ee1\u4e86\u5b81\u9759\u548c\u6e29\u6696\u7684\u6c1b\u56f4\uff0c\u7ed9\u4eba\u4e00\u79cd\u7965\u548c\u3001\u7f8e\u597d\u7684\u611f\u89c9\u3002\n\n---\n\n\u8fd9\u4e24\u5e45\u753b\u9762\u5206\u522b\u5c55\u793a\u4e86\u6d77\u6d0b\u7684\u52a8\u611f\u4e0e\u81ea\u7136\u7684\u5b81\u9759\uff0c\u5f62\u6210\u4e86\u9c9c\u660e\u7684\u5bf9\u6bd4\u3002"
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16
+    },
+    {
+        "id": 17,
+        "media": [
+            "cat.mp4",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Video A: Fluffy Orange Cat in Green Grass  \nA long-haired orange cat with a bushy tail explores a field of tall, vibrant green grass. Initially, the cat sniffs the grass intently, then begins walking steadily toward the camera. Its ears are perked forward, and its eyes are wide open, exuding curiosity and alertness. The sunlight casts soft shadows on the grass, creating a calm, natural atmosphere. The cat\u2019s fur is a mix of warm orange hues with lighter patches on its chest and legs, and it moves with gentle, deliberate steps.  \n\n\n### Image B: Sleek Yacht Speeding Through Blue Water  \nA modern, high-end white and black yacht cuts through the deep blue sea at high speed, leaving a large, frothy white wake behind it. The yacht features a sleek, aerodynamic design with a white hull, black trim, and a sunroof on the upper deck. The bow is pointed sharply, and the vessel glides smoothly over the calm water. The sky above is clear with a few wispy clouds, enhancing the bright, sunny ambiance. The overall scene conveys luxury, speed, and adventure.  \n\n\n---  \nThe video emphasizes a peaceful, natural moment with the curious cat, while the image captures a dynamic, glamorous scene of the yacht racing through the open sea."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17
+    }
+]

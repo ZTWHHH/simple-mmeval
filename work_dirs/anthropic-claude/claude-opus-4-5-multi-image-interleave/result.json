@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This image shows a GMC Canyon pickup truck, likely the AT4X or similar off-road oriented trim level. The truck is finished in a dark gray/charcoal color and is photographed in what appears to be a rugged desert or canyon environment.\n\nKey features visible include:\n\n- **Front end**: The distinctive GMC grille with bold \"GMC\" lettering, LED headlights with the signature C-shaped lighting elements\n- **Body style**: Crew cab configuration with four doors\n- **Wheels**: Black alloy wheels with all-terrain tires\n- **Stance**: Lifted suspension giving it an aggressive, off-road ready appearance\n- **Red tow hooks**: Visible on the front, indicating off-road/recovery capability\n- **Skid plate**: Protective underbody armor visible beneath the front bumper\n\nThe setting shows rocky, reddish terrain typical of the American Southwest, suggesting the truck is being showcased in its intended off-road environment. The dramatic lighting and composition appear to be from professional marketing/promotional photography."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This image shows a luxury motor yacht cruising at high speed across calm, blue waters. The vessel appears to be a sleek, modern sport yacht, likely in the 60-80 foot range, featuring:\n\n- A dark hull (appears black or dark blue) with white superstructure\n- A streamlined, aerodynamic hardtop design\n- Large windows along the cabin sides\n- A flybridge on top\n- The yacht is creating a significant wake and spray on the port (left) side, indicating it's traveling at considerable speed\n\nThe setting appears to be open water on a clear day with good visibility. The water has a smooth, glassy appearance typical of calm sea conditions. There's a hint of land or mountains visible in the distant background on the left side of the image.\n\nThis type of vessel is typically used for recreational cruising and represents high-end marine craftsmanship, often from Italian or American yacht manufacturers like Mangusta, Pershing, or similar premium brands."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "# Image Descriptions\n\n## Image 1: GMC Canyon Pickup Truck\n\nThe first image shows a **GMC Canyon** pickup truck, appearing to be the **AT4X** or similar off-road trim level. Key details include:\n\n- **Color**: Dark gray/charcoal metallic finish\n- **Body style**: Mid-size crew cab pickup truck\n- **Setting**: Desert/canyon terrain with rocky, reddish-brown landscape in the background\n- **Features visible**:\n  - Aggressive off-road stance\n  - Black alloy wheels\n  - All-terrain tires\n  - Bold GMC grille with horizontal slats\n  - LED headlights and daytime running lights\n  - Front skid plate protection\n  - Red tow hooks\n  - The truck appears to be in motion, kicking up dust\n\n## Image 2: Luxury Motor Yacht\n\nThe second image depicts a **luxury motor yacht** cruising on open water:\n\n- **Size**: Appears to be approximately 60-80 feet in length\n- **Color scheme**: White hull with dark (navy/black) accent stripe along the waterline\n- **Setting**: Calm, blue ocean waters with hazy/misty conditions\n- **Features visible**:\n  - Flybridge design\n  - Multiple deck levels\n  - Sleek, aerodynamic profile\n  - Creating a wake as it moves at cruising speed\n  - Modern sport yacht styling\n  - Appears to be a high-end Italian or European-style vessel"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "## Image 1: Luxury Yacht\n\nThe first image shows a **luxury motor yacht** cruising at high speed across calm, blue waters. Key details include:\n\n- **White and dark-hulled yacht** with a sleek, modern design\n- **Creating a wake/spray** on the port (left) side, indicating significant speed\n- **Multiple deck levels** with what appears to be a flybridge\n- **Calm sea conditions** with a hazy/misty horizon\n- The vessel appears to be approximately **60-80 feet in length**\n- Professional/promotional style photography with soft lighting\n\n---\n\n## Image 2: GMC Pickup Truck\n\nThe second image shows a **GMC Canyon** (or similar mid-size GMC pickup) in what appears to be an off-road setting:\n\n- **Dark gray/charcoal colored** crew cab pickup truck\n- **AT4X or similar off-road trim** based on styling cues\n- Prominent **GMC grille** with signature lighting\n- **Black wheels** with all-terrain tires\n- **Desert/canyon landscape** in the background with red rock formations\n- Dust visible around the vehicle suggesting off-road driving\n- **Aggressive front styling** with skid plate protection\n- This appears to be a **promotional/marketing photograph**"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "# Image 1: GMC Pickup Truck\n\nThis image shows a **GMC Canyon or Colorado pickup truck** (appears to be an AT4X or similar off-road variant) in a dramatic outdoor setting.\n\n**Vehicle Details:**\n- **Color:** Dark gray/charcoal metallic finish\n- **Body style:** Crew cab (4-door) pickup truck\n- **Trim level:** Off-road performance variant with aggressive styling\n- **Notable features:**\n  - Bold black front grille with prominent \"GMC\" lettering\n  - LED headlights and daytime running lights\n  - Black wheel arches and fender flares\n  - Black alloy wheels with off-road tires\n  - Red tow hooks visible on the front\n  - Skid plate protection underneath\n\n**Setting:**\n- Desert/canyon environment with reddish-brown rocky terrain\n- The truck appears to be in motion, kicking up dust\n- Dramatic lighting suggests sunset or golden hour photography\n\n---\n\n# Image 2: Luxury Motor Yacht\n\nThis image captures a **luxury motor yacht** cruising at high speed on open water.\n\n**Vessel Details:**\n- **Type:** Express cruiser/sport yacht\n- **Estimated length:** Approximately 50-70 feet\n- **Color scheme:** White hull with dark (navy/black) accent stripe along the waterline\n- **Features:**\n  - Sleek, aerodynamic flybridge design\n  - Large wraparound windows on the main cabin\n  - Radar/communication equipment on top\n  - Swim platform at stern\n\n**Setting:**\n- Calm, blue ocean waters\n- Clear sky with slight haze\n- Boat is creating a significant wake/spray, indicating high speed\n- Distant landmass visible on the horizon"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "# Image 1: Luxury Yacht\n\nThis image shows a **sleek, modern motor yacht** cruising at high speed across calm blue waters. Key details include:\n\n- **Vessel Type**: A luxury sport yacht/cruiser, appearing to be approximately 50-70 feet in length\n- **Color Scheme**: White superstructure with a dark navy/black hull stripe along the waterline\n- **Design Features**: Aerodynamic flybridge, large windows, and a streamlined profile\n- **Motion**: The yacht is clearly underway at speed, creating a prominent white wake/spray on the port (left) side\n- **Setting**: Open water with a hazy, overcast sky and possibly distant landmass visible on the horizon\n- **Water Conditions**: Calm, glassy water with subtle reflections of the vessel\n\n---\n\n# Image 2: GMC Pickup Truck\n\nThis image features a **GMC Canyon or Sierra pickup truck** in an off-road setting. Key details include:\n\n- **Vehicle**: GMC truck (likely the Canyon AT4X or similar off-road variant)\n- **Color**: Dark gray/charcoal metallic finish\n- **Configuration**: Crew cab (4-door) with a short bed\n- **Off-Road Features**: Lifted suspension, black alloy wheels, all-terrain tires, front skid plate, and aggressive front bumper design\n- **Styling**: Bold GMC grille with prominent \"GMC\" lettering, LED headlights, and red tow hooks\n- **Setting**: Desert/canyon environment with reddish-brown rocky terrain, suggesting rugged off-road capability\n- **Atmosphere**: Dusty conditions with dramatic landscape in the background"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "## Image A Description\n\nImage A shows a **GMC Canyon pickup truck**, likely the AT4X or similar off-road trim level. The truck is:\n\n- **Color**: Dark gray/charcoal metallic finish\n- **Style**: Mid-size crew cab pickup truck with 4 doors\n- **Setting**: Photographed in a rugged, desert/canyon environment with rocky terrain and reddish-brown cliffs in the background\n- **Features visible**: \n  - Aggressive off-road styling\n  - Black wheels with all-terrain tires\n  - Red tow hooks on the front\n  - Distinctive GMC grille with prominent \"GMC\" lettering\n  - LED headlights and daytime running lights\n  - Black trim accents throughout\n- **Position**: The truck appears to be in motion on a dirt/rocky surface, suggesting off-road capability\n\n---\n\n## Image B Description\n\nImage B shows a **luxury motor yacht** cruising on open water:\n\n- **Type**: Sport yacht/cruiser, approximately 50-70 feet in length\n- **Color scheme**: White hull with dark (navy/black) accent stripe along the waterline\n- **Setting**: Open ocean or large body of calm blue water with hazy sky\n- **Motion**: The yacht is actively moving at speed, creating a significant white wake/spray on the port (left) side\n- **Features visible**:\n  - Flybridge/upper deck\n  - Large cabin windows\n  - Sleek, aerodynamic profile\n  - Swim platform at the stern\n  - Multiple deck levels\n- **Conditions**: Clear day with calm seas and good visibility"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "# Image A Description\n\nThis image shows a **luxury motor yacht** cruising at high speed across calm, blue waters. The vessel appears to be a sleek, modern yacht with:\n\n- A white and dark-colored hull (appears to be black or dark blue along the waterline)\n- A streamlined, aerodynamic design typical of high-performance yachts\n- Multiple deck levels with large windows\n- A flying bridge/upper helm area\n- White spray/wake being created as it moves through the water\n- The setting appears to be open ocean or a large bay with hazy conditions in the background\n\nThe yacht appears to be approximately 60-80 feet in length and represents a high-end recreational or charter vessel.\n\n---\n\n# Image B Description\n\nThis image shows a **GMC Canyon pickup truck**, likely the **AT4X** or similar off-road variant, featuring:\n\n- Dark gray/charcoal exterior color\n- Aggressive off-road styling with black trim accents\n- Prominent GMC grille with red lettering\n- LED headlights and daytime running lights\n- Black alloy wheels with all-terrain tires\n- Crew cab (4-door) configuration\n- Raised suspension for off-road capability\n- Red tow hooks visible on the front\n\nThe truck is photographed in a **rugged desert/canyon landscape** setting, emphasizing its off-road capabilities. The background shows rocky terrain with warm, earthy tones suggesting a location like the American Southwest."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

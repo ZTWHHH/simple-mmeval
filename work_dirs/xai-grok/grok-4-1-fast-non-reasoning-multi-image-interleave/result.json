@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Vehicle\nThe image prominently features a **2024 GMC Canyon AT4X** (or a very similar trim, likely the off-road-oriented AT4X model), a mid-size pickup truck. Key details:\n- **Color and Finish**: Dark gray (Onyx Black or similar metallic shade) with a rugged, matte-like texture on some accents. It has subtle red tow hooks visible at the front bumper corners.\n- **Body Style**: Crew cab (four full doors) with a short bed. The truck is positioned dynamically in a low-speed off-road maneuver, kicking up a plume of tan dust/sand from the rear tires.\n- **Front End**: Aggressive styling with a bold **GMC grille** (blacked-out mesh with prominent red \"GMC\" lettering). Slim, angular LED headlights with C-shaped daytime running lights. Large front bumper with integrated winch-capable recovery points, skid plates, and red accents.\n- **Side Profile**: Black wheel arches with red trim outlining them. 18-inch (or larger) matte-black alloy wheels fitted with aggressive **35-inch all-terrain tires** (likely Goodyear Wrangler Territory MTs). Black running boards/side steps. Tinted windows, black mirror caps, and a blacked-out A-pillar. Roof rails and a tonneau cover on the bed.\n- **Rear**: Visible taillights with LED design, black bumper, and backup camera housing. Bed has tie-down points and a spray-in liner.\n- **Badging and Trim**: \"AT4X\" badge on the doors, \"GMC\" emblems, and off-road specific elements like Multimatic DSSV dampers implied by the stance. High ground clearance with lifted suspension.\n\n### Environment and Pose\n- **Setting**: Arid desert landscape, evoking Moab, Utah (a common GMC photo spot). The truck is on a flat, sandy/dirt trail with red rock formations and cliffs in the background. Golden-hour lighting casts warm sunlight from the right, highlighting dust particles in the air.\n- **Action**: The truck is turning left at low speed (dust trail from rear right tire), showcasing off-road capability. Front left tire is planted firmly, emphasizing stability.\n\n### Composition and Style\n- **Photography**: Professional promotional shot with shallow depth of field\u2014truck in sharp focus, background softly blurred. Wide-angle lens for dramatic perspective. Vibrant colors: truck's grays/reds pop against earthy tans/reds/oranges of the rocks and sunset sky.\n- **No Other Elements**: Empty scene\u2014no people, animals, or additional vehicles. Clean, high-resolution image optimized for marketing (e.g., GMC website or brochure).\n\nThis is a stock photo highlighting the truck's premium off-road prowess, rugged luxury, and adventure-ready design."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This image depicts a sleek, luxurious white motor yacht speeding across a calm, deep blue sea under clear skies. The yacht is captured from a low, slightly elevated aerial perspective, emphasizing its dynamic motion as it cuts through the water at high speed.\n\n### Yacht Details:\n- **Design and Size**: It's a modern superyacht, approximately 80-100 feet (24-30 meters) long, with a sporty, open-plan flybridge style. The hull is a glossy white with subtle dark gray or black accents along the waterline, gunwales, and deck edges for contrast. The superstructure features expansive tinted windows and a hardtop bimini over the aft cockpit.\n- **Key Features**:\n  - **Bow**: Pointed and raked for speed, with a polished stainless-steel anchor windlass visible and twin anchor rollers.\n  - **Midships**: Large wraparound salon windows on the main deck, a prominent flybridge with seating areas, radar arch, and multiple antennas (including VHF whips and satellite domes).\n  - **Stern**: Open aft deck with built-in seating, sunpads, and cleats; twin stairways likely leading to a swim platform (partially implied).\n  - **Propulsion**: Powerful twin outboard or inboard engines inferred from the massive white wake trailing behind, forming twin rooster tails that fan out dramatically.\n- **Deck and Amenities**: The flybridge appears to have helm station with dual captain's chairs, wet bar, lounge seating, and possibly a dining table. Railings are stainless steel with white lifelines. No people or tenders are visible, keeping the focus on the vessel.\n\n### Environment:\n- **Water**: Vibrant turquoise-to-deep-blue Mediterranean-style sea with gentle ripples ahead, churned into frothy white foam by the yacht's propellers.\n- **Sky and Horizon**: Mostly clear azure sky with faint high-altitude clouds; distant hazy coastline or low islands on the horizon to the left (port side).\n- **Lighting and Mood**: Bright midday sunlight creates sharp reflections on the hull and water, with subtle lens flare. The image conveys luxury, speed, and freedom, likely promotional photography for a high-end yacht model (possibly a Sunseeker, Azimut, or Pershing in the 80-90ft range).\n\nThe composition uses the yacht's forward momentum and expansive wake to draw the eye from stern to bow, highlighting its performance and elegance against the open ocean."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### First Image: GMC Canyon Truck\nThe image depicts a rugged, off-road oriented GMC Canyon midsize pickup truck in a dynamic action pose, kicking up dust on a dirt trail in a desert-like environment with red rock formations in the background. Key details include:\n\n- **Exterior Design**: The truck is painted in a dark gray (possibly Onyx Black or similar metallic finish) with blacked-out accents. It features prominent orange-red recovery hooks on the bumpers, bold fender flares, and ATX-series off-road wheels with aggressive all-terrain tires. The body style is a crew cab (four full doors) with a short bed, AT4 trim badging visible on the doors, and a blacked-out GMC grille with red illuminated accents.\n- **Front End**: Aggressive styling with slim LED headlights, a large mesh grille flanked by C-shaped daytime running lights, and a skid plate underneath. The hood has subtle creases for a muscular look.\n- **Side Profile**: Black mirror caps, roof rails, and side steps. The bed has a composite tonneau cover or liner, and there's visible underbody protection.\n- **Pose and Setting**: The truck is angled slightly to the driver's side, captured mid-motion with dust clouds billowing from the rear tires, emphasizing its off-road capability. The background shows arid terrain with layered rock cliffs under a clear sky, evoking Moab, Utah-style landscapes.\n- **Overall Vibe**: Promotional photography highlighting the truck's adventure-ready features, likely from GMC's marketing for the latest-generation Canyon AT4X or similar variant.\n\n### Second Image: Luxury Yacht\nThe image shows a sleek, high-performance luxury yacht speeding across calm, deep blue ocean waters under a clear sky, with white wake trailing dramatically from the stern. It's a modern motor yacht, approximately 70-90 feet in length, in pristine white with subtle dark accents. Key details include:\n\n- **Hull and Superstructure**: Glossy white fiberglass hull with a deep-V shape for speed and stability. The design is a stylish open-bridgedeck motoryacht with a large salon window band, expansive sun deck, and tiered decks. Black anti-slip surfaces on walkways and subtle blue pinstriping along the waterline.\n- **Bow and Stern**: Pointed bow with integrated anchor locker and navigation lights. The stern features a spacious swim platform with a tender garage (possibly housing a small jet ski or dinghy), fold-down transom, and multiple cleats. Twin staircases lead up from the swim platform to the main deck.\n- **Upper Decks**: Flybridge with Bimini top supports, helm station with multiple screens and controls, U-shaped seating with cushions, wet bar, and lounge areas. Forward on the main deck, there's a sunpad area and bow seating.\n- **Windows and Features**: Tinted wraparound windows on the main salon for panoramic views, multiple glass doors for indoor-outdoor flow, radar arch with antennas, and spotlights. No visible name or builder branding, but the style resembles models from Azimut, Sunseeker, or Ferretti (e.g., 76-88 foot range).\n- **Pose and Setting**: Viewed from a low aft angle, emphasizing speed with foaming white wake and bow wave. The horizon shows a vast, open sea with no land in sight, captured in bright daylight for a luxurious, high-seas escape feel.\n\nBoth images are high-production promotional shots, showcasing premium vehicles in their element: rugged terrestrial adventure for the truck and opulent marine performance for the yacht."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### First Image: Luxury Yacht at Sea\nThis image depicts a sleek, high-performance luxury yacht speeding across a calm, deep blue sea under a clear sky. The yacht is a modern motor yacht, approximately 80-100 feet in length, with a distinctive white hull and superstructure accented by thin black stripes along the gunwales and windows. Key features include:\n\n- **Design and Structure**: Open-plan flybridge with a hardtop bimini, large wraparound tinted windows on the main deck salon for panoramic views, and a prominent bow pulpit. The hull has a deep-V shape for cutting through waves, evident from the large white wake trailing behind. Side decks are wide with stainless steel railings, and there's a tender garage or swim platform at the stern.\n- **Propulsion and Motion**: The boat is captured mid-planing, generating a massive rooster tail of white foam and spray from the twin (or triple) outboard or inboard engines, indicating high speed (likely 30-40 knots). Water droplets are visible on the hull, emphasizing the dynamic motion.\n- **Details**: Multiple antennas and radar domes on the flybridge mast, teak-laid decks, and upscale furnishings like cushioned sunpads visible on the aft deck. The background shows a horizon line with subtle coastal haze, suggesting a Mediterranean or similar coastal environment during daylight with bright sunlight reflecting off the water.\n- **Overall Style**: This appears to be a Sunseeker or similar Italian/British superyacht model (e.g., Sunseeker 88 Yacht), exuding luxury and performance for leisure cruising.\n\n### Second Image: GMC Canyon Off-Road Pickup Truck\nThis image shows a rugged, modern mid-size pickup truck, specifically a GMC Canyon in its AT4 or AT4X off-road trim, positioned dynamically on a dusty desert trail amid dramatic red rock landscapes (resembling Moab, Utah). The truck is dark gray (Obsidian Rush metallic) with off-road enhancements. Key features include:\n\n- **Exterior Design**: Crew cab configuration with four full doors and a 5.5-foot bed. Aggressive stance with 33-inch all-terrain tires on 18-inch black wheels, red recovery hooks, blacked-out grille with red \"GMC\" lettering, and bold LED headlights with C-shaped daytime running lights. The front bumper has a skid plate, and side steps are integrated into the rock sliders. AT4 badging on the doors, red tow hooks, and overland roof rails with a tonneau cover.\n- **Off-Road Elements**: High ground clearance (about 10 inches), Multimatic DSSV dampers (implied by the trim), all-terrain tires kicking up red dust clouds from the rear wheels, and mud/sand residue on the underbody. The truck is leaning slightly into a turn on uneven terrain with loose gravel and rocks.\n- **Interior Glimpse**: Through the tinted windows, visible red accents on the seats and dashboard, suggesting the premium AT4 interior with leather and stitching.\n- **Background**: Arid desert scenery with towering sandstone cliffs, scrub brush, and a clear blue sky at golden hour, highlighting the truck's capability for overlanding or rock crawling.\n- **Overall Style**: 2023-2025 GMC Canyon AT4X, emphasizing premium off-road prowess with 310 hp turbocharged 2.7L engine, 4WD, and advanced trail tech like front/rear lockers.\n\nBoth images showcase high-end vehicles in their element: the yacht dominating open water and the truck conquering rugged trails, captured in professional promotional photography with vibrant colors and motion blur for excitement."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### First Image: GMC Canyon Off-Road Truck\n\nThis is a promotional photograph of a **2023-2025 GMC Canyon AT4X or AT4X AEV edition midsize pickup truck** (likely the off-road-focused trim), captured in a dynamic action pose on a rugged desert trail. The truck is shown driving toward the camera at moderate speed, kicking up a plume of tan dust from its rear tires, emphasizing its off-road capability. Key visual details include:\n\n- **Color and Finish**: Predominantly dark gray (Obsidian Rush metallic or similar) with blacked-out accents, matte black wheel arches, and subtle red trim highlights on the GMC grille lettering.\n- **Body Style**: Crew cab (four full doors) with a short bed, flared fenders, and composite recovery hooks integrated into the bumpers.\n- **Front End**: Bold, aggressive grille with prominent red-illuminated \"GMC\" lettering flanked by slim LED headlights (C-shaped daytime running lights). Large front skid plate, angular bumper with off-road bash guards, and auxiliary LED fog lights.\n- **Side Profile**: Black roof rails, tinted windows, power-folding mirrors with integrated turn signals and approach lights. Prominent wheel arch moldings, side steps, and \"AT4X\" badging on the doors. 33-inch all-terrain tires (likely Goodyear Wrangler Territory MT) on 18-inch matte-black beadlock-style wheels.\n- **Rear**: Visible taillights, backup camera housing, and towing hitch receiver. Dual exhaust tips integrated into the rear bumper.\n- **Environment**: Arid desert landscape with red rock formations (reminiscent of Moab, Utah), sandy dirt trail, sparse vegetation, and warm golden-hour lighting casting long shadows for a dramatic effect.\n- **Other Details**: Multimatic DSSV dampers (visible shocks), AEV branding on bumpers/hubs indicating the American Expedition Vehicles package, and subtle dirt splatter on the underbody for realism.\n\nThe image is a high-resolution studio shot from GMC's marketing materials, highlighting the truck's rugged luxury and trail performance.\n\n### Second Image: Sunseeker 76 Yacht\n\nThis is a professional photograph of a **Sunseeker 76 Yacht** (a luxury British motor yacht from the early 2010s, approximately 76 feet / 23 meters long), shown underway at high speed on calm, deep blue Mediterranean-style waters. The yacht is captured from a low forward angle, planing aggressively with a large white bow wake and twin rooster tails from the propellers, conveying speed and power. Key visual details include:\n\n- **Color and Finish**: Glossy white gelcoat hull and superstructure with thin dark gray (anthracite) stripes along the gunwales and superstructures for contrast. Polished stainless steel accents everywhere.\n- **Hull and Profile**: Deep-V planing hull with a sharp bow, flybridge design featuring a raised helm station. Large wraparound windscreen on the main deck salon, floor-to-ceiling windows, and expansive teak-laid aft cockpit with seating.\n- **Front/Deck Areas**: Pointed bow with anchor windlass, sunpads, and stainless bow rail. Foredeck lounge area visible.\n- **Upper Decks**: Flybridge with Bimini top (partially up), helm console, wet bar, U-shaped dining settee, and tender garage/crane at the stern (aft section implied). Multiple antennas, radar domes, and navigation lights on the mast.\n- **Side Features**: Port and starboard walkaround decks with high bulwarks, glass balustrades on flybridge. Sliding saloon doors, multiple large windows/portlights. Twin stern thrusters implied by water disturbance.\n- **Stern**: Open swim platform with teak sole, fold-down transom/chocks for a tender (jet ski or dinghy), and underwater blue LED lights (subtle glow in wake).\n- **Propulsion Signs**: Triple Volvo Penta IPS pod drives or similar (evident from wake pattern), cruising at 25-30 knots.\n- **Environment**: Open ocean with a clear blue sky, light horizon haze suggesting a coastal cruise (possibly off Monaco or the French Riviera). Shot from a chase boat or drone for dynamic perspective.\n\nThis is a stock marketing image from Sunseeker's portfolio, showcasing the yacht's sleek performance, spacious entertaining areas, and superyacht styling for affluent buyers."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### First Image: Luxury Yacht at Sea\n\nThis high-resolution photograph captures a sleek, white luxury yacht speeding across a calm, deep blue sea under a clear sky with a subtle gradient from light blue near the horizon to deeper azure overhead. The yacht is viewed from a slightly elevated frontal angle, emphasizing its dynamic motion as it cuts through the water, generating large, frothy white wakes trailing behind on both sides. The wakes foam dramatically, with splashes rising high, conveying high speed and power.\n\n**Yacht Details:**\n- **Design and Hull:** A modern sport yacht (likely 70-90 feet long) with a sharp, aggressive bow, deep blue waterline stripe accenting the pristine white fiberglass hull. The hull features subtle gray tonal variations and polished metal accents.\n- **Superstructure:** Multi-deck layout with a large, tinted wraparound windshield on the main helm deck, flanked by open side decks. Twin masts/antenna arrays rise from the aft superstructure, with white canvas bimini tops partially visible. Railings are slim stainless steel.\n- **Decking and Features:** Expansive teak or synthetic wood decking on the bow and sides, with built-in seating lounges, cleats, and navigation lights. Aft deck shows space for tenders or toys, with curved transom and swim platform implied.\n- **Performance Indicators:** Water displacement shows it's planing at high speed (30+ knots), with prop wash visible under the hull. No crew or passengers are visible, focusing on the vessel's elegance.\n- **Environment:** Open ocean with no land in sight; late afternoon lighting casts soft shadows, enhancing the glossy finish. The image evokes luxury, speed, and exclusivity, typical of brands like Sunseeker, Azimut, or Ferretti.\n\n### Second Image: GMC Canyon Off-Road Pickup Truck\n\nThis promotional photograph showcases a rugged, dark gray GMC Canyon midsize pickup truck in a dynamic off-road pose on a dusty desert trail. Shot from a low three-quarter front angle during golden-hour lighting (warm orange hues on red rock formations), it highlights the truck's capability amid swirling dust clouds kicked up by its tires. The background features dramatic Southwest U.S.-style canyons with layered red sandstone cliffs, sparse desert scrub, and a hazy sky.\n\n**Truck Details:**\n- **Model and Badging:** 2023+ GMC Canyon AT4X or similar trim (evident from \"GMC\" grille lettering in bright red, \"AT4\" side badge implied by styling). Crew cab configuration with four full doors and a 5.5-foot bed.\n- **Exterior Styling:** Matte or satin dark gray paint with blacked-out accents, bold fender flares, and rugged skid plates. Prominent LED headlights with C-shaped daytime running lights, large mesh grille, and angular bumpers. Roof rails, power dome (likely with overlanding gear capability), and side steps.\n- **Wheels and Tires:** 18-inch black alloy wheels wrapped in aggressive all-terrain tires (e.g., 33-inch), caked in red dirt, emphasizing off-road prowess. High ground clearance with visible underbody protection.\n- **Performance Indicators:** Front wheels turned slightly, body leaned into a turn on loose gravel/dirt surface, with dust plumes adding motion blur for energy.\n- **Interior Glimpse:** Through tinted windows, dark cloth/leather seats and digital dash are hinted at, suggesting premium tech like a large infotainment screen.\n- **Environment:** Arid canyon landscape with boulders, sandy washes, and distant mesas\u2014perfect for showcasing trail-rated features like Multimatic DSSV shocks or locking differentials.\n\nBoth images are professional marketing shots: the yacht promotes opulent marine leisure, while the truck emphasizes adventure and toughness. No people, text overlays, or additional objects appear in either."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A\nThis image depicts a rugged, modern GMC Canyon pickup truck in a dynamic off-road scene. The truck is painted in a dark gray (almost black) metallic finish with prominent red accents on the GMC grille lettering and lower bumper accents. It features an AT4 off-road trim, evident from the red tow hooks, blacked-out trim, and rugged styling elements like angular fender flares, skid plates, and all-terrain tires on black wheels. The truck has a crew cab configuration with four full doors, a black roof, and tinted windows. It's positioned at a slight angle, kicking up a plume of dust from the rear tires, suggesting it's accelerating or climbing through loose dirt or gravel terrain. The background shows dramatic red rock desert landscapes, likely inspired by areas like Moab, Utah, with layered sandstone cliffs under a clear sky at golden hour lighting, casting warm shadows and highlights on the vehicle. The overall composition emphasizes the truck's off-road capability and adventurous spirit.\n\n### Image B\nThis image shows a sleek, high-performance luxury yacht speeding across open ocean waters. The yacht is a white Sunseeker 76 Yacht (or similar model), characterized by its modern, aggressive design with a deep blue accent stripe along the hull sides, large wraparound tinted windows on the main deck, and an open flybridge with white railings and seating. It's captured from a low forward angle, emphasizing speed as it plows through calm blue-green Mediterranean-style seas, creating massive white wake sprays on both sides and a rooster tail from the stern. The twin inboard engines are implied by the powerful bow wave. The sky is clear and bright blue with minimal clouds, and the horizon shows a distant coastline or open water under sunny conditions. Details include polished chrome accents, teak decking visible on the bow, multiple antennas and radar domes on the superstructure, and expansive glass areas suggesting a luxurious interior. The image conveys luxury, speed, and high-seas performance."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A\nThis image depicts a luxurious white motor yacht speeding across a calm, deep blue sea under a clear sky with a light blue horizon. The yacht is a sleek, modern sport yacht, likely around 70-90 feet long, with a streamlined hull featuring sharp lines, expansive tinted windows on the main deck, and a prominent flybridge with railings and seating areas. The bow is pointed and elevated, cutting through the water, creating large white wakes and foam trails on both sides that trail behind the vessel. The superstructure is multi-level, with white fiberglass construction, polished metal accents, and several antennas/masts on top. The sea appears glassy and expansive, emphasizing the yacht's speed and elegance. No people or other objects are visible; the focus is on the yacht in motion from a low aerial or drone perspective.\n\n### Image B\nThis image shows a rugged, dark gray GMC Canyon pickup truck (likely the AT4X off-road trim) driving on a dusty dirt trail in a dramatic desert landscape. The truck has a crew cab configuration with four full doors, blacked-out trim, red recovery hooks on the bumpers, and prominent \"GMC\" lettering in red on the grille. It features aggressive off-road styling: flared fenders, black wheel arches, 33-inch all-terrain tires on black beadlock-style wheels, skid plates underneath, and red tow hooks. Dust and dirt are kicked up from the rear tires, suggesting high-speed off-roading. The background includes rocky red canyon walls, sparse vegetation, and warm golden-hour lighting casting long shadows. The truck is angled slightly to the viewer's left, captured in a dynamic action shot from a low side angle, highlighting its capability and adventure-ready design. No people or other vehicles are present."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]
