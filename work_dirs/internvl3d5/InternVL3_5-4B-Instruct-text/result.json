@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the result of 1 plus 1?\" Hmm, that seems pretty straightforward, but I should make sure I'm not missing anything here. Let me think.\n\nFirst, I know that addition is one of the basic arithmetic operations. When you add two numbers together, you're combining their values. In this case, we're adding 1 and 1. Let me visualize it. If I have one apple and someone gives me another apple, how many apples do I have? That's right, two apples. So 1 plus 1 should equal 2. \n\nWait, but maybe there's a trick here. Sometimes people ask simple questions to test if you're paying attention. Let me double-check. In standard arithmetic, 1 + 1 is definitely 2. But could there be a different context where this isn't the case? For example, in binary, 1 + 1 equals 10. But the question doesn't specify a different number system. So unless stated otherwise, I should assume it's base 10. \n\nAnother angle: maybe the user is referring to something else, like in a different mathematical structure. For instance, in modular arithmetic, if we're working modulo 1, then 1 + 1 would be 0. But again, the question doesn't mention any modulus. So that's probably not it. \n\nOr perhaps it's a riddle. Sometimes people phrase questions like \"What's 1 plus 1?\" to see if you think outside the box. But the straightforward answer is 2. Unless there's a play on words, like \"one plus one equals two\" being a common phrase, but the question is just asking for the numerical result. \n\nLet me also consider if there's any cultural or linguistic nuance. In some languages, the word for \"one\" might be different, but the numerical value remains the same. So regardless of language, 1 plus 1 is 2. \n\nIs there any scenario where 1 + 1 doesn't equal 2? In set theory, the cardinality of a set with one element plus another set with one element is two elements. So that still holds. In algebra, if you have variables, but here both are constants. \n\nMaybe in a different mathematical operation, like concatenation. If you concatenate 1 and 1, you get 11. But the question says \"plus,\" which is addition, not concaten"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. China is a country in East Asia, and I remember that Beijing is often mentioned as its capital. But wait, I should make sure I'm not mixing it up with another city. Sometimes people confuse Beijing with Shanghai, which is a major city but not the capital. Let me think... I've heard Beijing referred to as the political center of China. There's also the Forbidden City there, which is a historical site. The government buildings, like the Great Hall of the People and the National People's Congress, are located in Beijing. Also, the 2008 Olympics were held in Beijing, which might be a clue. But I should verify this because sometimes capitals change or there might be administrative changes. Wait, no, I don't think China has changed its capital recently. Other countries like India have New Delhi as their capital, so maybe China's is similar. Let me check if there's any other city that could be the capital. Xi'an is an ancient city, but I don't think it's the current capital. Shenzhen is a big city but more of a tech hub. So putting it all together, Beijing is the most likely answer. I think that's correct, but I should be careful not to make a mistake here. Maybe I can think of other sources or common knowledge. Yes, in news articles and geography classes, Beijing is always cited as the capital. So I'm pretty confident the answer is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It serves as the political, cultural, and administrative center of the country, housing key government institutions such as the National People's Congress and the Great Hall of the People. Beijing has been the capital for much of China's history, with its status solidified during the People's Republic of China in 1949."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

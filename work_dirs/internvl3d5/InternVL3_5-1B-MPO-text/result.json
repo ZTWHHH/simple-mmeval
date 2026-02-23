@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Hmm, let's start by recalling basic addition. When you add two numbers together, you're combining their values. So, if I have one apple and someone gives me another apple, how many apples do I have in total? That's two apples. So, 1 plus 1 should be 2. But wait, maybe I should check if there's any trick here. Sometimes problems seem straightforward, but there could be a catch. Let me think.\n\nFirst, the question is pretty simple: 1 plus 1. In basic arithmetic, addition is commutative, which means the order doesn't matter. So, 1 plus 1 is the same as 1 plus 1. There's no difference between them. If I add 1 and 1, I get 2. If I add 1 and 1 again, that's another 2. So, it's consistent. \n\nBut maybe I should consider if there's any context where this might not hold. For example, in some contexts, like in modular arithmetic, 1 plus 1 could be different, but the question doesn't specify any modulus or other operations. It's just a basic addition problem. \n\nAnother angle: sometimes people confuse addition with multiplication. Multiplication is repeated addition, so 1 times 1 is 1, but addition is just adding 1 to itself once. So, 1 plus 1 is definitely 2. \n\nWait, could there be a case where 1 plus 1 equals something else? Let me think. If I have a number line, starting at 1 and moving one step to the right, I land on 2. If I start at 0 and move one step to the right, I land on 1. So, moving from 1 to 2 is one step. Therefore, 1 plus 1 is 2. \n\nAlternatively, using the number line, adding 1 to 1 moves it two units to the right, landing on 2. That's a visual confirmation. \n\nIs there any mathematical principle that might affect this? The fundamental properties of numbers state that addition is associative and commutative, so the result should be the same regardless of the order. There's no need to rearrange the numbers or apply any other operations here. \n\nLet me also consider if the question is part of a larger problem or if there's a hidden instruction. The"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China has several major cities, and the capital is a well-known one. I think it's Beijing, but I'm not entirely sure. Wait, sometimes people confuse Beijing with other cities like Shanghai or Xi'an. Let me think.\n\nI know that Beijing is a big city in China, right? It's where the government is based. I've heard that the Forbidden City is a famous place there, maybe a palace. Also, there's the Great Wall nearby, which is a significant landmark. But is that the capital? I think the capital is definitely Beijing. \n\nWait, could there be any other cities that are sometimes called the capital? Like, sometimes people might refer to it as the capital of the country, but technically, it's Beijing. I should double-check. Maybe there's a recent change? I don't recall any recent changes to the capital. \n\nAnother way to confirm: if I search for \"capital of China,\" the top result is definitely Beijing. The other cities like Shanghai, Xi'an, or maybe even some smaller cities might be mentioned, but they aren't the capital. So, I'm pretty confident that Beijing is the correct answer here. \n\nJust to be thorough, maybe I can think about the administrative divisions. The capital is where the central government is located, and it's the largest city. The other major cities are the economic and cultural centers. So, yes, Beijing is the capital. I don't think I've heard any conflicting information about this. \n\nSo, putting it all together, the capital city of China is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It serves as the political, cultural, and economic heart of the country, housing the National People's Congress and the State Council. Beijing is also renowned for its historical landmarks, such as the Forbidden City and the Great Wall, and is a major hub for government and international activities."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

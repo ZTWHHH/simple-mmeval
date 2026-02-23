@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the question is asking, \"What is the result of 1 plus 1?\" Hmm, let's see. I remember from basic math that when you add two numbers together, you're combining their values. So 1 plus 1 should be... wait, isn't that just 2? Let me make sure I'm not mixing this up with something else.\n\nMaybe I should think about it in terms of objects. If I have one apple and someone gives me another apple, how many apples do I have? Yeah, that's two apples. So 1 plus 1 equals 2. But wait, is there any context where 1 plus 1 might not equal 2? Like in different number systems or something?\n\nOh, right! In binary, 1 plus 1 is 10. But the question doesn't specify a number system, so I guess it's safe to assume they're talking about the decimal system. Unless there's a trick here. Maybe it's a riddle? Like, \"1 plus 1\" could be interpreted differently. For example, in some contexts, \"plus\" might mean something else, but I don't think so. The standard interpretation is addition.\n\nAnother thought: sometimes in math problems, especially in algebra, variables can be involved. But here, both numbers are 1, so even if they were variables, substituting 1 for each would still give 2. Unless there's a different operation intended, but the question clearly says \"plus,\" which is addition.\n\nWait, maybe it's a play on words. Like, \"1 plus 1\" could be \"11\" if you just put them together, but that's not how addition works. Addition is about combining quantities, not concatenation. So that's probably not it.\n\nLet me check with another example. If I have 1 dollar and someone gives me another dollar, I have 2 dollars. Yep, that's straightforward. So unless there's some special rule or context I'm missing, the answer should be 2. I think that's it. The result of 1 plus 1 is 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\n**Step-by-Step Explanation:**\n1. **Understanding Addition:** Addition combines two quantities to find their total.\n2. **Applying to 1 + 1:** Adding 1 and 1 means combining one unit with another unit.\n3. **Result:**"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking for the capital city of China. Let me think. I remember that China is a large country with a long history. The capital might have changed over time. For example, I know that Beijing is a major city, but I'm not sure if it's the current capital. Wait, wasn't there a time when the capital was in Nanjing? Or maybe Shanghai? No, Shanghai is a big city but not the capital. Let me recall. The current capital is Beijing, right? But I should double-check. Maybe I'm mixing it up with other countries. For instance, Japan's capital is Tokyo, but China's... Yes, I think Beijing is correct. But wait, sometimes people confuse it with other cities. Let me confirm. The People's Republic of China was established in 1949, and since then, Beijing has been the capital. Before that, during the Republic of China era, the capital was Nanjing. So the answer should be Beijing. But I should make sure there's no recent change. I don't think there has been any change in the capital city recently. So the answer is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It has served as the political and cultural center of the country for centuries and remains the capital of the People's Republic of China since 1949."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

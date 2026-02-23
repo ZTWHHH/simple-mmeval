@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the question is asking what 1 plus 1 equals. Hmm, that seems really straightforward, but I want to make sure I think it through properly. Let me start by recalling basic addition.\n\nFirst, addition is one of the fundamental arithmetic operations. When you add two numbers, you're combining their values. In this case, we're adding 1 and 1. Let me visualize this. If I have one apple and someone gives me another apple, how many apples do I have in total? That would be 1 plus 1, which should be 2 apples. So, intuitively, that makes sense.\n\nBut wait, maybe I should check with another method to confirm. Let's use my fingers. Hold up one finger on my left hand and one finger on my right hand. If I count all the fingers I'm holding up, that's 1 plus 1, which equals 2. Yep, that checks out.\n\nAnother way to think about it is using number lines. Starting at the number 1, if I move one unit to the right, I land on 2. So, 1 plus 1 is 2. That seems consistent too.\n\nI could also consider the definition of addition in set theory. If I have a set with one element and another set with one element, and they are disjoint (meaning they don't share any elements), the union of these two sets will have 1 + 1 = 2 elements. That aligns with what I know from basic math.\n\nWait, but maybe there's a trick here? Sometimes questions that seem simple might have a twist. For example, in binary, 1 + 1 equals 10, but the question doesn't specify a number system. Since it's not mentioned, I should assume it's in the decimal system, which is standard unless stated otherwise.\n\nAlso, in some contexts, like Boolean algebra, 1 + 1 might represent a logical OR operation, which would be 1, but again, the question is about arithmetic addition, not logic gates. So that's probably not relevant here.\n\nLet me think about different number bases just to be thorough. In base 2 (binary), 1 + 1 is 10, but as I said, the question doesn't specify. In base 3, 1 + 1 is still 2. So unless there's a base specified, decimal is the default. Therefore, 1 + 1 should be 2"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a large country with a long history. The capital city might be Beijing, but I'm not 100% sure. Wait, sometimes people confuse Beijing with other cities like Shanghai or Nanjing. Let me think.\n\nI know that Beijing is a major city in China. It's where the government is based, right? The Great Wall is nearby, and there are important historical sites there. Also, the Forbidden City is in Beijing, which is a significant historical palace. That makes me think it's the capital. But I should double-check because sometimes there are changes or different administrative regions.\n\nWait, what about other cities? Shanghai is a financial hub, but I don't think it's the capital. Nanjing was the capital during certain periods in Chinese history, like the Republic of China era, but not currently. Then there's Xi'an, which is another ancient city, but again, not the capital now.\n\nI also remember that the People's Republic of China, which is the current government, moved the capital from Nanjing to Beijing in 1949. So that would make Beijing the capital since then. The government buildings, like the Great Hall of the People and the Tiananmen Square, are in Beijing. The President's residence is also there. \n\nAnother way to confirm is to think about international relations. When countries have embassies, they're usually in the capital city. China's embassies around the world are in Beijing, which supports the idea that it's the capital. Also, major international events like the Olympics were held in Beijing, which is typical for a capital city hosting such events.\n\nI might be mixing up some details, but all the clues point to Beijing. Let me see if there's any recent change I'm not aware of. As far as I know, there hasn't been a change in the capital city of China. So I think the answer is Beijing. But just to be thorough, maybe check if there's a different city that's the administrative center now. No, I think Beijing is still the capital. Yeah, I'm pretty confident now.\n</think>\n\nThe capital city of China is **Beijing**. It has been the political and cultural center of the country since the establishment of the People's Republic of China in 1949. Beijing is home to key government institutions, historical landmarks like the Forbidden"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

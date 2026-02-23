@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the result of 1 plus 1?\" Hmm, that seems pretty straightforward, but let me make sure I get it right. Let's break it down.\n\nFirst, addition is one of the basic arithmetic operations. When you add two numbers, you're combining their values. In this case, both numbers are 1. So, 1 plus 1. Let me visualize this. If I have one apple and someone gives me another apple, how many apples do I have in total? That's two apples. So, 1 + 1 should equal 2.\n\nWait, but maybe there's a trick here? Sometimes people ask simple questions to test if you're paying attention. Let me think. Is there any context where 1 plus 1 might not equal 2? Like in different number systems? For example, in binary, 1 + 1 equals 10. But the question doesn't specify a different base. It just says \"1 plus 1,\" so I should assume the standard base 10.\n\nAnother angle: could it be a riddle? Like, \"1 plus 1\" in a different language or something? But the question is in English, so probably not. Maybe a play on words? Like \"1 plus 1\" sounds like \"I plus I,\" but that doesn't make sense. Or maybe \"1 plus 1\" as in \"one plus one\" and the answer is \"two.\" Yeah, that's the usual interpretation.\n\nLet me check with basic addition facts. The number line: starting at 1, moving 1 step forward gets you to 2. So, 1 + 1 = 2. That's basic arithmetic. There's no carry-over or anything more complicated here. It's a simple addition problem.\n\nWait, maybe the user is testing if I can recognize that it's a simple question. Sometimes people ask basic questions to see if the AI is paying attention. But in this case, the answer is definitely 2. Unless there's some hidden context, but the question is straightforward.\n\nAlternatively, could it be a question about something else, like in a different field? For example, in computer science, 1 + 1 might be a bitwise operation, but again, the question doesn't specify. Without additional context, the standard answer is 2.\n\nSo, after considering different possibilities\u2014basic arithmetic, different number systems, riddles, wordplay\u2014the most"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a big country in East Asia, and I think Beijing is a major city there. But wait, isn't there another city that's also a significant capital? Maybe Shanghai? I've heard of both being major cities.\n\nWait, I think Beijing is the capital. But why do I have that doubt? Maybe because sometimes people talk about Shanghai as the financial hub. But the capital is the seat of government. So even though Shanghai is important, the capital is where the government is based. Let me think about recent news or events. I remember reading that Beijing has been the capital for a long time. The government moved to Shanghai a few years ago, but I think that was a temporary move. No, actually, I think the capital was moved back to Beijing. Let me check my memory. The People's Republic of China was established in 1949, and Beijing was the capital then. The government moved to Shanghai in the 1990s, but they moved back to Beijing in 2008. So Beijing remains the capital. \n\nAnother way to confirm: major landmarks. The Forbidden City is in Beijing, and the Great Wall is there too. The National Palace Museum is also in Beijing. These are all government buildings, so that supports Beijing as the capital. Shanghai, while a major city, has its own government and is the economic center. So the answer should be Beijing. I think that's right, but I want to be sure. Maybe I can think of other countries' capitals. For example, the capital of the US is Washington, D.C., not New York. Similarly, the capital of Japan is Tokyo, not Kyoto. So following that pattern, China's capital is Beijing. Yeah, that makes sense. I don't think I'm mixing up Beijing and Shanghai here. So the answer is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. \n\n**Key Points:**\n- Beijing has been the capital since the founding of the People's Republic of China in 1949.\n- It is home to significant government institutions, historical landmarks like the Forbidden City and the Great Wall, and cultural institutions such as the National Palace Museum.\n- While Shanghai is a major economic and financial hub, it is not the capital. The government has historically moved between Beijing and Shanghai, but Beijing remains the official capital."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

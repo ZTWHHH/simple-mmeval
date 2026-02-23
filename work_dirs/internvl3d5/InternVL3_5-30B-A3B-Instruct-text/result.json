@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Let me start by recalling basic addition. When you add two numbers together, you're combining their values. In this case, we're adding 1 and 1.\n\nHmm, let's visualize it. If I have one apple and someone gives me another apple, how many apples do I have in total? That's right, two apples. So maybe 1 plus 1 equals 2. But wait, is there any situation where this might not be the case? Like in different number systems or something?\n\nWait, the question doesn't specify any particular context, so I should assume it's in the standard base 10 decimal system. In binary, 1 plus 1 equals 10, but that's a different base. Since the question is straightforward, probably expecting the basic arithmetic answer. \n\nLet me double-check. If I count on my fingers: one finger up, then another finger up, that's two fingers. Yep, that's 2. Or using a number line: starting at 1, then moving one step forward lands on 2. \n\nI think that's solid. Unless there's a trick in the question, but it seems pretty direct. So the answer should be 2.\n</think>\n\nThe result of 1 plus 1 is calculated by adding the two numbers together. In the standard base 10 decimal system:\n\n1 (one) + 1 (one) = 2 (two).\n\n**Answer:** 2"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the capital city of China?\" Let me think about how to approach this. First, I need to recall the correct answer. I know that China is a large country in East Asia, and its capital is a well-known city. From what I remember, Beijing is the capital. But wait, let me make sure I'm not mixing it up with another city. Sometimes people might confuse it with Shanghai or Hong Kong, but those are major cities too, just not the capital.\n\nI should verify this. Maybe think about historical context. Beijing has been the capital for several dynasties, like the Ming and Qing. After the establishment of the People's Republic of China in 1949, Beijing was designated as the capital. Before that, during the Republic of China era, the capital was Nanjing. So, the current capital is definitely Beijing. \n\nAlso, considering international recognition, all the major government buildings, like the Great Hall of the People and the Forbidden City, are located in Beijing. The National People's Congress and the State Council are based there. So, that's another confirmation. \n\nI should also check if there's any recent change, but I don't recall any news about China changing its capital. Some countries have moved their capitals, like Nigeria or Brazil, but China hasn't done that. So, Beijing remains the capital. \n\nAnother angle: when people talk about Chinese politics, major events like the National Congress of the Communist Party are held in Beijing. The Olympic Games in 2008 were hosted in Beijing, which also underscores its status as the capital. \n\nTherefore, after considering historical, political, and cultural factors, I can confidently say that the capital city of China is Beijing. I should present this answer clearly and concisely, maybe adding a bit about its significance to provide context.\n</think>\n\nThe capital city of China is **Beijing**. \n\nBeijing has served as the political and cultural center of China for centuries, notably during the Ming and Qing dynasties. Since the establishment of the People's Republic of China in 1949, it has been the seat of the national government, housing key institutions like the Great Hall of the People, the Forbidden City, and the headquarters of the Communist Party of China. Its historical and contemporary significance solidifies its role as the capital."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

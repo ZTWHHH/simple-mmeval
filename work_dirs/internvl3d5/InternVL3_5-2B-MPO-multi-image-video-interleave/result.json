@@ -1,0 +1,430 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's take a look at this image. The main subject is a GMC pickup truck. The truck is in motion, kicking up dust, which suggests it's driving on a dusty or unpaved road. The setting appears to be a desert or a rocky area, given the reddish-brown terrain and the cliffs in the background.\n\nFirst, I'll note the vehicle's make and model. The front grille has the GMC logo, which is a red and white emblem. The truck is a pickup, so it's probably a model designed for off-road or rugged use. The color is a dark metallic, maybe gray or black, which is common for trucks to look sturdy and durable.\n\nThe truck's design features include a boxy shape typical of pickup trucks, with a high ground clearance. The wheels are black with a rugged tread pattern, suitable for off-road conditions. The headlights are modern, possibly LED, and there's a fog light on the lower part of the front bumper. The grille is large with vertical slats, which is common in trucks for better airflow and cooling.\n\nThe background shows a natural landscape with cliffs, which might indicate the truck is in a remote or off-road location. The lighting suggests it's either early morning or late afternoon, with warm tones, which adds to the rugged, adventurous feel of the scene.\n\nI should also consider the context. The dust being kicked up indicates the truck is moving at a moderate speed, perhaps accelerating or driving through a rough terrain. The overall impression is one of power, capability, and adventure, typical of a vehicle designed for off-road or utility purposes.\n\nAre there any other details? The truck's side mirrors are visible, and the windows are tinted, which is common for privacy and reducing glare. The exhaust system might be visible, but it's not clear from the image. The truck's suspension seems to be handling the rough terrain well, as there's no visible suspension damage.\n\nIn terms of style, the image is dynamic, capturing the motion of the truck. The composition focuses on the vehicle, with the background elements providing context without distracting from the main subject. The use of dust and the setting create a sense of movement and adventure.\n\nI should also check if there are any specific features of the truck that stand out. The GMC logo is prominent, which is a key identifier. The design elements like the grille, headlights, and wheels all contribute to the truck's rugged appearance. The overall impression is that of a reliable, capable vehicle suited for challenging environments"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user wants a detailed description of the image provided. The image shows a speedboat on the water. First, I need to visualize the scene. The boat is moving quickly, creating a wake behind it. The water is a deep blue, and the sky is clear with a few clouds. The boat itself is white with some dark accents, maybe black or dark brown. There's a cabin at the front, and the deck has railings. The wake is frothy and white, indicating high speed. The angle of the photo is from above, maybe a drone shot, showing the boat cutting through the water. I should mention the speed, the wake, the boat's design, and the surrounding environment. Also, check if there are any other details like the boat's name or any people on board, but since it's not visible, maybe just focus on the visible elements. Make sure to describe the colors, the movement, and the setting. Avoid any assumptions not directly visible. Keep it concise but thorough.\n</think>\n\nThe image depicts a sleek, white speedboat cutting through calm, deep blue ocean waters at high speed. The boat, likely a high-performance model, features a streamlined hull with a prominent cabin at the front, enclosed by a dark-tinted windshield and a metallic railing along the deck. A small, angular radar dome and navigation equipment are visible atop the cabin. The boat's wake is a frothy, white spray trailing behind it, emphasizing its rapid movement. The sky above is clear with a few wispy clouds, and the horizon stretches far into the distance, creating a sense of open space. The photograph is taken from an elevated angle, possibly via a drone, capturing the boat's dynamic motion and the contrast between its smooth white exterior and the turbulent water behind it."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle these two images. The first one is a pickup truck on a dirt road, probably in a desert or rocky area. The truck is dark-colored, maybe black or dark gray, with a modern design. The grille has the GM logo, so it's a Chevrolet. The wheels are off-road tires, and there's dust being kicked up, indicating it's moving at speed. The background has cliffs or rock formations, which adds to the rugged, adventurous vibe.\n\nThe second image is a speedboat on the ocean. The boat is white with a sleek design, maybe a catamaran or a high-performance model. It's cutting through the water, creating a wake behind it. The water is a deep blue, and the sky is clear, suggesting good weather. The boat has a cabin area, and there's a logo on the side, but it's not clear what it is. The angle is from above, showing the boat's speed and the dynamic motion of the water.\n\nI need to describe each image's content in detail. For the truck, focus on the vehicle's features, the environment, and the action. For the boat, mention the design, the water interaction, and the setting. Make sure to highlight the key elements like colors, textures, and the context each image provides.\n</think>\n\n**Image 1:**  \nA modern, dark-colored Chevrolet pickup truck is captured in motion on a rugged, dirt road. The vehicle features a prominent grille with the GM logo, sleek LED headlights, and off-road tires that kick up a trail of dust, emphasizing its speed and off-road capability. The truck's design includes a sturdy frame, tinted windows, and a raised suspension, suggesting utility and adventure. The background showcases a rocky, desert-like landscape with cliffs or rock formations, bathed in warm, natural sunlight, creating a sense of rugged exploration and freedom.\n\n**Image 2:**  \nA sleek, white speedboat is slicing through the deep blue ocean, leaving a frothy wake behind. The boat, likely a high-performance model, features a streamlined hull, a cabin area with windows, and a logo on its side. The clear sky and calm water suggest ideal weather conditions. The perspective is aerial, highlighting the boat's dynamic motion and the contrast between the vessel's smooth design and the turbulent water it displaces, evoking a sense of speed and luxury on the open sea."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle these two images. The first one is a speedboat on the ocean. I need to describe it. The boat is white with a sleek design, maybe a speedboat model. It's moving fast, creating a wake behind it. The water is blue, and the sky is clear. The angle is from the side, showing the boat cutting through the water. The wake is white and frothy, indicating high speed. The boat has a cabin with windows, and there's a logo on the side. The setting is a calm ocean, probably a sunny day.\n\nNow the second image is a pickup truck on a dirt road. The truck is dark-colored, maybe black or gray. It's a GMC model, as the logo is visible. The truck is kicking up dust, so it's moving at a moderate speed. The background has rocky cliffs, suggesting a desert or canyon area. The lighting is warm, maybe late afternoon sun. The truck has a boxy design typical of pickup trucks, with a visible bed and wheels. The scene is dynamic, showing the truck in motion on a rough terrain.\n\nWait, I should check if there's any other details. For the boat, maybe the number of people on board? Not visible. The truck's model name is GMC, but the specific model isn't clear. The wake's size and the boat's structure could indicate it's a high-performance model. The truck's tires are off-road, which fits the dusty road. The cliffs in the background add to the ruggedness of the scene. Both images are action-oriented, highlighting speed and movement in different environments.\n</think>\n\n**Image 1: Speedboat on the Ocean**  \nA sleek, white speedboat is captured in motion, slicing through calm blue waters. The boat, likely a high-performance model, creates a dramatic white wake trailing behind it, emphasizing its speed. The vessel features a streamlined cabin with windows, a streamlined hull, and a logo on its side. The scene is set against a clear sky and tranquil ocean, suggesting a sunny day ideal for boating. The angle highlights the boat's agility and the frothy wake, conveying a sense of exhilaration and power.\n\n**Image 2: GMC Pickup Truck on a Dusty Road**  \nA rugged, dark-colored GMC pickup truck is driving on a dusty, rocky terrain, kicking up a trail of dust. The truck, with its boxy, utilitarian design, features off-road tires and a raised suspension, indicating its capability"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user wants a detailed description of the contents shown in two images. The first image is a GMC pickup truck on a dirt road, and the second is a speedboat on the ocean. \n\nFirst, I need to analyze each image separately. For the truck, I should focus on the vehicle's features: color, design elements like the grille and headlights, the environment around it (dirt road, cliffs), and any action it's performing (driving, kicking up dust). The truck's branding is important too, like the GMC logo.\n\nThen, the speedboat. I need to describe its design, such as the hull shape, wake, and the setting (ocean, clear sky). The boat's features like the cabin, windows, and any visible equipment (like a radar dome) should be mentioned. The action here is the boat cutting through the water, creating a wake, which adds dynamism.\n\nI should also consider the user's possible intent. They might be comparing the two vehicles, highlighting their differences in purpose (off-road vs. on water) and environments. Maybe they're interested in the design aesthetics or the intended use cases. The user could be a car enthusiast, a buyer looking for a vehicle, or someone comparing different types of vehicles.\n\nI need to ensure the descriptions are vivid and cover all visible elements. For the truck, mention the color, model, and the rugged terrain. For the boat, emphasize speed, design, and the open water setting. Also, note any branding or logos present in each image to add context.\n\nCheck if there are any specific details I might have missed. The truck's headlights are on, which might indicate it's in motion. The boat's wake suggests it's moving quickly. Both images are action-oriented, so highlighting movement and the environment's impact on the vehicles is key.\n\nMake sure the descriptions are clear and structured, perhaps separating them into sections for each vehicle. Avoid technical jargon but still be precise. The user might appreciate knowing the intended use of each vehicle, like the truck for off-road adventures and the boat for recreational or high-speed travel.\n\nFinally, wrap it up by summarizing the key points to give a comprehensive overview. Ensure the language is engaging and paints a clear picture for the reader.\n</think>\n\nThe images depict two distinct vehicles in dynamic, action-oriented settings, each highlighting different environments and purposes:\n\n### **1. GMC Pickup Truck**  \n- **Vehicle Description**:  \n  - A modern, robust"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to describe the contents of these two images. Let me start with the first one. It's a boat speeding through the water, creating a wake. The boat is white with some dark accents, maybe a logo on the side. The water is a deep blue, and the sky is clear. The angle is from above, showing the boat's movement. The wake is white and frothy, indicating high speed. The boat has a cabin with windows, and there's a railing along the side. The background is the open sea, so it's probably a sunny day.\n\nNow the second image is a pickup truck on a dirt road, kicking up dust. The truck is dark-colored, maybe black or gray, with a prominent grille that has the GM logo. The headlights are on, and the truck is in motion, suggesting it's driving through a rugged terrain. The background has rocky cliffs, which could be a desert or canyon area. The lighting is warm, maybe late afternoon, casting long shadows. The truck's design looks sturdy, with off-road tires and a raised suspension.\n\nWait, I should make sure I'm not missing any details. For the boat, check if there's any text or specific features like the number of windows, the type of wake, or the angle of the camera. For the truck, confirm the model name, the presence of any additional lights, and the environment details like the type of road and surrounding landscape. Also, note the time of day and weather conditions in each image. The boat is on open water, so no land in sight. The truck is on a dirt road, so it's an off-road setting. Both images are dynamic, showing movement and speed. The boat's wake is a key element, and the truck's dust trail adds to the sense of motion. I should describe these elements clearly and concisely, making sure to highlight the main features and the context of each scene.\n</think>\n\n**Image 1: Speedboat in Open Water**  \nThe image features a sleek, white speedboat cutting through deep blue ocean waters, creating a dramatic, frothy wake. The boat, likely a high-performance model, has a streamlined hull with a cabin housing windows and a railing along its side. A logo is visible on the side, though details are indistinct. The camera angle is elevated, emphasizing the boat's motion and the vastness of the open sea. The sky is clear, suggesting a sunny day, and the scene conveys a"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A depicts a rugged, off-road pickup truck driving on a dusty, uneven terrain. The vehicle is a modern, dark-colored GMC model, featuring a prominent grille with the GMC logo and sleek headlights. The truck is equipped with large, black wheels and a raised suspension, indicating its capability for rough terrain. The background shows a rocky landscape, suggesting a desert or canyon environment, with the truck kicking up dust as it moves.\n\nImage B shows a sleek, high-performance speedboat cutting through the water at high speed. The boat is white with a streamlined design, featuring a cabin and a small deck area. It is creating a significant wake behind it, indicating its rapid movement. The background is a clear blue sea, with the horizon visible in the distance, suggesting a coastal or open water setting. The boat's design emphasizes speed and agility, with a focus on performance and luxury."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A depicts a sleek, white speedboat cutting through the ocean. The boat is designed for high-speed travel, evident from the significant wake it leaves behind. The hull is streamlined, with a pointed bow that suggests it's built for efficiency and speed. The deck is spacious, likely equipped with seating and amenities for passengers. The background shows a calm sea under a clear sky, indicating ideal conditions for boating.\n\nImage B features a rugged, black GMC pickup truck driving on a dusty, rocky terrain. The truck is equipped with a large front grille and prominent headlights, suggesting it's built for off-road capabilities. The tires are large and appear to be designed for traction on uneven surfaces. The dusty trail it leaves behind indicates it's moving at a considerable speed, possibly in a desert or mountainous area. The setting is rugged and natural, contrasting with the smooth, open water of Image A."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    },
+    {
+        "id": 8,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video features a single ginger cat with a fluffy tail and a mix of white and ginger fur. The cat is seen walking across a well-maintained lawn with vibrant green grass. The sunlight casts shadows on the ground, indicating it is a bright day. The cat's movements are slow and deliberate, and it appears to be focused on something in the grass. There are no other objects or animals visible in the frames, and the background is consistent throughout the video, with no changes in scenery or additional elements introduced."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8
+    },
+    {
+        "id": 9,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video presents a sequence of frames capturing the sun as it descends towards the horizon, casting a warm, golden hue across the sky. The sun appears as a bright, round disc, partially obscured by the silhouette of a hill or mountain range. The sky transitions from a deep orange near the sun to a lighter yellow and then to a pale blue as it extends outward. The clouds are sparse and appear as thin, wispy streaks against the vibrant sky. There is no visible movement of objects or people, and the focus remains on the natural beauty of the sunset."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9
+    },
+    {
+        "id": 10,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video opens with a close-up of a ginger cat with a fluffy tail, walking on green grass. The cat's fur is a mix of orange and white, and it appears to be in a relaxed state, possibly searching for something or simply enjoying the outdoors. The sunlight casts a warm glow on the scene, highlighting the cat's fur and the texture of the grass. As the clip progresses, the camera follows the cat's movement from behind, maintaining focus on its back and tail. The environment is serene, with no other animals or people in sight. The scene then transitions to a wide shot of a sunset over a mountainous landscape. The sky is ablaze with hues of orange and yellow, with the sun partially obscured by the silhouette of the mountains. The light from the setting sun creates a dramatic contrast between the bright sky and the darkened landforms."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10
+    },
+    {
+        "id": 11,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video opens with a serene sunset scene, the sun partially obscured by a hill, casting a warm golden hue across the sky and silhouetting the landscape. The light gradually intensifies as the sun rises higher, transitioning from a soft glow to a bright, radiant orb. The scene then cuts to a domestic cat with a fluffy orange coat and white markings, walking leisurely on a lush green lawn. The cat's movements are slow and deliberate, its tail swishing gently as it explores its surroundings. The sunlight casts soft shadows on the grass, highlighting the cat's fur and creating a tranquil atmosphere. The environment is peaceful, with no other characters or significant objects in the frame, focusing solely on the cat's interaction with its natural habitat."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11
+    },
+    {
+        "id": 12,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video starts with a cat walking on a grassy field. The cat is orange with white markings and has a fluffy tail. It appears to be sniffing the ground as it moves. The grass is green and the lighting suggests it is daytime. The cat's expression is curious and focused. The scene then transitions to a sunset over a mountainous landscape. The sky is filled with warm hues of orange and yellow, and the sun is partially obscured by the silhouette of the mountains. The clouds are streaked with light, creating a dramatic effect. The video captures the serene beauty of the sunset, with the light gradually changing as the sun moves lower in the sky."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12
+    },
+    {
+        "id": 13,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video begins with a serene sunset scene, where the sun is partially obscured by a hill, casting a warm golden hue across the sky and silhouetting the landscape. The clouds are streaked with the sunlight, creating a dramatic and peaceful atmosphere. The scene then transitions to a domestic setting, featuring a ginger cat with a fluffy tail walking on a lush green lawn. The cat's movements are slow and deliberate, and it appears to be exploring its surroundings with curiosity. The lighting in this scene is bright and natural, suggesting a sunny day."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13
+    },
+    {
+        "id": 14,
+        "media": [
+            "truck.png",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video clip features a ginger cat with a fluffy tail and a white face, walking across a lush green lawn. The cat's fur is a mix of orange and white, and it appears to be in a relaxed state, moving leisurely. The sunlight casts a warm glow on the scene, highlighting the cat's fur and the vibrant green of the grass. There are no other objects or characters in the frame, focusing all attention on the cat's movement. The environment suggests a peaceful, domestic setting, possibly a backyard or garden. The cat's eyes are focused ahead, and it seems to be enjoying its walk."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14
+    },
+    {
+        "id": 15,
+        "media": [
+            "sun.mp4",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video clip opens with a serene sunset scene, showcasing a vibrant orange sky with hues of yellow and a few scattered clouds. The sun is partially obscured by the silhouette of a hill or mountain, creating a dramatic contrast between the bright sky and the darkened land. As the clip progresses, the sun appears to move closer to the horizon, indicating the passage of time. The light intensity increases, casting a warm glow over the landscape. The final frame shifts to a dynamic scene of a GMC pickup truck driving on a dusty road. The truck is in motion, kicking up dust behind it, suggesting an off-road or rugged terrain setting. The environment here is arid and rocky, with the warm sunlight enhancing the earthy tones of the scene."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15
+    },
+    {
+        "id": 16,
+        "media": [
+            "boat.png",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video begins with a scene of a white speedboat cutting through the water, creating a large wake behind it. The boat is sleek and modern, with a streamlined design that suggests it is built for high-speed travel. The water is a deep blue, and the sky is clear, indicating good weather conditions. The boat is moving at a high speed, as evidenced by the significant wake it is creating.\n\nThe scene then transitions to a beautiful sunset over a mountainous landscape. The sun is setting behind the mountains, casting a warm orange glow across the sky. The mountains are silhouetted against the bright sky, and the sun is partially obscured by the mountain peaks. The colors of the sunset are vibrant and rich, with shades of orange, yellow, and red blending together to create a stunning visual effect.\n\nThe video then shows a close-up of the sun as it sets over the mountains. The sun is now fully visible, and its rays are streaming down onto the landscape. The colors of the sky are even more intense, with the orange and yellow hues dominating the scene. The mountains are still silhouetted against the bright sky, and the sun's rays are creating a dramatic effect.\n\nThe video concludes with a shot of the sun as it sets over the mountains. The sun is now almost completely set, and the sky is a deep orange color. The mountains are still silhouetted against the bright sky, and the sun's rays are fading away. The colors of the sky are now more muted, with shades of orange and yellow blending together to create a beautiful sunset.\n\nOverall, the video captures the beauty of nature and the power of the sun. The scenes of the speedboat and the sunset over the mountains are both stunning and awe-inspiring. The video is a reminder of the beauty that can be found in the world around us, and it encourages us to appreciate and protect the natural environment."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16
+    },
+    {
+        "id": 17,
+        "media": [
+            "cat.mp4",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video begins with a cat walking on a grassy field. The cat is orange with white markings and has a fluffy tail. It appears to be sniffing the ground as it moves. The cat then turns its head to look directly at the camera, giving a curious expression. The cat continues to walk forward, and the camera follows its movement. The cat's fur is well-groomed, and it seems to be enjoying its time outdoors. The grass is green and lush, indicating a healthy environment. The lighting suggests it is daytime, and the weather appears to be clear. The cat's tail is raised, and it seems to be in a relaxed and playful mood. The video then transitions to a scene of a boat speeding across the water. The boat is white with a sleek design and is creating a large wake behind it. The water is a deep blue, and the sky is clear, suggesting a sunny day. The boat is moving at a high speed, as evidenced by the significant wake it leaves behind. The scene conveys a sense of motion and excitement, contrasting with the calm and leisurely atmosphere of the previous clip."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17
+    }
+]

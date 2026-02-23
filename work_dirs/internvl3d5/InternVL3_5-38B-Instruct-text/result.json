@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking what 1 plus 1 is. Hmm, that seems pretty straightforward, but I should make sure I'm not missing anything here. Let me think.\n\nFirst, I know that addition is one of the basic arithmetic operations. When you add two numbers, you're combining their values. In this case, we're adding 1 and 1. Let me visualize it. If I have one apple and someone gives me another apple, how many apples do I have? That's right, two apples. So 1 plus 1 should equal 2.\n\nWait, but maybe there's a trick here. Sometimes people ask simple questions to test if you're paying attention. Let me check if there's any context I'm missing. The question is just \"What is the result of 1 plus 1?\" without any additional information. So it's probably a straightforward math problem.\n\nAnother way to look at it is using number lines. Starting at 1, if I move one unit to the right, I land on 2. That confirms it again. Or using fingers: hold up one finger on each hand and count them together. Yep, two fingers.\n\nI could also think about binary, where 1 + 1 equals 10, but the question doesn't specify a number system. Since it's not mentioned, I should assume it's in base 10, which is the standard decimal system. So in decimal, 1 + 1 is definitely 2.\n\nIs there any other angle? Maybe in different mathematical structures, like modular arithmetic. For example, in modulo 2, 1 + 1 would be 0. But again, unless specified, the default is regular addition. The user didn't mention anything about modular arithmetic, so that's probably not the case here.\n\nLet me also consider if the question is a riddle. Sometimes \"1 plus 1\" can be a play on words, like \"window\" if you're thinking of the shape, but the question specifically says \"the result of 1 plus 1,\" which implies a numerical answer. So the answer should be 2.\n\nI think I've covered all possible bases here. The answer is 2. There's no trick or hidden meaning in the question as presented. Just a simple addition problem.\n</think>\n\nThe result of 1 plus 1 is **2**. This is a fundamental arithmetic operation where adding the quantities of 1 and 1 yields a total of"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a huge country with a long history, so maybe the capital has changed over time. But the question is about the current capital.\n\nI think Beijing is the capital. Wait, but I should make sure. Sometimes people confuse it with other major cities like Shanghai or Hong Kong. But Hong Kong is a special administrative region, not the capital. Shanghai is a major financial hub, but I don't think it's the capital. \n\nLet me think about government buildings. The Great Hall of the People and the Forbidden City are in Beijing, right? Those are important government and historical sites. Also, the Chinese government's official residence, Zhongnanhai, is in Beijing. That makes sense because capitals usually have the main government offices.\n\nAnother way to check is to remember where the national leaders are based. The President of China and the Premier of the State Council are both located in Beijing. So that's another clue. \n\nI also recall that during the 2008 Summer Olympics, Beijing was the host city, which is a big event for a country, often held in the capital. Plus, the 2022 Winter Olympics were also in Beijing. Hosting major international events like the Olympics usually happens in the capital city.\n\nWait, but what about historical capitals? Like, wasn't Nanjing the capital at some point? Yes, during the Republic of China era and earlier dynasties. But the current People's Republic of China, established in 1949, has Beijing as its capital. \n\nAlso, in terms of geography, Beijing is located in the northern part of China, which might be strategic for governance. It's not too far from the coast but also inland enough to be a central location. \n\nI should also consider if there's any recent change, but I don't think so. The capital hasn't changed in recent years. So putting it all together, the capital of China is Beijing. I think that's correct. Let me just verify with a quick mental check: government seat, major political events, historical significance as the current capital since 1949. Yep, that all points to Beijing.\n</think>\n\nThe capital city of China is **Beijing**. Established as the capital of the People's Republic of China in 1949, Beijing serves as the political, cultural, and educational center of the country. It houses"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

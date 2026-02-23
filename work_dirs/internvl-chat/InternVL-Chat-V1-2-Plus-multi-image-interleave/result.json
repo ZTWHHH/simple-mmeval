@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment on a dirt road where a gray GMC truck is in motion. The truck, positioned centrally in the frame, is moving towards the right side of the image. It's a four-door model with a black grille and black rims, adding a touch of contrast to its gray body. The truck is slightly off-center, giving a sense of movement and dynamism to the scene.\n\nThe backdrop of the image is a rocky cliff, providing a rugged and natural setting for the truck. The cliff is located on the left side of the image, its rough texture and color complementing the smooth lines of the truck. The dirt road on which the truck is driving extends into the distance, leading the viewer's eye towards the cliff.\n\nThere are no discernible texts or other objects in the image. The relative position of the truck and the cliff suggests that the truck is moving away from the cliff, further down the dirt road. The image does not contain any other objects or people, focusing solely on the truck and its journey."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of a white yacht making its way across the deep blue ocean. The yacht, with its sleek design and white color, stands out against the vast expanse of the sea. It's moving towards the right side of the frame, leaving behind a trail of white waves that ripple across the water's surface. The sky above is a clear blue, mirroring the color of the ocean below. The yacht is the only object in the image, making it the focal point of this serene seascape. There are no texts or other discernible objects in the image. The relative position of the yacht to the ocean and the sky suggests it's in the middle of the frame, further emphasizing its prominence in the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of a white GMC truck in motion on a dirt road. The truck, positioned centrally in the frame, is moving from left to right, kicking up a cloud of dust behind it. The backdrop is a clear blue sky, providing a stark contrast to the earthy tones of the road and the truck. In the distance, a mountain range can be seen, adding depth to the scene. The image does not contain any discernible text."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment on a dirt road where a black GMC truck is in motion. The truck, positioned centrally in the frame, is moving towards the right side of the image. It's a four-door model with a black grille and black rims, giving it a sleek and modern look. The road beneath the truck is a light brown color, suggesting it's a dirt road.\n\nThe backdrop of the image is a clear blue sky, providing a stark contrast to the earthy tones of the road and the truck. In the distance, red rock formations can be seen, adding a touch of natural beauty to the scene. The truck, the road, and the rock formations together create a dynamic and interesting composition. There are no discernible texts or other objects in the image. The relative position of the truck to the rock formations suggests it's moving away from them. The image does not contain any imaginary content; everything described can be confidently determined from the image itself."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of a white GMC truck in motion on a dirt road. The truck, positioned centrally in the frame, is moving towards the right side of the image, kicking up a cloud of dust in its wake. The backdrop is a clear blue sky, providing a stark contrast to the earthy tones of the road and the truck. In the distance, a mountain range can be seen, adding depth to the scene. The image does not contain any discernible text."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment on a dirt road where a gray GMC truck is in motion. The truck, positioned centrally in the frame, is moving towards the right side of the image. It's a four-door model with a black grille and black rims, adding a touch of contrast to its gray body. The road beneath the truck is a light brown color, indicative of a dirt road.\n\nThe backdrop of the image is a clear blue sky, suggesting a bright and sunny day. In the distance, red rock formations can be seen, adding a touch of ruggedness to the scene. The truck, the road, and the rock formations together create a dynamic and interesting composition. There are no discernible texts or other objects in the image. The relative position of the truck to the rock formations indicates that the truck is closer to the viewer than the rock formations."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In the image, a white GMC truck is captured in motion on a dirt road. The truck, positioned centrally in the frame, is moving towards the right side of the image. It's a four-door model, equipped with a black grille and black rims, adding a contrast to its white body. The road beneath the truck is a mix of dirt and rocks, suggesting a rugged terrain.\n\nThe backdrop of the image is a clear blue sky, providing a serene contrast to the dynamic scene in the foreground. In the distance, a mountain range can be seen, adding depth to the image. The overall composition of the image suggests a sense of adventure and exploration."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In the image, a white GMC truck is captured in motion on a dirt road. The truck, positioned centrally in the frame, is moving towards the right side of the image. It's a four-door model with a black grille and black rims, adding a contrast to its white body. The road beneath the truck is a mix of dirt and rocks, suggesting a rugged terrain.\n\nThe backdrop of the image is a clear blue sky, providing a serene contrast to the dynamic scene in the foreground. On the right side of the image, a cliff can be seen, adding an element of natural beauty to the scene. The image does not contain any discernible text. The relative positions of the objects confirm that the truck is the main subject of the image, with the sky and cliff serving as the background."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

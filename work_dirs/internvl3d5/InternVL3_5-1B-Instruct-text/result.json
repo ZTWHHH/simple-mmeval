@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Hmm, let's start by recalling basic addition. When you add two numbers together, you're combining their values. So if I have one apple and someone gives me another apple, how many apples do I have in total? That's two apples. So, 1 plus 1 should be 2. But wait, maybe I should check if there's any trick here. Sometimes problems try to trick you by using different operations or something. But the question is straightforward: 1 plus 1. No mention of anything else like multiplication or subtraction. So, it's just addition. Let me visualize it. If I have a number line, starting at 1 and moving one step to the right, I land on 2. Or if I have a number line starting at 0 and moving one step to the right, I land on 1, then another step to the right to 2. Yeah, that makes sense. Another way to think about it is using objects. If I have one ball and someone gives me another ball, I have two balls. So, 1 plus 1 equals 2. I don't see any reason to doubt this. Maybe if I consider negative numbers or zero, but the question is about positive numbers. So, 1 plus 1 is definitely 2. I think that's it. No complications here. The answer should be 2.\n</think>\n\nThe result of 1 plus 1 is calculated by adding the two numbers together. \n\n**Step-by-Step Explanation:**\n1. Start with the number 1.\n2. Add 1 to it: \\(1 + 1 = 2\\).\n\n**Answer:** 2"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China has a lot of cities, and sometimes the capital is a big city. But I'm not exactly sure which one it is. Maybe I should think about the geography of China. I know that China is a large country with mountains and rivers, so maybe the capital is somewhere in the middle of the country.\n\nWait, I think Beijing is a major city. But I've heard that sometimes the capital is moved. For example, in the past, Beijing was the capital, but maybe there was a change. I remember something about the People's Republic of China being established in 1949, and then the capital was moved to Beijing. But I'm not sure if that's still the case. Maybe there's been some recent changes?\n\nLet me try to remember any events. There was a time when the capital was moved to Shanghai, but I think that was in the 1950s or 60s. Then in the 1980s, the capital was moved again to Beijing. So maybe Beijing is still the current capital. But I should verify this. \n\nI can also think about the political structure. The People's Republic of China is the government, and Beijing is the capital. The capital is where the government is located, so that makes sense. Also, Beijing is a major city with many government buildings, museums, and historical sites. \n\nAnother way to check is to think about the provinces. The capital is usually in the province where the government is located. Since Beijing is in the Beijing-Hangzhou region, which is in the northern part of China, that fits. \n\nI should also consider if there's any recent news or changes. For example, in 2020, there was a move of the capital to a new location, but I don't recall hearing about that. Maybe it's still Beijing. \n\nWait, I think in 2018, the government announced that the capital would be moved to a new location, but I'm not sure if that's still the case. Maybe it's still Beijing. Alternatively, maybe the capital is still Beijing, and the move was a temporary change. \n\nTo sum up, based on historical events and the political structure, Beijing is the capital of China. I can't think of any recent changes that would suggest otherwise. So I'm pretty confident that Beijing is the"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

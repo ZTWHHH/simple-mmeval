@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking what 1 plus 1 is. Hmm, that seems pretty straightforward, but I should make sure I'm not missing anything here. Let me think.\n\nFirst, I know that addition is one of the basic arithmetic operations. When you add two numbers together, you're combining their values. In this case, we're adding 1 and 1. Let me visualize it. If I have one apple and someone gives me another apple, how many apples do I have? That's right, two apples. So 1 plus 1 should equal 2.\n\nWait, but maybe there's a trick here? Sometimes people ask simple questions to test if you're paying attention. Let me check if there's any context I'm missing. The question is just \"What is the result of 1 plus 1?\" without any additional details. So probably not a trick question. \n\nLet me confirm with another example. If I have one coin and I add another coin, I have two coins. Yep, that's 1 + 1 = 2. In binary, 1 + 1 equals 10, but the question doesn't specify a number system. Since it's a general question, the answer should be in base 10, which is 2.\n\nI don't think there's any other way to interpret this. Unless the user is referring to something else, like in a different mathematical context or a riddle. But without any hints, the standard answer is 2. \n\nJust to be thorough, maybe check some references. In mathematics, the sum of 1 and 1 is universally accepted as 2. There's no controversy or alternative answer in standard arithmetic. So I'm confident the answer is 2.\n</think>\n\nThe result of 1 plus 1 is **2**. This is a fundamental arithmetic operation where adding the number 1 to another number 1 yields a sum of 2."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking for the capital city of China. Let me think. I remember that China is a big country in East Asia. The capital... wait, is it Beijing? Yeah, I think that's right. But wait, sometimes people might confuse it with other major cities like Shanghai or Hong Kong. But no, I'm pretty sure Beijing is the capital. Let me double-check. From what I've learned before, Beijing has been the capital for a long time, especially since the establishment of the People's Republic of China in 1949. Before that, during different dynasties, the capital changed, like Nanjing or Xi'an, but currently, it's Beijing. Also, major government buildings and landmarks like the Great Hall of the People and Tiananmen Square are in Beijing. So yeah, the answer should be Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It has served as the political and cultural center of the country since the establishment of the People's Republic of China in 1949. Beijing is home to significant historical sites such as the Forbidden City, Tiananmen Square, and the Great Hall of the People, reflecting its enduring importance in Chinese history and governance."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

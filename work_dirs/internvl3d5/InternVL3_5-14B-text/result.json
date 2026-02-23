@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Hmm, let's start by recalling basic addition. When you add two numbers together, you're combining their values. So if I have one apple and someone gives me another apple, how many apples do I have in total? That's right, two apples. So 1 plus 1 should equal 2. Wait, but maybe I should double-check. Let me count on my fingers. Hold up one finger on my left hand and one on my right. When I put them together, that's two fingers. Yep, that's 2. I think that's correct. But sometimes people joke about 1 + 1 being 11 if you're not careful with the notation, but in standard arithmetic, it's definitely 2. No, I'm pretty sure the answer is 2. Let me think if there's any other context where 1 + 1 could be something else. In binary, 1 + 1 equals 10, but the question doesn't specify a number system. Since it's a basic math question, it's safe to assume base 10. So yeah, 1 plus 1 is 2. I can't think of any reason why that wouldn't be the case. Maybe in some abstract algebra structures, but again, the question is straightforward. Alright, I'm confident the answer is 2.\n</think>\n\nThe result of 1 plus 1 is calculated by adding the two numbers together. \n\n1 + 1 = 2\n\n**Answer:** 2"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a country in East Asia, and it's one of the most populous countries in the world. The capital... Hmm, I think it's Beijing. Wait, but sometimes people might confuse it with other cities like Shanghai or Guangzhou. Let me think.\n\nBeijing is a major city, right? I've heard of the Great Wall being near Beijing. Also, the Forbidden City is there, which is a historical palace. The government buildings, like the National People's Congress, are in Beijing. Then there's the Olympic Games in 2008, which were held in Beijing. That might be a clue. \n\nBut wait, could it be another city? Maybe Nanjing? I think Nanjing was the capital during some dynasties, like the Ming dynasty. But currently, is it still the capital? No, I think the capital moved to Beijing. Also, when the People's Republic of China was established in 1949, the capital was set as Beijing. \n\nAnother way to check: major embassies are usually in the capital. So if I think about where embassies are located in China, they're in Beijing. For example, the US embassy is in Beijing. That makes sense. \n\nAlso, in terms of geography, Beijing is in the northern part of China, near the Bohai Sea. It's a significant political and cultural center. The name \"Beijing\" literally means \"Northern Capital\" in Chinese, which might indicate its role as the capital. \n\nWait, but sometimes people might think of Shanghai as the economic capital because it's a financial hub. However, the political capital is different. So even though Shanghai is bigger economically, the capital is still Beijing. \n\nI should also consider historical context. Before Beijing, there were other capitals like Xi'an during the Qin dynasty, Luoyang during the Zhou dynasty, and Nanjing during the Ming and Qing dynasties. But since the establishment of the People's Republic, Beijing has been the capital. \n\nSo putting it all together: the capital of China is Beijing. It's the political center, home to government institutions, historical sites, and major cultural landmarks. The name itself hints at its status as the northern capital. Major international events and embassies are located there, confirming its role as the capital.\n</think>\n\nThe capital city of China is **Beijing"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

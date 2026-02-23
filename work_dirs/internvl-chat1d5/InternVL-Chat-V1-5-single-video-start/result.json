@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC pickup truck in motion on a dirt road. The vehicle is a modern model with a prominent front grille featuring the GMC logo. The truck is painted in a dark color, possibly gray or black, and has a sleek design with angular lines. It has a short bed, indicating it's a crew cab model, which is designed for both passenger comfort and utility. The truck is equipped with large, rugged tires suitable for off-road conditions, and it's kicking up a trail of dust behind it, suggesting it's moving at a moderate speed. The background is a natural landscape with red rock formations, which could be indicative of a desert or canyon environment. The lighting in the image suggests it's either early morning or late afternoon, with the sun casting long shadows and giving the scene a warm tone."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, white yacht moving through the ocean. The yacht is creating a significant wake as it moves, indicating its speed. The ocean is a deep blue, and the sky is clear with no visible clouds. The yacht has multiple levels, with a visible upper deck and a lower deck. There are several windows and a radar dome on the top of the yacht. The yacht appears to be well-maintained and is likely used for leisure or travel. The image does not contain any text."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video shows a ginger cat walking across a grassy field. The cat appears to be in motion, with its tail raised and ears perked up. The grass is green and lush, and the sunlight casts a warm glow on the scene. The cat's fur is a rich orange color, and it seems to be enjoying its time outdoors."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video captures a breathtaking view of a sunrise over a mountainous landscape. The sun, a radiant orb of light, is seen rising from behind the mountains, casting a warm, orange glow across the sky. The mountains, shrouded in darkness, provide a stark contrast to the vibrant colors of the sky. The sun's rays pierce through the clouds, illuminating the landscape below. The video is taken from a distance, offering a panoramic view of the scene. The mountains appear to be densely forested, adding a touch of green to the otherwise orange and black palette of the image. The sun's position in the sky suggests that it's early morning, and the tranquility of the scene is palpable. The video does not contain any discernible text or countable objects. The relative positions of the objects remain constant, with the sun rising behind the mountains and the viewer observing the scene from a distance. The video does not depict any specific actions or movements. It's a still image capturing a moment of natural beauty."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]

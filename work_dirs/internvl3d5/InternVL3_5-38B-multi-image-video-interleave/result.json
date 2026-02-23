@@ -1,0 +1,430 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nThe image features a GMC pickup truck driving on a dirt road in a rugged, desert-like environment. The truck is a modern, four-door model with a crew cab and a short bed. It has a sleek, muscular design with prominent wheel arches and a bold front grille that displays the GMC logo. The vehicle is painted in a dark metallic color, possibly gray or black, which contrasts with the dusty, reddish-brown terrain. The truck is equipped with large, black off-road tires and black rims, suggesting it is designed for both on-road and off-road capabilities. Dust is being kicked up behind the rear wheels, indicating that the truck is in motion. The background features rocky, arid hills, enhancing the adventurous and robust nature of the scene. The lighting suggests it is daytime with clear skies, as the truck is well-lit and shadows are visible on the ground."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user wants a detailed description of the image provided. The image shows a yacht speeding on the water. First, I need to note the main elements: the yacht itself, the water, the wake, and the background.\n\nThe yacht is white with dark accents. It has a sleek design, which suggests it's a luxury vessel. The windows are tinted, and there's a radar dome on top, indicating modern navigation equipment. The wake is frothy and white, showing the yacht's high speed. The water is a deep blue, which might be the ocean. The sky is clear with a few clouds, so the weather is good. The horizon is visible, giving a sense of openness. There are no people visible, which keeps the focus on the yacht. The angle is from above and slightly to the side, giving a dynamic view. The lighting is bright, suggesting midday. The yacht's design includes aerodynamic lines and a streamlined hull. The wake trails off into the distance, emphasizing speed. The overall impression is luxury and speed in a serene setting.\n\nI should structure this into a coherent description, starting with the yacht, then the water and wake, the background, and the overall atmosphere. Make sure to mention the design features, the speed, the environment, and the time of day. Avoid any assumptions not visible in the image, like the exact location or the yacht's name. Keep it factual but vivid.\n</think>\n\nThe image captures a sleek, modern luxury yacht speeding across a vast expanse of deep blue ocean. The vessel, predominantly white with dark trim accents, cuts through the water at high speed, creating a dramatic, frothy white wake that fans out behind it. Its streamlined hull and aerodynamic design suggest advanced engineering, optimized for both speed and stability. The yacht features large, tinted windows along its upper deck, a radar dome atop the structure, and a polished wooden deck area, hinting at opulent interiors. The sky above is clear with a few wisps of clouds, and the horizon stretches infinitely, emphasizing the openness of the sea. The angle of the shot, taken from an elevated position slightly ahead of the yacht, highlights its dynamic motion and the contrast between the vessel's sharp lines and the fluid, undulating water. The lighting is bright and even, suggesting midday, and the absence of people in the frame keeps the focus on the yacht's power and elegance."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user wants a detailed description of the two images provided. First, I need to look at each image carefully.\n\nStarting with the first image: it's a GMC truck. The model looks like a Sierra, maybe the AT4 or Denali trim. The color is a metallic gray, and it's driving on a dirt road with dust trailing behind. The background has rocky cliffs, suggesting a desert or canyon setting. The truck has black wheels, LED headlights, and the GMC logo is prominent on the grille. The design is modern with sharp lines and a muscular stance.\n\nNow the second image: a luxury yacht speeding on the ocean. The yacht is white with a sleek design, cutting through the water, creating a wake. The ocean is a deep blue, and the sky is clear. The yacht has multiple decks, large windows, and maybe a radar dome on top. The speed is evident from the spray and the angle of the hull. It's a high-end vessel, likely used for leisure or private charters.\n\nI need to make sure I mention all the key elements in each image. For the truck, focus on the brand, model features, environment, and design details. For the yacht, highlight the luxury aspects, speed, ocean setting, and structural features. Avoid any assumptions not visible in the images. Check if there are any unique details I might have missed, like specific accessories or environmental elements. Also, ensure the descriptions are clear and vivid, helping someone visualize the images without seeing them.\n</think>\n\n**Image 1: GMC Truck**  \nThe image features a modern, metallic gray GMC pickup truck, likely a Sierra AT4 or Denali model, driving dynamically on a dusty, unpaved road. The vehicle is angled to showcase its front grille, which prominently displays the bold red \"GMC\" logo. Key design elements include sharp LED headlights, blacked-out wheels, and a muscular, elevated stance. The truck kicks up a trail of dust, emphasizing its off-road capability. The backdrop consists of rugged, reddish-brown rock formations, suggesting a desert or canyon environment, enhancing the vehicle's adventurous appeal.  \n\n**Image 2: Luxury Yacht**  \nA sleek, white luxury yacht cuts through deep blue ocean waters at high speed, creating a dramatic wake. The vessel features a streamlined hull, multiple decks with large windows, and a radar dome atop its structure. The yacht\u2019s design exudes opulence, with polished surfaces and a spacious layout visible on the"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user wants a detailed description of the two images provided. First, I need to look at each image carefully and note the key elements.\n\nStarting with the first image: it's a yacht on the water. The yacht is white, moving at high speed, creating a wake. The ocean is blue, and the sky is clear. The yacht has a sleek design with a curved windshield and multiple decks. There are railings around the upper deck, and the bow is pointed. The water spray is white and frothy, indicating speed. The horizon is visible in the background, showing a vast open sea.\n\nNow the second image: a pickup truck driving on a dirt road. The truck is a GMC, as seen by the logo. It's a modern model with a muscular build, black rims, and a prominent front grille. The environment is a desert-like area with red rock formations in the background. The truck is kicking up dust, suggesting it's moving fast. The lighting is warm, probably from the sun, casting shadows on the truck. The road is unpaved, and the terrain looks rugged.\n\nI need to make sure I mention the make and model of the truck, the type of terrain, and the environmental setting. For the yacht, focus on its design, speed, and the ocean setting. Also, note the time of day if possible. The yacht image has a clear sky, so maybe midday. The truck image has a warm light, possibly late afternoon.\n\nCheck if there are any other details. The yacht has a radar dome on top, which is part of the navigation equipment. The truck has LED headlights and a crew cab. The GMC logo is red, which stands out against the black grille. The dirt road is reddish, matching the rocks. The yacht's wake is a V-shape, typical of high-speed boats.\n\nMake sure the descriptions are separate and clear, highlighting each image's unique features. Avoid technical jargon but be specific enough. Mention the action in each (yacht speeding, truck driving on dirt). Also, the colors and how they contrast with the surroundings. The yacht's white against the blue water, the truck's dark color against the red rocks.\n\nDouble-check for any missed elements. The yacht has a name or registration? Not visible. The truck's license plate? Probably not necessary. Focus on the main aspects the user would notice: speed, environment, vehicle features.\n</think>\n\n**Image 1: Yacht on the Ocean"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user wants a detailed description of the contents in two images. The first image is a GMC truck driving on a dirt road, and the second is a yacht speeding on the ocean.\n\nStarting with the GMC truck. I need to note the make and model, which is a GMC Sierra. The color is metallic gray. The truck is in motion, kicking up dust, so the setting is probably a desert or rocky terrain. The background has red rock formations, suggesting a canyon or desert landscape. The truck has a modern design with LED headlights, a prominent grille with the GMC logo, and black wheels. The windows are tinted, and there's a side step. The environment is sunny with clear skies.\n\nNow the yacht. It's a white luxury yacht moving fast, creating a wake. The ocean is deep blue, indicating open water. The yacht has multiple decks, large windows, and a sleek design. There are railings and possibly a radar dome on top. The sky is clear, suggesting good weather. The yacht is cutting through the water, showing speed and power. The wake is white and frothy, emphasizing the speed.\n\nI should make sure to mention the key features of each vehicle, their environments, and the action they're engaged in. Also, highlight the contrast between the rugged truck and the luxurious yacht. Check if there are any specific details I might have missed, like the GMC logo color or the yacht's deck features. Avoid technical jargon but keep it descriptive. Make sure the descriptions are clear and vivid so the user can visualize the images accurately.\n</think>\n\n### Image 1: **GMC Sierra Pickup Truck**  \n- **Vehicle**: A modern, metallic gray GMC Sierra pickup truck is depicted in motion on a dusty, unpaved road.  \n- **Design Features**:  \n  - Prominent **GMC logo** on the front grille, flanked by sleek LED headlights.  \n  - Aggressive styling with a bold, angular front fascia and blacked-out accents (grille, wheels, side mirrors).  \n  - Four-door crew cab configuration with tinted windows and a short bed.  \n  - Black alloy wheels and a visible side step for entry.  \n- **Environment**:  \n  - The truck is driving through a **desert or canyon landscape**, with red rock formations and sparse vegetation in the background.  \n  - Dust trails behind the tires, emphasizing speed and off-road capability.  \n  - Bright sunlight casts sharp shadows, suggesting"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user wants a detailed description of the contents in two images. The first image is a yacht, and the second is a GMC truck. I need to make sure I cover all the visible elements in each.\n\nStarting with the yacht. The image shows a white luxury yacht moving through blue water, creating a wake. The yacht has a sleek design with a curved hull. There are multiple decks, including an upper deck with a radar dome and antennas. The windows are tinted, and there's a wooden deck area. The bow is pointed, and the water is a deep blue, indicating the ocean. The sky is clear with a few clouds. I should mention the speed, the wake, the design features, and the environment.\n\nNow the GMC truck. It's a dark gray pickup truck driving on a dirt road in a desert-like area with red rock formations. The truck has a modern design with a prominent grille, LED headlights, and black wheels. The GMC logo is visible. Dust is being kicked up by the tires, showing movement. The background has rocky cliffs and sparse vegetation. I need to describe the truck's features, the terrain, and the environment.\n\nWait, the user might be comparing the two vehicles or just wants separate descriptions. Since they provided two images, probably separate. I should ensure each description is thorough, mentioning color, design elements, surroundings, and any notable features like the wake or dust. Also, check if there are any specific details I might have missed, like the number of windows on the yacht or the type of terrain for the truck. Make sure to highlight the luxury aspect of the yacht and the ruggedness of the truck. Avoid technical jargon but be precise. Alright, that should cover it.\n</think>\n\n### Image 1: Luxury Yacht  \nThe image depicts a sleek, modern **white luxury yacht** speeding across a vast expanse of deep blue ocean. Key features include:  \n- **Design**: The yacht has a streamlined, aerodynamic hull with a pointed bow cutting through the water, creating a dramatic white wake. The exterior combines glossy white panels with dark trim accents, giving it a high-end, polished look.  \n- **Decks and Layout**: Multiple levels are visible, including an upper deck with a radar dome, antennas, and navigation equipment. The main deck features large, tinted windows and a spacious, open area with wooden flooring, likely for lounging or sunbathing.  \n- **Speed and Motion**: The vessel"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user wants detailed descriptions of Image A and Image B. Let me start by looking at each image carefully.\n\nImage A is a GMC truck. I need to note the model, color, features. The truck is driving on a dirt road, kicking up dust. The background has rocky terrain, maybe a desert. The truck has a prominent grille with the GMC logo, LED headlights, black wheels. It's a four-door crew cab, maybe a Sierra model. The setting suggests off-road capability.\n\nImage B is a yacht. It's white, moving fast on the water, creating a wake. The yacht has multiple decks, large windows, maybe a flybridge. The ocean is blue, clear skies. The yacht looks luxurious, designed for speed and comfort. The wake indicates high speed, so powerful engines. The design is sleek, modern.\n\nWait, for Image A, the model is GMC Sierra AT4? The user mentioned \"GMC\" on the grille. The color is metallic gray. The wheels are black with a rugged design. The environment is a desert with red rocks, which is typical for places like Utah or Arizona. The truck is in motion, showing off-road performance.\n\nFor Image B, the yacht is a motor yacht, maybe a Sea Ray or similar brand. The hull is white with dark accents. The wake is significant, showing speed. The upper deck has a radar dome and antennas, indicating navigation equipment. The ocean is calm, suggesting good weather. The yacht is likely used for leisure, with spacious decks and luxury features.\n\nI should make sure to mention the key features of each vehicle, their environments, and any notable design elements. Also, highlight the contrast between the off-road truck and the high-speed yacht. Check if there are any specific details I might have missed, like the number of doors on the truck or the yacht's size. The truck has four doors, crew cab. The yacht has at least two levels, maybe a sun deck and main cabin. The wake's size shows the yacht's speed and power. The truck's dust cloud emphasizes its movement and terrain.\n\nI think that's all. Now structure the descriptions clearly, starting with each image, then details about the vehicle, environment, and features.\n</think>\n\n**Image A Description:**  \nThe image features a **GMC Sierra AT4 pickup truck** in motion on a dusty, unpaved desert road. The truck is painted in a sleek **matte metallic gray** finish, with a bold"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user wants a detailed description of Image A and Image B. Let me start by looking at each image carefully.\n\nImage A is a yacht. It's white, moving fast on the water, creating a wake. The ocean is blue, and the sky is clear. The yacht has a sleek design with a curved windshield and multiple decks. There are railings around the upper deck, and the bow is pointed. The water spray is white, showing speed. The background is the open sea with a horizon line, no land in sight. The lighting is bright, suggesting daytime with sunlight reflecting off the water and the yacht.\n\nImage B is a pickup truck. It's a GMC model, dark gray or metallic color. The truck is on a dirt road, kicking up dust. The background has rocky cliffs, indicating a desert or canyon area. The truck has a modern design with a prominent grille, LED headlights, and black wheels. The windows are tinted, and there's a visible logo on the front. The lighting is warm, maybe late afternoon, with shadows indicating the sun is lower. The terrain is rough, and the truck looks sturdy, built for off-road conditions.\n\nWait, I should check if I missed any details. For the yacht, maybe mention the size, like luxury or large. The truck's model is GMC, maybe specify the type, like Sierra? The dirt road and dust show movement. The environment for the truck is rugged, contrasting with the yacht's open sea. Both images show motion, but in different settings. The yacht is sleek and smooth, the truck is rugged and robust. Make sure to note the differences in environment and vehicle type. Also, the time of day might be similar, but the yacht is in open water, while the truck is in a desert landscape. Need to describe each element clearly without mixing them up. Alright, that should cover the main points.\n</think>\n\n**Image A Description:**  \nThe image features a sleek, modern luxury yacht speeding across a vast expanse of clear blue ocean. The yacht is predominantly white, with a streamlined, aerodynamic design that includes a curved windshield and multiple decks. The upper deck is enclosed with glass windows, and the bow (front) is sharply pointed, cutting through the water and generating a dramatic white wake. The vessel is equipped with railings along the sides for safety, and its hull displays a glossy finish that reflects sunlight. The sky above is clear with minimal clouds, suggesting a bright, sunny day"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    },
+    {
+        "id": 8,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video captures a ginger cat with a fluffy tail and a white muzzle. The cat is seen walking across a lush green lawn, with the sunlight casting shadows on the grass. The cat's fur is a rich orange color, and it moves with a graceful, deliberate pace. The grass is vibrant green, indicating a healthy, well-maintained lawn. The cat's eyes are focused, and its ears are perked up, suggesting attentiveness to its surroundings."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8
+    },
+    {
+        "id": 9,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video captures a series of frames showing the sun setting behind a silhouette of a hill. The sky transitions from a deep orange to a lighter shade as the sun descends. The sun appears as a bright, round disc, partially obscured by the hill's edge. The hill is dark, creating a stark contrast against the vibrant sky. There are no other objects or actions visible in the video."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9
+    },
+    {
+        "id": 10,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user provided two sets of video frames. The first set shows a ginger cat walking on grass, and the second set is a sunset over a mountain. They want a detailed description of the contents in each frame.\n\nFirst, I need to analyze each frame individually. For the cat, the key points are the cat's appearance, movement, and the environment. The cat is ginger with a fluffy tail, walking on green grass. The lighting is natural, probably sunlight, which highlights the cat's fur. The grass is lush, indicating a healthy lawn. The cat's posture changes slightly across the frames, showing movement towards the camera.\n\nThen the sunset frames. The sun is setting behind a mountain, creating an orange and yellow sky. The sun's position changes slightly, showing the progression of the sunset. The mountain is silhouetted, and the sky has gradients of color. The clouds are sparse, allowing the sun's rays to spread. The lighting here is dramatic, with the sun's brightness contrasting against the dark mountain.\n\nI should make sure to mention the transition from the cat to the sunset, maybe noting the shift in focus from a living creature to a natural phenomenon. Also, the time of day might be inferred\u2014afternoon for the cat, evening for the sunset. The user might be looking for a vivid description to use in a story, presentation, or just to understand the scenes better. They might also want to know the mood each scene conveys: the cat is curious and playful, the sunset is serene and majestic.\n\nI need to check if there are any details I missed. For the cat, maybe the direction it's moving, the texture of the fur, the length of the grass. For the sunset, the shape of the mountain, the intensity of the colors, any changes in the sun's position. Also, the absence of other elements like people or animals in both scenes, keeping the focus on the main subjects.\n\nMake sure the descriptions are clear and structured, separating the two sets of frames. Use descriptive language to paint a picture, mentioning colors, lighting, movement, and the overall atmosphere. Avoid technical jargon but be precise. Maybe the user is a student analyzing video elements, a writer gathering inspiration, or someone interested in nature photography. Tailoring the description to be helpful for various uses.\n</think>\n\n**Frame-by-Frame Description:**\n\n### **Ginger Cat in a Grassy Field**  \n1. **Appearance & Movement**:  \n   - A fluffy,"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10
+    },
+    {
+        "id": 11,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user provided two sets of video frames and wants a detailed description of the contents in each. The first set shows a sunset over a mountain, and the second set features a ginger cat walking on grass. \n\nStarting with the sunset frames. The first frame has the sun partially hidden behind the mountain, casting an orange glow. The next frames show the sun moving lower, getting more intense. The colors are vibrant oranges and yellows, with the mountain's silhouette becoming more defined as the sun sets. I need to describe the progression of the sunset, the colors, the mountain's shape, and the atmosphere.\n\nNow the cat frames. The cat is ginger with a fluffy tail, walking on green grass. The first frame shows it sniffing the ground, then it starts moving towards the camera. The grass is lush, and the lighting is bright, suggesting daytime. The cat's movements are curious and playful. I should mention the cat's appearance, its actions, the environment, and the lighting.\n\nWait, the user also included a voiceover in the second part about the cat. The voiceover says, \"I'm not sure what it is, but I think it's a cat.\" That's a bit confusing because the frames clearly show a cat. Maybe the voiceover is part of the video, perhaps someone is unsure if it's a cat, but the visuals confirm it. I should note that the voiceover expresses uncertainty, but the frames show a cat.\n\nI need to make sure the descriptions are detailed, mentioning colors, movements, and any notable elements. For the sunset, the transition from the sun being partially visible to setting behind the mountain. For the cat, the progression from sniffing to walking towards the camera, the texture of the fur and grass.\n\nAlso, check if there are any other elements in the frames. The sunset frames have a dark mountain silhouette and a bright sky. The cat frames have only the cat and grass, no other objects. The lighting in the cat frames is natural sunlight, creating shadows on the grass.\n\nMake sure to structure the answer clearly, separating the two scenes. Use paragraphs for each set of frames, starting with the sunset, then the cat. Mention the sequence of events in each set, like the sun setting and the cat moving. Highlight the visual elements and any changes between frames.\n\nDouble-check the user's request: detailed description of the contents shown in each frame. They provided multiple frames for each scene, so describe how each scene evolves across the frames"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11
+    },
+    {
+        "id": 12,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user provided two videos, A and B, each with several frames. They want a detailed description of the contents of each video.\n\nStarting with Video A. The frames show a ginger cat in a grassy area. The cat is moving towards the camera, with its tail up and ears perked. The grass is green and well-lit, suggesting it's daytime. The cat's fur is fluffy, and it looks curious or playful. The movement is smooth, so the video is likely shot with a steady camera, maybe a tripod or handheld but stable. The focus is on the cat, so the background is blurred a bit, emphasizing the subject. The lighting is natural, probably sunlight, giving the cat a warm glow. The cat's expression changes slightly, showing alertness. No other objects or animals are visible, so the scene is simple and focused on the cat's movement.\n\nNow Video B. The frames depict a sunset behind a hill. The sun is large and bright, casting an orange-yellow hue across the sky. The hill is silhouetted, with trees lining the ridge. The sun moves slightly downward in each frame, indicating the passage of time. The sky has some clouds, but they're minimal, allowing the sun's rays to spread. The colors are vibrant, with gradients from deep orange near the sun to lighter shades outward. The lighting is dramatic, typical of a sunset, creating a serene and picturesque scene. There's no human activity or other elements, just the natural landscape. The camera is stationary, capturing the sun's descent steadily.\n\nComparing both videos, Video A is about a cat's movement in a natural setting, while Video B focuses on a static landscape with a dynamic element (the setting sun). The user might be looking for a contrast between animal behavior and natural phenomena. They might need these descriptions for a project, presentation, or content creation. The detailed analysis should highlight the subjects, settings, lighting, and mood of each video. Ensuring clarity and vivid imagery in the descriptions will help the user visualize the videos accurately.\n</think>\n\n**Video A Description:**  \nThe video features a fluffy ginger cat with a bushy tail walking purposefully across a lush, green grassy field. The cat moves toward the camera with a curious and alert demeanor, its ears perked and eyes focused. The sunlight illuminates its fur, casting soft shadows on the grass. The scene is serene, with no other animals or objects visible, emphasizing the cat\u2019s"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12
+    },
+    {
+        "id": 13,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user provided two videos, A and B, each with eight frames. They want a detailed description of the contents of each video.\n\nStarting with Video A. The frames show a sunset over a mountain. The first frame has the sun partially visible, casting an orange glow. The next frames show the sun moving lower, with rays spreading out. The colors are vibrant oranges and yellows, with the mountain silhouette dark against the sky. The progression suggests the sun is setting, and the light is changing intensity. I need to note the time of day, the elements like the mountain and sky, and the sun's movement.\n\nNow Video B. The frames feature a ginger cat in a grassy area. The cat is walking towards the camera, with its tail up. The grass is green, and the lighting is bright, indicating daytime. The cat's fur is fluffy, and it seems curious or playful. The movement is steady, and the focus is on the cat's approach. I should mention the cat's color, actions, environment, and the time of day based on lighting.\n\nWait, the user might be looking for a comparison or just separate descriptions. The query says \"provide a detailed description of the contents shown in each video,\" so separate descriptions are needed. Also, check if there's any hidden context. Maybe the user is testing attention to detail or the ability to describe visual elements accurately. They might be a student, a content creator, or someone interested in video analysis.\n\nFor Video A, emphasize the sunset's progression, colors, and the landscape. For Video B, focus on the cat's movement, appearance, and the environment. Make sure to highlight the key elements in each frame without assuming anything beyond what's visible. Avoid adding emotions unless inferred, like the cat's curiosity. Also, note the technical aspects like lighting and composition if relevant.\n\nDouble-check the frames. Video A's sun is setting behind the mountain, creating a silhouette. The sky's color gradient from dark to bright orange. Video B's cat is the main subject, with the grass providing a natural background. The cat's gait and tail position indicate it's alert or playful. \n\nMake sure the descriptions are clear, concise, and cover all visual aspects. Avoid technical jargon unless necessary. The user might need this for a report, a creative project, or to understand the videos better. Ensure each video's description is distinct and captures the essence of the scenes.\n</think>\n\n**Video A Description:**"
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13
+    },
+    {
+        "id": 14,
+        "media": [
+            "truck.png",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user provided a series of images and wants a detailed description of the contents. The first image is a GMC truck driving on a dirt road with a rocky background. The next three images are of an orange tabby cat walking on grass. The user also included a query in Chinese asking for a detailed description of the images.\n\nFirst, I need to make sure I understand each image correctly. The truck is a GMC model, probably a pickup, moving on a dusty road, which suggests an off-road or rugged environment. The background has red rock formations, maybe a desert or canyon area. The lighting is bright, indicating daytime.\n\nThen the cat images. The cat is an orange tabby with a fluffy tail. It's walking on green grass, moving towards the camera. The grass is well-lit, so it's also daytime. The cat's posture changes slightly across the frames, showing movement. The focus is on the cat's movement and the natural setting.\n\nThe user might be looking for a comparison between the two images or separate descriptions. Since the query is in Chinese, maybe they want the response in Chinese, but the initial instruction was in English. Wait, the user wrote the query in Chinese but the rest is in English. The assistant's response should be in English unless specified otherwise. But the user might have intended the answer in Chinese. Hmm, but the initial message starts with \"Please provide a detailed description...\" in English, followed by the images and then the Chinese query. Maybe the user wants the answer in English. I should check the instructions again.\n\nThe user message has the images, then the Chinese text: \"\u8bf7\u63cf\u8ff0\u4f60\u770b\u5230\u7684\u56fe\u7247\u5185\u5bb9\u3002\" which translates to \"Please describe the content of the images you see.\" So the user is asking for a description in Chinese. But the initial part of the message is in English. Maybe the user wants the answer in Chinese. However, the assistant's response is in English by default unless specified. Wait, looking at the history, the user might have mixed languages. The first part is in English, then the images, then the Chinese query. The assistant should respond in the same language as the query. Since the last line is in Chinese, the user probably expects the answer in Chinese. But the initial instruction was in English. This is a bit confusing. Let me check the exact user message structure.\n\nThe user provided:\n\n- A request in English: \"Please provide a detailed description...\"\n- Then three images (truck, cat"
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14
+    },
+    {
+        "id": 15,
+        "media": [
+            "sun.mp4",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's see. The user provided two images. The first set shows a sunset over a mountain, with the sun moving behind the hill. The second image is a GMC truck driving on a dirt road. They want a detailed description of the contents in Frame1, which I assume is the first image.\n\nWait, the user mentioned Frame1, Frame2, etc., but the second image is a GMC truck. Maybe they want a description of both the sunset frames and the truck image? The initial query says \"provide a detailed description of the contents shown in Frame1\" but then lists multiple frames and the truck image. Maybe there's a confusion here. Let me check again.\n\nLooking at the user's message, they have two sections. The first part has four sunset frames, and the second part has a GMC truck image. The user might have intended to ask about both, but the initial instruction was about Frame1. However, the way it's structured, maybe they want descriptions for all the frames and the truck image. But the exact query is a bit unclear. The user wrote: \"Please provide a detailed description of the contents shown in Frame1: [sunset images] and [truck image].\"\n\nHmm, perhaps the user included multiple frames (the sunset ones) and then another image (the truck) and wants descriptions for all of them. But the way it's written, the first part is labeled as Frame1 to Frame8 (though only four sunset images are shown), and then the truck image. Maybe the user made a formatting error. Alternatively, maybe they want a description of the sunset sequence and the truck image separately.\n\nBut the initial instruction says \"Frame1\" followed by the sunset images, then another image. Maybe the user intended to have two separate descriptions: one for the sunset frames (as a sequence) and one for the truck image. However, the way it's written is a bit confusing. Let me parse the user's exact request again.\n\nThe user wrote: \"Please provide a detailed description of the contents shown in Frame1: [sunset images] and [truck image].\" So perhaps they have two images labeled as Frame1 (the sunset) and another image (the truck). But the sunset images are multiple frames (Frame1 to Frame8?), but only four are shown. The truck image is separate. Maybe the user wants a description of the sunset sequence (the four frames) and the truck image.\n\nAlternatively, maybe the user intended to have the sunset as Frame1"
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15
+    },
+    {
+        "id": 16,
+        "media": [
+            "boat.png",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user provided an image and a video, and they want detailed descriptions of each. First, I need to look at Image A. It's a yacht on the ocean. The yacht is white, moving fast, creating a wake. The water is blue, the sky is clear with a few clouds. The yacht has a sleek design, maybe a luxury model. The angle is from above, showing the side and the wake.\n\nNow, Video B. The frames show a sunset over a mountain. The sun is setting behind the hill, casting an orange glow. The sky is filled with warm colors, transitioning from yellow to deep orange. The mountain is silhouetted, and the sun's rays are visible. The sequence shows the sun moving lower, indicating the passage of time. The clouds are sparse, and the light changes intensity as the sun sets.\n\nWait, the user mentioned \"Video B Frame1\" to Frame8. All frames seem similar, just the sun's position changes slightly. The description should note the progression of the sunset. Maybe mention the colors becoming more intense as the sun dips lower. Also, the silhouette of the mountain remains constant, providing contrast against the bright sky.\n\nFor Image A, I should highlight the yacht's features: size, design, speed, the wake, the ocean's color, and the clear sky. Maybe mention the time of day, which seems to be daytime given the bright light. The yacht's windows and deck details could be noted if visible.\n\nIn the video, the key elements are the sunset, the mountain, the color gradient in the sky, and the sun's movement. The transition from one frame to the next shows the sun setting further, so the description should capture that dynamic aspect. Also, the atmosphere is serene, with the warm colors evoking a calm feeling.\n\nI need to make sure the descriptions are detailed but not overly technical. Use descriptive language for colors, shapes, and movements. For the yacht, words like \"sleek,\" \"luxurious,\" \"speed,\" \"wake,\" \"azure waters.\" For the sunset, \"vibrant,\" \"golden hues,\" \"silhouetted mountain,\" \"radiant glow,\" \"tranquil.\"\n\nCheck if there are any specific details I might have missed. In the yacht image, are there people visible? The image shows the yacht from a distance, so maybe not. The video frames don't show any movement other than the sun setting. The mountain is covered with trees"
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16
+    },
+    {
+        "id": 17,
+        "media": [
+            "cat.mp4",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user provided two images, A and B, and wants a detailed description of each. Let me start with Image A.\n\nImage A shows a ginger cat in a grassy area. The cat is walking towards the camera, right? The grass is green and lush, indicating it's probably a sunny day. The cat's fur is a mix of orange and white, with a fluffy tail. Its posture is low, maybe it's stalking something or just exploring. The lighting is natural, casting shadows on the grass. The cat's eyes are focused, and its ears are perked up, showing alertness. The background is just grass, no other objects, so the focus is entirely on the cat.\n\nNow, Image B is a yacht on the ocean. The yacht is white with a sleek design, moving at high speed, creating a wake. The water is a deep blue, suggesting it's in open sea. The sky is clear with a few clouds, indicating good weather. The yacht has multiple decks, windows, and maybe some people on board, but they're not visible. The angle is from above, showing the yacht cutting through the water. The wake is white and foamy, showing the speed. The yacht looks luxurious, possibly a private or high-end model.\n\nWait, the user mentioned \"video\" for Image A but \"image\" for B. Maybe they meant both are images. The first part says \"Given the Video A Frame1...\" but then lists multiple frames. Maybe it's a video with those frames, but the user wants a description of the video content based on the frames. Similarly, Image B is a single image. So I need to describe the video (based on the frames) and the image.\n\nFor the video, the cat is moving through the grass, possibly hunting or playing. The frames show the cat in different positions as it walks towards the camera. The movement is smooth, and the focus is on the cat's actions. The environment is consistent, just grass, so the video is likely a short clip of the cat's activity.\n\nFor the yacht image, it's a single shot capturing the yacht in motion. The emphasis is on the speed and the yacht's design. The ocean and sky provide a serene backdrop, contrasting with the yacht's dynamic movement.\n\nI should make sure to mention the key elements in each: the cat's appearance and movement in the grass, and the yacht's features, speed, and the ocean setting. Also, note"
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17
+    }
+]

@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC pickup truck in motion on a dirt road. The truck is a modern, full-size model, likely designed for both utility and off-road capabilities. The vehicle is captured in a dynamic pose, with its front wheels slightly turned to the left and the rear wheels angled slightly to the right, indicating that the truck is in motion. The truck's body is a metallic gray color, and it features a prominent front grille with the GMC logo in the center. The headlights are sleek and angular, contributing to the vehicle's aggressive and sporty appearance.\n\nThe truck's design includes a set of black alloy wheels that are slightly lifted off the ground, suggesting that the vehicle is equipped with all-wheel drive. The tires appear to be in good condition, with a deep tread pattern suitable for off-road conditions. The truck's suspension system is visible, with a noticeable shock absorber and a hydraulic lift kit, which is common in modern pickup trucks for improved handling and stability.\n\nThe background of the image shows a natural, arid landscape with rocky terrain and sparse vegetation. The ground is covered in dirt and small rocks, typical of a desert or semi-arid environment. The sky is clear, indicating that the weather is dry and sunny, which is conducive to off-road driving.\n\nThe GMC logo is prominently displayed on the front grille, and the vehicle's overall design suggests that it is a high-performance model, likely designed for both daily use and adventurous driving. The truck's robust build and off-road capabilities are highlighted by its all-wheel drive system, which is essential for navigating challenging terrains.\n\nIn summary, the image showcases a GMC pickup truck in motion on a dirt road, highlighting its modern design, all-wheel drive system, and off-road capabilities. The vehicle's rugged appearance and the natural, arid environment in the background emphasize its suitability for both urban and off-road use."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, modern yacht cruising on a body of water, likely the ocean or a large lake. The yacht is moving at a considerable speed, as evidenced by the wake it is creating behind it. The wake is white and frothy, indicating the yacht's powerful propulsion system. The yacht itself is white with a sleek, modern design, featuring a cabin area with windows and a roof structure that likely houses the yacht's navigation and communication equipment. The hull of the yacht is dark, possibly black or dark blue, and it has a streamlined shape that is typical of high-performance vessels.\n\nThe water around the yacht is a deep blue-green color, suggesting that the water is relatively calm and clear. The sky above is clear with a few wispy clouds, indicating fair weather conditions. The horizon is visible in the background, showing a clear separation between the water and the sky, which adds to the sense of vastness and openness of the scene.\n\nThe yacht is equipped with various safety features, including life jackets for the crew and possibly other safety equipment. The deck of the yacht is equipped with railings and possibly other safety equipment, such as life rings or safety nets. The yacht's design suggests it is built for comfort and luxury, with features such as spacious seating areas, ample storage, and possibly a variety of entertainment options.\n\nIn summary, the image showcases a large, modern yacht cruising at high speed on a calm body of water, creating a significant wake behind it. The yacht is white with a dark hull, and it is equipped with safety features and modern amenities. The clear sky and calm water contribute to the serene and luxurious atmosphere of the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a ginger cat walking on a lush green lawn. The cat has a fluffy, orange coat with a slightly darker shade on its back and tail. Its fur appears soft and well-groomed, and it has a distinctive, alert expression with wide-open eyes and a slightly open mouth. The cat's ears are pointed and upright, and its tail is bushy and slightly curved. The grass is vibrant green, indicating it is well-maintained and healthy. The sunlight casts a shadow of the cat on the grass, suggesting it is a bright, sunny day. The cat's posture and the way it is walking suggest it is in mid-stride, with its front paws forward and its hind legs slightly bent. The overall scene is serene and natural, capturing a moment of the cat enjoying its time outdoors."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a breathtaking sunset scene with a vivid and dramatic sky. The sun is positioned centrally in the image, radiating a bright, warm glow that illuminates the surrounding landscape. The sky is a vibrant mix of warm colors, predominantly orange and yellow, with scattered wispy clouds adding texture to the backdrop. The sun appears to be partially obscured by the silhouette of a hill or mountain, which is visible on the left side of the image. The silhouette of the hill is dark, contrasting sharply with the bright sky.\n\nThe landscape below the hill is shrouded in darkness, suggesting that the photo was taken during the early evening or late afternoon. The silhouette of the hill and the hill's outline are clearly visible, creating a sense of depth and perspective in the image. The sun's rays are creating a lens flare effect, which adds to the overall visual appeal of the scene.\n\nThe image captures the essence of a serene and picturesque natural setting, with the sun's position and the warm colors of the sky evoking feelings of tranquility and awe. The silhouette of the hill adds a sense of mystery and intrigue, as it partially obscures the sun, making it seem as if it is hiding behind the hill. This creates a dynamic and visually engaging composition that draws the viewer's eye towards the center of the image.\n\nOverall, the image is a stunning representation of a sunset, showcasing the beauty of nature and the captivating effects of light and color. The combination of the warm colors, the silhouette of the hill, and the lens flare effect all contribute to a visually striking and memorable scene."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]

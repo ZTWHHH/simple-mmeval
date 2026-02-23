@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "\nThe image shows a modern pickup truck in motion on a dirt road. The truck is a GMC (General Motors Company) vehicle, as indicated by the GMC logo on the front grille. It appears to be a mid-size pickup truck with a four-door crew cab configuration, featuring a chrome grille, large, aggressive headlights, and a set of five-spoke alloy wheels. The truck is equipped with a bed cover, and the side mirrors are visible, suggesting it is designed for off-road use or rugged terrain. The vehicle is captured in a dynamic pose, with the front wheels lifted off the ground, indicating movement or acceleration. The background is a desert-like landscape with rocky terrain and a clear sky, which suggests the photo was taken in a remote or arid environment. The image is a photograph with a focus on the vehicle, and it is taken from a perspective that emphasizes the truck's design and capabilities."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "\nThe image shows a motorboat in motion on a body of water, likely the ocean or a large lake, given the open water and the horizon line. The boat is white with black and red accents, and it appears to be a speedboat or a yacht, given its size and design. The boat is angled slightly to the left of the frame, suggesting it is moving at a high speed, as indicated by the wake it is creating behind it. The wake is white and frothy, indicating the boat is moving quickly through the water.\n\nThe sky is clear with a few clouds, and the water is a deep blue, suggesting it might be a sunny day. There are no visible texts or distinctive markings on the boat that provide additional information about the make or model of the boat. The image is a photograph with a focus on the boat, capturing the motion and the surrounding environment. The style of the image is realistic, with natural lighting and colors that convey a sense of speed and movement."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the question is asking what 1 plus 1 equals. Hmm, that seems pretty straightforward, but let me think through it step by step to make sure I get it right.\n\nFirst, I know that addition is one of the basic arithmetic operations. When you add two numbers, you're combining their values. So if I have 1 apple and someone gives me another apple, how many apples do I have in total? That would be 1 plus 1, which is 2 apples. That makes sense.\n\nWait, but maybe there's a trick here? Sometimes questions are designed to be simple but have a catch. Let me check the question again: \"What is the result of 1 plus 1?\" No, it's just asking for the sum of 1 and 1. There's no mention of different number systems or anything like that. It's probably in base 10, right?\n\nIn base 10, 1 plus 1 is definitely 2. But just to be thorough, let me consider other bases. For example, in binary, which is base 2, 1 plus 1 equals 10. But the question doesn't specify the base, so I should assume it's base 10 unless stated otherwise. \n\nAnother angle: sometimes people confuse addition with multiplication. If it were 1 times 1, that's also 1, but the question says plus, not times. So that's not it. \n\nWhat about in modular arithmetic? Like modulo 2, 1 plus 1 would be 0. But again, the question doesn't mention anything about modulo or a specific modulus. So unless specified, we stick to regular addition.\n\nLet me visualize it. If I have one object and add another object, the total number of objects is two. So 1 + 1 = 2. That's basic counting. \n\nWait, maybe the question is testing something else, like the concept of addition in different contexts. For example, in programming, 1 + 1 could be 2 in most languages, but in some cases, like bitwise operations, 1 + 1 might be 0 if there's a carryover, but that's more about binary addition. But again, the question is just asking for the result of 1 plus 1, not a specific context.\n\nAlternatively, maybe it's a trick question where 1 plus 1 equals something unexpected, like infinity? But infinity isn't a number"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the question is asking, \"What is the capital city of China?\" Hmm, let's see. I need to make sure I get this right. First, I know that China is a country in East Asia. The capital city is the one where the government is based, right? But wait, sometimes people get confused between the capital and the largest city. For example, Beijing is often mentioned, but isn't Shanghai the largest city?\n\nWait, let me think. I remember that Beijing has been the capital for a long time. There was a time when Beijing was the capital, and then after the Cultural Revolution, they moved the capital to Shanghai. But then, in recent years, Beijing was moved back to its original position. So maybe the capital is still Beijing now?\n\nBut I should verify this. Let me recall some history. The People's Republic of China was established in 1949, and the capital was set in Beijing. After the 1970s, there was a lot of movement, and the capital was moved to Shanghai. But in 2008, Beijing was moved back to its original location. So currently, Beijing is the capital. However, I also remember that sometimes people might confuse it with other cities like Hong Kong or Macau, but those are special administrative regions, not the capital.\n\nWait, but the question is straightforward: \"What is the capital city of China?\" So the answer should be Beijing. But let me check if there's any recent change. Maybe in 2020 or 2021, there was a change? I don't think so. The government has been moving Beijing back to its original capital status. So the answer should be Beijing. But I should also consider if the question is a trick question. For example, sometimes people ask about the capital of a country that changed its capital, but in this case, China's capital is still Beijing.\n\nAlternatively, maybe the user is confused because Beijing is a huge city, but the capital is a different city. Wait, no, Beijing is the capital. The largest city is Shanghai, but the capital is Beijing. So the answer is Beijing. But let me make sure. Let me think of other examples. For instance, the capital of the United States is Washington, D.C., not New York. Similarly, the capital of Japan is Tokyo, but it's actually moved to Kyoto? Wait, no, Tokyo is still the capital. Wait, no, Japan"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

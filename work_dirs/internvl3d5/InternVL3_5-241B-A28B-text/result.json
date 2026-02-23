@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking what 1 plus 1 is. Hmm, that seems really basic, but maybe they're just starting to learn math. Let me think. Well, addition of two numbers... 1 and 1. If I have one apple and someone gives me another apple, how many apples do I have? That's right, two apples. So 1 plus 1 should equal 2. Wait, but is there any other context where this might not be the case? Like in binary or something? In binary, 1 plus 1 is 10, but the question doesn't specify a number system. Since it's a general question, probably expecting the decimal answer. Yeah, I'll go with 2. Let me double-check. Yep, 1 + 1 = 2 in standard arithmetic. Alright, that's the answer.\n</think>\n\nThe result of 1 plus 1 is **2**. This is a fundamental arithmetic operation where adding the number 1 to another number 1 yields the sum 2."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a big country in East Asia. From what I've learned before, the capital is a major city there. Wait, is it Beijing? I think I've heard that before. But maybe I should double-check.\n\nLet me think. Sometimes people confuse Beijing with other cities like Shanghai or Hong Kong. Shanghai is a huge city and a financial hub, but I don't think it's the capital. Hong Kong is a Special Administrative Region, so it's not the capital either. Then there's Guangzhou, but that's another major city, not the capital. So Beijing rings a bell. \n\nI also remember that the Olympics were held in Beijing in 2008. That might be a clue because capitals often host such events. Plus, the Great Wall of China is near Beijing, which is a significant historical site. The government buildings, like the Forbidden City, are in Beijing. The Forbidden City was the imperial palace, so that makes sense for a capital. \n\nWait, but wasn't Nanjing the capital at some point in history? Maybe during a different dynasty? But the current capital is definitely Beijing. Also, when I think of Chinese government, the leaders are based in Beijing. The Great Hall of the People and Tiananmen Square are there. \n\nAnother way to confirm: if I think of other countries' capitals, like Japan's is Tokyo, South Korea's is Seoul. So China's should be Beijing. I don't recall any recent changes in the capital of China. Some countries change their capitals, like Nigeria moved to Abuja, but China hasn't done that. \n\nSo putting it all together, the capital city of China is Beijing. I'm pretty confident, but maybe I should check a quick fact. Wait, the user is asking me to answer, so I need to be sure. Let me think if there's any other possibility. No, I can't think of any other city. Yeah, Beijing is the answer.\n</think>\n\nThe capital city of China is **Beijing**. It has served as the political and cultural center of the country for much of its history, hosting significant landmarks such as the Forbidden City, Tiananmen Square, and the Great Hall of the People. Beijing is also the seat of the Chinese government and has been the capital since the establishment of the People's Republic of China in 1949."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

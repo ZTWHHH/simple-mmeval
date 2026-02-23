@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Hmm, let's start by recalling basic addition. When you add two numbers together, you're combining their values. So if I have one apple and someone gives me another apple, how many apples do I have in total? That's right, two apples. So maybe 1 plus 1 equals 2.\n\nWait, but let me make sure I'm not missing something here. Sometimes in different number systems, like binary, 1 plus 1 might be different. In binary, 1 plus 1 equals 10, which is 2 in decimal. But the question doesn't specify a number system, so I should assume it's the standard decimal system. \n\nAnother way to think about it is using the number line. Starting at 1, if I move one unit to the right, I land on 2. That confirms it again. Or using fingers: hold up one finger on each hand, then count all the fingers up. That's two fingers. \n\nIs there any situation where 1 plus 1 doesn't equal 2? Maybe in some abstract algebra contexts, but unless specified, the basic arithmetic answer should be 2. I think that's it. The answer is definitely 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\n**Step-by-Step Explanation:**\n1. **Understanding Addition:** Adding two numbers combines their quantities.\n2. **Applying to 1 + 1:** Start with the number 1. Adding another 1 increases the total by one unit.\n3. **Verification:** Using basic arithmetic, counting objects, or a number line all confirm that 1 + 1 equals 2.\n\n**Answer:** 2"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the capital city of China?\" Let me think about how to approach this. First, I need to recall the correct answer. I know that China is a large country in East Asia, and its capital is a well-known city. From what I remember, Beijing is the capital. But wait, let me make sure I'm not mixing it up with another city. Sometimes people might confuse it with Shanghai or Hong Kong, but those are major cities too, just not the capital.\n\nI should verify this. Let me think about historical context. Before Beijing became the capital, there were other cities like Nanjing and Xi'an that served as capitals in different dynasties. But after the People's Republic of China was established in 1949, Beijing was designated as the capital. That's right. The government moved there from Nanjing, which was the capital under the Republic of China. So Beijing has been the capital since then.\n\nAlso, considering international recognition, all the major embassies are located in Beijing, which is another indicator. The Great Hall of the People and the Forbidden City are significant landmarks in Beijing, reinforcing its status as the political center. I don't think there's been any recent change in the capital city of China. Some countries change their capitals, like Myanmar moving from Yangon to Naypyidaw, but China hasn't done that. So I'm pretty confident that Beijing is the correct answer here.\n\nWait, just to be thorough, maybe check if there's any alternative information. For example, some sources might mention other cities in different contexts, but no, in standard references, Beijing is consistently listed as the capital. The user might be looking for a straightforward answer, so I should state it clearly and concisely. Also, maybe add a bit of context about its significance to provide a more informative response. That way, the user gets not just the name but also some background, which could be helpful.\n</think>\n\nThe capital city of China is **Beijing**. \n\nBeijing has served as the political and cultural center of China for centuries, notably since the establishment of the People's Republic of China in 1949. It is home to key government institutions, historical landmarks like the Forbidden City and Tiananmen Square, and hosts the majority of foreign embassies. Its status as the capital is internationally recognized and well-documented."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]
