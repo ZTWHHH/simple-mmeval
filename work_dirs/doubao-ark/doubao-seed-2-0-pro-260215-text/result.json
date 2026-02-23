@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In standard basic decimal arithmetic, the result of 1 plus 1 is 2.\n\nOf course, the answer varies in different specific contexts:\n- In the binary number system, 1 + 1 = 10 (which is equivalent to 2 in the decimal system)\n- In Boolean logic where 1 stands for \"true\", 1 + 1 (referring to the logical OR operation) equals 1.\n\nIf you are referring to ordinary elementary math calculation, 2 is the standard correct answer."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The capital city of the People's Republic of China is Beijing.\n\nLocated in northern China, Beijing is a time-honored city with more than 3,000 years of recorded history and over 800 years of history as a national capital. It serves as China's core center for politics, culture, international exchanges, and scientific and technological innovation."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

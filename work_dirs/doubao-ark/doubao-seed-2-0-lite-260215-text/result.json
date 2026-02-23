@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In standard basic arithmetic, the result of 1 plus 1 is **2**.\n\nThat said, the result can vary depending on the context:\n- In binary (the base-2 number system used in computing), 1 + 1 = 10\n- In some playful or informal non-mathematical scenarios, people might give other creative answers (for example, 1 drop of water + 1 drop of water = 1 larger drop of water), but 2 is the universally accepted standard result for 1+1."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The capital city of the People's Republic of China is Beijing (Peking is an older romanization of the name that is less widely used today). Beijing is China's political center, cultural center, international exchange center and technological innovation center."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

@@ -1,0 +1,430 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This is a promotional action photograph of the **second-generation (2023+ model) GMC Canyon AT4**, an off-road-focused midsize crew-cab pickup truck, captured while driving off-road in an arid desert canyon setting:\n\n---\n### Environment & Scene:\nThe truck travels across a dry, light brown sandy/dirt off-road trail on a bright, sunny day. The background uses a shallow depth of field to blur the backdrop of layered red rock canyon cliffs, typical of the American Southwest (a common location for off-road vehicle promotional shoots), with small patches of sparse green vegetation in the distance. A fine cloud of dust kicked up by the truck's rear wheel hangs in the air behind the vehicle, confirming forward motion, and a sharp shadow of the truck is cast onto the dry trail below. The image is framed with black horizontal bars at the top and bottom.\n\n---\n### Vehicle Details:\n1.  **Overview**: The pickup is finished in glossy metallic charcoal gray paint, configured as a 4-door crew cab with a short cargo bed.\n2.  **Front Design**: It features GMC's modern styling: a large black mesh grille centered with a bold red-accented GMC logo, distinctive C-shaped LED lighting (a horizontal LED daytime running light at the top of the fascia, with main headlight modules in recessed black cutouts below). The rugged all-black front bumper includes integrated fog lights and off-road-oriented trim.\n3.  **Side & Off-Road Styling**: It has widened black fender flares (with a small red accent marker on the front fender) to fit its off-road tires, with all exterior trim (door handles, side mirrors) finished in black for an aggressive look. It rides on black multi-spoke alloy wheels wrapped in thick, knobby all-terrain tires, an AT4 trim badge is visible on the front door, and a thin antenna rises from the front of the roof.\n4.  **Action Pose**: The truck is angled across the frame moving toward the right, with its front right tire slightly lifted off the uneven trail, intentionally highlighting its off-road capability and dynamic movement."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This is a widescreen image (framed by solid black bars at the top and bottom) capturing a high-speed luxury motor yacht traveling across calm open ocean on a clear, sunny day:\n1.  **The Yacht**: This is a sleek, modern sport luxury yacht, primarily finished in glossy bright white, accented by a thick contrasting dark (black) horizontal stripe running along the full length of the hull just above the waterline. It has a sharp, pointed bow built for speed, with an open forward deck (fitted with a sun relaxation lounge) enclosed by polished stainless steel railings. The main forward cabin has large, tinted dark aerodynamic windshields; an upper flybridge (second control level) sits further aft, outfitted with navigation antennas and radar equipment.\n2.  **Action & Water**: The yacht is moving at high speed toward the viewer (angled toward the right foreground of the frame), pushing water aside to create a large, dramatic V-shaped wake of churning bright white foam and spray that trails behind it to the left. The surrounding open ocean is a deep, calm rich blue, with soft reflections of the white yacht visible on the smooth water near the bow.\n3.  **Background & Atmosphere**: The sky is a clear pale light blue with only faint wispy clouding, meeting the sea at a sharp straight horizon. A faint low outline of distant land is visible on the far left horizon. Bright daylight and calm open conditions create a crisp, upscale atmosphere that emphasizes the yacht's speed and premium design."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed breakdown of both images:\n---\n### First Image (Pickup Truck)\nThis is a dynamic front three-quarter shot of a modern off-road-oriented *GMC Canyon (AT4X AEV Edition)* midsize crew-cab pickup truck, driving on a desert off-road trail:\n1.  **Vehicle details**: The truck is finished in dark metallic grey paint, with rugged off-road styling: a black mesh front grille with red GMC lettering, modern C-shaped LED headlights, black flared fenders with small red accent markers, black alloy off-road wheels wrapped in knobby all-terrain tires, and a small specialty trim badge on the driver-side door. A thin antenna is visible on the roof.\n2.  **Setting & action**: The truck is captured mid-motion on a dry, reddish unpaved desert trail, kicking up a light cloud of dust behind its front wheel, indicating it is traveling at speed over rough terrain. The background features sun-baked red rock canyon cliffs and sparse dry desert vegetation, under bright daylight, emphasizing the truck's rugged adventure-focused design.\n\n---\n### Second Image (Yacht)\nThis is an elevated front three-quarter shot of a large luxury high-performance sport motor yacht speeding across open ocean:\n1.  **Vessel details**: The yacht has a sleek, modern luxury design, finished primarily in bright white, with a thin black accent stripe running along the lower edge of the hull. It features a sloped curved windshield, an open bow (foredeck) sun-lounge area bordered by stainless steel railing, and an upper flybridge deck fitted with navigation radar and antenna equipment.\n2.  **Setting & action**: The yacht moves at high speed through calm, deep blue open water, pushing a large, dramatic plume of white wake/spray behind it as it cuts through the sea. The background shows open ocean stretching to a clear horizon under a bright pale blue sunny sky, with a faint distant coastline visible far in the background. The bright sunlit scene conveys luxury leisure and high-speed travel on the water."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here is a detailed description of each image:\n---\n### First Image (Top)\nThis is a bright daytime shot of a **sleek, modern luxury motor yacht** traveling at high speed across open, calm deep-blue ocean, framed by black bars at the top and bottom for a widescreen crop.\nThe yacht is primarily glossy white, accented with thin black decorative stripes along its hull. It has a streamlined design: dark-tinted tinted front windshield, metal safety railing along the open forward bow deck, and a raised upper flybridge (control deck) fitted with navigation/communication equipment at the top of the vessel.\nThe yacht cuts sharply through the water, creating a large, frothy white bow wave and trailing wake that extends behind it to the left. In the distance, a faint low-lying landmass lines the horizon under a clear pale blue sunny sky.\n\n---\n### Second Image (Bottom)\nThis image shows a **modern GMC off-road pickup truck** (GMC Canyon, in an off-road focused trim) speeding across a dry desert dirt trail, also framed by top/bottom black bars.\nThe truck is a metallic charcoal/gray four-door crew cab, with an aggressive off-road design: large black alloy wheels wrapped in thick knobby off-road tires, flared raised fenders, and a bold black front grille with bright red \"GMC\" lettering badging, plus modern C-shaped LED headlights. It moves at speed over uneven reddish dry dirt, kicking up a cloud of light dust behind its rear wheels.\nThe background is sunlit rocky desert canyon terrain, with layered red rock cliffs and sparse dry desert vegetation."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Let's describe both images separately:\n---\n### 1. First Image: GMC Off-Road Pickup Truck\nThis is a promotional shot of a **new GMC Canyon (off-road AT4 trim) crew-cab midsize pickup truck**, actively driving off-road in an arid, rocky canyon/desert environment (Southwestern US-style red rock terrain is blurred in the background).\n- The truck is painted a dark metallic gray, with a rugged, adventure-focused design: it has a black mesh front grille with the iconic red-accented GMC badging, modern stacked LED headlights with signature C-shaped daytime running lights, and a heavy-duty off-road front bumper.\n- It features black off-road alloy wheels with thick all-terrain tires, and flared black fender flares with small red accent markers.\n- Dry dust is kicked up behind the rear wheel, confirming the truck is moving at speed over the loose, dry dirt trail. The scene highlights the truck's off-road capability.\n\n---\n### 2. Second Image: Luxury High-Speed Motor Yacht\nThis image shows a **sleek luxury performance sports yacht**, speeding across open calm blue ocean on a clear, sunny day.\n- The yacht has a glossy white hull with a thin black accent stripe along its side, with an aerodynamic, sharp design built for high speed. It has a forward sun-lounge area on the bow, protected by stainless steel railings, and navigation/communication equipment on the upper flybridge.\n- It is moving at high velocity, creating a large, foamy white wake/spray trailing behind it as it cuts through the water.\n- The background is open deep blue sea, meeting a pale clear blue sky at the horizon, with a faint distant landmass visible far in the distance. The image emphasizes the yacht's speed, luxury, and leisure on open water."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### First Image:\nThis image shows a **high-speed luxury performance motor yacht** traveling across open, calm blue ocean on a clear sunny day:\n1.  The yacht has a sleek, modern aerodynamic design: it is finished in glossy white, with a thin black accent stripe along its hull. It features dark-tinted forward windows, a raised upper flybridge (control/observation deck) at the stern, and polished metal safety railings along the open bow deck.\n2.  Because the yacht is moving at high speed, it pushes up a large, bright frothy white wake/water spray that trails behind it on the left side of the frame.\n3.  The surrounding sea is a deep blue, with a faint distant low-lying landmass visible on the horizon under a pale clear blue sky. The image is framed with black horizontal bars at the top and bottom (widescreen cinematic cropping).\n\n---\n\n### Second Image:\nThis image shows a **modern off-road focused GMC crew-cab pickup truck** (the GMC Canyon, in an off-road trim) driving through a desert canyon:\n1.  The truck is painted metallic dark gunmetal gray. It has a bold black front grille with the signature bright red *GMC* badging, modern angular LED headlights, black wide off-road fender flares, black alloy wheels fitted with thick knobby off-road tires, and a raised lifted ride height for off-road capability.\n2.  It is moving along a dry, dusty reddish-brown dirt off-road trail, kicking up a cloud of fine dust behind its rear wheels.\n3.  The background is made of sunlit, rocky red canyon cliffs with sparse dry vegetation, creating an adventurous off-road setting. This image also has black horizontal framing bars at the top and bottom."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A\nThis image shows **a 2023+ GMC Canyon midsize off-road pickup truck (crew cab configuration)**, driving on a dry, dusty dirt off-road trail in a desert canyon landscape:\n1.  The truck has a metallic dark gray paint finish, with rugged off-road styling: a large black front grille with the iconic red-accented GMC logo, modern C-shaped LED headlights, black wheel fender flares (with small red marker accents), and black alloy wheels fitted with knobby all-terrain tires.\n2.  It is captured in motion: the truck kicks up light dust from the dry trail beneath its tires.\n3.  The background is composed of sunlit red-rock canyon cliffs, with sparse small patches of green desert vegetation, under bright daylight.\n\n---\n\n### Image B\nThis image shows **a high-end luxury sport motor yacht** speeding across open blue ocean:\n1.  The yacht has a sleek modern design, finished in pure white with a thin black accent stripe running along its hull. It features a curved tinted windshield, an open foredeck lined with metal safety railings, and an upper flybridge (control deck) with navigation/communication antennas at the stern of the upper deck.\n2.  The yacht is moving at high speed, creating a large, bright white V-shaped wake of spray trailing behind it as it cuts through the water.\n3.  The scene is set on a clear, sunny day: the ocean is a deep calm blue, with a clear pale blue sky overhead, and faint distant land visible on the horizon."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Description of Image A\nThis image shows a **high-end luxury performance motor yacht** speeding across open, calm blue ocean on a clear, sunny day:\n1.  The yacht has a sleek, modern design: it is primarily glossy white, with a thin dark accent stripe along the lower hull. It features an open bow foredeck enclosed by stainless steel railing, tinted dark front windscreen/windows, and an upper flybridge (control/observation deck) at the stern.\n2.  The yacht is traveling at high speed, pushing aside water to create a large, frothy bright white wake that trails behind it through the deep blue ocean. A faint distant landmass is visible on the horizon under the pale, clear blue sky, for a sense of open-water cruising.\n\n---\n\n### Description of Image B\nThis image captures a **modern GMC off-road pickup truck (4-door crew cab model)** driving aggressively on an off-road trail in an arid desert canyon:\n1.  The truck is finished in metallic dark gray, with rugged off-road styling details: a black mesh front grille with the branded red \"GMC\" logo, black multi-spoke off-road wheels, flared black fender flares, and a heavy-duty front bumper.\n2.  It is frozen mid-motion, moving at speed over uneven sandy/dirt terrain: fine dust is kicked up behind the rear wheels, and the truck is slightly elevated, showing it traversing uneven ground. The out-of-focus background shows red rock canyon cliffs under bright daylight, highlighting the truck's off-road capability in a rugged, dry landscape.\n\n*(Both images have black framing bars at the top and bottom of the frame)*"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    },
+    {
+        "id": 8,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This video shows a fluffy long-haired **orange ginger cat** with a white-tipped fluffy tail, moving through lush, bright green grass.\n1.  Initially, the cat has its head lowered, sniffing the grass.\n2.  It then lifts its head, and walks *directly toward the camera (viewer)*, moving steadily through the tall grass, with its tail held upright.\n3.  It is a sunny outdoor setting, the cat's shadow is visible on the grass as it approaches."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 8
+    },
+    {
+        "id": 9,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This is a time-lapse video capturing the sun emerging from behind a silhouetted, forested mountain ridge:\n1.  The opening scene shows a warm, rich golden-orange sky, with the sun mostly hidden behind the dark tree-lined mountain slope, with only a small portion of the sun peeking over the ridge.\n2.  As the video progresses, the sun slowly moves upward, gradually revealing more of itself from behind the mountain.\n3.  As the sun becomes fully visible, its intense bright light illuminates the entire sky, turning the whole frame a glowing, uniform warm golden-orange, while the mountain slope remains in dark silhouette.\n4.  By the end of the clip, the full bright sun sits above the mountain ridge, radiating intense warm golden light that fills the entire view."
+            }
+        ],
+        "comment": "Test 'single video start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 9
+    },
+    {
+        "id": 10,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first frame shows a fluffy long-haired orange (ginger) cat walking through tall green grass, with its tail held raised, moving toward the camera across the grassy area.\nThe second frame shows a sunset/sunrise landscape: a bright golden sun is positioned at the ridge of a silhouetted forested hill, the entire sky is filled with warm deep orange-yellow tones, with the hill and trees appearing as dark silhouettes against the glowing bright sun and sky."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 10
+    },
+    {
+        "id": 11,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image shows a sunrise/sunset landscape: a dark silhouetted mountain slope with a tree-lined ridge, the bright sun is just peeking over the ridge, and the entire sky is filled with warm, glowing golden-orange tones, capturing the sun moving above the mountain hill.\n\nThe second image features a fluffy long-haired ginger (orange) cat walking through lush, tall green grass. The cat is moving toward the camera, its fluffy tail is held upward, and it walks across the dense green grass, looking forward as it moves."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 11
+    },
+    {
+        "id": 12,
+        "media": [
+            "cat.mp4",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Description of Video A:\nThis video shows a fluffy **ginger (orange) long-haired cat** moving through lush, tall green grass. The cat begins with its head lowered, sniffing at the grass, then walks directly toward the camera, with its fluffy tail held upright as it moves through the grass, approaching the viewer across the green lawn.\n\n---\n\n### Description of Video B:\nThis is a time-lapse video capturing **the sun setting behind a silhouetted mountain ridge**. The sky is filled with warm, vibrant orange and golden light. The sun gradually descends, moving lower behind the tree-covered mountain slope, with the bright sun slowly disappearing behind the hill, tinting the entire sky in deep warm orange tones."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 12
+    },
+    {
+        "id": 13,
+        "media": [
+            "sun.mp4",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Video B <video>. Please provide a detailed description of the contents shown in each video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Video A\nThis is a time-lapse video capturing the sun moving upward from behind a forested mountain ridge. Initially, the sun is partially obscured by the dark silhouette of the mountain, with a warm orange-gold sky filled with soft clouds. As the video progresses, the sun gradually emerges fully from behind the mountain, its bright glow intensifies, illuminating the entire sky with a vivid golden-orange hue, showing the progression of the sunrise (or sunset) as the sun clears the ridge.\n\n### Video B\nThis video shows a fluffy ginger (orange) cat moving through tall, lush green grass. The cat starts with its head lowered, sniffing the grass, then lifts its head and walks forward directly toward the camera. The cat keeps its tail held high as it steps through the grass, slowly moving closer to the viewer across the grassy area."
+            }
+        ],
+        "comment": "Test 'multi video interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 13
+    },
+    {
+        "id": 14,
+        "media": [
+            "truck.png",
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <video>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "1.  The *first image* shows a **GMC (Canyon AT4) off-road crew-cab pickup truck**:\n    It's a modern midsize 4-door pickup finished in a metallic dark gray/bronze paint, actively driving on a dusty dirt off-road trail (kicking up light dust from its tires). The truck features the signature red-accented GMC grille logo, black off-road trim/bumpers, flared fenders, and black alloy wheels, set against a backdrop of sunlit red rock desert canyon terrain.\n\n2.  The video sequence shows a **fluffy long-haired ginger (orange) cat**:\n    The cat is in thick, lush green grass. It begins with its head lowered sniffing the grass, then lifts its head, and walks slowly forward *toward the camera*. The cat has a fluffy tail (with a light/white tip) held upright as it moves through the grass."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 14
+    },
+    {
+        "id": 15,
+        "media": [
+            "sun.mp4",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <video> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "1.  **The first image (0.0 second):** This is a landscape shot of a sunrise/sunset behind a mountain. A dark silhouetted mountain slope (with tree outlines along its ridge) fills the lower portion/left of the frame. The bright sun is just beginning to emerge from behind the mountain ridge, and the entire sky is saturated with warm, vibrant golden-orange light from the sun, with the mountain in deep shadow, creating a strong light-dark contrast.\n2.  **The second image:** This is an automotive shot: it shows a modern *gray GMC crew-cab off-road pickup truck* driving on a dusty dirt off-road trail, in a rocky red-rock canyon/desert environment. The truck is in motion, kicking up dust from the dry dirt track, with rocky canyon cliffs visible in the background, depicting an off-road driving scene. It is a completely different subject/scene from the first landscape sunset image."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 15
+    },
+    {
+        "id": 16,
+        "media": [
+            "boat.png",
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Video B <video>. Please provide a detailed description of the contents shown in each image and video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A:\nThis image shows a **sleek, modern luxury white motor yacht** traveling at high speed across calm, deep blue open ocean.\nThe yacht has a dark black accent stripe along its hull, with stainless steel railings on the bow, tinted dark windows, and a flybridge (upper control area) at the stern. It is cutting through the water, creating a large, foamy white wake trailing behind it.\nThe scene is set under a clear, pale blue sky, with a faint distant landmass visible on the horizon, giving a sense of open, open-water cruising on a clear sunny day.\n\n---\n\n### Video B:\nThis is a short timelapse video showing a **sunrise (or sunset)** behind a forested mountain ridge:\n1.  The video starts with the sun partially obscured by the dark, silhouetted mountain slope, with the sky filled with warm, vibrant golden-orange clouds.\n2.  As the video progresses, the sun gradually moves upward, climbing over the ridge, becoming fully visible as a bright, glowing white-yellow orb, while the sky intensifies to a solid bright golden yellow.\n3.  The mountain and the trees along its ridge remain in dark silhouette against the bright, warm-colored sky, highlighting the motion of the sun rising over the hill."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 16
+    },
+    {
+        "id": 17,
+        "media": [
+            "cat.mp4",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Video A <video> and Image B <image>. Please provide a detailed description of the contents shown in each video and image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Description of Video A:\nThis video shows a fluffy long-haired ginger (orange) cat moving through lush, tall green grass. Initially, the cat has its head lowered, sniffing at the grass, then it lifts its head and walks forward directly toward the camera, moving slowly across the grassy area. The cat has a fluffy tail with a pale/light-colored tip, and the scene is set in bright daylight on green grass, as the cat approaches the viewer.\n\n---\n\n### Description of Image B:\nThis image shows a sleek, modern white luxury speed yacht traveling at high speed across a calm, deep blue open ocean. The yacht cuts through the water, creating a large, bright white frothy wake/spray trailing behind its hull. The yacht has dark tinted windows and thin dark accent stripes along its white body, with an open bow deck area. The sky above is clear pale blue, it is a sunny clear day, and the scene shows the yacht moving across the open sea."
+            }
+        ],
+        "comment": "Test 'multi image video interleave' modality.",
+        "eval-id": 17
+    }
+]

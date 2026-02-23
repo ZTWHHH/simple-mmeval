@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "- The image shows a modern GMC pickup truck driving off\u2011road on a dusty, sandy trail.  \n- It\u2019s a four\u2011door crew\u2011cab with a short bed, painted in a metallic gray color.  \n- The view is a front three\u2011quarter angle, with the truck moving toward the right side of the frame.  \n- The front end features a large black grille with prominent red \u201cGMC\u201d lettering, a sturdy bumper with a skid-plate style lower section, and angular LED headlights with vertical accent lights.  \n- The truck rides on dark alloy wheels fitted with chunky all\u2011terrain tires; dust is billowing behind the rear wheels, emphasizing motion.  \n- The windows are tinted, and there are black fender flares and side steps/rock rails that add to the off\u2011road appearance.  \n- The background shows a desert landscape with reddish rock formations and canyon walls under clear daylight, giving the scene a rugged, adventurous feel."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "A sleek white luxury motor yacht is speeding across a calm, deep-blue sea. The boat is photographed from a slightly elevated front-right angle as it planes over the water, throwing up a wide fan of white spray and a frothy wake along its port side. The hull is streamlined with dark-tinted wraparound windows and polished metal railings running around the bow. The foredeck appears clean and uncluttered, with an anchor pocket visible near the bow. On the roof are antennas and radar domes, hinting at modern navigation gear. The horizon is far off and nearly level, with a pale, mostly clear sky above and no other vessels in sight. The image has a cinematic feel with black bars at the top and bottom, emphasizing the sense of speed and open water."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here\u2019s a detailed description of each image:\n\nImage 1\n- Subject: A modern GMC pickup truck driving off\u2011road.\n- Appearance: Metallic gray body, four\u2011door crew cab, black grille with bold red \u201cGMC\u201d badge, black wheels with chunky all\u2011terrain tires, pronounced fender flares, LED headlamps with square/\u201cC\u201d\u2011shaped daytime running lights, and a skid\u2011plate style lower bumper.\n- Action/setting: The truck is captured in motion on a dusty dirt trail, throwing up dust from its tires.\n- Environment: Arid, desertlike landscape with reddish rock formations and a clear sky, suggesting a warm, sunny day.\n- Camera angle/mood: Three\u2011quarter front view slightly from the left, low angle, emphasizing the truck\u2019s rugged stance and movement.\n\nImage 2\n- Subject: A sleek, white luxury motor yacht at speed.\n- Appearance: Streamlined hull with a sharp bow, stainless bow rails, tinted cabin windows, and equipment on the roof (radar/satellite domes and antennas). An anchor recess is visible near the bow.\n- Action/setting: The yacht is planing across calm open water, creating a wide, foamy wake and spray along the sides.\n- Environment: Open sea with a low, distant horizon and a clear blue sky, giving a bright, serene, high\u2011visibility scene.\n- Camera angle/mood: Three\u2011quarter front view from above/port side, highlighting speed, power, and elegance on the water."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image 1:\n- Subject: A large white motor yacht speeding across calm, open water.\n- View: Front-right three-quarter angle as the bow cuts through the sea.\n- Motion: The boat is planing at high speed, throwing up a wide, foamy wake along its starboard side and behind it.\n- Details: Sleek hull with dark accent stripe near the waterline; stainless bow rail; sun pad area on the foredeck; enclosed cabin with tinted windows; radar arch and antennas on the roof; anchor housing visible at the bow. No people are visible.\n- Environment: Clear day with a light-blue sky and a distant, flat horizon. Water is deep blue with smooth surface except for the churn from the boat.\n\nImage 2:\n- Subject: A modern gray pickup truck driving off-road.\n- View: Front-left three-quarter angle, moving toward the camera on a dusty, reddish dirt surface.\n- Branding/markings: Prominent \u201cGMC\u201d badge in red on the black grille.\n- Details: Crew-cab body with four doors; rugged front bumper and skid-plate style lower valance; LED headlamps and fog lights; black wheels with chunky all-terrain tires; visible suspension travel; dark wheel-arch trim and side steps. Dust is being kicked up behind the rear tires.\n- Environment: Desert-like landscape with tan/red sand and rock formations in the background; daylight with clear skies."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here\u2019s a detailed, plain\u2011language description of each image:\n\nImage 1\n- A modern, gray GMC pickup truck is driving fast on a dusty, off\u2011road trail in a desert or canyon landscape.\n- The truck is a crew cab with four doors and a short bed, shown from a front three\u2011quarter angle.\n- It has a bold, black front grille with large red GMC lettering, angular LED headlamps with a C\u2011shaped signature, and a rugged front bumper with skid\u2011plate detailing.\n- The wheel arches have dark cladding, and the truck rides on black alloy wheels wrapped in chunky, all\u2011terrain tires.\n- Dust is billowing behind the rear wheels, emphasizing motion and speed over the dirt surface.\n- The lighting suggests bright, clear conditions, with warm tones reflecting off the rocky formations in the background.\n- No people are visible.\n\nImage 2\n- A sleek, white luxury motor yacht is cruising at high speed across calm, open blue water.\n- The view is an elevated front three\u2011quarter angle from the yacht\u2019s starboard side, capturing a dramatic, foamy wake and spray as the bow cuts through the sea.\n- The yacht features a smooth, aerodynamic superstructure with large, tinted windows, stainless\u2011steel bow railings, and an upper deck with radar/antenna equipment.\n- Subtle dark striping accents the hull near the waterline, and the bow rides high, indicating planing at speed.\n- The horizon is clear with a pale blue sky and minimal clouds, suggesting good weather and daylight.\n- No people are visible on deck."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Here\u2019s a detailed description of each image:\n\nImage 1 (yacht on the water)\n- A sleek, white luxury motor yacht is speeding across a calm, open body of water.\n- The boat is captured from a front-left (port) three-quarter angle, slightly elevated, showing the sharp bow cutting through the water.\n- White spray and a broad, foamy wake trail behind and along the sides, indicating high speed.\n- The hull is white with a dark, tinted window band running along the cabin. Stainless guard rails encircle the foredeck.\n- The superstructure features a streamlined hardtop with antennas/radar gear on the roof.\n- The sea is a deep blue and relatively flat; the sky is clear to lightly hazy with a distant, straight horizon line. No other vessels are visible.\n- Lighting suggests bright daytime conditions. The image is presented in a cinematic, letterboxed format (black bars top and bottom).\n\nImage 2 (pickup truck off-road)\n- A modern GMC pickup truck, metallic gray, is driving fast on a dusty, off-road trail.\n- The truck is a crew-cab (four-door) configuration with a short bed, viewed from a front-right three-quarter angle, slightly low.\n- Prominent front fascia: a large black grille with a red GMC emblem, angular LED headlights, and a rugged lower bumper/skid area. Black wheels are fitted with chunky all-terrain tires.\n- Dust is kicked up behind the rear wheels, and there\u2019s a sense of motion and grip on the uneven, sandy surface.\n- The background features a dry, desert-like landscape with reddish dirt and layered rock formations or cliffs under clear daylight.\n- The photo also appears in a cinematic, letterboxed format (black bars top and bottom)."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A:\n- A gray GMC pickup truck driving off-road on a dusty, reddish dirt surface.\n- Four-door crew cab with black fender flares, rugged all-terrain tires, and raised suspension.\n- Prominent black grille with a red GMC emblem, LED headlights/DRLs, front skid plate, and tow hooks.\n- The truck is captured in a three-quarter front view, wheels in motion, kicking up dust behind it.\n- Background features a rocky desert landscape with sandstone cliffs under clear daylight. No people are visible.\n\nImage B:\n- A large white luxury motor yacht speeding across calm blue ocean water.\n- Three-quarter front starboard view, with a sleek, low-profile superstructure and tinted windows.\n- Stainless bow rails, anchor hardware at the bow, and antennas/radar arch on the roof.\n- The yacht is planing, throwing a broad, foamy wake to its port side; water spray indicates high speed.\n- Open horizon and clear sky in bright daylight. No people are visible."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "- Image A: A sleek, modern motor yacht speeds across calm, deep-blue ocean water. The white vessel is captured from a front-left (port bow) angle, throwing up a broad, frothy wake as it planes over the surface. It has a low-profile cabin with large tinted windows, stainless-steel railings around the bow, and a radar/antenna mast atop the superstructure. The horizon is distant under a clear sky, and sunlight glints off the hull, emphasizing motion and open-water cruising.\n\n- Image B: A gray GMC pickup truck drives briskly on a dusty, off-road trail in a desert-like setting. The truck is a crew cab with four doors, an elevated stance, and black alloy wheels fitted with all-terrain tires. The front end features a bold black grille with red GMC lettering, prominent bumper and skid-plate styling, and modern LED headlights/DRLs. Dust billows from the tires as it traverses the sandy track, with reddish rock formations and arid terrain in the background under warm daylight."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

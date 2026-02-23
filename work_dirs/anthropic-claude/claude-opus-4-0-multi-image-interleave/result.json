@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This image shows a GMC pickup truck, likely a Sierra model, driving through dusty, desert terrain. The truck appears to be a crew cab configuration with four doors and is finished in a metallic bronze or brown color. It's captured in action, kicking up a cloud of dust as it moves across what looks like sandy or loose dirt terrain, with dramatic red rock formations visible in the background.\n\nThe truck features GMC's distinctive front grille design with the prominent GMC lettering, modern LED headlights, and appears to be equipped with off-road tires and possibly a lifted suspension setup, suggesting this is likely an AT4 or similar off-road oriented trim level. The dramatic lighting and dust cloud create a dynamic action shot that emphasizes the truck's off-road capabilities in what appears to be a southwestern United States desert environment."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "This image shows a luxury motor yacht cutting through calm, deep blue ocean waters at high speed. The yacht appears to be a sleek, modern vessel with a white hull and superstructure. It's creating a dramatic spray of white water and wake as it powers through the sea, suggesting it's traveling at considerable speed.\n\nThe yacht features a sporty, streamlined design with large windows along its hull and what appears to be multiple deck levels. The vessel has a distinctive planing hull design that allows it to ride high on the water when at speed. You can see various yacht amenities including what looks like a flybridge on top with navigation and communication equipment.\n\nThe ocean water is a beautiful deep blue color, and the conditions appear to be ideal for boating with calm seas and clear skies visible in the background. The dramatic spray and wake created by the yacht's movement creates an impressive visual effect, showcasing the power and performance of this luxury vessel."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "These two images showcase very different types of vehicles in their natural environments:\n\n**Image 1:** A GMC pickup truck (appears to be a Sierra model) is captured in action on desert terrain. The truck is a crew cab configuration in what looks like a bronze or copper metallic finish. It's kicking up dust as it drives across sandy/rocky terrain with dramatic red rock formations visible in the background. The truck features aggressive off-road styling with dark wheels and prominent GMC branding on the grille. The lighting suggests either early morning or late afternoon, creating warm tones across the desert landscape.\n\n**Image 2:** A luxury motor yacht is photographed while underway at high speed on open ocean waters. The yacht appears to be a modern sports cruiser or express yacht, likely in the 50-70 foot range, with a sleek white hull and superstructure. It's creating an impressive wake and spray as it cuts through the blue waters. The yacht features a flybridge design with what appears to be radar and communication equipment on top. The clear blue sky and calm seas create ideal conditions for this dramatic action shot of the vessel at full throttle.\n\nBoth images emphasize power, performance, and luxury in their respective environments - one conquering rugged terrain, the other commanding the open seas."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "These two images showcase very different types of vehicles in their natural environments.\n\n**Image 1:** This shows a luxury motor yacht speeding across calm, deep blue ocean waters. The yacht appears to be a high-performance vessel with a sleek white hull and multiple decks. It's creating an impressive wake and spray as it cuts through the water at high speed. The yacht features a flybridge (upper pilot station), large windows, and appears to be in the 60-80 foot range. The clear blue sky and pristine ocean conditions suggest this was taken on a perfect day for yachting.\n\n**Image 2:** This displays a GMC pickup truck, likely a Sierra model, driving through desert terrain. The truck appears to be in a dark gray or bronze color and is kicking up dust as it navigates what looks like sandy or dusty ground. The setting appears to be in a southwestern desert landscape with distinctive red rock formations visible in the background. The truck has an aggressive, modern design with prominent grille styling and appears to be equipped for off-road capability. The dramatic lighting suggests this was taken during golden hour, creating a striking contrast between the vehicle and the rugged landscape.\n\nBoth images capture these vehicles in motion, emphasizing their performance capabilities in their respective environments - one conquering the ocean, the other mastering challenging terrain."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image shows a GMC Sierra pickup truck in what appears to be a desert or rocky terrain setting. The truck is captured in motion, kicking up dust as it drives across sandy/dirt terrain. It's a crew cab model with a distinctive modern GMC front grille design featuring the prominent \"GMC\" lettering. The vehicle appears to be in a dark color, possibly gray or brown, and has an aggressive, off-road capable stance. The background shows dramatic red rock formations typical of southwestern United States landscapes.\n\nThe second image depicts a luxury motor yacht speeding across clear blue ocean waters. The yacht appears to be a modern, sleek design with a white hull and superstructure. It's creating a dramatic spray of white water as it cuts through the waves at high speed. The vessel has multiple levels, with what looks like a flying bridge on top, and large windows along the main deck. The ocean water appears to be a beautiful turquoise blue color, and the conditions look calm with good visibility. This type of yacht would typically be in the 60-80 foot range based on its proportions and design."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**First Image - Luxury Motor Yacht:**\n\nThis image shows a high-performance luxury motor yacht in motion on open blue waters. The yacht appears to be a modern, sleek vessel with a white hull and superstructure. It's captured at high speed, creating dramatic white spray and wake as it cuts through the calm sea. The yacht features multiple decks, large windows along the hull, and what appears to be a flybridge with navigation equipment on top. The vessel looks to be approximately 60-80 feet in length based on its proportions. The water is a beautiful turquoise-blue color, and the sky is clear, creating ideal boating conditions. The photograph is taken from a slight angle that showcases both the yacht's profile and its impressive wake.\n\n**Second Image - GMC Pickup Truck:**\n\nThis image features a GMC pickup truck (appears to be a Sierra model) in an off-road desert environment. The truck is dark gray or gunmetal in color and is shown in action, kicking up dust as it drives across sandy/dusty terrain. The vehicle has an aggressive, modern design with a prominent GMC grille, LED lighting elements, and appears to be a crew cab configuration. The setting shows red rock formations or canyon walls in the background, suggesting this was photographed in a southwestern desert location like Utah or Arizona. The dramatic lighting and dust cloud create a dynamic action shot that emphasizes the truck's off-road capabilities. The vehicle appears to have off-road tires and a lifted suspension suitable for desert terrain."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image A:**\nThis image shows a GMC pickup truck (appears to be a Sierra model) in action on what looks like desert terrain. The truck is dark colored (possibly brown or gray) and is captured mid-motion, kicking up dust as it drives across sandy/dusty ground. The setting appears to be in a desert or canyon environment with reddish-brown rock formations visible in the background. The truck has an aggressive, modern design with prominent front grille featuring the GMC logo, LED headlights, and appears to be a crew cab configuration. The photo captures the truck's off-road capability in a dramatic action shot.\n\n**Image B:**\nThis image features a luxury motor yacht cutting through ocean waters at high speed. The yacht is white in color and appears to be a modern, sleek design with multiple decks. It's creating a dramatic spray of white water and wake as it speeds across the deep blue ocean. The vessel looks to be approximately 60-80 feet in length, with a flybridge design featuring an upper helm station. The image is taken from an aerial or elevated perspective, showing the yacht's impressive performance as it planes across calm seas under clear skies. The contrast between the white yacht and spray against the deep blue water creates a striking visual."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "**Image A:**\nThis image shows a luxury motor yacht speeding through clear blue ocean waters. The yacht appears to be a high-performance vessel with a sleek white hull and modern design. It's creating a dramatic wake and spray as it cuts through the water at high speed. The yacht features a flybridge (upper deck), large windows along the hull, and appears to be a sport yacht or express cruiser style vessel, likely in the 50-70 foot range. The ocean conditions appear calm with beautiful turquoise-blue water, and the photo captures the dynamic motion and power of the yacht in action.\n\n**Image B:**\nThis image depicts a GMC pickup truck (appears to be a Sierra model) driving through desert terrain. The truck is shown kicking up dust as it moves across what looks like sandy or dirt terrain with red rock formations visible in the background. It's a crew cab (four-door) pickup truck in a dark color, possibly gray or bronze. The truck has an aggressive, modern front grille design with the GMC branding clearly visible. The setting appears to be in a southwestern desert environment, possibly similar to areas found in Utah, Arizona, or Nevada, with the characteristic red rock landscape. The image captures the truck's off-road capability and rugged character."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

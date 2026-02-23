@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a modern **GMC pickup truck** driving on a **dusty dirt road** in an outdoor, desert-like setting.\n\n- **Vehicle:** A gray/silver, four-door crew-cab pickup with a short bed, photographed from a front-left three-quarter angle. The front grille prominently displays the red **\u201cGMC\u201d** badge. It has a rugged, off-road-oriented stance with dark wheels and chunky tires.\n- **Motion/Action:** The truck appears to be moving at speed, kicking up **dust** behind and around the tires.\n- **Lighting/Background:** Warm, natural sunlight illuminates the scene. The background features **rocky, reddish-brown terrain** resembling canyon or desert cliffs, with the ground being sandy or dirt.\n- **Framing/Presentation:** The image is centered on the truck, with black letterbox-style borders at the top and bottom, emphasizing a cinematic look."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a large white motor yacht traveling at high speed across open water. The boat is angled toward the right side of the frame, cutting through calm, deep-blue sea and throwing up a wide plume of white spray and wake along its sides and behind it.  \n\nThe yacht has a sleek, modern profile with a pointed bow, dark-tinted windshield windows, and railings running along the deck edges. On the upper level, there appear to be antennas/radar equipment and a small flybridge or upper helm area.  \n\nThe background is a clear, bright day with a pale blue sky and a visible horizon line. The overall scene conveys motion and speed, with the water surface mostly smooth except for the turbulent foam created by the yacht. The image is presented with black bars at the top and bottom (letterbox-style framing)."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1 (top)\n- A gray GMC pickup truck (crew cab, short bed) is driving on a dusty, reddish dirt road in a desert/canyon environment.\n- The truck is captured in a dynamic, front three-quarter view, with dust kicking up behind the rear tires, suggesting speed or off-road driving.\n- Visible features include a large black grille with a red \u201cGMC\u201d badge, LED-style headlights, black wheels/tires, and a relatively high ride height suited for rugged terrain.\n- The background shows warm-toned rock formations and dry ground, consistent with a canyon or desert landscape under clear daylight.\n\n### Image 2 (bottom)\n- A large white motor yacht is speeding across open water, photographed from a front three-quarter angle.\n- The boat is creating a wide V-shaped wake and heavy spray along the hull, indicating high speed.\n- The yacht has a sleek, modern profile with tinted windows, an upper deck/bridge area, and railings along the bow.\n- The sea appears calm aside from the yacht\u2019s wake, and the horizon line is visible under a clear blue sky in bright daylight."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1 (top)\nA large white motor yacht is captured speeding across open water. The boat is angled slightly toward the right side of the frame, cutting through calm, deep-blue sea and throwing up a wide plume of white spray and wake along its sides and behind it. The sky is clear and bright, suggesting sunny daytime conditions. The yacht has a sleek, modern design with tinted windows on the cabin area, railings along the bow, and visible equipment/antenna structures on the roofline. No people are clearly visible.\n\n### Image 2 (bottom)\nA gray GMC pickup truck is shown driving quickly on a dusty, off-road surface in a desert-like landscape. The vehicle is angled toward the right, with dust kicking up behind the tires, emphasizing motion. It\u2019s a four-door crew-cab truck with black wheels and rugged off-road tires. The front grille prominently displays the red \u201cGMC\u201d logo. In the background are warm-toned rocky cliffs and open terrain under daylight, reinforcing an outdoor, rugged setting. No driver or passengers are visible through the windows."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1\n- **Main subject:** A gray GMC pickup truck (mid-size, four-door crew cab) driving at speed.\n- **View/angle:** Front three-quarter view from the driver\u2019s side, slightly low angle, emphasizing the grille and stance.\n- **Notable features:** Large black grille with prominent red **\u201cGMC\u201d** lettering, chunky off-road-style tires, dark wheels, and squared-off modern headlights.\n- **Action/environment:** The truck is moving across a dusty, sandy surface, kicking up a visible cloud of dust behind and beneath it.\n- **Background:** A warm-toned, rocky desert/canyon landscape with blurred terrain, suggesting motion and an off-road setting.\n- **Lighting:** Bright daylight with a warm, sunlit look.\n\n### Image 2\n- **Main subject:** A sleek white motor yacht cruising at high speed.\n- **View/angle:** Front three-quarter view from the port (left) side, showing the bow cutting through the water.\n- **Notable features:** Streamlined hull, tinted windows along the cabin, upper deck structure, and railings along the bow; the vessel looks like a modern luxury yacht.\n- **Action/environment:** The yacht is creating a broad, foamy wake and spray as it planes over calm ocean water.\n- **Background:** Open sea under a clear sky with a visible horizon line; no other boats or land are prominent.\n- **Lighting:** Bright, clear daylight with strong reflections on the water and the yacht\u2019s white surfaces."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image 1\n- The scene shows a large **white motor yacht** traveling at high speed on open water.\n- The yacht is angled slightly toward the viewer, with its **bow lifted** as it cuts through the sea.\n- A wide plume of **white spray and wake** fans out behind and along the sides, indicating fast movement.\n- The water is a deep blue and relatively calm aside from the yacht\u2019s disturbance.\n- The sky is clear and bright, with the **horizon line** visible in the distance, suggesting a sunny day in open ocean.\n\n### Image 2\n- The scene shows a **gray GMC pickup truck** (crew cab) driving on a **dusty off-road/dirt surface**.\n- The truck is captured in motion, kicking up **dust** around the tires.\n- It has a bold front end with a large grille featuring prominent **\u201cGMC\u201d** lettering, and modern, angular headlights.\n- The background appears to be a rugged, desert-like environment with **rocky formations/cliffs** and warm-toned terrain.\n- Lighting suggests daylight, with shadows and highlights emphasizing the truck\u2019s contours and off-road setting."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A\n- **Main subject:** A gray pickup truck viewed from the front-left (three-quarter) angle.\n- **Branding/details:** The front grille prominently displays a red **\u201cGMC\u201d** badge. The truck has a rugged, off-road oriented look with a high stance and dark wheels.\n- **Environment:** It\u2019s driving on a **dusty dirt road/trail**, kicking up dust behind and beneath the tires.\n- **Background:** A **dry, desert-like landscape** with rocky terrain/cliffs and warm, earthy tones, suggesting an arid outdoor setting.\n- **Lighting/feel:** Bright daylight with a dynamic \u201cin motion\u201d action shot.\n\n### Image B\n- **Main subject:** A large **white motor yacht** (luxury powerboat) traveling at high speed.\n- **Motion/effects:** The boat is creating a substantial **white wake and spray** along both sides, indicating fast movement across the water.\n- **Environment:** Open **ocean/sea** with calm, deep blue water.\n- **Background:** A clear **blue sky** and a distant horizon line; no other boats or land are clearly visible nearby.\n- **Composition:** The yacht is angled slightly toward the viewer from the front-left, emphasizing speed and the bow cutting through the water."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "### Image A\n- A large white motor yacht is moving at high speed across open water.\n- The boat is angled slightly toward the right side of the frame, with the bow lifted as it cuts through the sea.\n- There\u2019s a dramatic spray and wake: white water fans out along the sides and trails behind, indicating fast motion.\n- The ocean is calm and deep blue, and the horizon line is visible under a clear, bright sky.\n- The yacht has tinted windows and visible railings along the deck, with sunlight reflecting off its sleek hull.\n\n### Image B\n- A gray GMC pickup truck (off-road style) is driving quickly on a dirt road in a desert-like environment.\n- The truck is angled slightly toward the right, with dust kicking up behind and around the tires, suggesting speed and rough terrain.\n- The front grille prominently displays the red \u201cGMC\u201d logo.\n- The vehicle appears to have higher ground clearance and rugged tires, consistent with an off-road or performance-oriented trim.\n- In the background are reddish rocky formations and dry ground, with warm lighting that suggests late afternoon or early evening."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]
