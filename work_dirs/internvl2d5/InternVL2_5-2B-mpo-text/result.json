@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "To solve the problem \\(1 + 1\\), we follow these steps:\n\n1. Identify the numbers involved in the addition: \\(1\\) and \\(1\\).\n2. Add the two numbers together: \\(1 + 1\\).\n\nPerforming the addition:\n\n\\[ 1 + 1 = 2 \\]\n\nThus, the result of \\(1 + 1\\) is \\(\\boxed{2}\\)."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The capital city of China is Beijing. It is the largest city in China and serves as the political, cultural, and educational center of the country. Beijing is known for its rich history, including being the former capital of China during the Qing Dynasty. The city is also famous for its historical sites such as the Forbidden City, the Great Wall of China, and Tiananmen Square. Additionally, Beijing is a major hub for business, education, and culture in China."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

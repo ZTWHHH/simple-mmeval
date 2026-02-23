@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the question is asking what the result of 1 plus 1 is. Hmm, let me think. I remember from basic math that when you add two numbers together, you combine their values. So, 1 plus 1... Let me visualize it. If I have one apple and someone gives me another apple, how many apples do I have in total? That should be two apples. \n\nWait, maybe I should check if there's any trick here. Sometimes people ask simple questions to see if you're paying attention. But in this case, it's straightforward addition. The numbers are both 1, so adding them together would be 1 + 1. Let me count on my fingers to be sure. One finger plus another finger equals two fingers. Yeah, that makes sense. \n\nI also recall that in binary numbers, 1 plus 1 equals 10, but that's in base 2. The question doesn't specify a different base, so I should assume it's in base 10, which is the standard. So, 1 + 1 in base 10 is definitely 2. \n\nAnother way to think about it is using number lines. If I start at 1 and move one step to the right, I land on 2. That's another confirmation. Maybe I can use objects to represent the numbers. Let's say I have one block and add another block. Now I have two blocks. Yep, that checks out. \n\nIs there any other perspective? Maybe algebraic. If I let x = 1, then x + x = 2x. Since x is 1, 2x is 2. That works too. Or using equations: 1 + 1 = 2. It's a fundamental equation in arithmetic. \n\nI don't think there's any ambiguity here. Unless the question is a riddle, but the way it's phrased seems straightforward. The answer should be 2. I can't think of any reason why it would be different. Maybe if it's a trick question, but the user didn't indicate that. So, sticking with the basic math, the result is 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\nThis is a fundamental arithmetic operation where combining two units (1 + 1) yields a total of two units. Whether visualized with objects, number lines, or basic algebra, the sum consistently equals 2 in base"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking for the capital city of China. Let me think. I remember that China's capital is Beijing. But wait, I should make sure I'm not mixing it up with other cities. Let me recall some geography. China is a large country, and historically, the capital has changed over time. For example, during the Ming Dynasty, the capital was Nanjing, but then it moved to Beijing. Since the People's Republic of China was established in 1949, Beijing has been the capital. I think there's also the case of Hong Kong and Macau being special administrative regions, but they aren't capitals. So yes, Beijing is definitely the capital. I should confirm that there's no other city that's considered the capital now. Maybe some people confuse it with Shanghai, but Shanghai is a major city, not the capital. So the answer is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It has served as the capital since the establishment of the People's Republic of China in 1949. Beijing is also a global hub for politics, culture, and international diplomacy."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

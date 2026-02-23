@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "To find the result of \\(1 + 1\\), we can follow these steps:\n\n1. Start with the number 1.\n2. Add the number 1 to the number 1.\n\nWhen we add 1 to 1, we get 2. Therefore, the result of \\(1 + 1\\) is \\(\\boxed{2}\\)."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Beijing"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

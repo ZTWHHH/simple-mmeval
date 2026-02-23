@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Let me start by recalling what addition means. Addition is combining two numbers to get a sum. So, if I have one number and another number, I add them together. \n\nFirst, I can think of the numbers as individual units. Like, if I have one apple and one orange, how many fruits do I have in total? Well, I have one of each, so that's two fruits. So, 1 plus 1 should be 2. \n\nWait, but maybe I should break it down into smaller parts to make sure. Let's say I have one apple and one orange. If I take away one apple, I'm left with one orange. Then, if I take away one orange, I'm left with zero apples. So, the total number of fruits is still one. Hmm, that doesn't make sense. Wait, maybe I'm confusing apples and oranges. Let me try again. \n\nIf I have one apple and one orange, the total is two. If I take away one apple, I have one orange left. Then, if I take away one orange, I have zero apples left. So, the total is still one. That seems contradictory. Maybe I need to visualize it differently. \n\nAnother way to think about it is using a number line. Starting at 1, moving one step to the right gives me 2. So, 1 plus 1 is 2. That makes sense. \n\nI can also use the concept of counting. If I have one group and another group, the total is the sum of both. So, 1 plus 1 is 2. \n\nWait, maybe I should consider the commutative property of addition. The order doesn't matter, so 1 plus 1 is the same as 1 plus 1. That's always true. \n\nIs there any other way to think about this? Maybe using the concept of zero. If I have one apple and one orange, and I add them together, the total is two. If I have zero apples and one orange, the total is one. So, 1 plus 1 is two. \n\nI think I'm overcomplicating it. The answer is straightforward. 1 plus 1 equals 2. \n\nBut just to double-check, let me use a different method. If I have one group and one group, the total is the sum. So, 1 +"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking for the capital city of China. Let me start by recalling what I know. I remember that Beijing is the capital, but I should make sure I'm not mixing it up with other cities. Maybe I should think about the history of China. The capital has changed over time, right? The first capital was Chang'an, which was in the Tang Dynasty. Then there was the capital in the Ming Dynasty, which was Nanjing. But the current capital is Beijing. Wait, but I've heard that the capital is still Beijing. Let me check if there's any recent change. I think the capital has been Beijing since the Ming Dynasty, and it hasn't changed much. So the answer should be Beijing. But I should make sure there's no confusion with other cities. Maybe the user is thinking of something else, but I don't think so. The capital is definitely Beijing. Yeah, that's right. So the answer is Beijing.\n</think>\n\nThe capital city of China is **Beijing**."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

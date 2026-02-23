@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the result of 1 plus 1?\" Hmm, that seems pretty straightforward. Let me think. In basic arithmetic, when you add 1 and 1 together, the sum should be 2. But wait, maybe I should double-check to make sure I'm not missing something here. Sometimes people might ask trick questions, but this one looks simple. Let me recall the addition table. 1 plus 1 is indeed 2. Yeah, that's right. I don't think there's any trick or alternative interpretation here. Unless they're using a different number system, like binary? In binary, 1 plus 1 is 10, which is 2 in decimal. But the question doesn't specify a different base, so I should assume it's decimal. Alright, so the answer is 2. I should make sure to present that clearly.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\nThis is a fundamental arithmetic operation where adding the two numbers together yields their sum. In decimal (base-10) notation, 1 + 1 = 2. If interpreted in binary (base-2), 1 + 1 = 10 (which equals 2 in decimal). However, unless specified otherwise, the default assumption is decimal arithmetic."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that Beijing is a major city in China, but I'm not entirely sure if it's the capital. Wait, I think I've heard that before. But maybe I should double-check to be sure.\n\nI know that some countries have their capital cities that are also major economic or cultural hubs. For example, in the United States, Washington, D.C. is the capital, but New York City is a bigger city. Similarly, in China, Beijing is a big city. But is it the capital? I think so, but I should confirm.\n\nAnother way to think about it is through historical context. I remember that during the 2008 Olympics, Beijing was the host city. That might have been a significant event, but does that relate to it being the capital? Maybe, but I'm not sure. Alternatively, I recall that the Forbidden City, which is a famous historical site, is located in Beijing. The Forbidden City was the imperial palace during the Ming and Qing dynasties, so that might indicate that Beijing has been an important city for a long time.\n\nAlso, considering modern China, the government's headquarters are in Beijing. The Great Hall of the People, which is where the National People's Congress meets, is in Beijing. That would make sense if it's the capital. Additionally, the Chinese government's official websites and embassies often list Beijing as the capital. \n\nWait, but I should make sure there isn't any confusion with other cities. For example, Shanghai is a major financial center, and Guangzhou is another large city. But I don't think either of those is the capital. Similarly, Chongqing is a large city, but again, not the capital. So Beijing seems to be the most likely answer.\n\nAnother angle: sometimes countries have capitals that are not their largest cities. For instance, Mexico's capital is Mexico City, which is also its largest city. In China's case, Beijing is both the capital and a major city. So that aligns with that pattern. \n\nI should also consider if there's any recent change. I don't think China has changed its capital recently. The capital has been Beijing for a long time. There was a time when the capital was Nanjing, but that was during the Republic of China era, which was before the People's Republic of China was established in 1949. Since then"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

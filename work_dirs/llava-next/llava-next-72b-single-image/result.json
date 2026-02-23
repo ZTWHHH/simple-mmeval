@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC pickup truck in motion on a dirt road. The truck is captured from a side angle, emphasizing its robust design and off-road capabilities. It features a prominent front grille with the GMC logo in the center, flanked by angular headlights. The body of the truck is finished in a dark color, possibly black or dark gray, and it has a set of large, black wheels that contrast with the body color. The truck is kicking up a cloud of dust, indicating that it is moving at a speed that causes the dirt to become airborne. The background consists of a rugged landscape with rocky formations and sparse vegetation, suggesting a desert or arid environment. The image is a still from a video, as indicated by the play button overlay in the center, which is a common feature in video thumbnails."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a modern, white motor yacht cruising on a body of water, likely an ocean or a large sea, given the vast expanse of blue water and the horizon line. The yacht has a sleek design with a pointed bow and a curved superstructure that includes a flybridge, which is a deck area above the main deck. The hull of the yacht is predominantly white, and there are some black accents, possibly indicating the brand or model of the yacht.\n\nThe yacht is moving at a speed that creates a wake behind it, indicating that it is not idling. The water is calm, with only small ripples visible, suggesting good weather conditions for boating. The sky is clear and blue, with a few scattered clouds, indicating a sunny day. There are no visible people on the yacht, and no other vessels or landmarks are discernible in the image, which focuses solely on the yacht and the surrounding water. The image is a photograph with a wide-angle lens, capturing the yacht in the center of the frame with a wide expanse of water on either side."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

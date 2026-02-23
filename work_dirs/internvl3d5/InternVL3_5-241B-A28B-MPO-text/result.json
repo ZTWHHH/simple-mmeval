@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 is. Let me start by recalling basic addition. When you add two numbers together, you're combining their values. In this case, both numbers are 1. If I have one apple and someone gives me another apple, how many apples do I have? That's right, two apples. So, 1 plus 1 should equal 2. But wait, maybe there's a trick here. Sometimes questions seem simple but have a catch. Let me think again. In binary, 1 plus 1 equals 10, but the question doesn't specify a number system. Since it's a general math question, it's probably in base 10. So, sticking with the standard decimal system, 1 plus 1 is definitely 2. I don't see any other way to interpret this. Unless it's a riddle where \"plus\" means something else, but the user just asked for the result of 1 plus 1, so straightforward addition. Yeah, the answer has to be 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\nIn basic arithmetic, adding the number 1 to another 1 combines their values, resulting in the sum of 2. This holds true in the standard decimal (base-10) system. \n\n**Answer:** 2."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a large country in East Asia. From what I've learned before, the capital is a major city there. Wait, is it Beijing? I think that's right. But maybe I should double-check.\n\nI've heard Beijing mentioned in the context of the Olympics, like the 2008 Summer Olympics were held there. That might be a clue. Also, there's the Great Wall of China, which is near Beijing. But I should make sure I'm not confusing it with another city. For example, Shanghai is a big city in China, but I don't think it's the capital. Similarly, Hong Kong is a special administrative region, but it's not the capital either.\n\nAnother way to think about it: sometimes countries have changed their capitals. For instance, Brazil moved its capital from Rio de Janeiro to Bras\u00edlia. Did China ever change its capital? I think historically, Beijing has been the capital for a long time, especially during the Ming and Qing dynasties. Before that, maybe Nanjing was the capital at some point, but currently, it's Beijing. \n\nAlso, government buildings and the central leadership are based in Beijing. The Forbidden City, which was the imperial palace, is in Beijing. So that supports the idea that Beijing is the capital. \n\nWait, but I should consider if there's any recent change. Sometimes political changes can lead to new capitals, but I haven't heard anything about China changing its capital recently. So I think it's safe to say Beijing is the capital. \n\nTo sum up, based on historical context, major events like the Olympics, and the presence of government institutions, the capital of China is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. \n\n**Key Points:**\n- **Historical Significance**: Beijing has served as the capital for several dynasties, including the Ming and Qing, and remains the political and cultural center.\n- **Modern Role**: It hosts major government institutions, the Forbidden City, and landmarks like Tiananmen Square.\n- **Global Events**: Beijing hosted the 2008 Summer Olympics and the 2022 Winter Olympics, reinforcing its international prominence.\n- **No Recent Changes**: There have been no official changes to China's capital in recent history.\n\nBeijing's enduring role as the capital underscores its importance in both historical and contemporary contexts."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

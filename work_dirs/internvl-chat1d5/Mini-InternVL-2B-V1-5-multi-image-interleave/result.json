@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC pickup truck in motion on a dirt road. The truck is a modern, full-size model, likely designed for both utility and off-road capabilities. The vehicle is captured in a dynamic pose, with its front wheels slightly turned to the left and the rear wheels angled slightly to the right, indicating that the truck is in motion. The truck's body is a metallic gray color, and it features a prominent front grille with the GMC logo in the center. The headlights are sleek and angular, contributing to the vehicle's aggressive and sporty appearance.\n\nThe truck's design includes a set of black alloy wheels that are slightly lifted off the ground, suggesting that the vehicle is equipped with all-wheel drive. The tires appear to be in good condition, with a deep tread pattern suitable for off-road conditions. The truck's suspension system is visible, with a noticeable shock absorber and a hydraulic lift kit, which is common in modern pickup trucks for improved handling and stability.\n\nThe background of the image shows a natural, arid landscape with rocky terrain and sparse vegetation. The ground is covered in dirt and small rocks, typical of a desert or semi-arid environment. The sky is clear, indicating that the weather is dry and sunny, which is conducive to off-road driving.\n\nThe GMC logo is prominently displayed on the front grille, and the vehicle's overall design suggests that it is a high-performance model, likely designed for both daily use and adventurous driving. The truck's robust build and off-road capabilities are highlighted by its all-wheel drive system, which is essential for navigating challenging terrains.\n\nIn summary, the image showcases a GMC pickup truck in motion on a dirt road, highlighting its modern design, all-wheel drive system, and off-road capabilities. The vehicle's rugged appearance and the natural, arid environment in the background emphasize its suitability for both urban and off-road use."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, modern yacht cruising on a body of water, likely the ocean or a large lake. The yacht is moving at a considerable speed, as evidenced by the wake it is creating behind it. The wake is white and frothy, indicating the yacht's powerful propulsion system. The yacht itself is white with a sleek, modern design, featuring a cabin area with windows and a roof structure that likely houses the yacht's navigation and communication equipment. The hull of the yacht is dark, possibly black or dark blue, and it has a streamlined shape that is typical of high-performance vessels.\n\nThe water around the yacht is a deep blue-green color, suggesting that the water is relatively calm and clear. The sky above is clear with a few wispy clouds, indicating fair weather conditions. The horizon is visible in the background, showing a clear separation between the water and the sky, which adds to the sense of vastness and openness of the scene.\n\nThe yacht is equipped with various safety features, including life jackets for the crew and possibly other safety equipment. The deck of the yacht is equipped with railings and possibly other safety equipment, such as life rings or safety nets. The yacht's design suggests it is built for comfort and luxury, with features such as spacious seating areas, ample storage, and possibly a variety of entertainment options.\n\nIn summary, the image showcases a large, modern yacht cruising at high speed on a calm body of water, creating a significant wake behind it. The yacht is white with a dark hull, and it is equipped with safety features and modern amenities. The clear sky and calm water contribute to the serene and luxurious atmosphere of the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, modern, four-wheel-drive truck, specifically a GMC, in motion on a body of water. The truck is captured mid-motion, with its front wheels slightly lifted off the ground, indicating that it is either accelerating or braking. The vehicle is equipped with a large, powerful engine, as evidenced by the significant amount of smoke or exhaust fumes trailing behind it. The exhaust fumes are white and appear to be emanating from the rear of the truck, suggesting that the engine is producing a significant amount of power.\n\nThe truck is painted in a metallic gray color, which gives it a sleek and modern appearance. The front grille of the truck is prominently displayed, featuring the GMC logo in the center. The truck's design includes a boxy, robust structure, typical of modern four-wheel-drive vehicles designed for off-road capabilities and towing heavy loads.\n\nThe background of the image shows a clear sky with a few scattered clouds, indicating a sunny day. The water surrounding the truck is a deep blue, suggesting that the location is likely a coastal area or a large lake. The water appears calm, with no visible waves or ripples, which is typical of a serene environment.\n\nThe truck is positioned in the center of the image, with the water extending to the edges of the frame. The overall composition of the image emphasizes the power and speed of the truck, as well as the contrast between the modern vehicle and the natural environment.\n\n### Analysis and Description:\n1. **Truck**: The GMC truck is a four-wheel-drive vehicle, indicated by the large exhaust fumes and the lifted front wheels. It is painted in a metallic gray color and features a boxy design typical of modern trucks.\n2. **Engine**: The truck's engine is powerful, as evidenced by the significant amount of exhaust fumes trailing behind it. This suggests that the engine is producing a substantial amount of power.\n3. **Environment**: The background shows a clear sky with a few scattered clouds, indicating a sunny day. The water surrounding the truck is a deep blue, suggesting a calm and serene environment.\n4. **Position and Motion**: The truck is positioned in the center of the image, with the water extending to the edges. The truck is in motion, as indicated by the lifted front wheels and the exhaust fumes.\n\n### Conclusion:\nThe image effectively captures the power and speed of the GMC truck, set against a"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC truck in motion on a body of water, likely a lake or a calm sea. The truck is a modern, full-size pickup truck with a sleek design, featuring a prominent front grille with the GMC logo in the center. The truck is equipped with a large, powerful engine, as indicated by the visible exhaust system and the substantial size of the vehicle. The truck is painted in a dark color, possibly black or dark gray, and has a shiny, metallic finish that reflects the sunlight.\n\nThe truck is in motion, creating a noticeable wake behind it, which is a common sight when vehicles are traveling at high speeds. The wake is white and turbulent, indicating the force of the truck's movement. The water around the truck is relatively calm, with a slight ripple effect caused by the movement of the vehicle.\n\nThe background of the image shows a clear sky with a few scattered clouds, suggesting a bright and sunny day. The horizon is visible in the distance, with a clear demarcation between the water and the sky. The terrain around the water is relatively flat, with no significant hills or mountains visible in the immediate vicinity.\n\nThe GMC truck is a full-size pickup truck, which is typically used for both personal and commercial purposes. The design of the truck suggests it is built for durability and performance, with features such as a powerful engine, ample cargo space, and a spacious interior.\n\nIn summary, the image showcases a GMC truck in motion on a body of water, with a clear sky and calm water in the background. The truck is a full-size pickup truck with a powerful engine, a sleek design, and a shiny metallic finish. The image captures the dynamic nature of the vehicle and the serene environment in which it is traveling."
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a large, modern, four-door pickup truck with a GMC logo on the front grille. The truck is in motion, kicking up a significant amount of dust as it moves through the water. The vehicle is a large, luxury boat, likely a yacht, with a sleek design and a white exterior. The boat is moving towards the right side of the image, creating a dynamic scene with the truck. The background features a clear blue sky and calm ocean waters."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC truck in motion on a body of water, creating a wake behind it. The truck is a modern, full-size pickup truck with a shiny metallic finish. The GMC logo is prominently displayed on the front grille. The vehicle is equipped with large, black alloy wheels and appears to be in motion, as indicated by the wake behind it. The background features a clear sky and a body of water, suggesting that the truck is traveling on a lake or a calm sea."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts two distinct scenes:\n\n1. **Foreground Scene:**\n   - **Subject:** A GMC truck is prominently featured in the foreground. The truck is captured in motion, with its front wheels slightly lifted off the ground, indicating that it is either accelerating or braking. The truck's tires are kicking up a significant amount of dust, suggesting that it is moving at a considerable speed.\n   - **Details:** The truck is a GMC, as indicated by the logo on the front grille. The vehicle is a four-door pickup truck with a boxy design, typical of GMC trucks. The front grille is large and prominently features the GMC logo.\n   - **Surroundings:** The truck is on a dirt road or a similar terrain, as evidenced by the dust being kicked up. The background shows a clear sky and a rocky landscape, possibly a desert or a similarly arid environment.\n\n2. **Background Scene:**\n   - **Subject:** A large, luxury yacht is captured in the background. The yacht is moving through the water, creating a wake behind it. The water is a deep blue, indicating a calm sea or ocean environment.\n   - **Details:** The yacht is a high-end vessel, likely a luxury yacht, given its size and design. It has a sleek, modern appearance with a white hull and a dark superstructure. The yacht features multiple decks, including a bridge and several smaller decks, typical of luxury yachts.\n   - **Surroundings:** The yacht is sailing on a calm sea, with no visible waves or rough waters. The horizon is visible in the distance, and the sky is clear, suggesting a sunny day.\n\n### Analysis and Description\n\nThe two images present a contrast between two different modes of transportation: land and water. The GMC truck represents a mode of transportation commonly used for both personal and commercial purposes, while the luxury yacht signifies a high-end, leisurely mode of travel. \n\nThe GMC truck, with its rugged design and the dust it is kicking up, suggests a sense of adventure and the thrill of driving. The dust indicates that the truck is moving at a considerable speed, which is often associated with high-speed driving or off-road capabilities. The GMC logo on the truck signifies that it is a model from the GMC brand, known for producing reliable and powerful vehicles.\n\nThe luxury yacht, on the other hand, represents"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts two distinct scenes, both featuring a GMC truck in motion on a body of water. \n\n**Image A:**\n- The primary focus is a GMC truck, which is a four-door pickup truck with a boxy design. The truck is white with black accents and has a prominent GMC logo on the front grille.\n- The truck is in motion, creating a wake behind it, indicating that it is moving at a considerable speed. The wake is white, suggesting the truck is moving at a high speed.\n- The background shows a clear blue sky and calm water, indicating that the truck is likely on a lake or a calm sea. The water is relatively still, with no visible waves or ripples.\n- The truck is positioned in the center of the image, with the wake trailing behind it, creating a dynamic and visually appealing scene.\n\n**Image B:**\n- This image shows the same GMC truck in a different setting, possibly on a road or a paved area.\n- The truck is also white with black accents and has the GMC logo on the front grille.\n- The background is less clear but appears to be a mix of natural and man-made elements. There is a rocky cliff or hill in the background, suggesting that the truck is on a coastal or riverine area.\n- The truck is positioned in the foreground, with the wake trailing behind it, indicating that it is moving at a similar speed to the first image.\n- The background is less detailed but shows a clear sky and calm water, similar to the first image.\n\n**Analysis:**\nBoth images show the GMC truck in motion, with the primary difference being the setting. Image A depicts the truck on a body of water, creating a dynamic and visually striking scene. The wake behind the truck suggests high speed. Image B shows the truck on a paved area, possibly a road or a parking lot, with a more static and less detailed background. The GMC logo and design are consistent in both images, indicating that the truck is a GMC model.\n\n**Conclusion:**\nThe GMC truck in both images is moving at a high speed, evidenced by the wake behind it. The difference in settings (water vs. paved area) and the clarity of the background (Image A vs. Image B) highlight the truck's capability to handle various terrains and environments. The consistent GMC logo and design across both images emphasize the brand's identity and quality."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

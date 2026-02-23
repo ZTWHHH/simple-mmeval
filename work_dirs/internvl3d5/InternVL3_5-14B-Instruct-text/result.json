@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the result of 1 plus 1?\" Hmm, that seems pretty straightforward, but let me make sure I understand it correctly. They want to know the sum of 1 and 1. Alright, basic arithmetic here.\n\nFirst, I should recall how addition works. When you add two numbers, you're combining their values. So if I have one apple and someone gives me another apple, I now have two apples. That's the concept behind 1 + 1. \n\nWait, but maybe there's a trick here? Sometimes people ask simple questions to test if you're paying attention. Let me think. In standard arithmetic, 1 plus 1 is definitely 2. But are there any contexts where this might not hold? Like in binary? In binary, 1 + 1 equals 10, but the question doesn't specify a number system. It just says \"1 plus 1,\" so I should assume base 10 unless stated otherwise.\n\nAnother angle: maybe they're referring to something metaphorical, like \"1 plus 1 equals love\" or something. But the question is phrased as a math problem, so probably not. The user is likely expecting a numerical answer.\n\nLet me double-check with basic addition. Starting at 1 on the number line, if I move one unit to the right, I land on 2. Yep, that's correct. No carry-over or anything because both numbers are single digits. \n\nIs there any possibility of a different result in another mathematical structure? For example, in modular arithmetic, like mod 2, 1 + 1 would be 0. But again, unless specified, the default is standard integer addition. \n\nSo, considering all that, the answer should be 2. I don't see any reason to complicate it further. The user probably just wants a quick confirmation. Let me make sure there's no typo or misinterpretation. The question is clear: 1 plus 1. No variables, no hidden operations. Straightforward addition. \n\nAlright, I think I'm confident. The result is 2.\n</think>\n\nThe result of 1 plus 1 is **2**. This is a fundamental arithmetic operation where adding the numbers 1 and 1 yields the sum of 2."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. China is a country in East Asia, and I remember that it's a very populous country with a long history. The capital city... Hmm, I think it's Beijing. But wait, sometimes people might confuse it with other cities like Shanghai or Guangzhou because those are major cities too. Let me think.\n\nI remember from school that Beijing was the capital during the Ming and Qing dynasties. Then after the establishment of the People's Republic of China in 1949, the capital was moved to Beijing. Before that, during the Republic of China era, the capital was Nanjing for a while, but then shifted to Chongqing and later to Beijing. So yes, Beijing has been the capital for a long time. \n\nAlso, major government buildings like the Great Hall of the People and the Forbidden City are in Beijing. The Olympic Games were held there in 2008, which might have put it more in the spotlight. I don't think the capital has changed recently. Some countries change their capitals, like Nigeria moving from Lagos to Abuja, but China hasn't done that. \n\nWait, could there be any confusion with Taiwan? Because Taiwan also has a capital, Taipei, but the People's Republic of China, which is the official government recognized by most countries, considers Taipei as part of its territory and the capital is Beijing. So in the context of the PRC, the answer is definitely Beijing. \n\nI should also check if there's any recent news about China changing its capital, but I don't recall any such news. So putting it all together, the capital city of China is Beijing.\n</think>\n\nThe capital city of China is **Beijing**. \n\n**Key Points:**\n- **Historical Significance**: Beijing has served as the capital for much of China's history, including during the Ming (1368\u20131644) and Qing (1644\u20131912) dynasties.\n- **Modern Era**: It became the capital of the People's Republic of China in 1949 after the establishment of the Communist government.\n- **Government and Culture**: It houses major political institutions (e.g., the Great Hall of the People) and cultural landmarks like the Forbidden City and Tiananmen Square.\n- **International Recognition**: Beijing is universally recognized as the capital by the international community, despite Taiwan's"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

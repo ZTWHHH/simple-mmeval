@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "To determine the result of \\(1 + 1\\), we need to follow these steps:\n\n1. Identify the value of \\(1\\).\n2. Add the value of \\(1\\) to itself.\n\nStep 1: Identify the value of \\(1\\).\nThe value of \\(1\\) is 1.\n\nStep 2: Add the value of \\(1\\) to itself.\nWe need to add 1 to 1. This can be written as:\n\\[1 + 1 = 2\\]\n\nTherefore, the result of \\(1 + 1\\) is \\(\\boxed{2}\\)."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The capital city of China is Beijing."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

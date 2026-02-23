@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC pickup truck in motion on a dirt road. The truck is a modern design with a prominent grille featuring the GMC logo. It has a four-door crew cab configuration and is equipped with a set of large, black wheels that appear to be off-road tires. The vehicle is kicking up dust from the road, indicating it is moving at a moderate speed. The background consists of a rocky landscape with a clear sky, suggesting the photo was taken in a desert or arid environment. The lighting and shadows in the image suggest it was taken during the late afternoon or early evening, as the sun appears to be low in the sky."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a motor yacht in motion on a body of water. The yacht is predominantly white with a black hull and has a sleek, modern design. It features a large, curved windshield and a spacious deck area with a railing. The yacht is creating a wake as it moves through the water, indicating its speed. The surrounding water appears calm, and the sky is clear with a gradient of blue hues, suggesting it might be early morning or late afternoon. The horizon is visible in the background, with the sky meeting the water at a gentle curve. There are no visible texts or distinctive markings that provide additional information about the yacht or its location. The style of the image is a dynamic, real-life photograph capturing the motion of the yacht."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

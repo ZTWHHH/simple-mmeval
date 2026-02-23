@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment on a dirt road where a gray GMC truck is in motion. The truck, positioned centrally in the frame, is moving towards the right side of the image. It's a four-door model with a black grille and black rims, adding a touch of contrast to its gray body. The truck is slightly off-center, giving a sense of movement and dynamism to the scene.\n\nThe backdrop of the image is a rocky cliff, providing a rugged and natural setting for the truck. The cliff is located on the left side of the image, its rough texture and color complementing the smooth lines of the truck. The dirt road on which the truck is driving extends into the distance, leading the viewer's eye towards the cliff.\n\nThere are no discernible texts or other objects in the image. The relative position of the truck and the cliff suggests that the truck is moving away from the cliff, further down the dirt road. The image does not contain any other objects or people, focusing solely on the truck and its journey."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of a white yacht making its way across the deep blue ocean. The yacht, with its sleek design and white color, stands out against the vast expanse of the sea. It's moving towards the right side of the frame, leaving behind a trail of white waves that ripple across the water's surface. The sky above is a clear blue, mirroring the color of the ocean below. The yacht is the only object in the image, making it the focal point of this serene seascape. There are no texts or other discernible objects in the image. The relative position of the yacht to the ocean and the sky suggests it's in the middle of the frame, further emphasizing its prominence in the scene."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of a ginger cat in mid-stride on a grassy lawn. The cat, with its fur glowing in the sunlight, is moving towards the right side of the frame. Its tail is held high, adding a sense of motion to the scene. The cat's eyes are focused ahead, suggesting it might be on the lookout for something. The grass beneath the cat's paws is a vibrant green, indicating it might be spring or summer. The image is taken from a low angle, making the cat appear larger and more dominant in the frame. There are no discernible texts or other objects in the image. The relative position of the cat to the grass suggests it is in the middle of the lawn. The image does not contain any other objects or creatures, making the cat the sole focus of the scene."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a breathtaking view of a sunrise over a mountainous landscape. The sky, awash with hues of orange and yellow, serves as a dramatic backdrop to the scene. The sun, a bright orange orb, is positioned in the center of the image, casting a warm glow that illuminates the surrounding landscape. \n\nThe mountain, shrouded in darkness, is dotted with trees and shrubs, their silhouettes stark against the vibrant sky. The sun's position in the center of the image draws the viewer's eye directly to it, creating a sense of balance in the composition. The overall effect is one of tranquility and serenity, a moment frozen in time as the day begins."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]

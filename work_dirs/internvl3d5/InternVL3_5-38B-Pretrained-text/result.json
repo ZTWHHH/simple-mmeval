@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the question is asking what is the result of 1 plus 1. Hmm, let me think. I remember from basic math that when you add two numbers together, you combine their values. So 1 plus 1... Let me visualize it. If I have one apple and someone gives me another apple, how many apples do I have? That's two apples. So maybe the answer is 2.\n\nWait, but maybe I should check this another way. Let's use counting. Starting at 1, if I add 1 more, I count up one number. So 1, then 2. Yeah, that makes sense. So 1 plus 1 equals 2. \n\nIs there any other way to verify this? Maybe using objects. If I have one block and add another block, I have two blocks. Or using fingers. Hold up one finger, then another, that's two fingers. All these methods point to the same answer. \n\nI guess in different number systems, like binary, 1 plus 1 would be 10, but the question doesn't specify a number system. Since it's a basic arithmetic question, it's safe to assume it's in base 10. So the answer should be 2. \n\nI don't think there's any trick here. It's straightforward addition. So yeah, 1 plus 1 is definitely 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\n**Step-by-Step Explanation:**\n1. Start with the number 1.\n2. Add another 1 to it.\n3. Combining the two gives a total of 2.\n\n**Answer:** 2"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a big country, and its capital is a major city. I think Beijing is the capital, but I'm not 100% sure. Wait, sometimes people confuse Beijing with other cities like Shanghai or Hong Kong. But I think Shanghai is more of a financial hub, and Hong Kong is a special administrative region. \n\nLet me think about other countries. For example, the capital of the United States is Washington, D.C., not New York. Similarly, the capital of France is Paris, not Lyon. So in China, the capital is probably a city that's the political center. Beijing has the Great Wall nearby, right? And it's where the government is located. I also remember that the Forbidden City is in Beijing, which was the imperial palace. That makes sense as a capital city.\n\nWait, but I should double-check. Maybe there was a time when the capital was different? Like, during different dynasties, the capital might have changed. For example, during the Tang Dynasty, the capital was Chang'an, which is now Xi'an. But the current capital, after the establishment of the People's Republic of China in 1949, is Beijing. So yes, Beijing has been the capital since then. \n\nAnother way to confirm: I've heard of the Chinese government being based in Beijing, with the National People's Congress meeting there. Also, the Olympic Games were held in Beijing in 2008, which is a significant event that capitals often host. So all these points lead me to believe that Beijing is indeed the capital city of China. I don't think there's any other city that fits the criteria as the current capital. Shanghai is a major city but not the capital. So the answer should be Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It serves as the political, cultural, and educational center of the country, housing the central government, the Forbidden City, and numerous historical landmarks. Beijing has been the capital since the establishment of the People's Republic of China in 1949, though it has also been a capital during various historical dynasties."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out what 1 plus 1 equals. Hmm, let's start by recalling what addition means. Addition is when you combine two numbers to get a total. So if I have 1 apple and someone gives me another apple, how many apples do I have in total? That should be 2 apples. So 1 plus 1 is 2. But wait, maybe I should check if there's a different way to think about it. Like, in math terms, addition is combining quantities. So 1 and 1 are both single units, and when you add them together, you just have two units. Yeah, that makes sense. I don't think there's any trick here. Maybe in some contexts, like binary or something, but 1 plus 1 is still 2 in decimal. Let me think if there's any other angle. Maybe in different number systems? But the question doesn't specify, so I should assume it's in base 10. So 1 plus 1 is definitely 2. I don't see any complications here. Maybe the user is testing if I know the basic addition facts. Yeah, 1 plus 1 is a fundamental fact. So the answer should be 2.\n</think>\n\nThe result of 1 plus 1 is **2**. \n\n**Step-by-Step Explanation:**\n1. **Understanding Addition:** Addition combines two numbers to find their total.\n2. **Applying to 1 and 1:** When you add 1 and 1, you are combining one unit with another unit.\n3. **Result:** The total is **2**.\n\n**Answer:** \\boxed{2}"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a big country, and there are several cities that are important. The most famous one is Beijing, but I'm not entirely sure if that's the capital. I think there's another one called Shanghai, which is a major city and a big port. Maybe they have a different capital?\n\nWait, I've heard that Beijing is the capital, but I'm not 100% certain. I should check some facts. Let me think about the history. China has had different capitals over the centuries. For example, during the Ming Dynasty, the capital was moved to Beijing. Then there was the Yuan Dynasty, which was in Dadu, which is now Beijing. So maybe Beijing has been the capital for a long time.\n\nBut then there's Shanghai. I know Shanghai is a major economic and financial center. It's a big city with a lot of international influence. I think it's the second most populous city in China. But is it the capital? I don't think so. The capital is usually the political center, so Beijing would be the capital. But I should confirm this.\n\nI remember reading that Beijing is the capital, but I'm not sure if there's any confusion with other cities. Maybe some people might think Shanghai is the capital because it's a major city. But no, the capital is officially Beijing. Let me think of other cities. There's also Chengdu, which is the capital of Sichuan province, but that's not the national capital. So the national capital is definitely Beijing.\n\nWait, but I should make sure there's no other city that's considered the capital. I think the government has designated Beijing as the capital since the founding of the People's Republic of China in 1949. So even though Shanghai is a big city, it's not the capital. Therefore, the answer should be Beijing.\n</think>\n\nThe capital city of China is **Beijing**. It has served as the capital since the founding of the People's Republic of China in 1949. While Shanghai is a major economic and financial hub, it is not the capital. Beijing is also home to significant historical and cultural landmarks, including the Forbidden City and the Great Wall."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

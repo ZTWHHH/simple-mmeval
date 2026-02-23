@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the result of 1 plus 1?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the result of 1 plus 1?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so the user is asking, \"What is the result of 1 plus 1?\" Hmm, that seems pretty straightforward, but I should make sure I understand it correctly. Let me break it down.\n\nFirst, addition is one of the basic arithmetic operations. When you add two numbers together, you're combining their values. In this case, the numbers are both 1. So, adding 1 and 1 should give the sum of those two numbers. \n\nLet me visualize it. If I have one apple and someone gives me another apple, how many apples do I have in total? That's right, two apples. So, 1 plus 1 equals 2. But wait, maybe there's a trick here? Sometimes questions seem simple but have a catch. Let me think. Is there any context where 1 plus 1 might not equal 2? \n\nIn standard arithmetic, especially in the decimal system, 1 + 1 is definitely 2. But in other number systems, like binary, 1 + 1 equals 10. However, the question doesn't specify a different base, so I should assume it's in base 10. \n\nAnother angle: maybe the user is testing if I can handle very basic math. But even so, the answer should still be 2. Let me check with my knowledge. Yes, in elementary math, 1 + 1 = 2 is a fundamental concept. It's the basis for counting and addition. \n\nWait, could there be a philosophical or abstract interpretation? Like, in some contexts, combining two things might not result in a simple sum. For example, in set theory, the union of two single-element sets would have a cardinality of 2 if the sets are disjoint. But again, unless specified, the question is likely expecting the numerical answer. \n\nI should also consider if there's any ambiguity in the question. The user wrote \"1 plus 1\" without any additional context. So, sticking to the basic arithmetic operation is the safest approach. \n\nLet me confirm with a simple calculation. Starting at 1, if I add another 1, I move one unit forward on the number line. So, 1 \u2192 2. Yep, that's correct. \n\nNo, I don't think there's any trick here. The answer is definitely 2. Maybe the user is just starting to learn math and wants to verify their understanding. Either way, the answer remains the same."
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [],
+        "messages": [
+            {
+                "role": "user",
+                "question": "What is the capital city of China?",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "What is the capital city of China?",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, so I need to figure out the capital city of China. Let me start by recalling what I know. I remember that China is a country in East Asia, and it's one of the most populous countries in the world. The capital city is usually the seat of government, so I should think about where the government is based.\n\nI think Beijing is a major city in China. I've heard of Beijing in the context of politics, like the Great Wall of China being there. Also, I remember that the Forbidden City is in Beijing, which is a significant historical site. That makes me think that Beijing might be the capital. But wait, sometimes people confuse Beijing with other cities like Shanghai. Shanghai is a huge financial hub, but I don't think it's the capital. \n\nLet me check my memory. The People's Republic of China was established in 1949, and I believe the capital was moved from Nanjing to Beijing during that time. Before that, during the Republic of China era, the capital was Nanjing, but after the Communist takeover, they moved the capital to Beijing. So that's a key point. \n\nAlso, major government buildings like the Great Hall of the People and the Tiananmen Square are in Beijing. These are places where important political events take place, which supports the idea that Beijing is the capital. Additionally, international organizations and embassies are often located in the capital city, so if Beijing has a lot of embassies, that would be another clue. \n\nI should also consider if there's any recent change. Sometimes countries change their capitals, but I don't recall China doing that. There was a time when Xi'an was the capital in ancient times, but that's way back. In modern times, it's definitely Beijing. \n\nAnother way to verify is to think about sports events. For example, the 2008 Summer Olympics were held in Beijing, which is often the case for the capital city when hosting major international events. Similarly, the 2022 Winter Olympics were also in Beijing. That further solidifies the idea that Beijing is the capital. \n\nI might also think about the Chinese government's structure. The President of China resides in Beijing, and the National People's Congress, which is the legislative body, is also based there. So all the key political institutions are in Beijing. \n\nWait, just to be thorough, are there any other cities that could be considered? Maybe Chengdu or Guangzhou? No, those"
+            }
+        ],
+        "comment": "Test 'no media' modality.",
+        "eval-id": 1
+    }
+]

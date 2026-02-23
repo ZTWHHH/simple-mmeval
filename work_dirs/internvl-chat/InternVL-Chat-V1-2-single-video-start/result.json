@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of adventure in a rugged landscape. Dominating the scene is a gray GMC truck, its black grille and black wheels adding a touch of contrast to its overall appearance. The truck is in motion, driving on a dirt road that cuts through the wilderness. The road is not just a path, but a stage for the truck's performance, as evidenced by the dust it kicks up behind it.\n\nThe truck is positioned centrally in the image, drawing the viewer's attention immediately. Its journey is set against a backdrop of red rock formations, their rugged texture and deep red color adding a sense of depth and scale to the scene. The rocks, scattered in the background, stand as silent spectators to the truck's journey.\n\nThe image is a study in contrasts - the man-made, mechanical precision of the truck against the raw, natural beauty of the landscape. It's a snapshot of a moment, frozen in time, telling a story of adventure and exploration."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of tranquility on the open sea. Dominating the scene is a white yacht, its sleek form cutting through the deep blue water. The yacht is moving towards the right side of the image, leaving behind a frothy white wake that contrasts with the calmness of the sea. \n\nThe yacht is well-equipped for a voyage, boasting a large deck and a smaller one on top. A radar and a satellite dish are mounted on the top deck, hinting at the yacht's advanced navigation capabilities. The yacht's design and features suggest it's ready to handle any journey across the vast ocean. \n\nThe image is taken from a high angle, providing a bird's eye view of the yacht and its surroundings. This perspective emphasizes the yacht's solitary journey across the endless expanse of the sea. The absence of other vessels or landmarks in the image further underscores the yacht's solitude. \n\nOverall, the image paints a picture of a peaceful journey on the sea, with the white yacht as the main character in this serene maritime tableau."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "In the image, a ginger cat is the main subject, captured in the midst of a leisurely stroll across a verdant, grassy lawn. The cat, with its fur glowing like a warm sunset, is moving towards the right side of the frame. Its tail, held high in the air, sways gently with each step it takes. The cat's eyes are focused ahead, perhaps drawn by something unseen in the distance. The grass beneath its paws is a lush green, dotted here and there with small, delicate flowers. The cat's path is unhurried, suggesting a sense of calm and contentment. The image is a snapshot of a simple, serene moment in nature, with the ginger cat as its charming centerpiece."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a breathtaking view of a sunrise over a mountainous landscape. The sun, a radiant orb of light, is positioned centrally in the image, its rays spreading outwards in a starburst pattern. The sky, a canvas of orange and yellow hues, is dotted with wispy clouds that add depth to the scene. The mountain, a silhouette of dark green, provides a stark contrast to the vibrant sky. The sun's position behind the mountain suggests it's either early morning or late evening. The image does not contain any discernible text or countable objects. The relative position of the sun, mountain, and sky creates a harmonious balance, making the image a captivating representation of nature's beauty."
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]

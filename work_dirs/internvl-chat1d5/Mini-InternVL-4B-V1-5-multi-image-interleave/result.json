@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a modern pickup truck, specifically a GMC truck, in motion on what appears to be a dirt or gravel surface. The truck is positioned at an angle, with the front facing slightly to the left of the image, giving a clear view of its front and side profile. The vehicle is equipped with a robust, angular front grille featuring the GMC logo prominently displayed in the center. The grille is flanked by two large, angular headlights that are turned on, illuminating the surrounding area.\n\nThe truck's body is a metallic gray color, and it has a rugged, utilitarian design typical of modern pickup trucks. The front bumper is equipped with additional lighting and a large air intake, suggesting that the truck is designed for both off-road capability and performance. The wheels are fitted with large, black, multi-spoke alloy rims, which are likely designed to handle rough terrain.\n\nThe truck is in motion, as evidenced by the dust being kicked up behind it, indicating that it is either accelerating or driving at a high speed. The background features a rocky landscape, likely a desert or canyon, with steep cliffs and sparse vegetation. The lighting in the image suggests it is daytime, with natural sunlight casting shadows and highlighting the truck's features.\n\nThe GMC logo is visible on the front grille, and the truck's design suggests it is a newer model, likely from the mid-2010s to the early 2020s. The overall impression is of a powerful, capable vehicle designed for both work and adventure.\n\nIn summary, the image shows a GMC pickup truck in motion on a dirt surface, with a rugged design, large wheels, and a prominent front grille with the GMC logo. The background is a rocky landscape, indicating an off-road setting. The truck appears to be a newer model, designed for both utility and performance."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, luxurious motor yacht cruising on the open sea. The yacht is predominantly white, with a sleek and modern design. The hull of the yacht is broad and streamlined, allowing for efficient movement through the water. The yacht features multiple decks, with the uppermost deck appearing to be a sun deck, equipped with outdoor seating and possibly a small bar or lounge area.\n\nThe yacht is equipped with a powerful outboard motor, which is generating a significant wake as it propels the vessel forward. The wake is a large, frothy spray of water, indicating the yacht's high speed and the force of the motor. The water in the image is a deep blue, suggesting that the yacht is in relatively deep waters, possibly in the open ocean or a large bay.\n\nThe sky above is clear and blue, with no visible clouds, indicating fair weather conditions. The horizon is visible in the background, where the blue of the sea meets the sky, creating a serene and picturesque scene.\n\nThe yacht's design includes several windows and possibly a sunroof, allowing for ample natural light and panoramic views from the interior. The deck is likely equipped with various amenities, such as a swimming pool, hot tub, and possibly a kitchen or dining area. The yacht also features a stern with a distinctive design, possibly including a helm or control station for navigation.\n\nOverall, the image captures the essence of luxury and leisure, showcasing a yacht designed for comfort and speed, cruising through calm waters under a clear sky. The yacht's powerful motor and the resulting wake emphasize its capability for high-speed travel, making it an ideal vessel for those seeking adventure and relaxation on the open sea."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts two distinct scenes, each showcasing a different type of vehicle in motion.\n\n1. **Truck on a Rocky Terrain:**\n   - **Vehicle:** The image features a large, modern pickup truck, specifically a GMC model, as indicated by the prominent logo on the front grille. The truck is painted in a metallic silver color.\n   - **Action:** The truck is in motion, driving on a rocky terrain. It appears to be off-road, as evidenced by the dust and dirt being kicked up behind it. The vehicle is equipped with a high ground clearance, suitable for navigating rough and uneven surfaces.\n   - **Background:** The background consists of rocky cliffs and a clear sky, suggesting a rugged, natural environment. The terrain is arid and barren, typical of desert or mountainous regions.\n\n2. **Boat on the Ocean:**\n   - **Vehicle:** The second image shows a luxurious yacht or speedboat. The boat is white with a sleek design, featuring a streamlined hull and a cabin structure.\n   - **Action:** The boat is moving at a high speed, creating a large wake in the water. The wake is a significant splash of water, indicating the boat's powerful propulsion system.\n   - **Background:** The background is the vast expanse of the ocean, with a clear sky above. The water is a deep blue, and the horizon is visible, separating the ocean from the sky.\n\n### Analysis and Description:\n\n**Truck on a Rocky Terrain:**\n- **Purpose:** The truck is likely used for off-road activities, such as exploring remote areas, transporting goods, or participating in off-road racing events.\n- **Features:** The truck's design includes features like a robust suspension system, high ground clearance, and durable tires to handle rough terrain. The GMC logo suggests it is a model from a reputable manufacturer known for producing reliable and powerful vehicles.\n\n**Boat on the Ocean:**\n- **Purpose:** The boat is designed for high-speed travel on the water, possibly for leisure activities such as cru"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts two distinct scenes, each showcasing a different type of vehicle in different environments.\n\n1. **Boat on Water:**\n   - **Vehicle:** The first scene features a large, white motorboat. The boat is moving at a high speed, as evidenced by the large wake it is creating in the water. The boat has a sleek design with a streamlined hull, which is typical of high-performance boats designed for speed and stability.\n   - **Environment:** The boat is on a body of water, likely an ocean or a large lake, given the vast expanse of water visible around it. The water appears calm, with no visible waves or disturbances, except for the wake created by the boat.\n   - **Background:** The background is mostly clear with a blue sky, indicating good weather conditions. There are no other boats or landmarks visible, suggesting that the boat is in an open water area.\n\n2. **Truck on Dirt Road:**\n   - **Vehicle:** The second scene shows a large, silver pickup truck. The truck is equipped with off-road tires and a robust build, indicating it is designed for rough terrain and possibly off-road activities. The truck is in motion, as indicated by the dust trail behind it.\n   - **Environment:** The truck is on a dirt road, which appears to be in a rugged or mountainous area. The road is not paved, and the surrounding terrain is uneven and rocky.\n   - **Background:** The background features rocky cliffs and sparse vegetation, typical of a desert or mountainous region. The sky is clear, suggesting a sunny day.\n\n### Analysis and Description:\n\n**Boat on Water:**\n- **Speed and Performance:** The boat's high speed and the large wake suggest it is a powerful vessel capable of fast travel across water.\n- **Design:** The sleek design of the boat indicates it is built for performance, with a focus on aerodynamics and stability.\n- **Environment:** The calm water and clear sky suggest ideal conditions for boating, with no immediate threats like storms or rough seas.\n\n**Truck on Dirt Road:**\n- **Capabilities:** The tr"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of exhilaration and freedom on the open water. Dominating the scene is a **white speedboat** with a **black stripe** running along its side, cutting through the water with a sense of purpose and speed. The boat is in motion, leaving behind a trail of **white foam** that contrasts with the deep blue of the ocean.\n\nThe boat is equipped with a **white cabin** and a **black roof**, providing shelter for its occupants. A **black railing** runs along the side of the boat, offering safety and support. The boat's design and features suggest it's built for speed and comfort.\n\nThe backdrop to this scene is a vast expanse of the **deep blue ocean**, stretching out to meet the **light blue sky** at the horizon. The contrast between the deep blue of the ocean and the light blue of the sky creates a serene and calming atmosphere.\n\nThe boat is positioned in the center of the image, drawing the viewer's attention to its speed and power. The foam trail it leaves behind adds a dynamic element to the scene, emphasizing the boat's movement and speed.\n\nOverall, this image captures a moment of adventure and freedom on the open water, with the speedboat as the main focus against a serene and calming backdrop."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image captures a moment of power and speed, featuring a **GMC truck** in motion on a **dirt road**. The truck, painted in a sleek **silver color**, is equipped with **black rims** and **black tires**, adding to its robust appearance. \n\nThe truck is moving towards the right side of the image, kicking up a cloud of dust behind it, indicating its speed and the rough terrain it's traversing. The dirt road on which it's driving is surrounded by a backdrop of a **rocky cliff**, suggesting a remote or rugged location.\n\nThe image is taken from a low angle, which emphasizes the size and power of the truck. The truck's position in the center of the image draws the viewer's attention directly to it, making it the focal point of the scene. The overall composition of the image suggests an adventurous spirit and the thrill of off-road driving."
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts two distinct scenes, each featuring a different type of vehicle in a unique setting.\n\n### Image A:\n- **Vehicle**: The vehicle in Image A is a modern pickup truck. It is a GMC model, as indicated by the prominent GMC logo on the front grille.\n- **Design**: The truck has a sleek, modern design with a shiny metallic finish. It features a large front grille with the GMC logo at the center, flanked by two headlights. The hood has a subtle contour, and the truck is equipped with a black front bumper and black alloy wheels.\n- **Action**: The truck is in motion, as evidenced by the dust trail behind it. It appears to be driving on a dirt road or a rough terrain, kicking up a significant amount of dust.\n- **Background**: The background shows a rocky landscape, likely a canyon or a desert area. The terrain is rugged, with steep cliffs and sparse vegetation.\n\n### Image B:\n- **Vehicle**: The vehicle in Image B is a luxury yacht. It is a large, white boat with a streamlined design.\n- **Design**: The yacht has a sleek, modern appearance with a white hull and a black stripe running along the side. The bow of the yacht is pointed, and it features a large, prominent bow with a windshield.\n- **Action**: The yacht is sailing on the ocean, as indicated by the water and the horizon in the background. The boat is moving at a moderate speed, creating a wake behind it.\n- **Background**: The background shows a clear blue sky and calm ocean waters. The horizon is visible, and there are no other boats or land in sight.\n\n### Analysis:\n- **Comparison**: The two images showcase vehicles designed for different purposes. Image A features a pickup truck, which is typically used for utility, work, or off-road activities. Image B features a yacht, which is designed for leisure and recreational purposes on the water.\n- **Environment**: The environments in the two images are also contrasting. Image A is set in a rugged, arid"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts two distinct scenes, each featuring a different type of vehicle.\n\n### Image A:\n- **Vehicle**: The vehicle in Image A is a large, white motorboat. It is moving at a high speed, as evidenced by the large wake it is creating in the water. The boat has a sleek design with a streamlined hull, which is typical for high-speed vessels.\n- **Wake**: The boat is creating a significant wake, indicating it is moving at a considerable speed. The wake is a large, turbulent mass of water that forms behind the boat due to the boat's movement through the water.\n- **Background**: The background shows a clear blue sky and calm blue water, suggesting that the boat is on a large body of water, possibly an ocean or a large lake.\n\n### Image B:\n- **Vehicle**: The vehicle in Image B is a large, silver pickup truck. It is shown in motion, as indicated by the dust trail behind it. The truck has a robust and rugged design, suitable for off-road conditions.\n- **Dust Trail**: The truck is kicking up a significant amount of dust, which is visible as a trail behind it. This suggests that the truck is moving at a high speed and is likely on a rough or unpaved surface.\n- **Background**: The background of Image B shows a rocky terrain with sparse vegetation. The terrain appears rugged and uneven, which is consistent with the type of environment that a pickup truck like this one is designed to navigate.\n\n### Analysis:\n- **Vehicle Types**: The two vehicles in the images are designed for different purposes. The motorboat is built for speed and efficiency on water, while the pickup truck is designed for off-road capability and utility.\n- **Speed and Environment**: Both vehicles are depicted in motion, with the motorboat moving through water and the pickup truck moving through a dusty, rocky terrain. The wake and dust trail indicate high speeds.\n- **Design Features**: The motorboat has a streamlined design for reducing water resistance, while the pickup truck has a rugged design with features like a high ground clearance and a sturdy chass"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

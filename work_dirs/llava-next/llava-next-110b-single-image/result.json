@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC pickup truck driving on a dirt road with a backdrop of rocky cliffs. The truck is silver in color with black rims and a black grille. The GMC logo is prominently displayed on the grille. The truck appears to be in motion, as there is a cloud of dust rising from the tires. The sky is clear and blue, indicating a sunny day. The overall scene suggests an off-road adventure or exploration."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a white speedboat with a blue stripe on the side, moving at high speed on a body of water. The boat is leaving a trail of white water behind it, indicating its speed. The sky is clear and blue, and the water is a deep blue-green color. The boat has a large cabin with large windows, and there are several people visible inside the cabin. The boat is equipped with a large outboard motor on the back, and there are several life jackets hanging on the side of the boat. The boat is designed for speed and luxury, and it appears to be a high-end recreational vessel."
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]

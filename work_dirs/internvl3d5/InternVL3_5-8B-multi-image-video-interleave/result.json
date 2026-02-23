@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's take a look at this image. The main subject is a GMC pickup truck. It's a modern model, probably the Sierra or a similar line. The truck is silver or gray, with a sleek design. The front grille has the GMC logo prominently displayed. The headlights are sharp and angular, giving it a aggressive look. The truck is on a dirt road, kicking up some dust, which suggests it's in motion, maybe driving off-road or on a rugged terrain.\n\nThe background features a desert-like environment with red rock formations, which might be a canyon or a similar landscape. The lighting is warm, indicating either sunrise or sunset, which adds a dramatic effect to the scene. The truck has large wheels with alloy rims, and there's a visible antenna on the roof. The side mirrors are body-colored, and there's a step bar below the doors for easier entry. The truck bed is covered, and there's a crew cab configuration with four doors. The overall impression is that of a powerful, capable vehicle designed for both work and off-road adventures.\n</think>\n\nThe image features a modern GMC pickup truck in motion on a rugged, dusty terrain. Here's a detailed breakdown:\n\n1. **Vehicle Details**:\n   - **Make/Model**: A GMC Sierra or similar full-size pickup, identifiable by the prominent \"GMC\" badge on the front grille.\n   - **Design**: Sleek, angular lines with a muscular stance. The front grille is large and black, flanked by sharp LED headlights with integrated daytime running lights.\n   - **Color**: Metallic silver-gray finish, reflecting the desert sunlight.\n   - **Wheels/Rims**: Large, polished alloy wheels with low-profile tires, suitable for off-road performance.\n   - **Features**: \n     - Crew cab configuration (four doors).\n     - Step bar below the doors for easier access.\n     - Body-colored side mirrors and door handles.\n     - A roof-mounted antenna and possibly a tow hitch (not clearly visible).\n\n2. **Environment**:\n   - **Terrain**: A reddish dirt road, kicking up dust as the truck drives, suggesting off-road capability.\n   - **Background**: A desert landscape with striking red rock formations, likely a canyon or arid region, bathed in warm, golden-hour lighting (sunrise/sunset).\n\n3. **Lighting/Atmosphere**:\n   - The warm, low-angle sunlight enhances the truck's metallic sheen and casts long shadows, creating a dramatic, adventurous mood.\n\n4"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's take a look at this image. There's a white yacht speeding across the ocean. The water is a deep blue, and the sky is clear with a few clouds. The yacht is moving fast, creating a big wake behind it. The design of the yacht is sleek and modern, with a cabin area and a deck. There are railings on the deck, and maybe some people on board, but they're not very visible. The yacht has a logo or emblem on the side near the bow. The overall scene gives a sense of luxury and speed. I should mention the details like the wake, the color of the water and sky, the yacht's features, and the atmosphere it conveys.\n</think>\n\nThe image depicts a sleek, modern yacht cruising at high speed across a vast expanse of deep blue ocean. The vessel, painted predominantly white with a streamlined design, generates a dramatic, frothy white wake as it slices through the water, emphasizing its velocity. The yacht features a spacious deck with stainless steel railings, a partially enclosed cabin area, and a polished hull adorned with a distinctive emblem near the bow. The sky above is clear with minimal cloud cover, suggesting favorable weather conditions. The scene conveys a sense of luxury, adventure, and freedom, with the yacht's powerful movement contrasting against the serene, endless horizon."
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's take a look at these two images. The first one is a GMC truck on a dirt road. The truck is silver, has a crew cab, and is kicking up dust, which suggests it's moving at a decent speed. The background has a rocky, desert-like landscape with some greenery. The second image is a white yacht speeding on the ocean. The yacht has a sleek design, a cabin, and is creating a big wake behind it. The water is clear blue, and the sky is clear too. Both vehicles are in motion, but in very different environments. The truck is on land, rugged and powerful, while the yacht is on water, luxurious and fast. I need to describe each image in detail, noting the vehicle type, color, environment, and any notable features like the dust or wake. Also, mention the branding on the truck and the design elements of the yacht. Make sure to highlight the contrast between the two settings and the vehicles' purposes.\n</think>\n\nThe two images depict contrasting modes of transportation in distinct environments, each highlighting different aspects of luxury and performance.\n\n**First Image: GMC Truck on a Rugged Terrain**  \n- **Vehicle**: A modern GMC pickup truck, likely a heavy-duty model such as the Sierra or HD series. It features a crew cab configuration with four doors, a robust front grille bearing the \"GMC\" logo, and LED headlights. The truck is painted in a metallic silver-gray hue, with black trim accents and chrome details.  \n- **Action**: The truck is in motion, driving aggressively on a dusty, unpaved road. A cloud of red-brown dust trails behind its rear wheels, emphasizing its power and the loose surface.  \n- **Environment**: The setting is a desert-like landscape with rocky formations and sparse vegetation, suggesting off-road capability. The lighting is warm, casting long shadows and enhancing the rugged aesthetic.  \n- **Design Features**: The truck\u2019s elevated stance, large alloy wheels, and protective side steps indicate its off-road prowess. The \"AT4\" badge (if visible) would hint at all-terrain performance.\n\n**Second Image: Luxury Yacht Speeding on the Ocean**  \n- **Vehicle**: A sleek, white luxury yacht with a streamlined hull and a cabin structure. The design includes large windows, a polished deck, and a radar dome atop the cabin, suggesting advanced navigation systems.  \n- **Action**: The yacht is moving at high speed, cutting through clear blue water and generating a significant wake behind it"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's take a look at these two images. The first one is a yacht speeding on the ocean. It's white with a sleek design, cutting through the water, creating a big wake behind it. The sky is clear, and the water is a deep blue, suggesting it's a sunny day. The yacht has a cabin and some windows, maybe indicating it's a luxury vessel. The second image is a GMC pickup truck on a dirt road. The truck is dark-colored, probably black or dark gray, with a muscular build. It's kicking up dust as it drives, showing it's moving at a good speed. The background has rocky terrain, maybe a desert or canyon area. The truck has a prominent grille with the GMC logo, and the headlights are on. Both vehicles are in motion, but in very different environments\u2014one on water, the other on land. The yacht is more about leisure and speed on the water, while the truck seems rugged and capable of handling tough terrains. I should note the details like the brand names, the environment, the action they're doing, and the overall vibe each image conveys.\n</think>\n\nThe two images depict dynamic scenes of luxury and power in contrasting environments:\n\n1. **Yacht on the Ocean**:  \n   - **Vehicle**: A sleek, white luxury yacht with a streamlined hull, cutting through the water at high speed.  \n   - **Design**: Features a modern cabin with tinted windows, a polished exterior, and a prominent bow creating a frothy wake.  \n   - **Environment**: Open ocean under a clear blue sky, with calm, deep-blue waters suggesting ideal weather for sailing.  \n   - **Vibe**: Exudes exclusivity and leisure, emphasizing speed and elegance on the water.\n\n2. **GMC Pickup Truck on a Dirt Road**:  \n   - **Vehicle**: A robust, dark-colored (likely black or charcoal) GMC pickup truck with a muscular build, large tires, and a bold front grille featuring the GMC logo.  \n   - **Action**: Kicking up dust as it drives aggressively on a reddish dirt road, indicating off-road capability.  \n   - **Environment**: Arid, rocky terrain with canyon-like cliffs in the background, suggesting a desert or rugged landscape.  \n   - **Vibe**: Conveys strength, adventure, and utility, highlighting the truck\u2019s performance in challenging conditions.\n\n**Contrast**: The yacht represents refined aquatic speed, while the truck embodies rugged terrestrial power, each tailored to their respective domains"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user wants a detailed description of the contents in two images. The first image is a GMC truck on a dirt road, and the second is a speedboat on the ocean. I need to make sure I cover all the visual elements in each image thoroughly.\n\nStarting with the truck. The GMC logo is prominent on the grille, so I should mention that. The truck is silver, which gives it a sleek look. The environment is a desert or canyon area with red rock formations. The truck is in motion, kicking up dust, which adds a sense of action. The wheels are large with a multi-spoke design, and the tires are off-road capable. The headlights are modern, maybe LED, and there's a tow hitch at the back. The windows are tinted, and the side mirrors are body-colored. The truck's stance is aggressive, with a lifted suspension. I should note the lighting, probably late afternoon with warm sunlight enhancing the metallic paint.\n\nNow the speedboat. It's white with a streamlined design, cutting through the water. The wake is significant, showing high speed. The boat has a cabin with windows and a radar dome on top. There's a registration number on the side. The ocean is calm with a clear blue sky. The boat's hull is hydrodynamic, and the deck has railings. The lighting suggests midday with bright sunlight reflecting off the water. The boat's purpose is likely recreational, given its size and design.\n\nI need to ensure each description is separate and detailed, highlighting key features, environment, and the vehicle's condition. Avoid technical jargon but be specific about design elements. Check for any missed details, like the truck's bed style or the boat's seating capacity if visible. Also, mention the atmosphere each image conveys\u2014adventure for the truck, luxury and speed for the boat. Make sure the descriptions flow well and are engaging, matching the user's request for a detailed account.\n</think>\n\n**Image 1: GMC Truck in Motion**  \nThe image features a modern GMC pickup truck driving aggressively on a rugged, reddish dirt road. The vehicle is painted in a sleek metallic silver color, with the prominent \"GMC\" logo displayed boldly on the front grille. The truck\u2019s design emphasizes strength and utility, with a muscular body, sharp LED headlights, and a large front fascia that includes a black grille and angular LED daytime running lights.  \n\nKey details include:  \n- **Suspension and Tires**:"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this query. The user wants a detailed description of the contents in two images. The first one is a yacht speeding on the ocean, and the second is a GMC pickup truck driving on a dirt road. \n\nStarting with the yacht. I need to describe its appearance, movement, and the environment. The yacht is white with a sleek design, probably a luxury model. It's moving fast, creating a wake. The ocean is calm, maybe indicating good weather. The angle of the photo might be from the side, showing the bow cutting through the water. I should mention the design elements like the windows, railings, and any visible features like a radar or antennas. Also, the spray of water and the sense of speed.\n\nNow the GMC truck. It's a pickup, likely a heavy-duty model given the dust and terrain. The truck is metallic gray, with the GMC logo on the grille. The setting is a desert or rocky area with reddish soil. The truck is in motion, kicking up dust, which shows power and capability. The wheels are large, suitable for off-road. The design features like the headlights, grille, and side mirrors should be noted. The background might have cliffs or rock formations, adding to the ruggedness.\n\nI need to make sure the descriptions are detailed but not too technical. Highlight the key features and the atmosphere each image conveys. For the yacht, focus on luxury and speed; for the truck, emphasize power and off-road capability. Check if there are any specific details I might have missed, like the number of windows, the exact model of the truck, or any unique design elements. Also, consider the lighting and how it affects the appearance\u2014sunlight reflecting off the yacht's hull or the shadows on the truck. Avoid assumptions not visible in the image, like the interior of the yacht or the exact model year of the truck. Keep the language clear and descriptive, ensuring each element is covered without being redundant.\n</think>\n\nThe image depicts a sleek, modern yacht cruising at high speed across a calm, turquoise ocean. Here's a detailed breakdown of its contents:\n\n### **Yacht Description:**\n1. **Design & Structure:**\n   - **Hull:** The yacht features a streamlined, white hull with a glossy finish, emphasizing luxury and aerodynamics. A subtle black stripe runs along the side, adding contrast.\n   - **Decks:** The main deck is partially enclosed with large windows, suggesting spacious interior cabins. The stern (rear) has"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user provided two images and wants a detailed description of each. First, I need to analyze Image A. It's a GMC truck on a dirt road. The truck is silver, has a crew cab, and is kicking up dust. The background has a rocky landscape, maybe a canyon. The lighting suggests it's either sunrise or sunset, giving a warm glow. The truck's features like the grille, headlights, and wheels should be mentioned. Also, the action of the truck moving and the dust trail.\n\nNow, Image B is a yacht on the ocean. The yacht is white with a sleek design, moving fast, creating a wake. The ocean is calm with a clear sky. The yacht has multiple decks, windows, and a cabin. There's a logo on the side, maybe a brand name. The angle shows the front cutting through the water. The speed is indicated by the wake and spray. The environment is open sea, possibly during daytime with good weather.\n\nI should make sure to differentiate between the two images clearly. For each, start with the main subject, then describe the vehicle's features, the environment, lighting, and any action happening. Avoid technical jargon but be specific about details like the brand, model hints, and the setting. Check if there are any notable elements like the dust in Image A or the wake in Image B. Also, mention the color schemes and any branding visible. Make sure the descriptions are vivid but concise, covering all key aspects without being too verbose.\n</think>\n\n**Image A Description:**  \nThe image features a modern, silver GMC pickup truck in motion on a rugged, reddish dirt road. The vehicle is a crew cab model with a robust, angular design, showcasing a prominent front grille bearing the \"GMC\" logo in bold red letters. The truck\u2019s headlights are sleek and angular, complementing its aggressive stance. It has large, black alloy wheels that kick up a trail of dust, emphasizing its power and off-road capability. The background reveals a desert-like landscape with layered rock formations and sparse greenery, bathed in warm, golden sunlight suggestive of sunrise or sunset. The scene conveys a sense of adventure and durability, highlighting the truck\u2019s performance in challenging terrain.\n\n**Image B Description:**  \nThis image captures a luxurious white yacht speeding across a calm, deep-blue ocean. The vessel features a sleek, aerodynamic hull with a curved windshield and multiple decks, including an open aft area. The yacht\u2019s design includes large windows"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>\nOkay, let's tackle this. The user provided two images and wants a detailed description of each. First, I need to make sure I understand what each image shows. Image A is a yacht on the ocean, and Image B is a GMC pickup truck on a dirt road.\n\nStarting with Image A: The yacht is white with a sleek design. It's moving fast, creating a wake. The ocean is calm, and the sky is clear. The yacht has a cabin, windows, and maybe some railings. The angle is from the side, showing the bow cutting through the water. I should mention the speed, the design features like the hull shape, and the environment around it.\n\nNow Image B: The GMC truck is on a dirt road, kicking up dust. It's a modern model, probably a heavy-duty pickup. The truck is silver or gray, with the GMC logo on the grille. The background has a rocky, desert-like landscape. The truck's features like the headlights, grille, and tires should be noted. Also, the action of driving on rough terrain, the dust trail, and the setting sun lighting.\n\nWait, the user might be comparing the two images or using them for something specific. Maybe they want to know the differences or similarities. But the query just asks for a detailed description of each. I should stick to that. Make sure each description is thorough but not too technical. Use adjectives to convey the scene accurately. Check for any specific details I might have missed, like the number of windows, the exact model of the truck, or the type of yacht. Since I can't see the images, I have to rely on the captions. The yacht's speed is indicated by the wake, and the truck's movement by the dust. Also, note the time of day if possible, like the lighting in Image B suggesting sunset.\n\nAvoid making assumptions beyond what's described. For example, the yacht's interior isn't visible, so don't speculate. Focus on visible elements. Mention the brand names (GMC) as they are clearly visible. Highlight the contrast between the two images: one is a luxury watercraft, the other a rugged vehicle. Maybe the user is interested in transportation modes or vehicle types. But since the task is just description, keep it straightforward. Ensure each paragraph is clear and structured, maybe separate each image's description into its own section with headings as the example shows. Use concise sentences but provide enough detail to paint a vivid picture.\n</think>\n\n**Image A Description:**"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality, 'multi image video interleave' modality should be able to handle this.",
+        "eval-id": 7
+    }
+]
