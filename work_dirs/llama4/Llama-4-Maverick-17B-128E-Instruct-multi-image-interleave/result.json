@@ -1,0 +1,25 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a GMC Sierra pickup truck driving on a dirt road, with the front wheels slightly raised and dust kicked up behind it. The truck is dark gray with black trim and features a red GMC logo on the front grille.\n\n*   **Truck**\n    *   Color: Dark gray\n    *   Trim: Black\n    *   Logo: Red GMC logo on the front grille\n    *   Wheels: Black\n    *   Position: Driving on a dirt road\n    *   Front wheels: Slightly raised\n    *   Dust: Kicked up behind the truck\n*   **Background**\n    *   Terrain: Rocky cliffside\n    *   Vegetation: Greenery visible in the distance\n    *   Lighting: Natural daylight\n\nThe image showcases the GMC Sierra's capabilities and ruggedness as it navigates the dirt road, with the raised front wheels and kicked-up dust conveying a sense of power and movement.<|eot|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    }
+]

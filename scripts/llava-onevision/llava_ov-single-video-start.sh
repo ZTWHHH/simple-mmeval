@@ -11,5 +11,5 @@ python $MMEVAL_DIR/mmeval/run.py \
     --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
     --model_name_or_path llava-hf/llava-onevision-qwen2-0.5b-ov-hf \
     --gpu_per_parallel 1 \
-    --parallel_per_task 4 \
+    --parallel_per_task 1 \
     --max_new_tokens 512

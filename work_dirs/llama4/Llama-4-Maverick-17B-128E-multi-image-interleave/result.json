@@ -1,0 +1,48 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a GMC Sierra pickup truck driving on a dirt road in a desert landscape. The truck is dark gray with a black grill and black rims. It has a red GMC logo on the front grill. The truck is driving on a dirt road that is covered in dust. The background is a desert landscape with rocky hills and mountains. The sky is blue and clear. The overall atmosphere of the image is one of adventure and exploration. The truck is driving through a rugged and remote area, and the driver is likely on a journey to explore the wilderness. The image suggests that the truck is capable of handling any terrain, and that the driver is confident and capable of navigating the challenges of the desert.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image depicts a large, white yacht sailing on the open sea. The yacht is positioned in the center of the image, with its bow facing the right side. It has a sleek, modern design with a black stripe running along its side. The yacht is moving at a high speed, creating a large wake behind it. The water is calm and blue, with a few small waves visible in the distance. The sky above is clear and blue, with a few wispy clouds scattered across it. The overall atmosphere of the image is one of luxury and relaxation, with the yacht gliding effortlessly across the water.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    }
+]
