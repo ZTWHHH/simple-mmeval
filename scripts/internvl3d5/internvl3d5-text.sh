@@ -4,7 +4,7 @@ RESULT_DIR="$SCRIPT_DIR/../.."
 export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
-# InternVL3.5 Base Models
+# InternVL3.5 Flagship Models
 python $MMEVAL_DIR/mmeval/run.py \
     --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
     --dataset local@json \

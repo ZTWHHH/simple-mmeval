@@ -1,0 +1,192 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a sleek, dark gray GMC Canyon pickup truck in motion, with its front wheels lifted off the ground as it navigates a dirt road. The truck's bold red \"GMC\" logo on the front grille stands out against the rugged terrain. In the background, a rocky cliff face rises up, adding to the sense of adventure and exploration. The overall atmosphere is one of excitement and freedom, as if the truck is ready to take on any challenge that comes its way.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image shows a white boat with a black stripe on the side, moving through the water. The boat has a large cabin in the middle and a smaller cabin at the back. There are two people on the boat, one standing at the front and one sitting at the back. The background is a blue sky and calm water.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image shows a GMC Canyon pickup truck in motion, driving on a dirt road with dust kicked up behind it. The truck is dark gray with a black grill and red lettering on the front that reads \"GMC.\" The background is a rocky cliff face, suggesting a rugged and adventurous setting.\n\nThe second image depicts a white yacht with a black stripe, moving through the water with a trail of white foam behind it. The yacht has a large cabin and a deck on top, with a railing around the edge. The background is a blue sky and calm water, indicating a peaceful and serene atmosphere.\n\nIn terms of similarities, both images feature a vehicle in motion, with a focus on the vehicle's design and movement. However, the settings and atmospheres are quite different, with the first image evoking a sense of adventure and ruggedness, while the second image suggests a more relaxed and luxurious experience.\n\nAs for differences, the most obvious is the type of vehicle depicted, with the first image showing a pickup truck and the second image showing a yacht. Additionally, the settings and backgrounds are distinct, with the first image featuring a rocky cliff face and the second image featuring a calm body of water.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image shows a white yacht with a black stripe, moving through the water, leaving a trail of white foam behind it. The yacht has a sleek design, with a pointed bow and a flat stern. It appears to be a large vessel, possibly a luxury yacht or a commercial boat.\n\nThe second image shows a gray GMC Canyon pickup truck, driving on a dirt road, kicking up dust as it moves. The truck has a rugged design, with a prominent grille and a lifted suspension. It appears to be a mid-size pickup truck, possibly a 2022 model.\n\nPlease provide a detailed description of the contents shown in the two images.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'multi image start' modality, 'multi image interleave' modality should be able to handle this.",
+        "eval-id": 3
+    },
+    {
+        "id": 4,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The contents shown in  and  are two images of vehicles. The first image is of a gray pickup truck with the brand name \"GMC\" on the front grille, driving on a dirt road with dust flying behind it. The second image is of a white yacht with a black stripe, speeding through the water with a trail of white foam behind it.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 4
+    },
+    {
+        "id": 5,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Please provide a detailed description of the contents shown in <image> and <image>.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Please provide a detailed description of the contents shown in  and .<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 5
+    },
+    {
+        "id": 6,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A: The image shows a gray GMC Canyon pickup truck driving on a dirt road. The truck is in motion, with dust kicked up behind the rear wheels. The background features a rocky cliff face and some greenery. The truck's front grille is visible, displaying the \"GMC\" logo in red letters.\n\nImage B: The image depicts a white yacht moving through calm blue water. The yacht is angled to the right, with a wake of white foam trailing behind it. The sky above is clear and blue. The yacht's hull is white with a black stripe running along its side, and it features a large cabin with windows and a railing around the top deck.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 6
+    },
+    {
+        "id": 7,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "Given the Image A <image> and Image B <image>. Please provide a detailed description of the contents shown in each image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "Image A: The image shows a white yacht with a black stripe along its side, moving through the water. The yacht has a large cabin in the center and a smaller cabin at the front. There are several windows on the yacht, and it appears to be moving quickly through the water, creating a wake behind it. The background of the image is a blue sky and calm water.\n\nImage B: The image shows a gray pickup truck with a black grill and red lettering that reads \"GMC\" on the front. The truck is driving on a dirt road, kicking up dust behind it. The truck has a large bed in the back and appears to be a four-door model. The background of the image is a rocky cliff face with greenery growing on it.<|end_of_text|>"
+            }
+        ],
+        "comment": "Test 'multi image interleave' modality.",
+        "eval-id": 7
+    }
+]

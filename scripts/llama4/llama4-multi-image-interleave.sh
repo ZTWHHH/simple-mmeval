@@ -20,7 +20,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --out_dir $RESULT_DIR/work_dirs/llama4/Llama-4-Maverick-17B-128E-Instruct-multi-image-interleave \
     --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
     --model_name_or_path meta-llama/Llama-4-Maverick-17B-128E-Instruct \
-    --gpu_per_parallel 4 \
+    --gpu_per_parallel 7 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
@@ -30,7 +30,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --out_dir $RESULT_DIR/work_dirs/llama4/Llama-4-Scout-17B-16E-multi-image-interleave \
     --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
     --model_name_or_path meta-llama/Llama-4-Scout-17B-16E \
-    --gpu_per_parallel 2 \
+    --gpu_per_parallel 4 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
@@ -40,6 +40,6 @@ python $MMEVAL_DIR/mmeval/run.py \
     --out_dir $RESULT_DIR/work_dirs/llama4/Llama-4-Maverick-17B-128E-multi-image-interleave \
     --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
     --model_name_or_path meta-llama/Llama-4-Maverick-17B-128E \
-    --gpu_per_parallel 4 \
+    --gpu_per_parallel 7 \
     --parallel_per_task 1 \
     --max_new_tokens 512

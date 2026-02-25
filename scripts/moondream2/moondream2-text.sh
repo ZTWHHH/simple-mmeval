@@ -10,6 +10,6 @@ python $MMEVAL_DIR/mmeval/run.py \
     --out_dir $RESULT_DIR/work_dirs/moondream2/moondream2-text \
     --model_name_or_path vikhyatk/moondream2 \
     --gpu_per_parallel 1 \
-    --parallel_per_task 4 \
+    --parallel_per_task 1 \
     --max_new_tokens 512
 
