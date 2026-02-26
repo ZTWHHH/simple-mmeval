@@ -8,7 +8,7 @@
 
 ---
 
-📦 [Installation](#installation) | 🚀 [Usage Guide](docs/en/USAGE.md) | 📊 [Supported Models and Datasets](docs/en/SUPPORTED.md) | 🤝 [Contributing](docs/en/CONTRIBUTING.md) | 📎 [Citation](#citation)
+📦 [Installation](#installation) | 🚀 [Quick Start](#quick-start) | 📊 [Supported Models and Datasets](#supported-models-and-datasets) | 🤝 [Contributing](#contributing) | 📎 [Citation](#citation)
 
 ## Key Features
 
@@ -17,7 +17,7 @@
 - **Scalable** -- Automatic multi-GPU parallel scheduling with worker-based data sharding; lazy loading for memory-efficient processing of large datasets
 - **Modular** -- Pluggable dataset loaders (local JSON, HuggingFace, VLMEvalKit TSV), Jinja2 prompt templates, and a registry-based model system that can be extended independently
 
-## 📦 Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -59,7 +59,7 @@ export GOOGLE_API_KEY=...
 export ANTHROPIC_API_KEY=...
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 Run Qwen2.5-VL-3B on a local image/video test set using a single GPU:
 
@@ -78,13 +78,13 @@ python mmeval/run.py \
 
 For more examples (HuggingFace datasets, VLMEvalKit benchmarks, multi-GPU parallel inference, etc.), command-line reference, prompt templates, caching, and output format, see the **[Usage Guide](docs/en/USAGE.md)**.
 
-## 📊 Supported Models and Datasets
+## Supported Models and Datasets
 
 Simple-MMEval supports **50 model series** (44 open source + 6 API providers) and **3 dataset backends** (local JSON, HuggingFace, VLMEvalKit 100+ benchmarks).
 
 See the complete list of all supported models and datasets in **[SUPPORTED.md](docs/en/SUPPORTED.md)**.
 
-## 🤝 Contributing
+## Contributing
 
 Simple-MMEval is designed to be easily extended with new models and datasets.
 
@@ -93,7 +93,7 @@ Simple-MMEval is designed to be easily extended with new models and datasets.
 
 See the full step-by-step guide in **[CONTRIBUTING.md](docs/en/CONTRIBUTING.md)**.
 
-## 📎 Citation
+## Citation
 
 If you find Simple-MMEval useful in your research, please consider citing:
 
