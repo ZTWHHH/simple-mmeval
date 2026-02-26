@@ -1,6 +1,6 @@
 # Usage Guide
 
-This document covers how to run evaluations with Simple-MMEval, including quick start examples, the full command-line reference, prompt template configuration, caching and resume behavior, and output format. For general overview, see the main [README](README.md).
+This document covers how to run evaluations with Simple-MMEval, including quick start examples, the full command-line reference, prompt template configuration, caching and resume behavior, and output format. For general overview, see the main [README](../../README.md).
 
 ---
 

@@ -1,6 +1,6 @@
 # Supported Models and Datasets
 
-For general usage, see the main [README](README.md).
+For general usage, see the main [README](../../README.md).
 
 ---
 

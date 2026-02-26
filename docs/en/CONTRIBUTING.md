@@ -1,6 +1,6 @@
 # Contributing to Simple-MMEval
 
-This guide covers how to extend Simple-MMEval with new models and new datasets. For general usage, see the main [README](README.md).
+This guide covers how to extend Simple-MMEval with new models and new datasets. For general usage, see the main [README](../../README.md).
 
 ---
 
@@ -242,7 +242,7 @@ Template variables must match keys present in the message objects (e.g., `hint`,
 
 3. **Main repo updates** (via PR):
    - Add a test script if applicable.
-   - Update the HuggingFace dataset table in the main [README](README.md).
+   - Update the HuggingFace dataset table in the main [README](../../README.md).
 
 ### Reference: conversion script example
 
