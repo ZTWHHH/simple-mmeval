@@ -28,7 +28,7 @@ class TaskRunner(Task):
         super().__init__(args)
     
     def load_model(self, args):
-        self.model = FuyuForCausalLM.from_pretrained(args.model_name_or_path, torch_dtype=self.dtype, **self.model_kwargs)
+        self.model = FuyuForCausalLM.from_pretrained(args.model_name_or_path, dtype=self.dtype, **self.model_kwargs)
         # Resolve "auto" dtype to actual model dtype
         if self.dtype == "auto":
             self.dtype = self.model.dtype

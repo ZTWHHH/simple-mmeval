@@ -11,7 +11,7 @@ class TaskRunner(Task):
     def __init__(self, args):
         self.args = args
         self.dtype = getattr(args, "dtype") or torch.bfloat16
-        self.default_model_kwargs = {"device_map": "auto", "torch_dtype": torch.bfloat16}
+        self.default_model_kwargs = {"device_map": "auto"}
         self.default_gen_kwargs = {"max_new_tokens": 256}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
@@ -21,7 +21,7 @@ class TaskRunner(Task):
     def load_model(self, args):
         self.model = Llama4ForConditionalGeneration.from_pretrained(
             args.model_name_or_path, 
-            torch_dtype=self.dtype, 
+            dtype=self.dtype, 
             **self.model_kwargs
         )
         self.processor = AutoProcessor.from_pretrained(args.model_name_or_path)
