@@ -27,7 +27,7 @@ class TaskRunner(Task):
     def load_model(self, args):
         self.model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
             args.model_name_or_path,
-            torch_dtype=self.dtype,
+            dtype=self.dtype,
             **self.model_kwargs
         )
         self.processor = Qwen3OmniMoeProcessor.from_pretrained(args.model_name_or_path)
