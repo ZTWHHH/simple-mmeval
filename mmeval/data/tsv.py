@@ -34,7 +34,7 @@ class TSVDataset(BaseDataset):
         args: argparse.Namespace
             Arguments from argparse containing dataset configuration
         """
-        self.dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
+        self.dataset_dir = os.getenv('DATASET_DIR') or "./datasets"
         self.dataset_url = None
         self.resize = args.resize
         
