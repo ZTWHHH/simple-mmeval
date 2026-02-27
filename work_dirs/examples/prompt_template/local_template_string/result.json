@@ -1,0 +1,72 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> What is shown in the image?",
+                "answer": "A",
+                "options": {
+                    "A": "A truck",
+                    "B": "A dog",
+                    "C": "A boat",
+                    "D": "A plane"
+                },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
+                "hint": "Please choose the correct option.",
+                "prompt": "<image> What is shown in the image?\nChoices:\n(A) A truck\n(B) A dog\n(C) A boat\n(D) A plane\nNote: Please choose the correct option."
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "(A) A truck"
+                ]
+            }
+        ],
+        "comment": "Test template rendering with ABCD options and hint.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> What is shown in the image?",
+                "answer": "C",
+                "options": {
+                    "A": "A truck",
+                    "B": "A dog",
+                    "C": "A boat",
+                    "D": "A plane"
+                },
+                "choices": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ],
+                "hint": "Please choose the correct option.",
+                "prompt": "<image> What is shown in the image?\nChoices:\n(A) A truck\n(B) A dog\n(C) A boat\n(D) A plane\nNote: Please choose the correct option."
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "(C) A boat"
+                ]
+            }
+        ],
+        "comment": "Test template rendering with ABCD options and hint.",
+        "eval-id": 1
+    }
+]
