@@ -1,7 +1,6 @@
 import os
 import time
 import subprocess
-import torch
 import json
 import copy
 
@@ -25,7 +24,37 @@ if __name__ == "__main__":
     infer_env = series_infer_env_mapping[series]["env"]
     parallel_per_task  = args.parallel_per_task
     gpu_per_parallel = args.gpu_per_parallel
-    total_gpus = torch.cuda.device_count()
+
+    # Initialize GPU pool: respect CUDA_VISIBLE_DEVICES
+    cvd = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
+    if cvd:
+        # Treat CUDA_VISIBLE_DEVICES entries as opaque strings (supports numeric IDs and GPU/MIG UUIDs)
+        available_gpus = [x.strip() for x in cvd.split(",") if x.strip()]
+        total_gpus = len(available_gpus)
+    else:
+        # Get GPU count via nvidia-smi when CVD not set (handles MIG)
+        try:
+            result = subprocess.run(
+                ["nvidia-smi", "-L"],
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            if result.returncode != 0:
+                total_gpus = 0
+            else:
+                lines = [line.strip() for line in result.stdout.strip().splitlines() if line.strip()]
+                # MIG mode: CUDA sees MIG instances, not parent GPUs; count "MIG ... Device X:" lines
+                mig_lines = [ln for ln in lines if "MIG" in ln and "Device" in ln]
+                if mig_lines:
+                    total_gpus = len(mig_lines)
+                else:
+                    # Normal mode: count "GPU X:" lines
+                    total_gpus = len([ln for ln in lines if ln.startswith("GPU") and ":" in ln])
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            # nvidia-smi is unavailable or unresponsive; assume no GPUs
+            total_gpus = 0
+        available_gpus = list(range(total_gpus))
 
     if os.path.exists(os.path.join(args.out_dir, "result.json")) and args.resume:
         # exit and return success
@@ -38,13 +67,6 @@ if __name__ == "__main__":
         )
         
 
-    # Initialize GPU pool and task list
-    cvd = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
-    if cvd:
-        available_gpus = [int(x.strip()) for x in cvd.split(",") if x.strip()]
-    else:
-        available_gpus = list(range(total_gpus))
-        
     running_tasks = []
     failed_tasks = []  # Track failed tasks
     next_rank = 0
