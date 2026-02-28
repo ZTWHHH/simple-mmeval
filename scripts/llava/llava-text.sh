@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/llava/llava-1.5-7b-text \
     --model_name_or_path llava-hf/llava-1.5-7b-hf \
@@ -13,7 +13,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/llava/llava-1.5-13b-text \
     --model_name_or_path llava-hf/llava-1.5-13b-hf \

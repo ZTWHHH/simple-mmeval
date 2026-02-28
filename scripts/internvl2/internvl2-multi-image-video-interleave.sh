@@ -5,70 +5,70 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-1B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-1B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-2B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-2B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-4B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-4B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-8B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-8B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-26B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-26B \
     --gpu_per_parallel 2 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-40B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-40B \
     --gpu_per_parallel 2 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/multi_image_video_interleave.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_video_interleave.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-Llama3-76B-multi-image-video-interleave \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL2-Llama3-76B \
     --gpu_per_parallel 4 \
     --parallel_per_task 1 \

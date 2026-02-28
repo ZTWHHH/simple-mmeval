@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # Qwen2.5-Omni Text-Only Tests
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen2.5-omni/Qwen2.5-Omni-3B-text \
     --model_name_or_path Qwen/Qwen2.5-Omni-3B \
@@ -15,7 +15,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen2.5-omni/Qwen2.5-Omni-7B-text \
     --model_name_or_path Qwen/Qwen2.5-Omni-7B \
@@ -25,7 +25,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # Qwen2.5-Omni Quantized Models
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen2.5-omni/Qwen2.5-Omni-7B-GPTQ-Int4-text \
     --model_name_or_path Qwen/Qwen2.5-Omni-7B-GPTQ-Int4 \

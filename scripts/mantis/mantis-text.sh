@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/mantis/mantis-8b-clip-llama3-text \
     --model_name_or_path TIGER-Lab/Mantis-8B-clip-llama3 \

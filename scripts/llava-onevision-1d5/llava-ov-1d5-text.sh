@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/llava-onevision-1d5/LLaVA-OneVision-1.5-8B-Instruct-text \
     --model_name_or_path lmms-lab/LLaVA-OneVision-1.5-8B-Instruct \

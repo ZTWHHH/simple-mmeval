@@ -5,10 +5,10 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/single_image_start.json \
+    --infile $MMEVAL_DIR/tests/samples/single_image_start.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/phi3v/Phi-3-vision-128k-instruct-single-image-start \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path microsoft/Phi-3-vision-128k-instruct \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \

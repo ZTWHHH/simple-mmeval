@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/blip2/blip2-flan-t5-xl-text \
     --model_name_or_path Salesforce/blip2-flan-t5-xl \
@@ -14,7 +14,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/blip2/blip2-flan-t5-xxl-text \
     --model_name_or_path Salesforce/blip2-flan-t5-xxl \

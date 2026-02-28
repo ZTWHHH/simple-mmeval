@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-1B-text \
     --model_name_or_path OpenGVLab/InternVL2-1B \
@@ -13,7 +13,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-2B-text \
     --model_name_or_path OpenGVLab/InternVL2-2B \
@@ -21,7 +21,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-4B-text \
     --model_name_or_path OpenGVLab/InternVL2-4B \
@@ -29,7 +29,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-8B-text \
     --model_name_or_path OpenGVLab/InternVL2-8B \
@@ -37,7 +37,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-26B-text \
     --model_name_or_path OpenGVLab/InternVL2-26B \
@@ -45,7 +45,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-40B-text \
     --model_name_or_path OpenGVLab/InternVL2-40B \
@@ -53,7 +53,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl2/InternVL2-Llama3-76B-text \
     --model_name_or_path OpenGVLab/InternVL2-Llama3-76B \

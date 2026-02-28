@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/vlaa-thinker/VLAA-Thinker-Qwen2VL-2B-text \
     --model_name_or_path UCSC-VLAA/VLAA-Thinker-Qwen2VL-2B \
@@ -14,7 +14,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/vlaa-thinker/VLAA-Thinker-Qwen2VL-7B-text \
     --model_name_or_path UCSC-VLAA/VLAA-Thinker-Qwen2VL-7B \
@@ -23,7 +23,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/vlaa-thinker/VLAA-Thinker-Qwen2VL-7B-Zero-text \
     --model_name_or_path UCSC-VLAA/VLAA-Thinker-Qwen2VL-7B-Zero \
@@ -32,7 +32,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/vlaa-thinker/VLAA-Thinker-Qwen2.5VL-3B-text \
     --model_name_or_path UCSC-VLAA/VLAA-Thinker-Qwen2.5VL-3B \
@@ -41,7 +41,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/vlaa-thinker/VLAA-Thinker-Qwen2.5VL-7B-text \
     --model_name_or_path UCSC-VLAA/VLAA-Thinker-Qwen2.5VL-7B \

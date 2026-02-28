@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # Qwen3-VL Text-Only Tests
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-2B-Instruct-text \
     --model_name_or_path Qwen/Qwen3-VL-2B-Instruct \
@@ -15,7 +15,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-4B-Instruct-text \
     --model_name_or_path Qwen/Qwen3-VL-4B-Instruct \
@@ -24,7 +24,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-8B-Instruct-text \
     --model_name_or_path Qwen/Qwen3-VL-8B-Instruct \
@@ -33,7 +33,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-30B-A3B-Instruct-text \
     --model_name_or_path Qwen/Qwen3-VL-30B-A3B-Instruct \
@@ -42,7 +42,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-32B-Instruct-text \
     --model_name_or_path Qwen/Qwen3-VL-32B-Instruct \
@@ -51,7 +51,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-2B-Thinking-text \
     --model_name_or_path Qwen/Qwen3-VL-2B-Thinking \
@@ -60,7 +60,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-4B-Thinking-text \
     --model_name_or_path Qwen/Qwen3-VL-4B-Thinking \
@@ -69,7 +69,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-8B-Thinking-text \
     --model_name_or_path Qwen/Qwen3-VL-8B-Thinking \
@@ -78,7 +78,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-vl/Qwen3-VL-30B-A3B-Thinking-text \
     --model_name_or_path Qwen/Qwen3-VL-30B-A3B-Thinking \
