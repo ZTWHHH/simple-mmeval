@@ -5,7 +5,7 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl-chat/InternVL-Chat-V1-1-text \
     --model_name_or_path OpenGVLab/InternVL-Chat-V1-1 \
@@ -13,7 +13,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl-chat/InternVL-Chat-V1-2-text \
     --model_name_or_path OpenGVLab/InternVL-Chat-V1-2 \
@@ -21,7 +21,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 1
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl-chat/InternVL-Chat-V1-2-Plus-text \
     --model_name_or_path OpenGVLab/InternVL-Chat-V1-2-Plus \

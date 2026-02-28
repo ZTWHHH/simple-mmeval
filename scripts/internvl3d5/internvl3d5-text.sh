@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # InternVL3.5 Flagship Models
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-1B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-1B \
@@ -15,7 +15,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-2B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-2B \
@@ -24,7 +24,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-4B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-4B \
@@ -33,7 +33,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-8B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-8B \
@@ -42,7 +42,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-14B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-14B \
@@ -51,7 +51,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-GPT-OSS-20B-A4B-Preview-text \
     --model_name_or_path OpenGVLab/InternVL3_5-GPT-OSS-20B-A4B-Preview \
@@ -60,7 +60,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-30B-A3B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-30B-A3B \
@@ -69,7 +69,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-38B-text \
     --model_name_or_path OpenGVLab/InternVL3_5-38B \
@@ -78,10 +78,10 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-241B-A28B-text \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL3_5-241B-A28B \
     --gpu_per_parallel 8 \
     --parallel_per_task 1 \
@@ -89,7 +89,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # InternVL3.5 MPO Models
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-1B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-1B-MPO \
@@ -98,7 +98,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-2B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-2B-MPO \
@@ -107,7 +107,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-4B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-4B-MPO \
@@ -116,7 +116,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-8B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-8B-MPO \
@@ -125,7 +125,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-14B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-14B-MPO \
@@ -134,7 +134,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-30B-A3B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-30B-A3B-MPO \
@@ -143,7 +143,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-38B-MPO-text \
     --model_name_or_path OpenGVLab/InternVL3_5-38B-MPO \
@@ -152,10 +152,10 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-241B-A28B-MPO-text \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL3_5-241B-A28B-MPO \
     --gpu_per_parallel 8 \
     --parallel_per_task 1 \
@@ -163,7 +163,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # InternVL3.5 Pretrained Models
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-1B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-1B-Pretrained \
@@ -172,7 +172,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-2B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-2B-Pretrained \
@@ -181,7 +181,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-4B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-4B-Pretrained \
@@ -190,7 +190,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-8B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-8B-Pretrained \
@@ -199,7 +199,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-14B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-14B-Pretrained \
@@ -208,7 +208,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-30B-A3B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-30B-A3B-Pretrained \
@@ -217,7 +217,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-38B-Pretrained-text \
     --model_name_or_path OpenGVLab/InternVL3_5-38B-Pretrained \
@@ -226,10 +226,10 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-241B-A28B-Pretrained-text \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL3_5-241B-A28B-Pretrained \
     --gpu_per_parallel 8 \
     --parallel_per_task 1 \
@@ -237,7 +237,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # InternVL3.5 Instruct Models
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-1B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-1B-Instruct \
@@ -246,7 +246,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-2B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-2B-Instruct \
@@ -255,7 +255,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-4B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-4B-Instruct \
@@ -264,7 +264,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-8B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-8B-Instruct \
@@ -273,7 +273,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-14B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-14B-Instruct \
@@ -282,7 +282,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-30B-A3B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-30B-A3B-Instruct \
@@ -291,7 +291,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-38B-Instruct-text \
     --model_name_or_path OpenGVLab/InternVL3_5-38B-Instruct \
@@ -300,10 +300,10 @@ python $MMEVAL_DIR/mmeval/run.py \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/internvl3d5/InternVL3_5-241B-A28B-Instruct-text \
-    --img_dir $MMEVAL_DIR/test_bed/modality_test/media/448 \
+    --img_dir $MMEVAL_DIR/tests/media/448 \
     --model_name_or_path OpenGVLab/InternVL3_5-241B-A28B-Instruct \
     --gpu_per_parallel 8 \
     --parallel_per_task 1 \

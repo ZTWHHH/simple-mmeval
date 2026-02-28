@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # Cosmos-Reason2-2B Text-Only
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/cosmos-reason2/Cosmos-Reason2-2B-text \
     --model_name_or_path nvidia/Cosmos-Reason2-2B \
@@ -16,7 +16,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # Cosmos-Reason2-8B Text-Only
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/cosmos-reason2/Cosmos-Reason2-8B-text \
     --model_name_or_path nvidia/Cosmos-Reason2-8B \

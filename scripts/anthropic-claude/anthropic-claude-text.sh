@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # claude-haiku-4-5
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-haiku-4-5-text \
     --model_name_or_path claude-haiku-4-5 \
@@ -16,7 +16,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-sonnet-4-0
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-sonnet-4-0-text \
     --model_name_or_path claude-sonnet-4-0 \
@@ -26,7 +26,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-sonnet-4-5
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-sonnet-4-5-text \
     --model_name_or_path claude-sonnet-4-5 \
@@ -36,7 +36,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-sonnet-4-6
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-sonnet-4-6-text \
     --model_name_or_path claude-sonnet-4-6 \
@@ -46,7 +46,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-opus-4-0
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-opus-4-0-text \
     --model_name_or_path claude-opus-4-0 \
@@ -56,7 +56,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-opus-4-1
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-opus-4-1-text \
     --model_name_or_path claude-opus-4-1 \
@@ -66,7 +66,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-opus-4-5
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-opus-4-5-text \
     --model_name_or_path claude-opus-4-5 \
@@ -76,7 +76,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # claude-opus-4-6
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/anthropic-claude/claude-opus-4-6-text \
     --model_name_or_path claude-opus-4-6 \

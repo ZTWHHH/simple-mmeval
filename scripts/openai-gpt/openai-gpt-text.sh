@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # GPT-4o-mini
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-4o-mini-text \
     --model_name_or_path gpt-4o-mini \
@@ -16,7 +16,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-4o
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-4o-text \
     --model_name_or_path gpt-4o \
@@ -26,7 +26,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-4.1-nano
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-4.1-nano-text \
     --model_name_or_path gpt-4.1-nano \
@@ -36,7 +36,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-4.1-mini
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-4.1-mini-text \
     --model_name_or_path gpt-4.1-mini \
@@ -46,7 +46,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-4.1
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-4.1-text \
     --model_name_or_path gpt-4.1 \
@@ -56,7 +56,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-5-nano
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-5-nano-text \
     --model_name_or_path gpt-5-nano \
@@ -66,7 +66,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-5-mini
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-5-mini-text \
     --model_name_or_path gpt-5-mini \
@@ -76,7 +76,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-5
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-5-text \
     --model_name_or_path gpt-5 \
@@ -86,7 +86,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-5.1
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-5.1-text \
     --model_name_or_path gpt-5.1 \
@@ -96,7 +96,7 @@ python $MMEVAL_DIR/mmeval/run.py \
 
 # GPT-5.2
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/openai-gpt/gpt-5.2-text \
     --model_name_or_path gpt-5.2 \

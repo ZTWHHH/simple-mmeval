@@ -6,7 +6,7 @@ cd "$MMEVAL_DIR"
 
 # Qwen3-Omni Text-Only Tests
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-omni/Qwen3-Omni-30B-A3B-Instruct-text \
     --model_name_or_path Qwen/Qwen3-Omni-30B-A3B-Instruct \
@@ -14,7 +14,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 2
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-omni/Qwen3-Omni-30B-A3B-Thinking-text \
     --model_name_or_path Qwen/Qwen3-Omni-30B-A3B-Thinking \
@@ -22,7 +22,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --parallel_per_task 2
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/test_bed/modality_test/task/no_media.json \
+    --infile $MMEVAL_DIR/tests/samples/no_media.json \
     --dataset local@json \
     --out_dir $RESULT_DIR/work_dirs/qwen3-omni/Qwen3-Omni-30B-A3B-Captioner-text \
     --model_name_or_path Qwen/Qwen3-Omni-30B-A3B-Captioner \
