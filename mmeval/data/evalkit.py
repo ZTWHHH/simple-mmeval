@@ -1,8 +1,9 @@
 import os
 import pandas as pd
 from typing import Any
+from filelock import FileLock
 from mmeval.data.tsv import TSVDataset
-from mmeval.data.utils import download_tsv
+from mmeval.data.utils import download_tsv, write_tsv
 
 
 def get_hf_base_url():
@@ -164,23 +165,31 @@ def load_multipart_dataset(dataset_name: str, dataset_dir: str) -> None:
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
-    if not os.path.exists(file_path):
-        config = VLMEVALKIT_MULTIPART_DATASET_CONFIG[dataset_name]
-        pattern = config["filename_pattern"]
-        
-        # Load and merge all parts into DataFrames
-        dataframe = []
-        for part_idx in range(config["start_idx"], config["end_idx"]+1):
-            sub_file_path = os.path.join(dataset_dir, f"{pattern.format(part_idx)}.tsv")
-            if not os.path.exists(sub_file_path):
-                sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{pattern.format(part_idx)}.tsv"
-                download_tsv(sub_dataset_url, sub_file_path)
-            sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
-            dataframe.append(sub_dataframe)
-        
-        # Concatenate all dataframes
-        combined_df = pd.concat(dataframe, ignore_index=True)
-        combined_df.to_csv(file_path, sep='\t', index=False, chunksize=100000)
+    if os.path.exists(file_path):
+        return
+    lock_path = file_path + ".lock"
+    with FileLock(lock_path):
+        if not os.path.exists(file_path):
+            config = VLMEVALKIT_MULTIPART_DATASET_CONFIG[dataset_name]
+            pattern = config["filename_pattern"]
+            
+            # Load and merge all parts into DataFrames
+            dataframe = []
+            for part_idx in range(config["start_idx"], config["end_idx"]+1):
+                sub_file_path = os.path.join(dataset_dir, f"{pattern.format(part_idx)}.tsv")
+                if not os.path.exists(sub_file_path):
+                    sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{pattern.format(part_idx)}.tsv"
+                    download_tsv(sub_dataset_url, sub_file_path)
+                sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
+                dataframe.append(sub_dataframe)
+            
+            # Concatenate all dataframes and write atomically
+            combined_df = pd.concat(dataframe, ignore_index=True)
+            write_tsv(combined_df, file_path, sep='\t', index=False, chunksize=100000)
+    try:
+        os.remove(lock_path)
+    except FileNotFoundError:
+        pass
 
 def load_concat_dataset(dataset_name: str, dataset_dir: str) -> None:
     """Download and concatenate multiple datasets for VLMEvalKit composite datasets if not exists.
@@ -194,20 +203,29 @@ def load_concat_dataset(dataset_name: str, dataset_dir: str) -> None:
     """
     file_path = os.path.join(dataset_dir, f"{dataset_name}.tsv")
 
-    if not os.path.exists(file_path):
-        dataset_list = VLMEVALKIT_CONCAT_DATASET_SETS[dataset_name]
-        dataframes = []
-        for sub_dataset_name in dataset_list:
-            sub_file_path = os.path.join(dataset_dir, f"{sub_dataset_name}.tsv")
-            if not os.path.exists(sub_file_path):
-                sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{sub_dataset_name}.tsv"
-                download_tsv(sub_dataset_url, sub_file_path)
-            sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
-            sub_dataframe['sub_dataset'] = [sub_dataset_name] * len(sub_dataframe)
-            dataframes.append(sub_dataframe)
+    if os.path.exists(file_path):
+        return
+    lock_path = file_path + ".lock"
+    with FileLock(lock_path):
+        if not os.path.exists(file_path):
+            dataset_list = VLMEVALKIT_CONCAT_DATASET_SETS[dataset_name]
+            dataframes = []
+            for sub_dataset_name in dataset_list:
+                sub_file_path = os.path.join(dataset_dir, f"{sub_dataset_name}.tsv")
+                if not os.path.exists(sub_file_path):
+                    sub_dataset_url = f"{get_hf_base_url()}/datasets/mm-eval/VLMEvalKit/resolve/main/{sub_dataset_name}.tsv"
+                    download_tsv(sub_dataset_url, sub_file_path)
+                sub_dataframe = pd.read_csv(sub_file_path, sep='\t')
+                sub_dataframe['sub_dataset'] = [sub_dataset_name] * len(sub_dataframe)
+                dataframes.append(sub_dataframe)
 
-        combined_df = pd.concat(dataframes, ignore_index=True)
-        combined_df.to_csv(file_path, sep='\t', index=False, chunksize=100000)
+            # Concatenate all dataframes and write atomically
+            combined_df = pd.concat(dataframes, ignore_index=True)
+            write_tsv(combined_df, file_path, sep='\t', index=False, chunksize=100000)
+    try:
+        os.remove(lock_path)
+    except FileNotFoundError:
+        pass
 
 def load_evalkit_dataset(args) -> Any:
     """Load raw data from TSV files.
@@ -218,7 +236,7 @@ def load_evalkit_dataset(args) -> Any:
         Pandas DataFrame containing the dataset
     """
     # Validate environment
-    dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
+    dataset_dir = os.getenv('DATASET_DIR') or "./datasets"
 
     if args.dataset.startswith("evalkit@"):
         dataset_name = args.dataset.split("@")[-1]
