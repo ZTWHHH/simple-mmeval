@@ -5,7 +5,7 @@ import json
 import copy
 
 from mmeval.registry import series_mapping, series_infer_env_mapping
-from mmeval.utils.argparser import parse_args
+from mmeval.utils.argparser import parse_args, BOOL_DEFAULTS
 
 
 def get_series(model_name: str):
@@ -17,6 +17,7 @@ def get_series(model_name: str):
 
 if __name__ == "__main__":
     args = parse_args()
+
     model_name_or_path = args.model_name_or_path
     series = get_series(model_name_or_path.split("/")[-1])
     
@@ -106,10 +107,20 @@ if __name__ == "__main__":
                     # Skip None flags entirely
                     if val is None:
                         continue
-                    # Boolean flags: --flag (only if True)
+                    # Boolean flags depend on their default values.
                     if isinstance(val, bool):
-                        if val:
-                            cmd.append(f"--{key}")
+                        default = BOOL_DEFAULTS.get(key)
+                        if default is True:
+                            if val is False:
+                                cmd.append(f"--no_{key}")
+                        elif default is False:
+                            if val is True:
+                                cmd.append(f"--{key}")
+                        else:
+                            if val is True:
+                                cmd.append(f"--{key}")
+                            elif val is False:
+                                cmd.append(f"--no_{key}")
                     else:
                         cmd.extend([f"--{key}", str(val)])
             # Build the conda-run command
