@@ -155,16 +155,15 @@ Text-only samples simply use an empty `media` list:
 Load datasets from HuggingFace Hub in the mm-eval format. These datasets include built-in Jinja2 prompt templates via their `metadata` config.
 
 ```bash
---dataset mmeval_hf@mm-eval/MMBench-en-V11 --split test
+--dataset mmeval_hf@mm-eval/MMBench-en --split test
 ```
 
 Currently available mm-eval HuggingFace datasets:
 
 | Dataset | Splits | Usage |
 |---------|--------|-------|
+| [MMBench-en](https://huggingface.co/datasets/mm-eval/MMBench-en) | dev, test | `mmeval_hf@mm-eval/MMBench-en` |
 | [MMBench-en-V11](https://huggingface.co/datasets/mm-eval/MMBench-en-V11) | dev, test | `mmeval_hf@mm-eval/MMBench-en-V11` |
-| [MMBench-cc](https://huggingface.co/datasets/mm-eval/MMBench-cc) | test | `mmeval_hf@mm-eval/MMBench-cc` |
-| [MMMU](https://huggingface.co/datasets/mm-eval/MMMU) | dev, test, validation | `mmeval_hf@mm-eval/MMMU` |
 
 ### 3. VLMEvalKit Datasets (`evalkit@`)
 
