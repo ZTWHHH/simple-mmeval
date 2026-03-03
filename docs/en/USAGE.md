@@ -35,7 +35,7 @@ python mmeval/run.py \
     --parallel_per_task 1
 ```
 
-### Example 2: HuggingFace dataset (mm-eval format)
+### Example 2: HuggingFace dataset
 
 Run evaluation on a HuggingFace-hosted dataset with built-in prompt templates:
 
@@ -139,7 +139,7 @@ All arguments are passed to `python mmeval/run.py` and organized into the follow
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
 | `--out_dir` | str | -- | Output directory for results and cache |
-| `--resume` | bool | True | Resume from existing cache (skip completed samples) |
+| `--no-resume` | flag | off | Disable default resume behavior; when set, do not early-exit even if `result.json` already exists |
 | `--save_freq` | int | 3 | Number of results to buffer before flushing to SQLite |
 | `--max_retry` | int | 1 | Maximum number of full-dataset retry passes |
 | `--max_retry_sample` | int | 1 | Maximum retries per sample within a pass |
@@ -221,15 +221,15 @@ If a sample's message already contains a `prompt` field, it is used directly and
 
 ## Resume and Caching
 
-Simple-MMEval uses an SQLite-based key-value store (`cache.db`) for multi-process safe incremental result persistence.
+Simple-MMEval writes the final output to `result.json`. During execution, it also uses an SQLite key-value store (`cache.db`) as a temporary, multi-process-safe cache.
 
 **How it works:**
 
-- Each completed sample is written to `cache.db` in the output directory
+- During an in-progress run, each completed sample is written to `cache.db` in the output directory
 - Results are buffered in memory and flushed every `--save_freq` samples (default: 3)
-- On restart with `--resume True` (the default), completed samples are skipped automatically
+- If a run is interrupted, restarting with the same `--out_dir` reuses existing `cache.db` entries and skips already completed samples
 - The cache is shared across all parallel workers using SQLite WAL mode with retry logic for lock contention
-- After all workers finish, `run.py` merges the cache into a final `result.json` and deletes `cache.db`
+- After all workers finish successfully, `run.py` merges cached entries into final `result.json` and deletes `cache.db`
 
 ```bash
 # Resume an interrupted run (default behavior)
@@ -240,11 +240,14 @@ python mmeval/run.py \
     --img_dir tests/media/448 \
     --out_dir work_dirs/resume_test \
     --gpu_per_parallel 1 \
-    --parallel_per_task 8 \
-    --resume True
+    --parallel_per_task 8
 ```
 
-If a `result.json` already exists in `--out_dir` and `--resume` is set, the runner exits immediately without re-running inference.
+Resume is enabled by default. In `run.py`, this currently controls one behavior: if `result.json` already exists in `--out_dir`, the runner exits immediately. Use `--no-resume` (or `--no_resume`) to force a re-run in that case.
+
+`result.json` is the completed-task artifact. `cache.db` is a temporary file used for incremental persistence and resume; it normally exists only while a run is in progress (or after an interrupted run).
+
+To start fully from scratch, use a new `--out_dir` or clean the existing output directory before running.
 
 ---
 
@@ -279,5 +282,5 @@ Key output fields:
 |-------|-------------|
 | `eval-id` | Framework-assigned integer index (used for sharding and caching) |
 | `messages[-1].role` | Always `"assistant"` for the model's response |
-| `messages[-1].response` | Model output -- a list of strings containing the generated text |
+| `messages[-1].response` | Model output text as returned by the model backend |
 | `media` | Original media paths (PIL Image objects are replaced with `"Image Object"` placeholder) |

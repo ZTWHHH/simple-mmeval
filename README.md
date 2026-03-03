@@ -2,9 +2,13 @@
 
 **A Self-Contained, Scalable Framework for Multimodal Model Evaluation**
 
-**50 model series** (HuggingFace models + commercial APIs) | **3 dataset backends** | **Multi-GPU parallel scheduling**
+**56 model series** (HuggingFace models + commercial APIs) | **3 dataset backends** | **Multi-GPU parallel scheduling**
 
-[![contributors](https://img.shields.io/github/contributors/mm-evaluation/simple-mmeval)](https://github.com/mm-evaluation/simple-mmeval/graphs/contributors) [![forks](https://img.shields.io/github/forks/mm-evaluation/simple-mmeval)](https://github.com/mm-evaluation/simple-mmeval/network/members) [![stars](https://img.shields.io/github/stars/mm-evaluation/simple-mmeval)](https://github.com/mm-evaluation/simple-mmeval/stargazers) [![issues](https://img.shields.io/github/issues/mm-evaluation/simple-mmeval)](https://github.com/mm-evaluation/simple-mmeval/issues) [![license](https://img.shields.io/github/license/mm-evaluation/simple-mmeval)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/mm-evaluation/simple-mmeval?style=for-the-badge&label=contributors&labelColor=1f2937&color=84cc16)](https://github.com/mm-evaluation/simple-mmeval/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/mm-evaluation/simple-mmeval?style=for-the-badge&label=forks&labelColor=1f2937&color=06b6d4)](https://github.com/mm-evaluation/simple-mmeval/network/members)
+[![Stars](https://img.shields.io/github/stars/mm-evaluation/simple-mmeval?style=for-the-badge&label=stars&labelColor=1f2937&color=f59e0b)](https://github.com/mm-evaluation/simple-mmeval/stargazers)
+[![Issues](https://img.shields.io/github/issues/mm-evaluation/simple-mmeval?style=for-the-badge&label=issues&labelColor=1f2937&color=a855f7)](https://github.com/mm-evaluation/simple-mmeval/issues)
+[![License](https://img.shields.io/github/license/mm-evaluation/simple-mmeval?style=for-the-badge&label=license&labelColor=1f2937&color=10b981)](LICENSE)
 
 ---
 
@@ -80,7 +84,7 @@ For more examples (HuggingFace datasets, VLMEvalKit benchmarks, multi-GPU parall
 
 ## Supported Models and Datasets
 
-Simple-MMEval supports **50 model series** (44 open source + 6 API providers) and **3 dataset backends** (local JSON, HuggingFace, VLMEvalKit 100+ benchmarks).
+Simple-MMEval supports **56 model series** (50 open source + 6 API providers) and **3 dataset backends** (local JSON, HuggingFace, VLMEvalKit 100+ benchmarks).
 
 See the complete list of all supported models and datasets in **[SUPPORTED.md](docs/en/SUPPORTED.md)**.
 
