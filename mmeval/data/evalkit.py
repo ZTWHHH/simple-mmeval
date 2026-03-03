@@ -218,7 +218,7 @@ def load_evalkit_dataset(args) -> Any:
         Pandas DataFrame containing the dataset
     """
     # Validate environment
-    dataset_dir = os.getenv('DATASET_DIR') or "./dataset"
+    dataset_dir = os.getenv('DATASET_DIR') or "./datasets"
 
     if args.dataset.startswith("evalkit@"):
         dataset_name = args.dataset.split("@")[-1]
