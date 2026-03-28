@@ -60,6 +60,14 @@ series_mapping = {
     "qwen3_vl": ["Qwen3-VL-2B-Instruct", "Qwen3-VL-4B-Instruct", "Qwen3-VL-8B-Instruct", "Qwen3-VL-32B-Instruct", "Qwen3-VL-30B-A3B-Instruct", "Qwen3-VL-235B-A22B-Instruct", 
                  "Qwen3-VL-2B-Thinking", "Qwen3-VL-4B-Thinking", "Qwen3-VL-8B-Thinking", "Qwen3-VL-32B-Thinking", "Qwen3-VL-30B-A3B-Thinking", "Qwen3-VL-235B-A22B-Thinking"],
     "qwen3_omni": ["Qwen3-Omni-30B-A3B-Instruct", "Qwen3-Omni-30B-A3B-Thinking", "Qwen3-Omni-30B-A3B-Captioner"],
+    "qwen3d5": ["Qwen3.5-0.8B",
+                "Qwen3.5-2B", "Qwen3.5-2B-Base",
+                "Qwen3.5-4B", "Qwen3.5-4B-Base",
+                "Qwen3.5-9B", "Qwen3.5-9B-Base",
+                "Qwen3.5-27B", "Qwen3.5-27B-FP8",
+                "Qwen3.5-35B-A3B", "Qwen3.5-35B-A3B-FP8", "Qwen3.5-35B-A3B-Base",
+                "Qwen3.5-122B-A10B", "Qwen3.5-122B-A10B-FP8",
+                "Qwen3.5-397B-A17B", "Qwen3.5-397B-A17B-FP8"],
     "videollama2": ["VideoLLaMA2-7B"],
     "vlaa_thinking": ["VLAA-Thinker-Qwen2VL-2B", "VLAA-Thinker-Qwen2VL-7B", "VLAA-Thinker-Qwen2VL-7B-Zero", "VLAA-Thinker-Qwen2.5VL-3B", "VLAA-Thinker-Qwen2.5VL-7B"],
     "r1_onevision": ["R1-Onevision-7B"],
@@ -263,6 +271,10 @@ series_infer_env_mapping = {
     "qwen3_omni": {
         "env": os.path.join(env_dir, "qwen3_omni"),
         "infer_file": "qwen3_omni.py",
+    },
+    "qwen3d5": {
+        "env": os.path.join(env_dir, "qwen3_vl"),
+        "infer_file": "qwen3d5.py",
     },
     "videollama2": {
         "env": os.path.join(env_dir, "videollama2"),

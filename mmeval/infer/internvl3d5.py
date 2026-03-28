@@ -154,7 +154,7 @@ class TaskRunner(Task):
             args.model_name_or_path,
             torch_dtype=self.dtype,
             load_in_8bit=False,
-            use_flash_attn=True,
+            use_flash_attn=(getattr(args, "attn_implementation", None) == "flash_attention_2"),
             trust_remote_code=True,
             **self.model_kwargs).eval()
         self.model.system_message = R1_SYSTEM_PROMPT
