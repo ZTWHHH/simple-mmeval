@@ -20,6 +20,27 @@ IMG_PLACEHOLDER_RE = re.compile(
     re.IGNORECASE | re.VERBOSE,
 )
 
+def normalize_question_with_media(question: str, media_count: int) -> str:
+    """Normalize image placeholders against available media count.
+
+    Rules:
+    - If placeholder count equals media count: keep original positions and normalize tokens to <image>.
+    - If counts differ: remove all original image placeholders and prepend exactly media_count <image> tokens.
+    """
+    question = str(question)
+    placeholder_count = len(IMG_PLACEHOLDER_RE.findall(question))
+
+    if placeholder_count == media_count:
+        if placeholder_count == 0:
+            return question
+        return IMG_PLACEHOLDER_RE.sub("<image>", question)
+
+    stripped_question = IMG_PLACEHOLDER_RE.sub("", question).strip()
+    prefix = "<image>" * media_count
+    if prefix and stripped_question:
+        return f"{prefix} {stripped_question}".strip()
+    return prefix or stripped_question
+
 class TSVDataset(BaseDataset):
     """Dataset class for loading TSV files.
     
@@ -120,11 +141,9 @@ class TSVDataset(BaseDataset):
         media_list = self._extract_media_paths(sample)
         question = str(sample['question'])
 
-        # Normalize image placeholders
-        if IMG_PLACEHOLDER_RE.search(question):
-            question = IMG_PLACEHOLDER_RE.sub("<image>", question)
-        elif media_list:
-            question = f'{"<image>" * len(media_list)} {question}'.strip()
+        # Normalize image placeholders.
+        # If placeholder/media counts mismatch, all placeholders are moved to prefix.
+        question = normalize_question_with_media(question, len(media_list))
 
         # Build options dict and choices list
         options = {
