@@ -109,7 +109,7 @@ def to_pil(value: Any):
             if is_video(value):
                 return value
             return Image.open(value)
-        if value.startswith("http"):
+        if value.startswith(("http://","https://")):
             if is_video(value):
                 return value
             return Image.open(requests.get(value, stream=True).raw)
@@ -140,7 +140,7 @@ def write_image_to_disk(item: Any, out_dir: Path, stem: str, idx: int,
         ext = os.path.splitext(pil_or_path.split("?")[0])[-1].lower() or ".mp4"
         name = f"{stem}_{idx}{ext}"
         target = out_dir / name
-        if pil_or_path.startswith("http"):
+        if pil_or_path.startswith(("http://","https://")):
             import requests
             with requests.get(pil_or_path, stream=True) as r:
                 r.raise_for_status()
@@ -293,7 +293,7 @@ def stream_convert(args, template_str: Optional[str], colmap: Dict[str, str]) ->
         if args.json and args.media_dir:
             resolved = []
             for m in media_raw:
-                if isinstance(m, str) and not os.path.isabs(m) and not m.startswith("http"):
+                if isinstance(m, str) and not os.path.isabs(m) and not m.startswith(("http://","https://")):
                     cand = os.path.join(args.media_dir, m)
                     if os.path.exists(cand):
                         m = cand
