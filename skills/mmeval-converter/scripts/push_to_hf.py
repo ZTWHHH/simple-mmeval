@@ -15,7 +15,14 @@ Usage
 The artifact directory must contain:
     artifact-dir/
       hf_dataset/      # DatasetDict for the `default` config
-      hf_metadata/     # DatasetDict for the `metadata` config
+      metadata.json    # v2 manifest (top-level prompt_template + mapping_from_source)
+      hf_metadata/     # legacy `metadata` config DatasetDict (no longer pushed —
+                       # kept on disk for validate.py to round-trip locally)
+
+Push behaviour (v2 format):
+- Always pushes ``hf_dataset/`` as the ``default`` config.
+- If ``metadata.json`` is present, uploads it to the repo root.
+- The legacy ``metadata`` config is no longer pushed.
 
 After pushing, the script prints the exact ``simple-mmeval`` invocation to copy.
 """
@@ -44,9 +51,9 @@ def main() -> int:
 
     artifact = Path(args.artifact_dir)
     default_dir = artifact / "hf_dataset"
-    metadata_dir = artifact / "hf_metadata"
-    if not default_dir.exists() or not metadata_dir.exists():
-        print(f"ERROR: expected {default_dir} and {metadata_dir} to exist (run convert.py --mode hf first)",
+    metadata_json = artifact / "metadata.json"
+    if not default_dir.exists():
+        print(f"ERROR: expected {default_dir} to exist (run convert.py --mode hf first)",
               file=sys.stderr)
         return 2
 
@@ -65,11 +72,19 @@ def main() -> int:
     default_dd.push_to_hub(args.repo_id, config_name="default",
                            private=args.private, token=args.token)
 
-    print(f"[hf] loading {metadata_dir}")
-    metadata_dd = load_from_disk(str(metadata_dir))
-    print(f"[hf] pushing metadata config: splits={list(metadata_dd.keys())}")
-    metadata_dd.push_to_hub(args.repo_id, config_name="metadata",
-                            private=args.private, token=args.token)
+    if metadata_json.exists():
+        print(f"[hf] uploading {metadata_json.name} to repo root")
+        api.upload_file(
+            path_or_fileobj=str(metadata_json),
+            path_in_repo="metadata.json",
+            repo_id=args.repo_id,
+            repo_type="dataset",
+            token=args.token,
+            commit_message="Add v2 manifest (metadata.json)",
+        )
+    else:
+        print(f"[hf] note: no metadata.json in {artifact} — skipping manifest upload "
+              f"(re-run convert.py with --task-type to emit it)")
 
     print()
     print(f"Done. Run with simple-mmeval:")

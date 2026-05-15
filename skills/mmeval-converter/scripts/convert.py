@@ -433,7 +433,80 @@ def stream_convert(args, template_str: Optional[str], colmap: Dict[str, str]) ->
                          "rows": len(hf_ids)}
         print(f"[hf] wrote {len(hf_ids)} rows -> {out/'hf_dataset'} (+ {out/'hf_metadata'})")
 
+    # v2 manifest: top-level metadata.json. push_to_hf.py uploads this to the
+    # repo root and drops the legacy `metadata` config from the README.
+    if args.task_type:
+        manifest = build_v2_metadata(args, template_str, colmap)
+        manifest_path = out / "metadata.json"
+        manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+        print(f"[v2] wrote manifest -> {manifest_path}")
+        summary["metadata_json"] = str(manifest_path)
+
     return summary
+
+
+def build_v2_metadata(args, template_str: Optional[str], colmap: Dict[str, str]) -> Dict[str, Any]:
+    """Build the v2 metadata.json from convert args + colmap + template.
+
+    Schema: top-level {name, release_date, subsets:{<subset>:{...}}}. Inside the
+    subset: language, modalities, task_type, prompt_template, mapping_from_source.
+    """
+    from datetime import datetime, timezone
+
+    name = args.dataset_name or (args.hf.split("/")[-1] if args.hf else Path(args.out).name)
+    release = args.release_date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    canonical = {"id", "question", "answer", "image", "images", "media", "options",
+                 "choices", "hint"}
+    media_src = colmap.get("image") or colmap.get("images") or colmap.get("media")
+
+    mapping: Dict[str, Any] = {}
+    if media_src is not None:
+        mapping["media"] = {"from": media_src, "type": "list",
+                            "min_items": 1, "max_items": 1}
+    if "id" in colmap:
+        mapping["id"] = {"from": colmap["id"]}
+    if "question" in colmap:
+        mapping["question"] = {"from": colmap["question"]}
+    if "answer" in colmap:
+        mapping["answer"] = {"from": colmap["answer"], "optional": True}
+    if "options" in colmap:
+        mapping["options"] = {"from": colmap["options"], "optional": True}
+    if "choices" in colmap:
+        mapping["choices"] = {"from": colmap["choices"], "optional": True}
+    if "hint" in colmap:
+        mapping["hint"] = {"from": colmap["hint"], "optional": True}
+
+    extras = {k: {"from": v} for k, v in colmap.items() if k not in canonical}
+    if extras:
+        mapping["extra"] = extras
+
+    source_url = args.source_url or (
+        f"https://huggingface.co/datasets/{args.hf}" if args.hf else None
+    )
+    if source_url:
+        mapping["source"] = {
+            "format": "json",
+            "url": {args.split: source_url},
+        }
+
+    modalities = args.modalities or (
+        ["single_image_start"] if (template_str and "<image>" in template_str)
+        else ["text"]
+    )
+
+    subset = {
+        "language": ["en"],
+        "modalities": modalities,
+        "task_type": args.task_type,
+        "prompt_template": template_str or "",
+        "mapping_from_source": mapping,
+    }
+    return {
+        "name": name,
+        "release_date": release,
+        "subsets": {args.subset_name: subset},
+    }
 
 
 def main() -> int:
@@ -469,6 +542,26 @@ def main() -> int:
     p.add_argument("--id-template", default="{id}_q{idx}",
                    help="Format string for post-explode ids (default '{id}_q{idx}'). "
                         "Available fields: {id} (outer), {outer}, {idx}.")
+    # v2 manifest flags — when --task-type is set, convert.py also emits
+    # <out>/metadata.json in the new top-level manifest format. push_to_hf.py
+    # picks that up and uploads it to the repo root, replacing the legacy
+    # `metadata` config.
+    p.add_argument("--task-type", default=None,
+                   help="v2 task_type (e.g. vqa, multiple_choice_vqa, captioning). "
+                        "Required to emit metadata.json.")
+    p.add_argument("--modalities", nargs="+", default=None,
+                   help="v2 modalities list (default: ['single_image_start'] if template "
+                        "contains <image>, else ['text']).")
+    p.add_argument("--release-date", default=None,
+                   help="v2 release_date YYYY-MM-DD (default: today UTC).")
+    p.add_argument("--subset-name", default="main",
+                   help="v2 subset key under `subsets:` (default: 'main').")
+    p.add_argument("--source-url", default=None,
+                   help="v2 source URL for this split (default: "
+                        "https://huggingface.co/datasets/<--hf> if --hf is set).")
+    p.add_argument("--dataset-name", default=None,
+                   help="v2 top-level `name` field (default: last segment of --hf or "
+                        "basename of --out).")
     args = p.parse_args()
 
     colmap = parse_map(args.map)

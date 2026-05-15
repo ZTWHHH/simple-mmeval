@@ -1,6 +1,6 @@
 ---
 name: mmeval-converter
-description: Convert any multimodal benchmark (HuggingFace dataset, local JSON, CSV/TSV with images) into Simple-MMEval runnable format. Use this skill whenever the user wants to prepare/normalize/port a vision-language eval dataset for Simple-MMEval, run an existing benchmark through Simple-MMEval, build a `local@json` data file with an `img_dir`, build an `mmeval_hf@`-compatible HF dataset (with `media` / `messages` / `id` + Jinja `metadata` config), or push a converted dataset to HuggingFace Hub. Trigger even if the user does not explicitly say "Simple-MMEval" — phrases like "convert this VQA dataset", "make this runnable in mmeval", "wrap this for evaluation", "turn this into an eval dataset", or "push this benchmark to HF for mmeval" all apply.
+description: Convert any multimodal benchmark (HuggingFace dataset, local JSON, CSV/TSV with images) into Simple-MMEval runnable format. Use this skill whenever the user wants to prepare/normalize/port a vision-language eval dataset for Simple-MMEval, run an existing benchmark through Simple-MMEval, build a `local@json` data file with an `img_dir`, build an `mmeval_hf@`-compatible HF dataset (canonical `media` / `messages` / `id` columns plus a top-level `metadata.json` v2 manifest with the prompt template + source mapping), or push a converted dataset to HuggingFace Hub. Trigger even if the user does not explicitly say "Simple-MMEval" — phrases like "convert this VQA dataset", "make this runnable in mmeval", "wrap this for evaluation", "turn this into an eval dataset", or "push this benchmark to HF for mmeval" all apply.
 ---
 
 # mmeval-converter
@@ -8,7 +8,7 @@ description: Convert any multimodal benchmark (HuggingFace dataset, local JSON, 
 Convert a multimodal eval dataset into one of two runnable input formats accepted by [Simple-MMEval](https://github.com/mm-evaluation/simple-mmeval):
 
 1. **`local`** — a single JSON file plus a directory of media files (`--dataset local@json --infile <data.json> --img_dir <media_dir>`).
-2. **`hf`** — a HuggingFace `DatasetDict` with two configs (`default` and `metadata`) (`--dataset mmeval_hf@<user>/<repo>`).
+2. **`hf`** — a HuggingFace `DatasetDict` for the `default` config plus a top-level `metadata.json` manifest at the repo root (`--dataset mmeval_hf@<user>/<repo>`). The legacy `metadata` config (a sibling DatasetDict) is no longer used; the v2 manifest replaces it.
 
 The converter can emit one mode or **both at once in a single source pass** (`--mode both`), which is the recommended path when the user wants the local artifact for quick smoke runs *and* an HF artifact to push.
 
@@ -103,9 +103,33 @@ The merged directory has one `hf_dataset/` and one `hf_metadata/` ready for `pus
 ├── data.json               # local mode
 ├── media/                  # local mode (also reused for HF bytes)
 ├── hf_dataset/             # HF mode — DatasetDict for the `default` config
-├── hf_metadata/            # HF mode — DatasetDict for the `metadata` config
+├── hf_metadata/            # HF mode — legacy `metadata` config DatasetDict
+│                           #   (kept on disk for validate.py round-trip;
+│                           #    no longer pushed to HF Hub)
+├── metadata.json           # HF mode — v2 manifest (emitted when --task-type
+│                           #   is set; uploaded to repo root by push_to_hf.py)
 └── convert_summary.json
 ```
+
+**v2 manifest flags** (set these to emit `metadata.json` for the new format):
+
+- `--task-type <type>` — required. Values: `vqa` (open-ended single-image VQA),
+  `multiple_choice_vqa` (MCQ with options dict), `captioning`,
+  `binary_vqa` (yes/no), etc.
+- `--modalities <m> [...]` — default auto: `["single_image_start"]` if the
+  template contains `<image>`, else `["text"]`. Override for multi-image
+  or video benchmarks.
+- `--release-date YYYY-MM-DD` — default: today UTC.
+- `--subset-name <name>` — default `main`. Use distinct names when packing
+  multiple sub-benchmarks into one repo.
+- `--source-url <url>` — default `https://huggingface.co/datasets/<--hf>`.
+- `--dataset-name <name>` — top-level `name` in the manifest. Default: last
+  segment of `--hf` or basename of `--out`.
+
+The manifest's `mapping_from_source` block is auto-built from `--map`:
+canonical keys (`id`/`question`/`answer`/`image`/`options`/...) land at the
+top of the mapping; everything else lands under `extra:`. The `media` block
+defaults to `type: list, min_items: 1, max_items: 1`.
 
 ### Step 4 — Verify
 
@@ -202,7 +226,46 @@ python3 scripts/push_to_hf.py \
     [--private]
 ```
 
-It pushes the `default` and `metadata` configs as separate configs on the same repo, and prints the exact `simple-mmeval` invocation for the user to copy.
+It pushes the `default` config (the parquet data) and, if `<out>/metadata.json` exists, uploads it to the repo root. The legacy `metadata` config is no longer pushed. The script prints the exact `simple-mmeval` invocation for the user to copy.
+
+**Repo layout after push (v2):**
+
+```
+<user>/<repo>/
+├── data/                   # default config parquet shards
+├── metadata.json           # v2 manifest (top-level)
+├── README.md               # auto-generated (default config only)
+└── .gitattributes
+```
+
+The v2 `metadata.json` schema:
+
+```json
+{
+  "name": "<dataset name>",
+  "release_date": "YYYY-MM-DD",
+  "subsets": {
+    "<subset>": {
+      "language": ["en"],
+      "modalities": ["single_image_start"],
+      "task_type": "multiple_choice_vqa",
+      "prompt_template": "<image>{{ question }}\nAnswer with the option's letter…",
+      "mapping_from_source": {
+        "media":    {"from": "<src>", "type": "list", "min_items": 1, "max_items": 1},
+        "id":       {"from": "<src>"},
+        "question": {"from": "<src>"},
+        "answer":   {"from": "<src>", "optional": true},
+        "options":  {"from": "<src>", "optional": true},
+        "extra":    {"<canonical>": {"from": "<src>"}, ...},
+        "source": {
+          "format": "json",
+          "url": {"<split>": "https://huggingface.co/datasets/<source>"}
+        }
+      }
+    }
+  }
+}
+```
 
 ## Worked example — CaptionQA (nested-MCQ, 4 domain splits)
 
