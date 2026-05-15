@@ -219,12 +219,23 @@ def iter_source(args) -> Iterator[Tuple[Dict[str, Any], int]]:
             data = json.load(f)
         raw_iter = enumerate(data)
 
+    # Optional row filter — a Python expression evaluated with `row` in scope.
+    # Use sparingly; mixed-modality benchmarks (e.g. SEEDBench with image+video
+    # rows) need a filter to isolate the modality this converter supports.
+    filter_expr = getattr(args, "filter_expr", None)
+    filter_fn = None
+    if filter_expr:
+        compiled = compile(filter_expr, "<--filter-expr>", "eval")
+        filter_fn = lambda row: bool(eval(compiled, {"__builtins__": {}}, {"row": row}))
+
     explode = getattr(args, "explode", None)
     # The original id source is captured by main() before any override.
     id_field = getattr(args, "_original_id_field", None)
 
     global_idx = 0
     for _, row in raw_iter:
+        if filter_fn is not None and not filter_fn(row):
+            continue
         if not explode:
             yield row, global_idx
             global_idx += 1
@@ -542,6 +553,10 @@ def main() -> int:
     p.add_argument("--id-template", default="{id}_q{idx}",
                    help="Format string for post-explode ids (default '{id}_q{idx}'). "
                         "Available fields: {id} (outer), {outer}, {idx}.")
+    p.add_argument("--filter-expr", default=None,
+                   help="Python expression eval'd per row (with `row` in scope) to "
+                        "keep only matching rows. e.g. \"row['data_type']=='image'\" "
+                        "for SEEDBench's image/video mix. Sandboxed (no builtins).")
     # v2 manifest flags — when --task-type is set, convert.py also emits
     # <out>/metadata.json in the new top-level manifest format. push_to_hf.py
     # picks that up and uploads it to the repo root, replacing the legacy
