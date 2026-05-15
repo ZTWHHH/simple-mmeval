@@ -25,7 +25,8 @@ mmeval-converter/
     ├── convert.py                   ← generic conversion (one split at a time)
     ├── convert_indexed_multimage.py ← MMMU-style: <image N> refs + per-subject configs
     ├── merge_splits.py              ← merge per-split HF artifacts into one DatasetDict
-    ├── validate.py                  ← round-trip a converted artifact through Simple-MMEval
+    ├── validate.py                  ← data-loader round-trip (no model)
+    ├── smoke_run.py                 ← end-to-end smoke: tiny model + N rows through Simple-MMEval
     └── push_to_hf.py                ← final HF push (token + repo)
 ```
 
@@ -120,6 +121,75 @@ python3 scripts/validate.py \
 
 It prints rendered prompts and confirms images load as PIL with the right dimensions. Use it before declaring a conversion done.
 
+### Step 4b — Smoke run (tiny model, N rows)
+
+`validate.py` only proves the artifact loads. It does NOT prove the chat
+template + processor accept the rendered prompt + media count, that
+inference produces output, or that the result file is well-formed. A
+common silent failure mode is: `validate.py` is green but the processor
+sees a different `<image>` count than the row's media list at run time.
+
+`scripts/smoke_run.py` closes that gap. It slices the local artifact to N
+rows, spawns `mmeval/run.py` against it with a small VL model
+(default `Qwen/Qwen2.5-VL-3B-Instruct`), then asserts every row got a
+non-empty `response`:
+
+```bash
+python3 scripts/smoke_run.py \
+    --simple-mmeval <path-to-simple-mmeval> \
+    --local <out> \
+    --limit 2 \
+    --gpu 0 \
+    --python /raid/miniconda3/envs/qwenvl/bin/python
+```
+
+It runs in ~1–2 minutes on one H200 once the model is cached. Local-mode
+smoke is sufficient for both artifacts — `convert.py --mode both` produces
+them from the same source pass, so the same prompt + media list is
+exercised. Don't push to HF until this is green.
+
+**Required flags & defaults (each lands fixes a real failure mode seen in the field):**
+
+- `--python <bin>` (default `python3`) — orchestrator interpreter for
+  `mmeval/run.py`, which imports `torch` at top-level. The default `python3`
+  on the box often isn't a venv/conda env that has torch installed; point
+  this at a conda env with `torch` + `datasets` (e.g.
+  `/raid/miniconda3/envs/qwenvl/bin/python`). Per-model inference still
+  dispatches to the env in `mmeval/registry.py` — this flag is only the
+  orchestrator interpreter.
+- `--attn-implementation` (default `sdpa`) — passed through to
+  `mmeval/run.py`. The default sidesteps a common silent failure: if the
+  per-model conda env has a broken `flash_attn` install (torch ABI
+  mismatch), `transformers` falls into an interactive `input()` prompt
+  asking whether to fetch a remote flash-attn kernel. With no stdin
+  attached the prompt hits EOF, every sample is retried-then-skipped, and
+  `result.json` ends up empty. `sdpa` always works.
+- `--limit N` (default 2) — number of rows to feed through. Two is
+  enough to catch prompt/template/processor failures; bump only if you
+  need richer signal.
+- `--gpu <id>` — `CUDA_VISIBLE_DEVICES` for the spawned `mmeval/run.py`.
+  Required on multi-GPU boxes so the model lands on a free card.
+- `--keep-tmp` — leaves the truncated artifact + `result.json` in
+  `/raid/icy/tmp/mmeval_smoke_*/` for inspection if the assertion trips.
+
+**Two implementation details worth knowing about (handled automatically):**
+
+1. **Passthrough template.** `LocalJSONDataset` re-renders `prompt` from
+   its own template at `_process_messages` time, defaulting to
+   `default_template.txt` (just `{{ question }}`). That silently strips
+   `<image>` and any post-prompt suffix from the prompt that `convert.py`
+   wrote into `data.json`, so the model never sees the image and answers
+   "I'm a text-based AI". `smoke_run.py` writes a passthrough
+   `{{ prompt }}` template into the work dir and passes it via
+   `--template`, forcing the loader to use the prompt the converter
+   already rendered. If you ever invoke `mmeval/run.py` against a
+   `local@json` artifact by hand, pass `--template <path-to-jinja>` with
+   the same template you handed to `convert.py`, or you'll get this
+   silent strip.
+2. **Response shape.** `mmeval` writes `response` into `result.json` as
+   `str`, `list[str]`, or `list[list[str]]` depending on the inference
+   backend. `smoke_run.py` flattens before checking emptiness.
+
 ### Step 5 — Push to HuggingFace (for `hf` mode)
 
 `scripts/push_to_hf.py` is the **final user-facing push script**. It only needs the artifact dir + an HF token + a target repo name:
@@ -188,7 +258,7 @@ Answer the question using a single word or phrase.' \
     --workers 16
 ```
 
-Then verify both:
+Then verify both, then smoke-run:
 
 ```bash
 python3 scripts/validate.py \
@@ -196,6 +266,11 @@ python3 scripts/validate.py \
     --local <workdir>/vizwiz_val \
     --hf <workdir>/vizwiz_val \
     -n 3
+
+python3 scripts/smoke_run.py \
+    --simple-mmeval <simple-mmeval-checkout> \
+    --local <workdir>/vizwiz_val \
+    --limit 2 --gpu 0
 ```
 
 Run via Simple-MMEval (local artifact, no HF push needed):
