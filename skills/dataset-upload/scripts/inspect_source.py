@@ -3,9 +3,11 @@
 
 Examples
 --------
-    python3 inspect.py --hf lmms-lab/VizWiz-VQA --split val
-    python3 inspect.py --json data.json --media-dir media/
+    python3 inspect_source.py --hf lmms-lab/VizWiz-VQA --split val
+    python3 inspect_source.py --json data.json --media-dir media/
 """
+from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -62,7 +64,7 @@ def inspect_hf(repo_id: str, split: str, n: int = 1) -> None:
 
 def inspect_json(path: str, media_dir: str | None) -> None:
     print(f"# Local JSON: {path}")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     if not isinstance(data, list):
         print(f"  ERROR: top-level should be a list, got {type(data).__name__}")
@@ -83,16 +85,18 @@ def inspect_json(path: str, media_dir: str | None) -> None:
 
 
 def main() -> int:
-    p = argparse.ArgumentParser(description="Inspect a source dataset for mmeval-converter.")
+    p = argparse.ArgumentParser(description="Inspect a source dataset for dataset-upload.")
     src = p.add_mutually_exclusive_group(required=True)
     src.add_argument("--hf", help="HuggingFace dataset repo id (e.g. lmms-lab/VizWiz-VQA)")
     src.add_argument("--json", help="Local JSON file path")
-    p.add_argument("--split", default="val", help="HF split (default: val)")
+    p.add_argument("--split", default=None, help="HF split (required for --hf)")
     p.add_argument("--media-dir", help="Local media directory (for --json)")
     p.add_argument("-n", type=int, default=1, help="Number of sample rows to peek (HF only)")
     args = p.parse_args()
 
     if args.hf:
+        if not args.split:
+            p.error("--hf requires --split")
         inspect_hf(args.hf, args.split, args.n)
     else:
         inspect_json(args.json, args.media_dir)

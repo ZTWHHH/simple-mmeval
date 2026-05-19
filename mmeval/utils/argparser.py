@@ -47,6 +47,8 @@ class DataArguments:
                            metadata={"help": "name of the dataset."})
     split: Optional[str] = field(default=None,
                            metadata={"help": "split of the dataset for huggingface."})
+    subset: Optional[str] = field(default=None,
+                           metadata={"help": "HF mm-eval subset key inside metadata.json (when multiple subsets exist)."})
     infile: Optional[str]= field(default=None,
                            metadata={"help": "input file."})
     img_dir: Optional[str] = field(default=None,
@@ -57,6 +59,12 @@ class DataArguments:
                            metadata={"help": "whether to prepare data for circular evaluation."})
     resize: Optional[int] = field(default=None,
                            metadata={"help": "resize images to this pixel value."})
+    sample_num: Optional[int] = field(default=None,
+                           metadata={"help": "number of samples to run (default: all)."})
+    sample_order: str = field(default="head",
+                           metadata={"help": "sample selection order: head | tail | random (default: head)."})
+    sample_seed: int = field(default=42,
+                           metadata={"help": "random seed for sample_order=random (default: 42)."})
 
 @dataclass
 class InferenceArguments:

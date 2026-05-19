@@ -6,23 +6,21 @@ is read from the artifact directory.
 
 Usage
 -----
-    python3 push_to_hf.py \
-        --artifact-dir /path/to/convert/output \
-        --repo-id <user>/<repo> \
-        --token <hf_token> \
-        [--private]
+    python3 push_to_hf.py \\
+        --artifact-dir /path/to/convert/output \\
+        --repo-id <user>/<repo> \\
+        --token <hf_token> \\
+        [--private] \\
+        [--cleanup-artifact]   # delete artifact-dir after a successful push
 
 The artifact directory must contain:
     artifact-dir/
       hf_dataset/      # DatasetDict for the `default` config
       metadata.json    # v2 manifest (top-level prompt_template + mapping_from_source)
-      hf_metadata/     # legacy `metadata` config DatasetDict (no longer pushed —
-                       # kept on disk for validate.py to round-trip locally)
 
-Push behaviour (v2 format):
+Push behaviour:
 - Always pushes ``hf_dataset/`` as the ``default`` config.
 - If ``metadata.json`` is present, uploads it to the repo root.
-- The legacy ``metadata`` config is no longer pushed.
 
 After pushing, the script prints the exact ``simple-mmeval`` invocation to copy.
 """
@@ -30,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -43,6 +42,10 @@ def main() -> int:
     p.add_argument("--private", action="store_true", help="Create the repo as private")
     p.add_argument("--no-create", action="store_true",
                    help="Don't try to create the repo (assume it already exists)")
+    p.add_argument("--cleanup-artifact", action="store_true",
+                   help="Delete --artifact-dir after a successful push to free local disk space. "
+                        "Safe only when the dataset is already pushed and you no longer need the "
+                        "local Arrow files (re-run convert.py to regenerate if needed).")
     args = p.parse_args()
 
     if not args.token:
@@ -57,6 +60,7 @@ def main() -> int:
               file=sys.stderr)
         return 2
 
+    from datasets import Dataset, DatasetDict
     from datasets import load_from_disk
     from huggingface_hub import HfApi
 
@@ -68,10 +72,22 @@ def main() -> int:
 
     print(f"[hf] loading {default_dir}")
     default_dd = load_from_disk(str(default_dir))
-    print(f"[hf] pushing default config: splits={list(default_dd.keys())}")
-    default_dd.push_to_hub(args.repo_id, config_name="default",
-                           private=args.private, token=args.token)
+    if isinstance(default_dd, DatasetDict):
+        split_names = list(default_dd.keys())
+        print(f"[hf] pushing default config: splits={split_names}")
+        default_dd.push_to_hub(args.repo_id, config_name="default",
+                               private=args.private, token=args.token)
+        split = split_names[0]
+    elif isinstance(default_dd, Dataset):
+        print("[hf] pushing default config: flat Dataset (Hub split will be train)")
+        default_dd.push_to_hub(args.repo_id, config_name="default",
+                               private=args.private, token=args.token)
+        split = "train"
+    else:
+        print(f"ERROR: unexpected object from load_from_disk: {type(default_dd)}", file=sys.stderr)
+        return 2
 
+    subset_names: list[str] = []
     if metadata_json.exists():
         print(f"[hf] uploading {metadata_json.name} to repo root")
         api.upload_file(
@@ -82,19 +98,32 @@ def main() -> int:
             token=args.token,
             commit_message="Add v2 manifest (metadata.json)",
         )
+        import json as _json
+        try:
+            with open(metadata_json, encoding="utf-8") as _f:
+                subset_names = list((_json.load(_f).get("subsets") or {}).keys())
+        except Exception:
+            subset_names = []
     else:
         print(f"[hf] note: no metadata.json in {artifact} — skipping manifest upload "
-              f"(re-run convert.py with --task-type to emit it)")
+              f"(re-run convert.py to emit it)")
 
     print()
-    print(f"Done. Run with simple-mmeval:")
-    split = list(default_dd.keys())[0]
-    print(f"  python mmeval/run.py \\")
-    print(f"      --model_name_or_path Qwen/Qwen2.5-VL-3B-Instruct \\")
+    print("Done. Run with simple-mmeval:")
+    print("  python mmeval/run.py \\")
+    print("      --model_name_or_path Qwen3-VL-2B-Instruct \\")
     print(f"      --dataset mmeval_hf@{args.repo_id} \\")
+    if len(subset_names) > 1:
+        print(f"      --subset {subset_names[0]} \\  # pick one of {subset_names}")
     print(f"      --split {split} \\")
     print(f"      --out_dir work_dirs/$(basename {args.repo_id}) \\")
-    print(f"      --gpu_per_parallel 1 --parallel_per_task 1")
+    print("      --gpu_per_parallel 1 --parallel_per_task 1")
+
+    if args.cleanup_artifact:
+        print(f"\n[cleanup] deleting local artifact {artifact} ...")
+        shutil.rmtree(str(artifact))
+        print("[cleanup] done")
+
     return 0
 
 

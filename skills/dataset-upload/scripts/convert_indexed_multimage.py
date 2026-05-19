@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Convert MMMU/MMMU into Simple-MMEval HF format.
+"""Convert MMMU-style indexed multi-image benchmarks (MMMU/MMMU, MMMU/MMMU-Pro)
+into Simple-MMEval HF format.
 
-Source: ``MMMU/MMMU`` (the official upstream — one HF config per subject, with
-``image_1``…``image_7`` columns and ``question`` text using ``<image N>``
-references).
+Source: ``MMMU/MMMU`` (default) or ``MMMU/MMMU-Pro`` via ``--hf`` — one HF config
+per subject, with ``image_1``…``image_7`` columns and ``question`` text using
+``<image N>`` references.
 
-Output: a single mm-eval HF artifact whose ``default`` config has three splits
-(``dev``, ``validation``, ``test``) each containing the union of all 30 subject
-configs. The ``metadata`` config carries one Jinja template per split that
-mirrors the official MMMU paper / eval-code prompt format verbatim:
+Output (per split): an mm-eval v2 artifact at ``<out>/<split>/`` consisting of
+``hf_dataset/`` (DatasetDict for the ``default`` config) plus a v2
+``metadata.json`` manifest whose single ``main`` subset carries the Jinja
+template that mirrors the official MMMU paper / eval-code prompt format
+verbatim:
 
   Multiple-choice (MMMU/configs/llava1.5.yaml + utils/data_utils.py):
       {question}\\n\\n(A) opt1\\n(B) opt2\\n…\\n\\n\\nAnswer with the option's letter from the given choices directly.
@@ -25,9 +27,11 @@ Per row we:
      ASSEMBLES the prompt at runtime — no pre-rendered ``prompt`` field is
      stored on the message.
 
-Subjects are loaded in parallel with one HF config each. Per-split outputs
-are written to ``<out>/<split>/{hf_dataset,hf_metadata}`` for direct use with
-``merge_splits.py``.
+Subjects are loaded in parallel with one HF config each. Each per-split
+``<out>/<split>/`` directory is directly consumable by ``merge_splits.py``
+(which expects ``hf_dataset/`` + ``metadata.json``) and ``push_to_hf.py``.
+Because ``metadata.json`` has a single subset (``main``), runtime selection
+is just ``--dataset mmeval_hf@<repo>`` with no ``--subset`` needed.
 """
 from __future__ import annotations
 
@@ -238,29 +242,38 @@ def convert_split(args, split: str) -> Dict[str, Any]:
     )
     DatasetDict({split: out_ds}).save_to_disk(str(out_dir / "hf_dataset"))
 
-    meta_features = Features({
-        "jinja_template": Value("string"),
-        "version": Value("string"),
-        "metadata": Value("string"),
-    })
-    meta_ds = Dataset.from_dict(
-        {
-            "jinja_template": [MMMU_TEMPLATE],
-            "version": [args.version],
-            "metadata": [json.dumps({
-                "source": args.hf,
-                "split": split,
-                "n_subjects": len(args.subjects),
-                "notes": ("Per-reference image expansion from image_1..image_7. "
-                          "Question/options pre-normalized to <image>. Prompt rendered "
-                          "from per-split Jinja template that mirrors the official "
-                          "MMMU paper format (MMMU/configs/llava1.5.yaml + "
-                          "MMMU/utils/data_utils.py)."),
-            })],
+    media_min = min(media_counts) if (media_counts := [len(m) for m in media_col]) else 0
+    media_max = max(media_counts) if media_counts else 0
+    metadata = {
+        "name": Path(args.hf).name,
+        "release_date": args.release_date,
+        "subsets": {
+            "main": {
+                "language": ["en"],
+                "modalities": ["multi_image_interleave"],
+                "task_type": "multiple_choice_vqa",
+                "prompt_template": MMMU_TEMPLATE,
+                "mapping_from_source": {
+                    "source": {
+                        "format": "huggingface",
+                        "url": {split: f"https://huggingface.co/datasets/{args.hf}"},
+                    },
+                    "id": {"from": "id"},
+                    "question": {"from": "question"},
+                    "options": {"from": "options", "optional": True},
+                    "answer": {"from": "answer", "optional": True},
+                    "media": {
+                        "from": "image_1..image_7",
+                        "type": "list",
+                        "min_items": media_min,
+                        "max_items": media_max,
+                    },
+                },
+            }
         },
-        features=meta_features,
-    )
-    DatasetDict({split: meta_ds}).save_to_disk(str(out_dir / "hf_metadata"))
+    }
+    with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
+        json.dump(metadata, f, ensure_ascii=False, indent=2)
 
     return {
         "split": split,
@@ -281,8 +294,12 @@ def main() -> int:
     p.add_argument("--image-format", choices=["png", "jpeg"], default="jpeg")
     p.add_argument("--jpeg-quality", type=int, default=92)
     p.add_argument("--limit", type=int, default=None)
-    p.add_argument("--version", default="v1")
+    p.add_argument("--release-date", default=None,
+                   help="metadata.json release_date (default: today UTC date)")
     args = p.parse_args()
+    if args.release_date is None:
+        from datetime import date as _date
+        args.release_date = _date.today().isoformat()
 
     summary = {"hf": args.hf, "subjects": args.subjects, "splits": []}
     for s in args.splits:
