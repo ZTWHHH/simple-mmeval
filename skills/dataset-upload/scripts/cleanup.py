@@ -25,7 +25,7 @@ python3 cleanup.py \\
 
 # Clean up the per-dataset work dir created by convert.py --work-dir
 # (contains HF download cache under hf/ and temp files under tmp/):
-python3 cleanup.py --work-dir .tmp/enem_workdir
+python3 cleanup.py --work-dir .tmp/conversions/enem_workdir
 """
 from __future__ import annotations
 
@@ -81,19 +81,27 @@ def _remove(path: Path, dry_run: bool) -> int:
 
 
 def _remove_work_dir_protecting_smoke(path: Path, dry_run: bool) -> int:
-    """Remove a work dir but preserve any `smoke_*` subdirectories at the top level.
+    """Remove a work dir, but never touch the project's smoke-results tree.
 
-    Smoke results are deliberately persisted under `<project-root>/.tmp/smoke_<dataset>/`
-    so a human can inspect what the framework actually saw. A user running
-    `cleanup.py --work-dir .tmp/<dataset>/` shouldn't lose them as a side
-    effect of freeing the HF cache.
+    Smoke results are deliberately persisted under
+    `<project-root>/.tmp/smoke_tests/<dataset>/` (legacy: `smoke_<dataset>/`
+    or any `smoke_*` subdir under a work dir) so a human can inspect what
+    the framework actually saw. A user running
+    `cleanup.py --work-dir .tmp/conversions/<dataset>/` shouldn't lose them
+    as a side effect of freeing the HF cache.
     """
     if not path.exists():
         return 0
+    # Refuse to operate on the project's smoke-results root directly.
+    if path.resolve().name == "smoke_tests":
+        print(f"  refusing to remove smoke-results tree: {path} "
+              "(pass --include-smoke-results to delete)")
+        return 0
+    # Legacy fallback: a per-dataset work dir that contains `smoke_*` subdirs
+    # (old layout where smoke artifacts lived inside the work dir).
     smoke_children = [c for c in path.iterdir() if c.is_dir() and c.name.startswith("smoke_")]
     if not smoke_children:
         return _remove(path, dry_run)
-    # Targeted removal: delete every entry except smoke_* dirs.
     freed = 0
     for child in path.iterdir():
         if child.is_dir() and child.name.startswith("smoke_"):

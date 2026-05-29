@@ -216,6 +216,86 @@ def merge(input_dirs: List[Path], out_dir: Path, subset: Optional[str]) -> None:
     print("  rows per split: " + ", ".join(f"{k}={len(v)}" for k, v in default_dd.items()))
 
 
+def merge_multi_subset(input_dirs: List[Path], out_dir: Path) -> None:
+    """Multi-subset merge: each input may define a different subset.
+
+    All (subset, split) pairs across the inputs are combined into one
+    DatasetDict where each pair becomes a split named ``{subset}_{split}``
+    (or just ``{subset}`` when the source split name == subset already).
+    Each subset's metadata block points only to its own owned splits.
+
+    Use this for multi-config benchmarks like CRPE (exist, relation) or
+    MMBench (cc, cn, en) where the source carries N distinct configs.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    combined_dd: Dict[str, Any] = {}
+    name: Optional[str] = None
+    release_dates: List[str] = []
+    subsets_meta: Dict[str, Dict[str, Any]] = {}
+
+    for d in input_dirs:
+        ds_obj = load_from_disk(str(d / "hf_dataset"))
+        if isinstance(ds_obj, Dataset):
+            raise ValueError(f"{d}: hf_dataset is a flat Dataset (DatasetDict required)")
+
+        mp = d / "metadata.json"
+        if not mp.exists():
+            raise ValueError(f"{d}: missing metadata.json")
+        with open(mp, encoding="utf-8") as f:
+            m = json.load(f)
+        if name is None:
+            name = m.get("name")
+        elif m.get("name") != name:
+            raise ValueError(f"name mismatch: {name!r} vs {m.get('name')!r} in {d}")
+        if m.get("release_date"):
+            release_dates.append(str(m["release_date"]))
+
+        subs = m.get("subsets") or {}
+        if not subs:
+            raise ValueError(f"{d}: metadata.json has no subsets")
+
+        for subset_key, subset_block in subs.items():
+            block = copy.deepcopy(subset_block)
+            mfs = block.get("mapping_from_source") or {}
+            src = mfs.get("source") or {}
+            url_map = src.get("url") or {}
+            owned_split_renames: Dict[str, str] = {}
+            for split_name, sub in ds_obj.items():
+                target = split_name if split_name == subset_key else f"{subset_key}_{split_name}"
+                if target in combined_dd:
+                    raise ValueError(f"split-name collision after multi-subset merge: {target!r}")
+                _check_features("default", target, sub.features, REQUIRED_DEFAULT)
+                combined_dd[target] = sub
+                owned_split_renames[split_name] = target
+            # Rewrite the subset's source.url to reference the renamed split keys
+            new_url_map: Dict[str, str] = {}
+            for split_name, target in owned_split_renames.items():
+                # Prefer URL keyed by original split name; fall back to subset key
+                u = url_map.get(split_name) or url_map.get(subset_key)
+                if isinstance(url_map, dict) and isinstance(u, str):
+                    new_url_map[target] = u
+            if new_url_map:
+                src = dict(src)
+                src["url"] = new_url_map
+                mfs = dict(mfs); mfs["source"] = src
+                block["mapping_from_source"] = mfs
+            if subset_key in subsets_meta:
+                raise ValueError(f"subset key collision: {subset_key!r} appears in multiple inputs")
+            subsets_meta[subset_key] = block
+
+    merged = {
+        "name": name,
+        "release_date": (max(release_dates) if release_dates else None),
+        "subsets": subsets_meta,
+    }
+    DatasetDict(combined_dd).save_to_disk(str(out_dir / "hf_dataset"))
+    with open(out_dir / "metadata.json", "w", encoding="utf-8") as f:
+        json.dump(merged, f, ensure_ascii=False, indent=2)
+    print(f"merged (multi-subset): {len(combined_dd)} splits, "
+          f"{len(subsets_meta)} subsets -> {out_dir}")
+    print("  rows per split: " + ", ".join(f"{k}={len(v)}" for k, v in combined_dd.items()))
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--inputs", nargs="+", required=True,
@@ -223,8 +303,18 @@ def main() -> int:
     p.add_argument("--out", required=True, help="Output directory for the merged artifact")
     p.add_argument("--subset", default=None,
                    help="Subset key inside metadata.json (default: auto when all inputs share one subset)")
+    p.add_argument("--multi-subset", action="store_true",
+                   help="Combine inputs that each declare DIFFERENT subset keys. Each (subset, split) "
+                        "becomes a HF split named '{subset}_{split}', and the merged metadata.json "
+                        "contains one block per source subset with its own source.url mapping. Use for "
+                        "multi-config benchmarks like CRPE (exist/relation) or MMBench (cc/cn/en).")
     args = p.parse_args()
-    merge([Path(d) for d in args.inputs], Path(args.out), args.subset)
+    if args.multi_subset:
+        if args.subset is not None:
+            p.error("--subset and --multi-subset are mutually exclusive")
+        merge_multi_subset([Path(d) for d in args.inputs], Path(args.out))
+    else:
+        merge([Path(d) for d in args.inputs], Path(args.out), args.subset)
     return 0
 
 

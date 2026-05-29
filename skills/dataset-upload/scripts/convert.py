@@ -124,13 +124,22 @@ def video_path_of(value: Any) -> Optional[str]:
     return None
 
 
-def parse_map_pairs(pairs: Optional[List[str]], *, require_id_question: bool = True) -> Dict[str, str]:
-    """Parse ``canonical=source`` pairs. When ``require_id_question`` is False (e.g. overrides
-    on top of ``--metadata-json``), ``id`` / ``question`` need not appear in ``pairs``."""
+def parse_map_pairs(pairs: Optional[List[str]], *, require_id: bool = True,
+                    require_question: bool = True) -> Dict[str, str]:
+    """Parse ``canonical=source`` pairs.
+
+    - ``require_id=False`` skips the ``id`` requirement (e.g. overrides on top of
+      ``--metadata-json``, or when ``--auto-id`` will synthesize a row id).
+    - ``require_question=False`` skips the ``question`` requirement — captioning
+      tasks have synthetic prompts that do not consume ``question`` at render time.
+    """
     out: Dict[str, str] = {}
     if not pairs:
-        if require_id_question:
-            raise ValueError("--map must include id=<source-field> and question=<source-field>")
+        missing = []
+        if require_id: missing.append("id=<source-field>")
+        if require_question: missing.append("question=<source-field>")
+        if missing:
+            raise ValueError("--map must include " + " and ".join(missing))
         return out
     for p in pairs:
         if "=" not in p:
@@ -144,16 +153,22 @@ def parse_map_pairs(pairs: Optional[List[str]], *, require_id_question: bool = T
         if k in out:
             raise ValueError(f"--map has duplicate canonical key '{k}'")
         out[k] = v
-    if require_id_question:
-        if "id" not in out:
-            raise ValueError("--map must include id=<source-field>")
-        if "question" not in out:
-            raise ValueError("--map must include question=<source-field>")
+    if require_id and "id" not in out:
+        raise ValueError("--map must include id=<source-field>")
+    if require_question and "question" not in out:
+        raise ValueError("--map must include question=<source-field>")
     return out
 
 
-def parse_map(pairs: List[str]) -> Dict[str, str]:
-    return parse_map_pairs(pairs, require_id_question=True)
+def parse_map(pairs: List[str], *, task_type: Optional[str] = None,
+              has_auto_id: bool = False) -> Dict[str, str]:
+    """Convenience wrapper. Captioning tasks don't require a `question` mapping.
+    `--auto-id` callers synthesize their own ids, so `id` mapping is optional."""
+    return parse_map_pairs(
+        pairs,
+        require_id=not has_auto_id,
+        require_question=(task_type != "captioning"),
+    )
 
 
 def load_metadata_json(path: Path) -> Dict[str, Any]:
@@ -293,25 +308,57 @@ def encode_image_bytes(value: Any, image_format: str, jpeg_quality: int) -> Tupl
     return buf.getvalue(), ".png"
 
 
-def materialize_video(path_or_url: str, out_dir: Path, stem: str, idx: int) -> str:
-    """Copy/download a video to local disk; returns the basename."""
+def materialize_video(path_or_url: str, out_dir: Path, stem: str, idx: int,
+                      verify: bool = False) -> str:
+    """Copy/download a video to local disk; returns the basename.
+
+    When ``verify=True``, checks that the materialized file is non-empty and
+    (when PyAV is available) can be opened and contains at least one video stream.
+    """
     ext = os.path.splitext(path_or_url.split("?")[0])[-1].lower()
     if not ext:
         raise UnknownVideoExt(f"video has no extension: {path_or_url[:80]}")
+    if ext not in VIDEO_EXTS:
+        raise UnknownVideoExt(f"unrecognized video extension {ext!r}: {path_or_url[:80]}")
     name = f"{stem}_{idx}{ext}"
     target = out_dir / name
     try:
         if path_or_url.startswith(("http://", "https://")):
-            with requests.get(path_or_url, stream=True, timeout=60) as r:
+            with requests.get(path_or_url, stream=True, timeout=120) as r:
                 r.raise_for_status()
                 with open(target, "wb") as f:
-                    for chunk in r.iter_content(8192):
+                    for chunk in r.iter_content(65536):
                         f.write(chunk)
         else:
+            if not os.path.isfile(path_or_url):
+                raise FileNotFoundError(f"video source file not found: {path_or_url!r}")
             shutil.copyfile(path_or_url, target)
+    except EncodeFailed:
+        raise
     except Exception as e:
         raise EncodeFailed(f"video materialize failed: {path_or_url[:80]!r}: {e!s}") from e
+    if verify:
+        _verify_video_file(target)
     return name
+
+
+def _verify_video_file(path: Path) -> None:
+    """Quick integrity check: file is non-empty and decodable."""
+    if not path.exists():
+        raise EncodeFailed(f"video file missing after write: {path}")
+    if path.stat().st_size == 0:
+        raise EncodeFailed(f"video file is empty (0 bytes): {path}")
+    try:
+        import av
+        with av.open(str(path)) as container:
+            if not container.streams.video:
+                raise EncodeFailed(f"video has no video stream: {path}")
+    except ImportError:
+        pass
+    except EncodeFailed:
+        raise
+    except Exception as e:
+        raise EncodeFailed(f"video probe failed for {path}: {e}") from e
 
 
 def _media_path_str(m: Any) -> Optional[str]:
@@ -349,7 +396,9 @@ def build_message(
     representations (`""` / `{}` / `[]`); pass-through fields with None values
     are dropped to avoid the Jinja template rendering the literal string "None"."""
     msg: Dict[str, Any] = {"role": "user"}
-    msg["question"] = row.get(colmap["question"], "") or ""
+    # `question` is optional for captioning-style tasks; default to "" when
+    # the mapping omits it.
+    msg["question"] = (row.get(colmap["question"], "") or "") if "question" in colmap else ""
     if "answer" in colmap:
         ans = row.get(colmap["answer"])
         if isinstance(ans, list) and not answer_as_list:
@@ -709,16 +758,36 @@ def _setup_work_dir(work_dir: Path) -> None:
     tmp_dir = work_dir / "tmp"
     hf_home.mkdir(parents=True, exist_ok=True)
     tmp_dir.mkdir(parents=True, exist_ok=True)
-    os.environ.update({
+    env_update = {
         "HF_HOME": str(hf_home),
         "HF_DATASETS_CACHE": str(hf_home / "datasets"),
         "HUGGINGFACE_HUB_CACHE": str(hf_home / "hub"),
         "TRANSFORMERS_CACHE": str(hf_home),
-        "TMPDIR": str(tmp_dir),
-        "TEMP": str(tmp_dir),
-        "TMP": str(tmp_dir),
-    })
-    _tempfile.tempdir = str(tmp_dir)
+    }
+    # Linux Unix-domain socket paths are capped at 108 bytes. multiprocess.Manager
+    # (used internally by datasets.save_to_disk → iflatmap_unordered) builds a
+    # socket path under $TMPDIR; if the project root + work-dir name already
+    # consumes >~80 chars, the socket bind fails with `OSError: AF_UNIX path too
+    # long`, killing the save. Only route TMPDIR into the work-dir when the
+    # resulting socket path will fit; otherwise leave TMPDIR pointing at the
+    # system default (usually /tmp) so multiprocess works. HF caches still go
+    # to work_dir regardless — they don't use Unix sockets.
+    # multiprocess Manager builds a socket path like `<TMPDIR>/pymp-<uuid>/listener-<uuid>`,
+    # which appends ~55 chars. The kernel limit for AF_UNIX paths is 108 bytes, so
+    # leave a generous margin: ~50 chars max for TMPDIR. When tmp_dir exceeds that,
+    # we leave TMPDIR pointing at the system default (which is typically /tmp).
+    AF_UNIX_BUDGET = 50
+    if len(str(tmp_dir)) <= AF_UNIX_BUDGET:
+        env_update.update({
+            "TMPDIR": str(tmp_dir),
+            "TEMP": str(tmp_dir),
+            "TMP": str(tmp_dir),
+        })
+        _tempfile.tempdir = str(tmp_dir)
+    else:
+        print(f"[work-dir] TMPDIR path too long ({len(str(tmp_dir))} chars); "
+              f"leaving TMPDIR={os.environ.get('TMPDIR', '/tmp')} to avoid AF_UNIX bind failure")
+    os.environ.update(env_update)
     try:
         stat = shutil.disk_usage(work_dir)
         free_gb = stat.free / 1e9
@@ -745,7 +814,14 @@ def iter_source(args) -> Iterator[Tuple[Dict[str, Any], int]]:
         # Stream when the user only wants a small sample; avoids fully
         # downloading multi-GB benchmarks just to inspect a few rows.
         streaming = args.limit is not None
-        base = load_dataset(args.hf, split=args.split, streaming=streaming)
+        # Optional --hf-config <name> for multi-config repos (e.g. lmms-lab/DocVQA
+        # ships configs "DocVQA" + "InfographicVQA"). When omitted, load_dataset
+        # uses the repo's default config — works for single-config repos.
+        hf_config = getattr(args, "hf_config", None)
+        if hf_config:
+            base = load_dataset(args.hf, hf_config, split=args.split, streaming=streaming)
+        else:
+            base = load_dataset(args.hf, split=args.split, streaming=streaming)
         raw_iter = enumerate(base)
     elif args.json:
         with open(args.json, encoding="utf-8") as f:
@@ -810,11 +886,18 @@ class StreamState:
     hf_ids: List[str] = field(default_factory=list)
     hf_media: List[List[Dict[str, Any]]] = field(default_factory=list)
     hf_messages: List[str] = field(default_factory=list)
+    # Parallel to local_rows / hf_ids: the source-stream index that produced
+    # each surviving row.  Used to make duplicate-id disambiguation
+    # deterministic (occurrence order = source order, independent of which
+    # thread completed first).
+    local_source_idx: List[int] = field(default_factory=list)
+    hf_source_idx: List[int] = field(default_factory=list)
     skipped_samples: List[Dict[str, Any]] = field(default_factory=list)
     skip_reason_counts: Dict[str, int] = field(default_factory=dict)
     seen: int = 0
     row_signals: List[Dict[str, Any]] = field(default_factory=list)
     media_counts_kept: List[int] = field(default_factory=list)
+    duplicate_ids_resolved: Dict[str, Any] = field(default_factory=dict)
 
     def record(
         self,
@@ -839,14 +922,95 @@ class StreamState:
             self.media_counts_kept.append(n_media_kept)
         if local is not None:
             self.local_rows.append(local)
+            self.local_source_idx.append(idx)
         if hf is not None:
             self.hf_ids.append(hf[0])
             self.hf_media.append(hf[1])
             self.hf_messages.append(hf[2])
+            self.hf_source_idx.append(idx)
 
     @property
     def skipped(self) -> int:
         return sum(self.skip_reason_counts.values())
+
+
+def _resolve_duplicate_row_ids(state: "ConvertState") -> None:
+    """Disambiguate non-unique row ids deterministically.
+
+    Some upstreams use a per-entity id (e.g., per-chart UUID) that is not
+    unique once multiple samples per entity ship in the same split (multiple
+    QA paraphrases per chart, multiple sub-questions per document, etc.).
+    Walk surviving rows in stable source-stream order, count per-id
+    occurrences (1-indexed), and rewrite `id` to `{source_id}_q{k}` for the
+    kth occurrence.  Move the original id into a `source_id` field on the
+    per-row message dict and on the local row dict so consumers can still
+    join back to the upstream entity.
+
+    If every id is already row-unique, this is a no-op.
+    """
+    from collections import Counter
+    # Tally — use whichever output mode has data (both lists carry the same
+    # ids when --mode both).
+    ids_seq: List[str] = state.hf_ids if state.hf_ids else [r["id"] for r in state.local_rows]
+    counts = Counter(ids_seq)
+    dup_ids = [i for i, c in counts.items() if c > 1]
+    if not dup_ids:
+        return
+
+    # Build a stable per-(id, source_idx) occurrence index.  Sort by
+    # (original_id, source_idx) so the kth occurrence of `<X>` is always the
+    # one that came first in the source stream, regardless of thread order.
+    def _occ_map(ids: List[str], src_idx: List[int]) -> List[int]:
+        order = sorted(range(len(ids)), key=lambda i: (ids[i], src_idx[i] if i < len(src_idx) else 0))
+        occ_seen: Dict[str, int] = {}
+        out = [0] * len(ids)
+        for i in order:
+            occ_seen[ids[i]] = occ_seen.get(ids[i], 0) + 1
+            out[i] = occ_seen[ids[i]]
+        return out
+
+    if state.hf_ids:
+        occ = _occ_map(state.hf_ids, state.hf_source_idx)
+        new_hf_ids: List[str] = []
+        new_hf_messages: List[str] = []
+        for i, old_id in enumerate(state.hf_ids):
+            new_id = f"{old_id}_q{occ[i]}" if counts[old_id] > 1 else old_id
+            new_hf_ids.append(new_id)
+            # Inject source_id into the message dict only when the id changed.
+            if new_id != old_id:
+                msgs = json.loads(state.hf_messages[i])
+                if msgs and isinstance(msgs[0], dict):
+                    msgs[0]["source_id"] = old_id
+                new_hf_messages.append(json.dumps(msgs, ensure_ascii=False))
+            else:
+                new_hf_messages.append(state.hf_messages[i])
+        state.hf_ids = new_hf_ids
+        state.hf_messages = new_hf_messages
+
+    if state.local_rows:
+        local_ids = [r["id"] for r in state.local_rows]
+        occ = _occ_map(local_ids, state.local_source_idx)
+        for i, row in enumerate(state.local_rows):
+            old_id = row["id"]
+            if counts[old_id] > 1:
+                row["id"] = f"{old_id}_q{occ[i]}"
+                # mmeval LocalJSONDataset doesn't re-render `messages[0]` at
+                # eval time when a per-row `prompt` is present; still inject
+                # source_id so downstream tooling can read it.
+                msgs = row.get("messages") or []
+                if msgs and isinstance(msgs[0], dict):
+                    msgs[0]["source_id"] = old_id
+
+    # Record what happened for the convert_summary.json so the operator sees it.
+    state.duplicate_ids_resolved = {
+        "source_id_field_added": "source_id",
+        "id_template": "{source_id}_q{occurrence_index}",
+        "n_duplicated_source_ids": len(dup_ids),
+        "max_occurrences": max(counts.values()),
+        "examples": [{"source_id": sid, "occurrences": counts[sid]} for sid in dup_ids[:5]],
+    }
+    print(f"[ids] disambiguated {len(dup_ids)} source ids with multiple occurrences "
+          f"(max {max(counts.values())}); original id preserved as `source_id`.")
 
 
 # --- main per-row pipeline --------------------------------------------------
@@ -890,10 +1054,19 @@ def stream_convert(
             print(f"  …processed {state.seen} rows ({state.seen/(now-t0):.1f}/s)")
             last_log = now
 
+    auto_id_tpl = getattr(args, "auto_id", None)
+    split_name = args.split or "data"
+
     def process_one(row: Dict[str, Any], i: int):
         raw_id = row.get(colmap["id"])
         if raw_id is None:
-            return i, None, None, None, "missing_required:id", None, None
+            if auto_id_tpl:
+                # Synthesize a deterministic positional id when the source has no id
+                # field. Documented as `auto_id_template` in the metadata.json so
+                # downstream consumers can re-derive the row identity.
+                raw_id = auto_id_tpl.format(idx=i, split=split_name)
+            else:
+                return i, None, None, None, "missing_required:id", None, None
         stem = str(raw_id).replace("/", "_")
 
         msg = build_message(row, colmap, args.answer_join, args.answer_list, choice_specs or None)
@@ -922,13 +1095,18 @@ def stream_convert(
                     if not ext_raw:
                         video = ps
             if video is not None:
-                if do_hf:
+                if do_hf and not getattr(args, "hf_video", False):
                     raise ValueError(
                         f"HF mode does not support video media (sample id={stem}); "
-                        f"use --mode local for video benchmarks."
+                        f"use --mode local for video benchmarks, or pass --hf-video "
+                        f"to store video paths (not bytes) in the Arrow dataset."
                     )
+                if do_hf and getattr(args, "hf_video", False):
+                    hf_media_items.append(video)
                 try:
-                    saved_basenames.append(materialize_video(video, media_dir, stem, m_idx))
+                    verify_vid = getattr(args, "verify_video", False)
+                    saved_basenames.append(materialize_video(video, media_dir, stem, m_idx,
+                                                            verify=verify_vid))
                 except EncodeFailed as e:
                     return i, stem, None, None, f"{e.category}:{e}", signal, None
                 continue
@@ -978,6 +1156,20 @@ def stream_convert(
             state.record(*process_one(row, i))
             maybe_log()
 
+    # Globally disambiguate row ids before writing artifacts.  Some source
+    # datasets carry a per-CHART or per-DOCUMENT id that is not unique at the
+    # row granularity once the dataset ships multiple samples per source
+    # entity (e.g., ChartNet has multiple QA paraphrases per chart_id).  In
+    # those cases we walk surviving rows in stable source-stream order, count
+    # per-id occurrences (1-indexed), and rewrite the row id to
+    # `{source_id}_q{k}`.  The original id is preserved as `source_id` on
+    # the per-row message dict so downstream consumers can still join back
+    # to the upstream source.  Opt out with --no-auto-disambiguate-ids when
+    # the upstream id is already row-unique and you want the converter to
+    # hard-fail on collisions instead.
+    if getattr(args, "auto_disambiguate_ids", True):
+        _resolve_duplicate_row_ids(state)
+
     summary: Dict[str, Any] = {
         "mode": args.mode,
         "out": str(out),
@@ -985,6 +1177,7 @@ def stream_convert(
         "skipped": state.skipped,
         "skip_reason_counts": state.skip_reason_counts,
         "skipped_samples": state.skipped_samples,
+        "duplicate_ids_resolved": state.duplicate_ids_resolved,
         "elapsed_s": round(time.time() - t0, 2),
     }
 
@@ -1011,11 +1204,20 @@ def stream_convert(
             hf_media = [state.hf_media[i] for i in order]
             hf_messages = [state.hf_messages[i] for i in order]
 
-            features = Features({
-                "id": Value("string"),
-                "media": Sequence(HFImage()),
-                "messages": Value("string"),
-            })
+            hf_video_mode = getattr(args, "hf_video", False)
+            if hf_video_mode:
+                features = Features({
+                    "id": Value("string"),
+                    "media": Sequence(Value("string")),
+                    "messages": Value("string"),
+                })
+                print("[hf] video mode: media column stores video paths as strings")
+            else:
+                features = Features({
+                    "id": Value("string"),
+                    "media": Sequence(HFImage()),
+                    "messages": Value("string"),
+                })
             ds = Dataset.from_dict({"id": hf_ids, "media": hf_media, "messages": hf_messages},
                                    features=features)
             hf_path = out / "hf_dataset"
@@ -1023,7 +1225,8 @@ def stream_convert(
                 DatasetDict({args.split: ds}).save_to_disk(str(hf_path), num_proc=args.save_num_proc)
             else:
                 ds.save_to_disk(str(hf_path), num_proc=args.save_num_proc)
-            summary["hf"] = {"hf_dataset": str(hf_path), "rows": len(hf_ids)}
+            summary["hf"] = {"hf_dataset": str(hf_path), "rows": len(hf_ids),
+                             "video_mode": hf_video_mode}
             print(f"[hf] wrote {len(hf_ids)} rows -> {hf_path}")
 
     seed_modalities: Optional[List[str]] = None
@@ -1066,6 +1269,9 @@ def main() -> int:
     src.add_argument("--tsv", help="Local TSV path (header row + tab-separated values)")
     src.add_argument("--csv", help="Local CSV path (header row)")
     p.add_argument("--split", default=None, help="HF split (required for --hf). Optional for local files.")
+    p.add_argument("--hf-config", default=None,
+                   help="HF config name for multi-config repos (e.g. lmms-lab/DocVQA "
+                        "configs DocVQA / InfographicVQA). Omit for single-config repos.")
     p.add_argument("--media-dir", help="Local media dir for local file sources")
     p.add_argument("--map", nargs="*", default=None,
                    help="Column mapping: canonical=source pairs (required unless --metadata-json)")
@@ -1109,12 +1315,20 @@ def main() -> int:
                    help="Per-dataset work directory for HF caches and temp files. "
                         "Sets HF_HOME, HF_DATASETS_CACHE, HUGGINGFACE_HUB_CACHE, "
                         "TRANSFORMERS_CACHE, TMPDIR/TEMP/TMP to subdirs here. "
-                        "Default: <project-root>/.tmp/<out-basename>. "
+                        "Default: <project-root>/.tmp/conversions/<out-basename>. "
                         "Pass an explicit path to override, or --work-dir '' to disable.")
     p.add_argument("--explode", default=None,
                    help="Source list-valued field to explode into one row per element "
                         "(e.g. 'questions' for nested-MCQ datasets). The inner dict's "
                         "keys are merged onto each row; outer keys remain as fallback.")
+    p.add_argument("--auto-id", default=None,
+                   help="Format string used to synthesize a positional row id "
+                        "when the source has no id field (e.g. '{split}_{idx:06d}'). "
+                        "Available placeholders: {idx} (0-based row index), {split} "
+                        "(--split value or 'data'). Without this flag, rows without "
+                        "an id are skipped as 'missing_required:id' per the strict "
+                        "no-fabrication contract; pass it only for sources you have "
+                        "verified do not expose any natural id field.")
     p.add_argument("--id-template", default="{id}_q{idx}",
                    help="Format string for post-explode ids (default '{id}_q{idx}'). "
                         "Available fields: {id} (outer), {outer}, {idx}.")
@@ -1122,6 +1336,26 @@ def main() -> int:
                    help="Python expression eval'd per row (with `row` in scope) to "
                         "keep only matching rows. e.g. \"row['data_type']=='image'\" "
                         "for SEEDBench's image/video mix. Sandboxed (no builtins).")
+    p.add_argument("--no-auto-disambiguate-ids", dest="auto_disambiguate_ids",
+                   action="store_false",
+                   help="By default, when the per-row id from the source is not unique "
+                        "across surviving rows (e.g., a per-chart id when the dataset "
+                        "ships multiple QA samples per chart), the converter rewrites "
+                        "each duplicate id to '{source_id}_q{k}' (1-indexed by source "
+                        "stream order) and preserves the original id in a `source_id` "
+                        "field on the per-row message dict. Pass --no-auto-disambiguate-ids "
+                        "to disable that and fail hard on id collisions instead.")
+    p.set_defaults(auto_disambiguate_ids=True)
+    p.add_argument("--hf-video", action="store_true",
+                   help="Enable HF video mode: store video paths as strings in the "
+                        "Arrow media column (Sequence(Value('string'))) instead of "
+                        "raising an error. Video files are materialized to media/ "
+                        "and must be uploaded separately to the HF repo. Use this "
+                        "when converting video benchmarks for HF distribution.")
+    p.add_argument("--verify-video", action="store_true",
+                   help="Verify each materialized video file: check non-empty size "
+                        "and (when PyAV is installed) probe codec, duration, and "
+                        "frame count. Slower but catches broken/truncated downloads.")
     p.add_argument("--save-num-proc", type=int, default=1,
                    help="num_proc forwarded to Dataset.save_to_disk / DatasetDict.save_to_disk (default 1)")
     p.add_argument("--json-indent", type=int, default=None,
@@ -1135,7 +1369,7 @@ def main() -> int:
             _wd = Path(args.work_dir)
         else:
             _project_root = Path(__file__).resolve().parents[3]
-            _wd = _project_root / ".tmp" / Path(args.out).name
+            _wd = _project_root / ".tmp" / "conversions" / Path(args.out).name
         _setup_work_dir(_wd)
 
     if args.hf and not args.split:
@@ -1160,7 +1394,11 @@ def main() -> int:
     else:
         if not args.map:
             p.error("either --map or --metadata-json is required")
-        colmap = parse_map(args.map)
+        colmap = parse_map(
+            args.map,
+            task_type=getattr(args, "task_type", None),
+            has_auto_id=bool(getattr(args, "auto_id", None)),
+        )
         template_str = load_template(args.template)
 
     args._original_id_field = colmap.get("id")

@@ -45,6 +45,110 @@ def _build_jinja_env():
     return env
 
 
+VIDEO_MODALITIES = {"single_video_start", "multi_video_interleave", "multi_image_video_interleave"}
+
+VIDEO_EXTS = {
+    ".mp4", ".avi", ".mov", ".mkv", ".webm", ".flv", ".wmv",
+    ".mpeg", ".mpg", ".m4v", ".3gp", ".3g2", ".ts", ".mts", ".vob", ".gif",
+}
+
+
+def _is_video_ext(path: str) -> bool:
+    ext = os.path.splitext(path.split("?")[0])[-1].lower()
+    return ext in VIDEO_EXTS
+
+
+def audit_video_metadata(subsets: dict, issues: list) -> None:
+    """Check video-specific metadata requirements."""
+    for sk, sv in subsets.items():
+        mods = set(sv.get("modalities") or [])
+        has_video = bool(mods & VIDEO_MODALITIES)
+        if not has_video:
+            continue
+        vs = sv.get("video_storage")
+        if vs is None:
+            issues.append(
+                f"subset={sk!r}: modalities include video tags {sorted(mods & VIDEO_MODALITIES)} "
+                f"but no 'video_storage' block is present in metadata.json. "
+                f"Add a video_storage block (see metadata-json.md)."
+            )
+            continue
+        if not isinstance(vs, dict):
+            issues.append(f"subset={sk!r}: video_storage must be an object, got {type(vs).__name__}")
+            continue
+        fmt = vs.get("format")
+        if fmt not in ("files", "archives"):
+            issues.append(
+                f"subset={sk!r}: video_storage.format must be 'files' or 'archives', got {fmt!r}"
+            )
+        if not vs.get("media_root"):
+            issues.append(f"subset={sk!r}: video_storage.media_root is missing or empty")
+        if fmt == "archives":
+            af = vs.get("archive_format")
+            if af not in ("zip", "tar", "tar.gz"):
+                issues.append(
+                    f"subset={sk!r}: video_storage.archive_format must be 'zip'/'tar'/'tar.gz' "
+                    f"when format='archives', got {af!r}"
+                )
+            afiles = vs.get("archive_files") or []
+            if not afiles:
+                issues.append(
+                    f"subset={sk!r}: video_storage.archive_files is empty but format='archives'"
+                )
+
+
+def audit_video_local(artifact_dir: Path, metadata_path: Path, issues: list, max_check: int = 200) -> None:
+    """Check that video files referenced in a local artifact actually exist."""
+    data_json = artifact_dir / "data.json"
+    if not data_json.exists():
+        return
+    media_dir_path = artifact_dir / "media"
+
+    with open(metadata_path, encoding="utf-8") as f:
+        meta = json.load(f)
+    subsets = meta.get("subsets") or {}
+    has_video = any(
+        bool(set(sv.get("modalities") or []) & VIDEO_MODALITIES)
+        for sv in subsets.values()
+    )
+    if not has_video:
+        return
+
+    with open(data_json, encoding="utf-8") as f:
+        data = json.load(f)
+
+    missing = 0
+    empty = 0
+    bad_ext = 0
+    checked = 0
+    for entry in data[:max_check]:
+        for m in (entry.get("media") or []):
+            if not isinstance(m, str):
+                continue
+            if not _is_video_ext(m):
+                continue
+            checked += 1
+            full = media_dir_path / m
+            if not full.exists():
+                missing += 1
+                if missing <= 3:
+                    issues.append(f"video file missing: {full}")
+            elif full.stat().st_size == 0:
+                empty += 1
+                if empty <= 3:
+                    issues.append(f"video file empty (0 bytes): {full}")
+            ext = os.path.splitext(m)[-1].lower()
+            if ext not in VIDEO_EXTS:
+                bad_ext += 1
+    if missing > 3:
+        issues.append(f"  ... {missing} total missing video files (showing first 3)")
+    if empty > 3:
+        issues.append(f"  ... {empty} total empty video files (showing first 3)")
+    if checked > 0:
+        print(f"  [video] checked {checked} video refs in first {min(len(data), max_check)} rows: "
+              f"{missing} missing, {empty} empty, {bad_ext} bad extension")
+
+
 def audit_artifact(hf_dataset_dir: Path, metadata_path: Path) -> int:
     """Standalone audit: metadata + placeholder/media count check.
 
@@ -134,6 +238,14 @@ def audit_artifact(hf_dataset_dir: Path, metadata_path: Path) -> int:
                         f"splits {sorted(actual_splits)}"
                     )
 
+    # 2e. Video-specific metadata checks
+    audit_video_metadata(subsets, issues)
+
+    # 2f. Video file existence checks (local artifacts only)
+    local_artifact_dir = hf_dataset_dir.parent
+    if (local_artifact_dir / "data.json").exists():
+        audit_video_local(local_artifact_dir, metadata_path, issues)
+
     # 3. Load dataset and run placeholder/media check for each split
     try:
         loaded = load_from_disk(str(hf_dataset_dir))
@@ -172,7 +284,27 @@ def audit_artifact(hf_dataset_dir: Path, metadata_path: Path) -> int:
         n_rows = len(ds)
         n_ph_mismatches = 0
         n_repeated_img1 = 0
+        # Track row-id uniqueness so we surface accidental row duplication
+        # (e.g., a split assembled by concatenating two copies of the same
+        # Arrow file). 1k duplicates inside 2k rows is silent unless we check.
+        # Additionally track per-source_id row counts when the message dict
+        # carries a `source_id` field — that signals the converter applied
+        # the composite-id convention `{source_id}_q{k}`.  Multiple rows
+        # may share a source_id (that is the whole point of the convention),
+        # but their row ids must be distinct.
+        seen_ids: dict[str, int] = {}
+        source_ids_seen: dict[str, list[str]] = {}
         for i, row in enumerate(ds):
+            rid = row.get("id")
+            if rid is not None:
+                seen_ids[rid] = seen_ids.get(rid, 0) + 1
+            try:
+                msg0 = json.loads(row["messages"])[0]
+            except Exception:
+                msg0 = {}
+            src_id = msg0.get("source_id") if isinstance(msg0, dict) else None
+            if src_id:
+                source_ids_seen.setdefault(src_id, []).append(str(rid))
             msg = json.loads(row["messages"])[0]
             try:
                 rendered = tmpl.render(**msg)
@@ -213,8 +345,38 @@ def audit_artifact(hf_dataset_dir: Path, metadata_path: Path) -> int:
         if n_ph_mismatches > 3:
             issues.append(f"Split '{split_name}': {n_ph_mismatches} total issues (showing first 3)")
 
+        # Surface duplicate row ids (counted across the full split). These
+        # must be unique even when multiple rows legitimately share a
+        # source_id (the composite-id convention assigns distinct
+        # `{source_id}_q{k}` to each).
+        dup_ids = {k: v for k, v in seen_ids.items() if v > 1}
+        if dup_ids:
+            n_dup = sum(v - 1 for v in dup_ids.values())
+            issues.append(
+                f"Split '{split_name}': {len(dup_ids)} duplicate id(s) "
+                f"({n_dup} extra rows). First few: "
+                f"{list(dup_ids.items())[:3]}"
+            )
+
+        # When the composite-id convention is in use (source_id present on
+        # any row), require that rows sharing a source_id have distinct ids.
+        if source_ids_seen:
+            broken = {sid: ids for sid, ids in source_ids_seen.items()
+                      if len(ids) > len(set(ids))}
+            if broken:
+                first = list(broken.items())[:3]
+                issues.append(
+                    f"Split '{split_name}': composite-id convention violated — "
+                    f"{len(broken)} source_id(s) have collisions among row ids. "
+                    f"First few: {first}"
+                )
+            n_multi_sid = sum(1 for ids in source_ids_seen.values() if len(ids) > 1)
+            if n_multi_sid:
+                print(f"  [{split_name}] composite-id convention active: "
+                      f"{n_multi_sid}/{len(source_ids_seen)} source_id(s) span >1 row")
+
         warn_refs = f"  (info: {n_repeated_img1} rows with <imageN> text refs — OK)" if n_repeated_img1 else ""
-        status = "OK" if not n_ph_mismatches else f"FAIL ({n_ph_mismatches} issue rows)"
+        status = "OK" if not n_ph_mismatches and not dup_ids else "FAIL"
         print(f"  [{split_name}] {n_rows} rows, placeholder/media: {status}{warn_refs}")
 
     _print_issues(issues)

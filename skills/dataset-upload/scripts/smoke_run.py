@@ -36,9 +36,9 @@ own loader handles dataset/subset/split selection, prompt template
 rendering, and media decode — so a non-zero exit catches any dataloader,
 prompt-render, or media-load failure surfaced by the framework.
 
-Outputs are persisted under ``<simple-mmeval>/.tmp/smoke_<dataset-slug>/``
-so they remain available for human inspection — ``cleanup.py`` skips
-``smoke_*`` directories unless ``--include-smoke-results`` is passed.
+Outputs are persisted under ``<simple-mmeval>/.tmp/smoke_tests/<dataset-slug>/``
+so they remain available for human inspection — ``cleanup.py`` skips the
+``smoke_tests/`` tree unless ``--include-smoke-results`` is passed.
 
 Post-run fidelity checks (per sampled row)
 ------------------------------------------
@@ -81,13 +81,18 @@ Usage
     python3 smoke_run.py \\
         --simple-mmeval /path/to/simple-mmeval \\
         --hf <user>/<repo>                 \\
-        --python /raid/miniconda3/envs/qwenvl/bin/python
+        --python "$MMEVAL_SMOKE_PYTHON"        # path to a python env with torch + transformers
 
     # pre-push (same 50/split contract as --hf, scoped to the local artifact):
     python3 smoke_run.py \\
         --simple-mmeval /path/to/simple-mmeval \\
         --local /path/to/converted/artifact    \\
-        --python /raid/miniconda3/envs/qwenvl/bin/python
+        --python "$MMEVAL_SMOKE_PYTHON"
+
+The --python flag also reads its default from the MMEVAL_SMOKE_PYTHON env
+var. Falls back to `python3` on PATH if neither is provided. The interpreter
+needs `torch`, `transformers` (recent enough for the chosen model series),
+and `datasets`. No absolute paths baked into this script.
 
 Override ``--rows-per-split N`` only when you specifically want a tighter
 or looser sample (e.g. ``--rows-per-split 10`` for a quick local
@@ -110,7 +115,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
-DEFAULT_MODEL = "Qwen3-VL-2B-Instruct"  # unified test model; registered in mmeval/registry.py
+DEFAULT_MODEL = "Qwen/Qwen3-VL-2B-Instruct"  # full HF repo id; mmeval/registry.py resolves the series from the final path component
 # A smoke run samples this many rows per (subset, split). If a split has fewer
 # rows, mmeval's --sample_num is capped at the split size and every row runs.
 DEFAULT_ROWS_PER_SPLIT = 50
@@ -219,8 +224,8 @@ def _spawn(simple_mmeval: Path, cmd: List[str], gpu: Optional[str], log_path: Pa
 
 def _build_local_cmd(python_bin: str, src: Path, out_dir: Path, model: str,
                      attn_impl: str, passthrough: Path,
-                     rows: int, seed: int) -> List[str]:
-    return [
+                     rows: int, seed: int, no_conda: bool) -> List[str]:
+    cmd = [
         python_bin, "mmeval/run.py",
         "--model_name_or_path", model,
         "--dataset", "local@json",
@@ -235,11 +240,15 @@ def _build_local_cmd(python_bin: str, src: Path, out_dir: Path, model: str,
         "--sample_order", "random",
         "--sample_seed", str(seed),
     ]
+    if no_conda:
+        cmd.append("--no_conda")
+    return cmd
 
 
 def _build_hf_cmd(python_bin: str, repo: str, subset: str, split: str,
                   out_dir: Path, model: str, attn_impl: str,
-                  rows: int, seed: int, no_conda: bool) -> List[str]:
+                  rows: int, seed: int, no_conda: bool,
+                  template_override: Optional[Path] = None) -> List[str]:
     cmd = [
         python_bin, "mmeval/run.py",
         "--model_name_or_path", model,
@@ -254,6 +263,8 @@ def _build_hf_cmd(python_bin: str, repo: str, subset: str, split: str,
         "--sample_order", "random",
         "--sample_seed", str(seed),
     ]
+    if template_override is not None:
+        cmd.extend(["--template", str(template_override)])
     if no_conda:
         cmd.append("--no_conda")
     return cmd
@@ -280,6 +291,19 @@ _OPTIONAL_FIELD_TYPES = {
 }
 _ANSWER_OK = (str, list)
 
+VIDEO_EXTS = {
+    ".mp4", ".avi", ".mov", ".mkv", ".webm", ".flv", ".wmv",
+    ".mpeg", ".mpg", ".m4v", ".3gp", ".3g2", ".ts", ".mts", ".vob", ".gif",
+}
+
+
+def _is_video_media(m: Any) -> bool:
+    """Check if a media reference is a video (by string extension or "Image Object" marker)."""
+    if isinstance(m, str) and m != "Image Object":
+        ext = os.path.splitext(m.split("?")[0])[-1].lower()
+        return ext in VIDEO_EXTS
+    return False
+
 
 def _verify_result(result_json: Path, expected_rows: Optional[int]) -> List[str]:
     """Return a list of human-readable violations; empty list = all checks passed.
@@ -292,6 +316,8 @@ def _verify_result(result_json: Path, expected_rows: Optional[int]) -> List[str]
         count equals ``len(media)``; optional ``options``/``choices``/``hint``,
         when present, are the right types; ``answer`` (when present) is a string
         or list.
+      - For video rows: check that video media references have recognized extensions
+        and are non-empty path strings.
       - messages[1] is the assistant message with a non-empty ``response``
         (str / list[str] / list[list[str]] all flatten).
     """
@@ -312,6 +338,7 @@ def _verify_result(result_json: Path, expected_rows: Optional[int]) -> List[str]
         violations.append(f"expected {expected_rows} rows, got {len(rows)}")
 
     seen_ids: Dict[str, int] = {}
+    video_stats = {"total_video_refs": 0, "video_rows": 0}
     for r in rows:
         rid = r.get("id")
         if rid is None or (isinstance(rid, str) and not rid.strip()):
@@ -339,13 +366,33 @@ def _verify_result(result_json: Path, expected_rows: Optional[int]) -> List[str]
         if not isinstance(prompt, str) or not prompt.strip():
             violations.append(f"id={rid}: messages[0].prompt empty or non-string")
             continue
-        media_count = len(r.get("media") or [])
+        media_list = r.get("media") or []
+        media_count = len(media_list)
         placeholder_count = len(re.findall(r"<(?:image|video)>", prompt))
         if placeholder_count != media_count:
             violations.append(
                 f"id={rid}: <image|video> placeholders={placeholder_count} but "
                 f"sample-level media count={media_count}"
             )
+
+        # Video-specific checks on media references
+        row_has_video = False
+        for m in media_list:
+            if _is_video_media(m):
+                row_has_video = True
+                video_stats["total_video_refs"] += 1
+                if isinstance(m, str) and not m.strip():
+                    violations.append(f"id={rid}: video media path is empty string")
+        if row_has_video:
+            video_stats["video_rows"] += 1
+            video_phs = len(re.findall(r"<video>", prompt))
+            video_media = sum(1 for m in media_list if _is_video_media(m))
+            if video_phs != video_media:
+                violations.append(
+                    f"id={rid}: <video> placeholders={video_phs} but "
+                    f"video media count={video_media}"
+                )
+
         for key, expected_t in _OPTIONAL_FIELD_TYPES.items():
             if key in first and first[key] is not None and not isinstance(first[key], expected_t):
                 violations.append(
@@ -376,6 +423,10 @@ def _verify_result(result_json: Path, expected_rows: Optional[int]) -> List[str]
         if count > 1:
             violations.append(f"id={dup_id!r} appears {count} times in result.json")
 
+    if video_stats["video_rows"] > 0:
+        print(f"[smoke] video stats: {video_stats['video_rows']} rows with video, "
+              f"{video_stats['total_video_refs']} total video references")
+
     return violations
 
 
@@ -397,7 +448,7 @@ def _smoke_local(args, project_root: Path, model: str, attn_impl: str,
     rows = max(1, min(requested, total))
     seed = args.seed
     slug = _slug(src.name)
-    smoke_root = project_root / ".tmp" / f"smoke_{slug}" / "local"
+    smoke_root = project_root / ".tmp" / "smoke_tests" / slug / "local"
     out_dir = smoke_root / "out"
     work = smoke_root / "artifact"
     smoke_root.mkdir(parents=True, exist_ok=True)
@@ -413,9 +464,10 @@ def _smoke_local(args, project_root: Path, model: str, attn_impl: str,
     passthrough.write_text("{{ prompt }}")
 
     cmd = _build_local_cmd(python_bin, src, out_dir, model, attn_impl, passthrough,
-                           rows, seed)
+                           rows, seed, args.no_conda)
     log = smoke_root / "run.log"
-    rc = _spawn(Path(args.simple_mmeval).resolve(), cmd, gpu, log)
+    rc = _spawn(Path(args.simple_mmeval).resolve(), cmd, gpu, log,
+                python_bin if args.no_conda else None)
     summary_path = smoke_root / "smoke_summary.json"
     (smoke_root / "smoke_metadata.json").write_text(json.dumps(
         {"artifact": str(src), "rows_per_split": rows, "total_rows": total,
@@ -507,7 +559,7 @@ def _smoke_hf(args, project_root: Path, model: str, attn_impl: str,
     requested = args.rows_per_split if args.rows_per_split is not None else DEFAULT_ROWS_PER_SPLIT
     seed = args.seed
     slug = _slug(repo)
-    smoke_root = project_root / ".tmp" / f"smoke_{slug}"
+    smoke_root = project_root / ".tmp" / "smoke_tests" / slug
     smoke_root.mkdir(parents=True, exist_ok=True)
     (smoke_root / "smoke_metadata.json").write_text(json.dumps(
         {"repo": repo, "subsets": subset_names, "splits": splits, "pairs": pairs,
@@ -528,8 +580,21 @@ def _smoke_hf(args, project_root: Path, model: str, attn_impl: str,
                 shutil.rmtree(out_dir)
             out_dir.mkdir(parents=True)
             log = out_dir / "run.log"
+            # Optional per-(subset) template override — picks
+            # `<override_dir>/<subset>/template.j2` if present, else
+            # `<override_dir>/template.j2`. Falls back to the dataset's own
+            # metadata.json template when nothing matches.
+            template_override: Optional[Path] = None
+            if getattr(args, "template_override_dir", None):
+                base = Path(args.template_override_dir)
+                cand = [base / subset / "template.j2", base / "template.j2"]
+                for c in cand:
+                    if c.is_file():
+                        template_override = c
+                        break
             cmd = _build_hf_cmd(python_bin, repo, subset, split, out_dir,
-                                model, attn_impl, requested, seed, args.no_conda)
+                                model, attn_impl, requested, seed, args.no_conda,
+                                template_override=template_override)
             print(f"\n[smoke][hf] === {subset}/{split} ===")
             rc = _spawn(smm, cmd, gpu, log, python_bin if args.no_conda else None)
             entry: Dict[str, Any] = {"subset": subset, "split": split,
@@ -574,7 +639,7 @@ def _smoke_hf(args, project_root: Path, model: str, attn_impl: str,
 
 
 def _project_root_of(simple_mmeval: str) -> Path:
-    """Return the simple-mmeval checkout root (used to anchor .tmp/smoke_*)."""
+    """Return the simple-mmeval checkout root (used to anchor .tmp/smoke_tests/<slug>/)."""
     return Path(simple_mmeval).resolve()
 
 
@@ -584,7 +649,7 @@ def main() -> int:
     )
     p.add_argument("--simple-mmeval", required=True,
                    help="Path to a simple-mmeval checkout (used as cwd for mmeval/run.py "
-                        "and as the root for .tmp/smoke_<dataset>/ result storage)")
+                        "and as the root for .tmp/smoke_tests/<dataset>/ result storage)")
     target = p.add_mutually_exclusive_group(required=True)
     target.add_argument("--local",
                         help="Pre-push: path to local artifact dir (data.json + media/)")
@@ -610,10 +675,12 @@ def main() -> int:
                         "Pass '-1' to skip pinning entirely.")
     p.add_argument("--min-free-mb", type=int, default=DEFAULT_MIN_FREE_MB,
                    help=f"Free-VRAM threshold for auto GPU pick (default {DEFAULT_MIN_FREE_MB})")
-    p.add_argument("--python", default="python3",
+    p.add_argument("--python", default=os.environ.get("MMEVAL_SMOKE_PYTHON", "python3"),
                    help="Python interpreter for mmeval/run.py (needs torch + datasets). "
-                        "Per-model inference still dispatches to ENV_DIR/<series>/ per "
-                        "mmeval/registry.py — this is only the orchestrator interpreter.")
+                        "Default reads MMEVAL_SMOKE_PYTHON env var, else falls back to "
+                        "`python3` on PATH. Per-model inference still dispatches to "
+                        "ENV_DIR/<series>/ per mmeval/registry.py — this is only the "
+                        "orchestrator interpreter.")
     p.add_argument("--attn-implementation", default="sdpa",
                    help="Attention backend (default sdpa; avoids the flash-attn interactive "
                         "prompt that hangs with no stdin attached)")
@@ -625,6 +692,14 @@ def main() -> int:
                         "off with --no-no-conda if you have the canonical env layout.")
     p.add_argument("--no-no-conda", dest="no_conda", action="store_false",
                    help="Disable the default --no-conda behavior.")
+    p.add_argument("--template-override-dir", default=None,
+                   help="Optional dir holding per-subset Jinja templates "
+                        "(<dir>/<subset>/template.j2 or <dir>/template.j2). "
+                        "When present, the matching file is passed to "
+                        "mmeval/run.py as --template, taking priority over the "
+                        "dataset's metadata.json prompt_template. Use this when "
+                        "validating a corrected prompt before pushing it to the "
+                        "Hub.")
     args = p.parse_args()
 
     # GPU resolution

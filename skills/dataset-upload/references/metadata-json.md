@@ -40,6 +40,7 @@ Use **only** the following tags. List every tag that applies to at least one row
 - Include `text` only when at least one row genuinely has no media (e.g. mixed-modality benchmarks like ScienceQA or ENEM). Do **not** add `text` simply because the modality type is language.
 - When a dataset has rows with 1 image and rows with 2+ images (both at start), use `multi_image_start` — it subsumes the single-image case when max > 1.
 - `single_image_start` and `multi_image_start` are mutually exclusive per subset; use whichever matches the actual data.
+- For video datasets, `single_video_start` is the most common tag (one video per question). Use `multi_video_interleave` only when multiple videos appear interleaved with question text in the same row.
 
 ## Task types
 
@@ -49,9 +50,43 @@ Use **only** the following values:
 | --- | --- |
 | `vqa` | Free-form visual question answering — the model generates a natural-language answer. Covers open-ended, numeric, short-answer, and yes/no formats. |
 | `multiple_choice_vqa` | The correct answer is one of a discrete set of labelled options (A / B / C …), whether the options appear in a separate `options` dict or are embedded in the question text. |
-| `captioning` | Image / video captioning — no explicit question; the model produces a free-form caption. The prompt template typically reads like `<image>Describe the image.` and the reference `answer` is a string or list of reference captions used by BLEU/CIDEr/SPICE scorers. |
+| `captioning` | Image / video captioning — no explicit question; the model produces a free-form caption. The prompt template is canonical T5 in `jinja-templates.md` (`<image>Provide a one-sentence caption for the provided image.`) and the reference `answer` is a string or list of reference captions used by BLEU/CIDEr/SPICE scorers. |
 
 When a dataset mixes both formats across rows (e.g. some rows are MCQ, others are free-form), use `vqa` if the majority are free-form, or `multiple_choice_vqa` if the majority are MCQ.
+
+## `video_storage` (video datasets only)
+
+For subsets where any modality tag contains `video`, include a `video_storage` block describing how video files are stored and accessed. This block is optional for image-only datasets.
+
+| Field | Required | Type | Description |
+| --- | --- | --- | --- |
+| `format` | yes | string | `"files"` (loose video files in a directory) or `"archives"` (zip/tar that must be extracted before loading). |
+| `media_root` | yes | string | Directory containing video files, relative to the artifact/repo root. Typically `"media"` (local mode) or `"videos"` (HF mode). |
+| `archive_format` | no | string or null | `"zip"`, `"tar"`, `"tar.gz"`, or `null`. Required when `format == "archives"`. |
+| `archive_files` | no | list of string | Archive filenames when `format == "archives"`. Empty list otherwise. |
+| `notes` | no | string | Free-text notes: download instructions, licensing caveats, frame sampling recommendations, known missing videos. |
+
+Example:
+```json
+"video_storage": {
+  "format": "files",
+  "media_root": "media",
+  "archive_format": null,
+  "archive_files": [],
+  "notes": "Videos downloaded from YouTube via yt-dlp; 12 videos unavailable due to takedowns."
+}
+```
+
+When `format == "archives"`:
+```json
+"video_storage": {
+  "format": "archives",
+  "media_root": "videos",
+  "archive_format": "zip",
+  "archive_files": ["videos_001.zip", "videos_002.zip"],
+  "notes": "Extract all archives into videos/ before running evaluation."
+}
+```
 
 ## `mapping_from_source`
 
@@ -80,6 +115,22 @@ Any additional `--map foo=bar` pass-through fields:
 ```json
 "extra": { "category": {"from": "category"} }
 ```
+
+### `id` vs `source_id` (composite-id convention)
+
+When the source's `id` field is not row-unique (e.g., one chart UUID shared by multiple QA paraphrases), `convert.py` rewrites each duplicate to `{source_id}_q{k}` and adds a `source_id` field on the per-row message dict. The metadata.json reflects this with two mappings:
+
+```json
+"id": {
+  "from": "id",
+  "note": "Composite key {source_id}_q{occurrence_index} produced by walking rows in upstream order and counting per-source-id occurrences (1-indexed)."
+},
+"extra": {
+  "source_id": { "from": "id", "note": "Original upstream id before composite-id formation." }
+}
+```
+
+This is automatic — the converter emits both mappings when disambiguation fires. `validate.py --audit` recognizes the convention and reports `composite-id convention active: N/M source_id(s) span >1 row` so the operator sees at a glance whether the dataset is 1-row-per-source or multi-row-per-source.
 
 ## Source `format` decision table
 
@@ -118,7 +169,7 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "language": ["en"],
       "modalities": ["single_image_start"],
       "task_type": "multiple_choice_vqa",
-      "prompt_template": "{% if hint %}Hint: {{ hint }}{% endif %}Question: {{ question }}{% for idx, content in options.items() %}{{ idx }}: {{ content }}{% endfor %}",
+      "prompt_template": "<image>{% if hint %}Hint: {{ hint }}\n{% endif %}Question: {{ question }}\nOptions:\n{% for k, v in options.items() %}{{ k }}. {{ v }}\n{% endfor %}Please select the correct answer from the options above. \n",
       "mapping_from_source": {
         "source": {
           "format": "tsv",
@@ -244,11 +295,86 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
 }
 ```
 
+## Example — Video MCQ (Video-MME style)
+
+```json
+{
+  "name": "Video-MME",
+  "release_date": "2024-06-01",
+  "subsets": {
+    "main": {
+      "language": ["en"],
+      "modalities": ["single_video_start"],
+      "task_type": "multiple_choice_vqa",
+      "prompt_template": "<video>{{ question }}\nAnswer with the option's letter from the given choices directly.",
+      "video_storage": {
+        "format": "files",
+        "media_root": "media",
+        "notes": "900 videos downloaded from YouTube. 12 unavailable due to takedowns (skipped in conversion)."
+      },
+      "mapping_from_source": {
+        "source": {
+          "format": "huggingface",
+          "url": { "test": "https://huggingface.co/datasets/lmms-lab/Video-MME" }
+        },
+        "id": { "from": "question_id" },
+        "question": { "from": "question" },
+        "options": { "from": "options", "note": "list normalized to {A,B,...} dict" },
+        "answer": { "from": "answer", "optional": true },
+        "media": { "from": "videoID", "type": "list", "min_items": 1, "max_items": 1 },
+        "extra": {
+          "video_id": { "from": "videoID" },
+          "duration_category": { "from": "duration" }
+        }
+      }
+    }
+  }
+}
+```
+
+## Example — Video open-ended QA (ActivityNet-QA style)
+
+```json
+{
+  "name": "ActivityNet-QA",
+  "release_date": "2019-06-01",
+  "subsets": {
+    "main": {
+      "language": ["en"],
+      "modalities": ["single_video_start"],
+      "task_type": "vqa",
+      "prompt_template": "<video>{{ question }}\nAnswer the question using a single word or phrase.",
+      "video_storage": {
+        "format": "files",
+        "media_root": "media",
+        "notes": "Videos from ActivityNet v1.3 (YouTube). Some unavailable due to takedowns."
+      },
+      "mapping_from_source": {
+        "source": {
+          "format": "huggingface",
+          "url": { "test": "https://huggingface.co/datasets/lmms-lab/ActivityNetQA" }
+        },
+        "id": { "from": "question_id" },
+        "question": { "from": "question" },
+        "answer": { "from": "answer", "optional": true },
+        "media": { "from": "video_name", "type": "list", "min_items": 1, "max_items": 1 },
+        "extra": {
+          "video_id": { "from": "video_name" },
+          "question_type": { "from": "type" }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Common pitfalls
 
 - **`prompt_template` must match placeholders** (`<image>` / `<video>`) with the emitted HF `media` sequence (see `mmeval-format.md`). Run `validate.py --audit` to catch mismatches before push.
-- **HF Hub cannot carry video bytes** in this format — use `--mode local` for video benchmarks.
+- **HF video mode stores video paths as strings, not bytes.** The HF `media` column uses `Sequence(Value('string'))` for video datasets (not `Sequence(Image())`). The dataloader resolves these paths to local files at runtime. Use `--mode local` for the primary artifact; use HF video mode only for distribution.
 - **`source.url` is not a substitute for HF `--split`**. `url` is documentation; the Arrow split name is whatever you passed to `convert.py --split` (or `train` when omitting `--split` on local sources).
 - **Never add a `choices` mapping unless the source truly provides a choices column.** For benchmarks where options are embedded in the question text or extracted by the converter, document them under `options` only.
 - **`source.url` keys must match the uploaded split names exactly.** For multi-subset datasets, each subset's `url` should only reference that subset's splits — do not copy keys from a sibling subset.
 - **Do not add `repo` or `links` fields** — they are superseded by `source.url`.
+- **Include `video_storage` for video subsets.** The block is required when any modality tag contains `video`. Omitting it causes the dataloader to fall back to default path resolution, which may fail for archived or non-standard layouts.
+- **Archive extraction is a manual step.** The dataloader does not extract archives automatically. Document the extraction command in `video_storage.notes` and in the dataset card.

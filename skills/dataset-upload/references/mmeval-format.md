@@ -37,7 +37,7 @@ Arrow table(s) on the Hub. When converted with an explicit `--split`, this is a 
 | Column | Type | Notes |
 |---|---|---|
 | `id` | string | unique within the split |
-| `media` | `Sequence(Image())` | always emitted as a sequence by this converter; the runtime also accepts `Image()` (single-image) but converted artifacts use the sequence form for uniformity. **Video media is not supported in HF mode** — use local mode. |
+| `media` | `Sequence(Image())` for image datasets; `Sequence(Value('string'))` for video datasets | Always emitted as a sequence. For image datasets: PIL Image objects (bytes embedded in Arrow). For video datasets: relative file paths as strings (e.g., `videos/vid_001.mp4`); actual video files stored separately in the HF repo. |
 | `messages` | string (JSON) | `json.dumps([{role, question, ...}], ensure_ascii=False)` — JSON text so each HF row mirrors local `data.json`'s `messages[0]` payload; consumers don't branch on mode. |
 
 ### `metadata.json` (repo root)
@@ -68,12 +68,52 @@ Any other key is allowed and visible to your custom template (`choices`, `catego
 - **Local mode**: prompts are rendered at conversion time and frozen into `messages[i].prompt`. The runner uses them as-is; the template is *not* re-applied. This keeps local artifacts deterministic and self-contained.
 - **HF mode**: only the message dict is shipped; the template lives in `metadata.json → subsets[<subset>].prompt_template` and is re-rendered per row at eval time. This lets you fix a template and re-push without re-encoding images.
 
+## Video format details
+
+### Local mode (`--dataset local@json`)
+
+Video files live under `--img_dir` (the same directory as images). The `media` array in `data.json` contains video filenames (basenames, no directory prefix):
+
+```json
+{
+  "id": "vmme_test_001_q0",
+  "media": ["vmme_test_001_0.mp4"],
+  "messages": [
+    {
+      "role": "user",
+      "question": "What is happening in this video?",
+      "answer": "A",
+      "options": {"A": "A person is cooking", "B": "A person is dancing"},
+      "prompt": "<video>What is happening in this video?\nAnswer with the option's letter from the given choices directly.",
+      "hint": ""
+    }
+  ]
+}
+```
+
+The dataloader returns the video file path as a string (no decoding). Model inference backends handle frame extraction.
+
+### HF video mode (`--dataset mmeval_hf@<user>/<repo>`)
+
+The Arrow dataset uses `Sequence(Value('string'))` for the `media` column instead of `Sequence(Image())`. Each entry is a relative path to a video file stored in the HF repo:
+
+```
+media: ["videos/vmme_test_001_0.mp4"]
+```
+
+The dataloader downloads video files from the HF repo via `hf_hub_download()` on first access, then passes the local cache path to the model.
+
+### Mixed image+video datasets
+
+For datasets with both image and video rows (modality `multi_image_video_interleave`), the `media` list may contain both image objects and video path strings. The dataloader distinguishes them by type: PIL Image objects are images; strings with video extensions are videos.
+
 ## Validation checklist
 
 - [ ] `id` is a string and unique within the split.
-- [ ] `media` is a list (single-image still becomes `[img]`).
+- [ ] `media` is a list (single-image still becomes `[img]`; single-video becomes `["path.mp4"]`).
 - [ ] In HF mode, `messages` is a JSON-encoded string serialized with `ensure_ascii=False` (CJK content otherwise inflates 3-5×).
 - [ ] In local mode, every `media[i]` is a **basename** relative to `--img_dir` — no `..`, no absolute paths, no URLs.
-- [ ] Rendered prompt's placeholder count matches `len(media)` per message.
+- [ ] Rendered prompt's placeholder count matches `len(media)` per message. Count `<video>` placeholders for video media.
 - [ ] `metadata.json` `mapping_from_source.source.url` is a `{split_name: URL, …}` dict; keys correspond to actual uploaded split names. No `links`, `repo`, or `path` keys in `source`.
-- [ ] No video media in `--mode hf` (the converter raises `ValueError` on this; double-check if you assembled the artifact by hand).
+- [ ] For video datasets: every video file referenced in `media` exists, has a recognized extension, and has size > 0.
+- [ ] For video datasets: `metadata.json` includes a `video_storage` block (see `metadata-json.md`).
