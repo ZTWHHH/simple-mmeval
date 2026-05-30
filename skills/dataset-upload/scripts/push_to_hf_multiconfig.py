@@ -31,7 +31,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import shutil
 import sys
 from collections import defaultdict
@@ -39,25 +38,6 @@ from pathlib import Path
 
 from datasets import Dataset, DatasetDict, load_from_disk
 from huggingface_hub import HfApi
-
-
-def _derive_split_name(subset: str, split: str) -> str:
-    """Map a flattened DatasetDict split name to its (subset-stripped) name.
-
-    - "en_dev" + subset "en" -> "dev"
-    - "test" + subset "test" -> "test" (no prefix)
-    - "CS_Figure2Caption" + subset "figure2caption" -> "CS"
-    Raises ValueError if no match.
-    """
-    if split == subset:
-        return split
-    pattern_prefix = f"{subset}_"
-    if split.startswith(pattern_prefix):
-        return split[len(pattern_prefix):]
-    pattern_suffix = f"_{subset}"
-    if split.endswith(pattern_suffix):
-        return split[:-len(pattern_suffix)]
-    return split  # nothing to strip
 
 
 def _map_splits_to_subsets(splits: list[str], subsets: list[str]) -> dict[str, dict[str, str]]:

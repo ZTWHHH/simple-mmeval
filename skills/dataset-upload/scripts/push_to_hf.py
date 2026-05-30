@@ -16,7 +16,7 @@ Usage
 The artifact directory must contain:
     artifact-dir/
       hf_dataset/      # DatasetDict for the `default` config
-      metadata.json    # v2 manifest (top-level prompt_template + mapping_from_source)
+      metadata.json    # manifest (top-level prompt_template + mapping_from_source)
 
 Push behaviour:
 - Always pushes ``hf_dataset/`` as the ``default`` config.
@@ -96,7 +96,7 @@ def main() -> int:
             repo_id=args.repo_id,
             repo_type="dataset",
             token=args.token,
-            commit_message="Add v2 manifest (metadata.json)",
+            commit_message="Add manifest (metadata.json)",
         )
         import json as _json
         try:

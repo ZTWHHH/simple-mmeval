@@ -83,6 +83,11 @@ def test_seed_preserve_subset_resolve_and_links(tmp_skill: Path, tmp: Path) -> N
                 "modalities": ["single_image_start"],
                 "task_type": "vqa",
                 "prompt_template": "<image>{{ question }}",
+                "prompt_template_source": {
+                    "origin": "source_column",
+                    "reference": "text",
+                    "notes": "Seed provenance should be preserved.",
+                },
                 "mapping_from_source": {
                     "source": {"format": "json", "url": {}},
                     "id": {"from": "qid"},
@@ -125,6 +130,8 @@ def test_seed_preserve_subset_resolve_and_links(tmp_skill: Path, tmp: Path) -> N
     blk = meta["subsets"]["bench_only"]
     assert blk["language"] == ["zh"]
     assert blk["task_type"] == "vqa"
+    assert blk["prompt_template_source"]["origin"] == "source_column"
+    assert blk["prompt_template_source"]["reference"] == "text"
     ch = blk["mapping_from_source"]["choices"]
     assert isinstance(ch, list) and ch[0].get("key") == "A" and ch[0].get("from") == "opt_a"
     assert ch[0].get("optional") is False
@@ -258,6 +265,12 @@ def test_multi_image_text_modalities(tmp_skill: Path, tmp: Path) -> None:
             "hf",
             "--out",
             str(out),
+            "--template-source-origin",
+            "fallback",
+            "--template-source-ref",
+            "T4",
+            "--template-source-notes",
+            "regression test fallback provenance",
             "--workers",
             "1",
         ],
@@ -266,6 +279,10 @@ def test_multi_image_text_modalities(tmp_skill: Path, tmp: Path) -> None:
     mods = blk["modalities"]
     assert mods == _sort_modalities_check(mods)
     assert mods == ["multi_image_start", "text"]
+    pts = blk["prompt_template_source"]
+    assert pts["origin"] == "fallback"
+    assert pts["reference"] == "T4"
+    assert pts["notes"] == "regression test fallback provenance"
 
 
 def test_merge_auto_subset_non_main(tmp_skill: Path, tmp: Path) -> None:

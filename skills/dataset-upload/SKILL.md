@@ -1,6 +1,6 @@
 ---
 name: dataset-upload
-description: Convert any multimodal benchmark (HuggingFace dataset, local JSON, CSV/TSV with images) into Simple-MMEval runnable format and upload it to the HuggingFace Hub. Use this skill whenever the user wants to prepare/normalize/port a vision-language eval dataset for Simple-MMEval, run an existing benchmark through Simple-MMEval, build a `local@json` data file with an `img_dir`, build an `mmeval_hf@`-compatible HF dataset (canonical `media` / `messages` / `id` columns plus a top-level `metadata.json` v2 manifest with the prompt template + source mapping), or push a converted dataset to HuggingFace Hub. Trigger even if the user does not explicitly say "Simple-MMEval" — phrases like "convert this VQA dataset", "make this runnable in mmeval", "wrap this for evaluation", "turn this into an eval dataset", or "push this benchmark to HF for mmeval" all apply.
+description: Convert any multimodal benchmark (HuggingFace dataset, local JSON, CSV/TSV with images) into Simple-MMEval runnable format and upload it to the HuggingFace Hub. Use this skill whenever the user wants to prepare/normalize/port a vision-language eval dataset for Simple-MMEval, run an existing benchmark through Simple-MMEval, build a `local@json` data file with an `img_dir`, build an `mmeval_hf@`-compatible HF dataset (canonical `media` / `messages` / `id` columns plus a top-level `metadata.json` manifest with the prompt template + source mapping), or push a converted dataset to HuggingFace Hub. Trigger even if the user does not explicitly say "Simple-MMEval" — phrases like "convert this VQA dataset", "make this runnable in mmeval", "wrap this for evaluation", "turn this into an eval dataset", or "push this benchmark to HF for mmeval" all apply.
 ---
 
 # dataset-upload
@@ -8,7 +8,7 @@ description: Convert any multimodal benchmark (HuggingFace dataset, local JSON, 
 Convert a multimodal eval dataset into one of two runnable input formats accepted by [Simple-MMEval](https://github.com/mm-evaluation/simple-mmeval):
 
 1. **`local`** — a single JSON file plus a directory of media files (`--dataset local@json --infile <data.json> --img_dir <media_dir>`).
-2. **`hf`** — a HuggingFace `DatasetDict` for the `default` config plus a top-level `metadata.json` manifest at the repo root (`--dataset mmeval_hf@<user>/<repo>`; pass `--subset <name>` when the manifest packs multiple subsets). The legacy `metadata` config (a sibling DatasetDict) is no longer used; the v2 manifest replaces it.
+2. **`hf`** — a HuggingFace `DatasetDict` for the `default` config plus a top-level `metadata.json` manifest at the repo root (`--dataset mmeval_hf@<user>/<repo>`; pass `--subset <name>` when the manifest packs multiple subsets). The legacy `metadata` config (a sibling DatasetDict) is no longer used; the top-level `metadata.json` manifest replaces it.
 
 The converter can emit one mode or **both at once in a single source pass** (`--mode both`), which is the recommended path when the user wants the local artifact for quick smoke runs *and* an HF artifact to push.
 
@@ -41,7 +41,8 @@ dataset-upload/
     ├── smoke_run.py                 ← end-to-end smoke: tiny model + N rows through Simple-MMEval
     ├── push_to_hf.py                ← final HF push, single-`default`-config (legacy single-subset path)
     ├── push_to_hf_multiconfig.py    ← multi-config HF push, one HF config per metadata.json subset (preferred for multi-subset datasets)
-    └── cleanup.py                   ← remove intermediate artifacts and HF cache after push
+    ├── cleanup.py                   ← remove intermediate artifacts and HF cache after push
+    └── test_audit_regressions.py    ← internal regression tests for convert.py + validate.py --audit
 ```
 
 > The inspect script is named `inspect_source.py` rather than `inspect.py` because the latter shadows Python's stdlib `inspect` module when run from the same directory and breaks pandas import.
@@ -113,18 +114,18 @@ python3 scripts/convert.py ... --work-dir ''
 
 > **Always pass `--out` a dataset-specific basename** (e.g., `--out $WORK/MyDataset`) — never a generic split or category name like `val`, `test`, `train`, `dev`, `img`, or a language code. The work-dir is derived from `Path(--out).name`, so a generic basename causes multiple conversions to share one HF cache directory and accumulate tens of gigabytes under a misnamed `.tmp/conversions/val/`-style folder.
 
-### Datasets that require a config name: pre-download to JSON
+### Datasets that require a config name
 
-`convert.py --hf` calls `load_dataset(repo, split=split)` **without a config name**. This works for repos whose only config is `default`, but fails for repos with named configs (e.g., `maritaca-ai/enem` with configs `2022/2023/2024`, `Hothan/OlympiadBench` with 18 configs, `ibm-granite/ChartNet`).
+Repos with named configs (e.g., `maritaca-ai/enem` with configs `2022/2023/2024`, `Hothan/OlympiadBench` with 18 configs, `ibm-granite/ChartNet`) cannot be loaded from the default config alone. Pass the config explicitly: `convert.py --hf <repo> --hf-config <name> --split <split>` (the converter forwards it to `load_dataset(repo, config_name, split=split)`). When `--hf-config` is omitted, `load_dataset(repo, split=split)` uses the repo's default config — fine for single-config repos.
 
-Detect these upfront:
+Detect configs upfront:
 ```python
 from datasets import get_dataset_config_names
 configs = get_dataset_config_names("repo/name")
-# If configs != ['default'], you must pre-download to JSON.
+# If configs != ['default'], pass --hf-config <name>.
 ```
 
-Pre-download pattern — **use base64 JPEG instead of saving image files to disk**. Separate image files accumulate fast and are equivalent in size to the JSON embed:
+Only fall back to the pre-download-to-JSON pattern below when `--hf-config` still cannot load a config directly (e.g. the rows need custom decoding before conversion). It **uses base64 JPEG instead of saving image files to disk** — separate image files accumulate fast and are equivalent in size to the JSON embed:
 
 ```python
 import base64, io, json
@@ -245,7 +246,7 @@ Video benchmarks (Video-MME, MVBench, EgoSchema, ActivityNet-QA, NExT-QA, Percep
 │   ├── vid_001_0.mp4
 │   ├── vid_002_0.mp4
 │   └── ...
-└── metadata.json      # v2 manifest with video_storage block
+└── metadata.json      # manifest with video_storage block
 ```
 
 Video files are materialized (copied or downloaded) into `media/` during conversion. The `media` field in `data.json` stores basenames relative to `media/`, exactly like images. The dataloader returns the video file path as a string — it never loads video bytes into memory.
@@ -375,8 +376,16 @@ Source `options` given as a list (`["cat", "dog", ...]`) are normalized to `{"A"
 
 Then pick the Jinja template. The decision is deterministic — see [`references/jinja-templates.md`](references/jinja-templates.md) for the full set:
 
-1. **If an official model-input prompt exists** for this benchmark (paper appendix / official eval-code `construct_prompt` / dataset card), copy it byte-for-byte into `prompt_template`. Cite the source path + line numbers in `metadata.metadata.notes`. This is always the highest-priority choice.
-2. **Otherwise**, walk the selection table in `jinja-templates.md` top-to-bottom and pick the first canonical T-template (T1–T7) whose condition matches. The conditions are observable: `task_type`, media kind/count, presence of `options`, and either (a) membership in the judge-scored allow-list or (b) presence of an answer-format cue inside the `question` field.
+1. **If an official model-input prompt exists** for this benchmark (paper appendix / official eval-code's prompt-construction function, e.g. `construct_prompt` / `build_prompt` / `doc_to_text`, or dataset card), copy it byte-for-byte into `prompt_template`. Set `prompt_template_source.origin = "official"` and cite the source path + line numbers in `prompt_template_source.reference`. This is always the highest-priority choice.
+2. **If the source dataset ships a full per-row prompt column** (e.g. MathVista `query`, MathVerse `query_wo`, VisOnlyQA `prompt_no_reasoning`, CharXiv per-category instructions), use that source-provided prompt instead of falling through to a canonical fallback template:
+   - **2.1** If the source provides both the full prompt and its component fields (`question`, `options`, `hint`, etc.), reverse-engineer a Jinja template that renders byte-identical to the source prompt on sampled rows.
+   - **2.2** If the source provides only the full prompt string, map it to a pass-through field and use the one-key template `{{ prompt }}` (or the mapped field name).
+   Set `prompt_template_source.origin = "source_column"` and record the source column name in `prompt_template_source.reference`.
+3. **Otherwise**, walk the selection table in `jinja-templates.md` top-to-bottom and pick the first canonical fallback template (T1–T10) whose condition matches. The conditions are observable: `task_type`, media kind/count, presence of `options`, and either (a) membership in the judge-scored allow-list or (b) presence of an answer-format cue inside the `question` field. Set `prompt_template_source.origin = "fallback"` and record the selected template id (for example, `T3`) in `prompt_template_source.reference`.
+
+Priority 1 and 2.2 differ by where the prompt is defined. Priority 1 uses a prompt specification outside the data (paper, official eval code, or dataset card) and transcribes it into a real Jinja template. Priority 2.2 forwards an already-materialized prompt column from the data with `{{ prompt }}`. When both exist, priority 1 wins; the official published specification is more authoritative than a possibly third-party rendered column.
+
+This tier decision **directly determines** `prompt_template_source`: tier 1 → `origin = "official"`, tier 2 → `origin = "source_column"`, tier 3 → `origin = "fallback"`. There is always exactly one answer, so the agent must carry it into Step 3 by passing `--template-source-origin <origin> --template-source-ref <reference>` (and `--template-source-notes` when an adaptation needs explaining) on every conversion, or by setting `prompt_template_source` in the `--metadata-json` seed. Never leave it for a manual follow-up — the audit in Step 5 rejects a missing or `unspecified` value.
 
 The default single-image short-answer fallback (T1):
 
@@ -392,14 +401,14 @@ If the source question already carries an answer-format cue (e.g., the question 
 `scripts/convert.py` reads the source, applies the column map and template, and writes the artifact(s).
 
 **Source flags** (pick one):
-- `--hf <repo_id> --split <split>` (HF **requires** an explicit split name)
+- `--hf <repo_id> --split <split>` (HF **requires** an explicit split name); add `--hf-config <name>` for multi-config repos (forwarded to `load_dataset(repo, config_name, split=split)`)
 - `--json <path> [--media-dir <dir>]` | `--tsv <path>` | `--csv <path>` (local splits optional; omit `--split` for a flat HF `Dataset` on disk / Hub split `train` after push)
 
 **Mapping flags:**
 - `--map id=<src> question=<src> image=<src> answer=<src> ...` — space-separated `canonical=source` pairs (omit when using `--metadata-json` unless you want overrides).
 - With `--metadata-json`, `--map` is **override-only**: extra pairs like `category=cat` merge onto the seed mapping and **do not** need to repeat `id` / `question` (those come from the template).
 - `--metadata-json <path>` — load `mapping_from_source` + default `prompt_template` from a draft `metadata.json` (see `references/metadata-json.md`).
-- `--name`, `--subset`, `--language`, `--task-type`, `--modalities`, `--release-date`, `--source-url`, `--source-format` — control emitted `metadata.json`.
+- `--name`, `--subset`, `--language`, `--task-type`, `--modalities`, `--release-date`, `--source-url`, `--source-format`, `--template-source-origin`, `--template-source-ref`, `--template-source-notes` — control emitted `metadata.json`.
 - `--template <path-or-string>` — Jinja template (string or file path).
 - `--prompt-prefix "<image>"` — auto-prepend the placeholder if the template doesn't include it.
 - `--answer-list` — keep `answer` as a list when the source provides a list (default joins with space).
@@ -437,7 +446,7 @@ The merged directory has one `hf_dataset/` and one merged `metadata.json` ready 
 ├── media/                  # local mode (also reused for HF bytes)
 ├── hf_dataset/             # HF mode — DatasetDict for the `default` config
 │                           #   (named split, or flat Dataset when --split is omitted)
-├── metadata.json           # always written — v2 manifest, uploaded to repo root by push_to_hf.py
+├── metadata.json           # always written — manifest, uploaded to repo root by push_to_hf.py
 └── convert_summary.json    # rows kept/skipped + skip_reason_counts + first 50 skips
 ```
 
@@ -452,6 +461,7 @@ The merged directory has one `hf_dataset/` and one merged `metadata.json` ready 
 - `--source-url <url>` — default: `https://huggingface.co/datasets/<--hf>` for HF sources; otherwise omitted.
 - `--name <name>` — top-level `name`. Default: `--hf` repo or basename of `--out`.
 - `--language <lang> [...]` — default `["en"]` (or the seed value when `--metadata-json` is used).
+- `--template-source-origin official|source_column|fallback`, `--template-source-ref <reference>`, `--template-source-notes <text>` — fill `subsets[<subset>].prompt_template_source`, which records where the `prompt_template` came from.
 
 The `mapping_from_source` block is auto-built from `--map`: canonical keys (`id`/`question`/`answer`/`image`/`options`/...) land at the top; everything else lands under `extra:`. The `media.min_items`/`max_items` are filled in from the actual per-row counts observed during conversion.
 
@@ -510,19 +520,21 @@ for split_name, ds in dd.items():
 - [ ] For multi-subset datasets, each subset's `source.url` keys reference **only that subset's** uploaded split names — not a sibling subset's keys. Copy-paste errors across subsets are easy to miss.
 - [ ] `choices` mapping is present only when the source actually provides a choices column. Do not add it for benchmarks where options are embedded in the question text or extracted by the converter.
 - [ ] `validate.py --audit <out>/hf_dataset` passes with no issues (covers placeholder/media count, `<image>` inside question text, schema fields, no local paths).
-- [ ] **Prompt template matches the authoritative source or follows the standardized fallback policy.** Render the template against one sample row and compare against the official `construct_prompt`/`make_prompt`/eval-script output byte-for-byte. Cite the source file + line numbers in `metadata.metadata` (paper section, repo path, or HF dataset-card URL). If the benchmark publishes no official model-input prompt (e.g., MMVet, LLaVA-Bench-in-the-Wild, MMHal-Bench, WildVision-Bench, NoCaps, VizWiz-Captions, VQA-RAD), pick a template from the standardized fallback policy and document `FALLBACK` in `metadata.metadata`. Never invent an "official" string. See `references/jinja-templates.md` for the canonical shape of each policy class.
+- [ ] **Prompt template matches the authoritative source, source-provided prompt column, or standardized fallback policy.** Render the template against sample rows and compare against the official prompt-construction output byte-for-byte when eval code exists. Fill `prompt_template_source` for every subset: `origin` must be `official`, `source_column`, or `fallback`; `reference` must cite a paper section / repo path + line numbers / HF dataset-card URL, source prompt column name, or canonical template id (for example, `T3`). Never invent an "official" string. If no official or source-provided full prompt exists (e.g., MM-Vet, LLaVA-Bench-in-the-Wild, MMHal-Bench, WildVision-Bench, NoCaps, VizWiz-Captions, VQA-RAD), set `origin = "fallback"` and document the selected fallback template id in `reference`.
 - [ ] **No trailer duplication.** If the official upstream renders Options/instructions into a `question` field (MathVerse `query_wo`, MathVista `query`, MEGA-Bench `task_description+example_text+query_text`, CharXiv per-category, MuirBench `<image>`-interleaved options, RealWorldQA baked instruction), the template should NOT add another `Options:` block, another `Answer with …` trailer, or another `<image>` placeholder. Smell test: render against one sample row and grep for `Options:` / `option letter` / `Answer with` — if either string appears twice, you have a duplicate.
-- [ ] **No harness-style suffixes on judge-scored benchmarks.** Free-form benchmarks routed to a GPT-4/GPT-4o judge (MMVet, LLaVA-Bench-in-the-Wild, MMHal-Bench, WildVision-Bench, VibeEval) must NOT append `Answer the question using a single word or phrase.` / `Answer briefly.` / `Answer the question.` — those are lmms-eval defaults, not benchmark policy, and they directly conflict with judge prompts that score response detail or hallucinations.
+- [ ] **No harness-style suffixes on judge-scored benchmarks.** Free-form benchmarks routed to a GPT-4/GPT-4o judge (MM-Vet, LLaVA-Bench-in-the-Wild, MMHal-Bench, WildVision-Bench, VibeEval) must NOT append `Answer the question using a single word or phrase.` / `Answer briefly.` / `Answer the question.` — those are lmms-eval defaults, not benchmark policy, and they directly conflict with judge prompts that score response detail or hallucinations.
 
 If a source has both image and text-only configs for the same benchmark, convert each config separately (with appropriate templates), then merge the splits into one artifact:
 
 ```bash
 # Convert image config → out_img/ (template with <image>)
-python3 scripts/convert.py --hf <repo> --split <img_split> --template '<image>{{ question }}' …
+python3 scripts/convert.py --hf <repo> --split <img_split> --template '<image>{{ question }}' \
+    --template-source-origin fallback --template-source-ref <Tn> …
 
 # Convert text-only config → out_text/ (no image, different subset key)
 python3 scripts/convert.py --hf <repo> --split <text_split> --subset text_only \
-    --template '{{ question }}' --modalities text …
+    --template '{{ question }}' --modalities text \
+    --template-source-origin fallback --template-source-ref <Tn> …
 
 # Merge DatasetDicts and combine metadata.json subsets manually
 python3 - << 'PYEOF'
@@ -558,7 +570,7 @@ python3 scripts/validate.py --audit <out>/hf_dataset
 # or with an explicit metadata.json path:
 python3 scripts/validate.py --audit <out>/hf_dataset --metadata <out>/metadata.json
 ```
-Checks: (1) `metadata.json` has no leaked local paths, (2) `source.url` keys match actual split names and no deprecated `repo`/`links` fields are present, (3) modalities/task_type use the supported taxonomy, (4) every row's `<image>`/`<video>` placeholder count equals its media count, (5) `<image>` inside question text when the template already supplies placeholders.
+Checks: (1) `metadata.json` has no leaked local paths, (2) `source.url` keys match actual split names and no deprecated `repo`/`links` fields are present, (3) modalities/task_type use the supported taxonomy, (4) every row's `<image>`/`<video>` placeholder count equals its media count, (5) `<image>` inside question text when the template already supplies placeholders, (6) every subset's `prompt_template_source.origin` is one of `official`/`source_column`/`fallback` with a non-empty `reference`.
 
 **Full round-trip (requires Simple-MMEval checkout):**
 ```bash
@@ -571,6 +583,8 @@ python3 scripts/validate.py \
 Instantiates the actual `LocalJSONDataset` / `MMEvalHFDataset` data loaders, prints rendered prompts, and confirms images load as PIL with the right dimensions.
 
 Run the standalone audit before the full round-trip; both should pass before declaring a conversion done.
+
+**If the audit fails on `prompt_template_source`** (missing, `unspecified`, or an invalid `origin`): re-derive the value from the Step 2 tier decision and re-run the conversion with the correct `--template-source-origin/-ref/-notes` flags (or fix the `--metadata-json` seed), then re-audit. Do not hand-edit `metadata.json` to silence the check and do not skip the subset. Only if the provenance genuinely cannot be resolved after retrying, surface it in the final report with: the dataset/subset, the current `prompt_template_source` value, the inference path you attempted (which tiers you checked and what you found), and the specific reason it could not be resolved.
 
 ### Step 5b — Pre-push smoke (local mode, 50 random rows)
 
@@ -705,6 +719,8 @@ It pushes the `default` config and uploads `metadata.json` to the repo root, the
 
 Add `--cleanup-artifact` on disk-constrained systems to delete the local Arrow artifact immediately after a successful push (the Hub becomes the durable copy).
 
+For datasets whose `metadata.json` packs **multiple subsets** that should land as separate HF configs (one config per subset), use `scripts/push_to_hf_multiconfig.py` instead of `push_to_hf.py`; it pushes one HF config per `metadata.json` subset.
+
 > **Do not push until the split-count checklist in Step 4 passes.** A missing split cannot be patched post-push without a full re-push of the affected splits.
 
 ### Step 6b — Post-push framework smoke (HF mode, 50 random rows / (subset, split))
@@ -805,17 +821,17 @@ python3 scripts/cleanup.py \
 
 **Never delete** the merged artifact before a successful push.
 
-**Repo layout after push (v2):**
+**Repo layout after push:**
 
 ```
 <user>/<repo>/
 ├── data/                   # default config parquet shards
-├── metadata.json           # v2 manifest (top-level)
+├── metadata.json           # manifest (top-level)
 ├── README.md               # auto-generated (default config only)
 └── .gitattributes
 ```
 
-See `references/metadata-json.md` for the full v2 manifest schema (top-level `name`/`release_date`/`subsets[name]` with `language`/`modalities`/`task_type`/`prompt_template`/`mapping_from_source`).
+See `references/metadata-json.md` for the full manifest schema (top-level `name`/`release_date`/`subsets[name]` with `language`/`modalities`/`task_type`/`prompt_template`/`prompt_template_source`/`mapping_from_source`).
 
 ## Worked example — CaptionQA (nested-MCQ, 4 domain splits)
 
@@ -842,6 +858,9 @@ Options:
 {% endif %}{% endfor %}
 
 Answer:' \
+    --template-source-origin official \
+    --template-source-ref 'https://github.com/bronyayang/CaptionQA/blob/main/qa.py (build_caption_qa_prompt)' \
+    --template-source-notes 'visual analogue of build_caption_qa_prompt; Caption text replaced by <image>, "given an image" instead of "given a caption"' \
     --mode hf --out $ROOT/$split --workers 16 &
 done; wait
 
@@ -874,6 +893,8 @@ python3 scripts/convert.py \
     --template '<image>{{ question }}
 Answer the question using a single word or phrase.' \
     --answer-list \
+    --template-source-origin fallback \
+    --template-source-ref T1 \
     --mode both \
     --out <workdir>/vizwiz_val \
     --workers 16
@@ -973,11 +994,11 @@ Answer with the option's letter from the given choices directly.{% else %}
 Answer the question using a single word or phrase.{% endif %}
 ```
 
-Verify it matches the upstream `construct_prompt` output verbatim:
+Verify it matches the upstream prompt-construction output verbatim:
 
 ```python
 got = env.from_string(TEMPLATE).render(question=q, options=opts)
-exp = upstream_construct_prompt(row)
+exp = upstream_prompt(row)
 assert got == exp   # byte-for-byte
 ```
 
@@ -1044,16 +1065,21 @@ PYEOF
 
 ```bash
 SKILL=<skill-path>
+# video_path values are absolute, so --media-dir is the filesystem root.
+# --mode both also writes hf_dataset/ so Step 3's --audit has something to check;
+# --hf-video stores video paths as strings (video files are not redistributable).
 python3 -u $SKILL/scripts/convert.py \
     --json $WORK/video_mme_preprocessed.json \
-    --media-dir /  # video_path is absolute \
+    --media-dir / \
     --map id=id question=question media=video_path options=options answer=answer \
          video_id=video_id duration_category=duration_category \
     --template '<video>{{ question }}
 Answer with the option'"'"'s letter from the given choices directly.' \
     --task-type multiple_choice_vqa --modalities single_video_start \
     --name "Video-MME" --release-date 2024-06-01 \
-    --mode local --out $WORK/VideoMME --split test \
+    --template-source-origin official \
+    --template-source-ref 'Video-MME official post_prompt (MME-Benchmarks/Video-MME eval code)' \
+    --mode both --hf-video --out $WORK/VideoMME --split test \
     --verify-video --workers 1
 ```
 
@@ -1154,11 +1180,11 @@ done
 - **Don't trust intermediate "convenience" reformats — re-source from the official upstream.** Third-party consolidations of a benchmark sometimes pre-render a `prompt` field whose token count silently disagrees with the unique-image count, or strip metadata (subject, difficulty, explanation) you'd want later. When the upstream is available, source from it.
 - **Case-sensitive identifiers — silent wrong results or dropped rows.** HF split names, config names, and dataset column names are all case-sensitive: `val` ≠ `Val`, `question_id` ≠ `Question_ID`. Always take split and config names from `get_dataset_split_names` / `get_dataset_config_names`, and column names from `inspect_source.py` output — never from descriptions, papers, or memory.
 - **Missing splits — the silent but critical failure.** HF datasets often expose multiple splits (`test`, `testmini`) or multiple configs (`testmini`, `testmini_text_only`). Converting only one and pushing is wrong even when row counts look right. Always enumerate all configs and splits with `get_dataset_config_names` + `get_dataset_split_names` before starting, and verify against the converted artifact at Step 4.
-- **Config name ≠ split name.** For HF datasets that require a config (`load_dataset(repo, config_name, split=...)`), `convert.py --hf` does not support passing a config name. Pre-download such datasets to local JSON first, then use `--json`. See the "Datasets that require a config name" section above for the base64-JPEG pre-download pattern.
+- **Config name ≠ split name.** For HF datasets that require a config (`load_dataset(repo, config_name, split=...)`), pass `convert.py --hf <repo> --hf-config <name> --split <split>`. Only pre-download to local JSON (then `--json`) when a config still cannot be loaded directly. See the "Datasets that require a config name" section above.
 - **Multi-config benchmarks → one split per config.** When a source has multiple HF configs that should evaluate as a single benchmark (MMMU-Pro: `standard (4 options)` + `standard (10 options)` + `vision`; MMMU: 30 subjects), run the converter per config into separate output dirs and `merge_splits.py` them. Pick split names without spaces or parens (`standard_4_options`, not `standard (4 options)`) — HF Hub config/split names disallow special chars.
-- **Source the prompt from the official eval code, then the paper, in that order.** When they disagree the eval-code version wins (it produced the reported numbers). Cite path + line numbers in `metadata.metadata.notes`. Show the user a rendered prompt for one short-answer and one MC row, name the source, and wait for sign-off before the full conversion — re-pushing a multi-GB HF artifact is more expensive than a 5-line preview.
-- **Assert template == upstream byte-for-byte.** When the source ships an eval script, render your template with one sample row and `assert rendered == upstream.construct_prompt(row)`. Tiny discrepancies (extra blank line, `(A)` vs `A.`, `option's letter` vs `option letter`, trailing space + newline vs newline only) silently change scores.
-- **Prefer a Jinja template in `metadata` over a pre-rendered `prompt` on the message.** Per the format spec, when the metadata template is non-empty Simple-MMEval *always* re-renders it (the per-row `prompt` becomes a fallback only when rendering throws). A template lets a downstream user fork the repo and change the prompt without re-running the converter. Bake `prompt` only when the rendering is genuinely per-row dynamic in a way Jinja can't express.
+- **Source the prompt from the official eval code, then the paper, in that order.** When they disagree the eval-code version wins (it produced the reported numbers). Cite path + line numbers in `prompt_template_source.reference` and set `prompt_template_source.origin = "official"`. Show the user a rendered prompt for one short-answer and one MC row, name the source, and wait for sign-off before the full conversion — re-pushing a multi-GB HF artifact is more expensive than a 5-line preview.
+- **Assert template == upstream byte-for-byte.** When the source ships an eval script, render your template with one sample row and compare it to the upstream prompt-construction output. Tiny discrepancies (extra blank line, `(A)` vs `A.`, `option's letter` vs `option letter`, trailing space + newline vs newline only) silently change scores.
+- **Prefer a transparent Jinja template over a pre-rendered prompt when both are available.** Per the format spec, when the metadata template is non-empty Simple-MMEval *always* re-renders it (the per-row `prompt` becomes a fallback only when rendering throws). If the source has both a full prompt column and component fields, reverse-engineer a byte-identical template (priority 2.1). Use a one-key `{{ prompt }}` pass-through (priority 2.2) only when the full prompt cannot be cleanly decomposed.
 - **Multi-image rows.** Use `--map images=<list-field>` and ensure the template emits the right number of `<image>` placeholders. For indexed `<image N>` patterns (MMMU-style, note the space: `<image 1>`) see the worked example above — that shape needs custom preprocessing that replaces each `<image N>` ref with `<image>` and builds a multi-item media list.
 - **`<imageN>` tokens (no space) are text labels, not media placeholders.** Some datasets (e.g., MathVision) use `<image1>`, `<image2>`, … (no space before the digit) as textual labels for subfigures *within* a single composite image — each row has exactly **one** media file. These are distinct from MMMU's `<image N>` (space before digit) which reference separate images. Preserve `<imageN>` verbatim in the question text; the canonical T2 template (`<image>{{ question }}`) supplies the single real placeholder. Never replace `<image1>` with `<image>` in the question field. The `validate.py --audit` check catches `<image>` embedded in question text as a structural error.
 - **Text-only configs in image benchmarks.** Benchmarks like MathVerse have both an image config and a `text_only` config. The text-only config needs a separate `--subset text_only` conversion with a template that has no `<image>` placeholder and `--modalities text`. Merge the resulting DatasetDicts manually (see Step 4 merge snippet).
@@ -1189,7 +1215,7 @@ done
 - **CircularEval-compressed image references in VLMEvalKit TSVs.** VLMEvalKit-hosted TSVs (`opencompass.openxlab.space/utils/VLMEval/*.tsv`, e.g. `MMBench_DEV_EN_V11.tsv`) frequently ship a CircularEval-compressed schema: rows where the `image` cell is a short integer string (typically <50 chars) reference another row's `index` column instead of carrying their own base64. Skipping the resolution silently drops those rows (`encode_failed: base64 decode failed: <integer>`). Pre-process the TSV with `base_imgs = {row['index']: row['image'] for row in df if len(row['image']) >= 500}` and replace `image` cells where `len < 500` with `base_imgs[row['image']]` before feeding to `convert.py`. A 70%+ `encode_failed` rate on a VLMEvalKit TSV almost always means this resolution step was skipped.
 - **Expired upstream TLS certs.** Some canonical mirrors (notably `opencompass.openxlab.space` as of 2026-05-28) present an expired TLS cert. `requests`/`urllib` will reject the connection by default. Workaround: stream with `ssl.create_default_context(); ctx.check_hostname=False; ctx.verify_mode=ssl.CERT_NONE` and re-verify the downloaded file by MD5 against the upstream-published hash. Never blindly disable TLS verification for any host where you can't independently verify the file via a published checksum.
 
-- **Video datasets: always check `convert_summary.json` for skipped rows.** YouTube takedowns, expired links, gated access, and download failures silently produce `encode_failed` / `missing_video` skips. A 30% skip rate on ActivityNet-QA is plausible (YouTube takedowns); a 30% skip rate on MVBench (bundled on HF) is a bug.
+- **Video datasets: always check `convert_summary.json` for skipped rows.** YouTube takedowns, expired links, gated access, and download failures silently produce `encode_failed` / `unknown_video_ext` skips (the two grouped prefixes in `skip_reason_counts`). A 30% skip rate on ActivityNet-QA is plausible (YouTube takedowns); a 30% skip rate on MVBench (bundled on HF) is a bug.
 - **Video datasets: don't confuse `<video>` with textual references to "the video".** Many video QA questions contain phrases like "In the video, what does the person do?". These are question text, not media placeholders. The canonical `<video>` placeholder (angle brackets, lowercase, no space) is the only string that triggers media binding. Never replace textual "video" references with `<video>`.
 - **Video datasets: include `video_storage` in metadata.** The `validate.py --audit` check flags video subsets missing the `video_storage` block. Add it manually after conversion — the converter does not auto-populate it yet.
 - **Video datasets: process one dataset at a time.** Video datasets are large (often 10–400+ GB). Never convert multiple video datasets in parallel. Check disk space with `df -h` before starting, and clean up intermediate files with `cleanup.py` after each push.

@@ -1,6 +1,6 @@
 # `metadata.json` authoring guide (mm-eval / Simple-MMEval HF datasets)
 
-This file lives at the **repository root** next to the `data/` tree (or alongside `hf_dataset/` before push). Simple-MMEval's HF loader downloads `metadata.json` via `hf_hub_download` and reads the Jinja template from `subsets[<subset>].prompt_template`.
+This file lives at the **repository root** next to the `data/` tree (or alongside `hf_dataset/` before push). Simple-MMEval's HF loader downloads `metadata.json` via `hf_hub_download` and reads the Jinja template from `subsets[<subset>].prompt_template`. This root-level manifest is the current format; it replaces the deprecated sibling HF `metadata` DatasetDict config that older repos shipped.
 
 The converter (`scripts/convert.py`) can **emit** `metadata.json` automatically from `--map` / inferred stats, or **consume** a draft via `--metadata-json` (to derive `--map` + default template, then refresh media counts).
 
@@ -20,7 +20,30 @@ The converter (`scripts/convert.py`) can **emit** `metadata.json` automatically 
 | `modalities` | yes | See **Modalities** below. |
 | `task_type` | yes | See **Task types** below. |
 | `prompt_template` | yes | Jinja string. Must render from the **mmeval message dict** keys present in `messages[0]` (`question`, `options`, `hint`, `answer`, plus any pass-through fields). |
+| `prompt_template_source` | yes | Structured provenance for `prompt_template`; see **Prompt template source** below. |
 | `mapping_from_source` | yes | Describes how **source rows** map into message fields + HF `media` column. |
+
+## Prompt template source
+
+Every subset must explain where its `prompt_template` came from:
+
+```json
+"prompt_template_source": {
+  "origin": "official",
+  "reference": "https://github.com/example/repo/path.py#L10-L25",
+  "notes": "Copied byte-for-byte from the official eval-code prompt-construction function."
+}
+```
+
+Use only these `origin` values:
+
+| `origin` | When to use | `reference` convention |
+| --- | --- | --- |
+| `official` | A paper appendix, official eval-code prompt-construction function (e.g. `construct_prompt` / `build_prompt` / `doc_to_text`), or dataset card publishes the model-input prompt. | URL/path + line range, paper section, or dataset-card URL. |
+| `source_column` | The source dataset ships a full per-row prompt column. Prefer reverse-engineering a byte-identical Jinja template when component fields are also available; otherwise use a one-key pass-through template such as `{{ prompt }}`. | Source prompt column name, e.g. `query_wo` or `prompt_no_reasoning`. |
+| `fallback` | No official prompt and no source-provided full prompt column exists, so the template follows `references/jinja-templates.md`. | Canonical fallback template id, e.g. `T1`, `T3`, `T8`. When the shipped template is based on a canonical `Tn` but modified (e.g. an added domain instruction), use `<Tn>-adapted` (e.g. `T3-adapted`) and explain the change in `notes`. |
+
+`notes` is optional free text for details such as `FALLBACK class=A`, "2.1 reverse-engineered from source prompt", or "translated instruction literals copied from the authors' dataset card". Do not put prompt provenance in a separate top-level free-text notes object; it belongs in this per-subset object.
 
 ## Modalities
 
@@ -170,6 +193,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["single_image_start"],
       "task_type": "multiple_choice_vqa",
       "prompt_template": "<image>{% if hint %}Hint: {{ hint }}\n{% endif %}Question: {{ question }}\nOptions:\n{% for k, v in options.items() %}{{ k }}. {{ v }}\n{% endfor %}Please select the correct answer from the options above. \n",
+      "prompt_template_source": {
+        "origin": "fallback",
+        "reference": "T3",
+        "notes": "VLMEvalKit canonical MCQ fallback."
+      },
       "mapping_from_source": {
         "source": {
           "format": "tsv",
@@ -204,6 +232,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["single_image_start"],
       "task_type": "vqa",
       "prompt_template": "<image>{{ question }}\nAnswer the question using a single word or phrase.",
+      "prompt_template_source": {
+        "origin": "fallback",
+        "reference": "T1",
+        "notes": "Canonical single-image short-answer VQA fallback."
+      },
       "mapping_from_source": {
         "source": {
           "format": "huggingface",
@@ -231,6 +264,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["single_image_start", "text"],
       "task_type": "multiple_choice_vqa",
       "prompt_template": "{% if has_image %}<image>{% endif %}{% if hint %}Context: {{ hint }}\n{% endif %}Question: {{ question }}\nOptions:\n{% for k, v in options.items() %}({{ k }}) {{ v }}\n{% endfor %}Answer with the option letter from the given choices.",
+      "prompt_template_source": {
+        "origin": "fallback",
+        "reference": "T3-adapted",
+        "notes": "ScienceQA-style context MCQ fallback using source hint/options fields."
+      },
       "mapping_from_source": {
         "source": {
           "format": "json",
@@ -265,6 +303,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["single_image_start"],
       "task_type": "vqa",
       "prompt_template": "<image>{{ question }}\n",
+      "prompt_template_source": {
+        "origin": "source_column",
+        "reference": "query_wo",
+        "notes": "Source column already carries the benchmark prompt text; template only prepends the image placeholder."
+      },
       "mapping_from_source": {
         "source": {
           "format": "huggingface",
@@ -281,6 +324,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["text"],
       "task_type": "vqa",
       "prompt_template": "{{ question }}\n",
+      "prompt_template_source": {
+        "origin": "source_column",
+        "reference": "query_wo",
+        "notes": "Text-only variant of the source-provided prompt column."
+      },
       "mapping_from_source": {
         "source": {
           "format": "huggingface",
@@ -307,6 +355,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["single_video_start"],
       "task_type": "multiple_choice_vqa",
       "prompt_template": "<video>{{ question }}\nAnswer with the option's letter from the given choices directly.",
+      "prompt_template_source": {
+        "origin": "fallback",
+        "reference": "T6",
+        "notes": "Canonical video MCQ fallback aligned with Video-MME-style post prompts."
+      },
       "video_storage": {
         "format": "files",
         "media_root": "media",
@@ -344,6 +397,11 @@ HF **data split** (`train` / `val` / …) is still `--split` and refers to the `
       "modalities": ["single_video_start"],
       "task_type": "vqa",
       "prompt_template": "<video>{{ question }}\nAnswer the question using a single word or phrase.",
+      "prompt_template_source": {
+        "origin": "fallback",
+        "reference": "T8",
+        "notes": "Canonical video open-ended VQA fallback."
+      },
       "video_storage": {
         "format": "files",
         "media_root": "media",

@@ -6,8 +6,8 @@ Source: ``MMMU/MMMU`` (default) or ``MMMU/MMMU-Pro`` via ``--hf`` — one HF con
 per subject, with ``image_1``…``image_7`` columns and ``question`` text using
 ``<image N>`` references.
 
-Output (per split): an mm-eval v2 artifact at ``<out>/<split>/`` consisting of
-``hf_dataset/`` (DatasetDict for the ``default`` config) plus a v2
+Output (per split): an mm-eval artifact at ``<out>/<split>/`` consisting of
+``hf_dataset/`` (DatasetDict for the ``default`` config) plus a top-level
 ``metadata.json`` manifest whose single ``main`` subset carries the Jinja
 template that mirrors the official MMMU paper / eval-code prompt format
 verbatim:
@@ -253,6 +253,11 @@ def convert_split(args, split: str) -> Dict[str, Any]:
                 "modalities": ["multi_image_interleave"],
                 "task_type": "multiple_choice_vqa",
                 "prompt_template": MMMU_TEMPLATE,
+                "prompt_template_source": {
+                    "origin": args.template_source_origin,
+                    "reference": args.template_source_ref,
+                    "notes": args.template_source_notes,
+                },
                 "mapping_from_source": {
                     "source": {
                         "format": "huggingface",
@@ -296,6 +301,15 @@ def main() -> int:
     p.add_argument("--limit", type=int, default=None)
     p.add_argument("--release-date", default=None,
                    help="metadata.json release_date (default: today UTC date)")
+    p.add_argument("--template-source-origin", default="official",
+                   help="prompt_template_source.origin (default: official — MMMU_TEMPLATE is "
+                        "byte-for-byte the official MMMU eval-code prompt)")
+    p.add_argument("--template-source-ref",
+                   default="https://github.com/MMMU-Benchmark/MMMU "
+                           "(utils/data_utils.py + configs/llava1.5.yaml)",
+                   help="prompt_template_source.reference")
+    p.add_argument("--template-source-notes", default="",
+                   help="Optional prompt_template_source.notes")
     args = p.parse_args()
     if args.release_date is None:
         from datetime import date as _date

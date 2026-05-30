@@ -83,10 +83,10 @@ Video datasets in mm-eval use **local mode** (`--mode local`) as the primary for
 │   ├── vid_001.mp4
 │   ├── vid_002.mp4
 │   └── ...
-└── metadata.json       # v2 manifest
+└── metadata.json       # manifest
 ```
 
-For HF distribution of video datasets, mm-eval supports a **video-aware HF mode** (`--mode hf-video`):
+For HF distribution of video datasets, mm-eval supports a **video-aware HF mode** (`--mode hf --hf-video`):
 
 ```
 <hf-repo>/
@@ -94,7 +94,7 @@ For HF distribution of video datasets, mm-eval supports a **video-aware HF mode*
 ├── videos/             # video files (flat or sharded)
 │   ├── vid_001.mp4
 │   └── ...
-├── metadata.json       # v2 manifest (with video_storage block)
+├── metadata.json       # manifest (with video_storage block)
 └── .gitattributes
 ```
 
@@ -133,7 +133,7 @@ When converting a video dataset, the converter must:
 3. **Map each data entry** to its video file unambiguously: store the video filename in the `media` list on the data entry.
 4. **Handle missing/unavailable videos** explicitly:
    - Log each missing video with its ID and reason (takedown, gated, download failure).
-   - Skip the row and count it as `missing_video:{video_id}` in `convert_summary.json`.
+   - Skip the row; `convert.py` records it under `encode_failed:{video_id}` in `convert_summary.json`'s `skip_reason_counts` (videos with an unrecognized extension are grouped under `unknown_video_ext` instead).
    - Never silently drop rows — the skip count must be inspectable.
 5. **Verify downloaded videos**:
    - File exists and size > 0.
@@ -154,6 +154,10 @@ The `metadata.json` per-subset block gains an optional `video_storage` object:
       "modalities": ["single_video_start"],
       "task_type": "multiple_choice_vqa",
       "prompt_template": "<video>{{ question }}\nAnswer with the option's letter from the given choices directly.",
+      "prompt_template_source": {
+        "origin": "official",
+        "reference": "Video-MME official post_prompt (MME-Benchmarks/Video-MME eval code)"
+      },
       "video_storage": {
         "format": "files",
         "media_root": "media",
@@ -208,7 +212,7 @@ However, the metadata should document expected frame-sampling behavior when spec
 
 ```json
 "video_storage": {
-  "frame_sampling_notes": "TSN sampling, 16 frames recommended (MVBench paper)"
+  "notes": "Frame sampling: TSN sampling, 16 frames recommended (MVBench paper)"
 }
 ```
 

@@ -502,10 +502,6 @@ def infer_source_format(args: Any) -> str:
     return "json"
 
 
-def hf_viewer_link(repo: str, split: str) -> str:
-    return f"https://huggingface.co/datasets/{repo}/viewer/{split}"
-
-
 def build_mapping_from_colmap(
     colmap: Dict[str, str],
     choice_specs: List[Dict[str, Any]],
@@ -563,6 +559,37 @@ def _inferred_task_type(colmap: Dict[str, str], choice_specs: List[Dict[str, Any
         if (choice_specs or "options" in colmap or "choices" in colmap)
         else "vqa"
     )
+
+
+def _prompt_template_source_from_args(args: Any, seed_block: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Build the per-subset prompt_template_source provenance block."""
+    seed_source: Dict[str, Any] = {}
+    if seed_block and isinstance(seed_block.get("prompt_template_source"), dict):
+        seed_source = copy.deepcopy(seed_block["prompt_template_source"])
+
+    origin = getattr(args, "template_source_origin", None)
+    reference = getattr(args, "template_source_ref", None)
+    notes = getattr(args, "template_source_notes", None)
+
+    if origin is None and reference is None and notes is None and seed_source:
+        return seed_source
+
+    out = seed_source if seed_source else {
+        "origin": "unspecified",
+        "reference": "",
+        "notes": "TODO: pass --template-source-origin/-ref (or seed prompt_template_source); "
+                 "this stub is rejected by validate.py --audit",
+    }
+    if origin is not None:
+        out["origin"] = origin
+    if reference is not None:
+        out["reference"] = reference
+    if notes is not None:
+        out["notes"] = notes
+    out.setdefault("origin", "unspecified")
+    out.setdefault("reference", "")
+    out.setdefault("notes", "")
+    return out
 
 
 def build_metadata_object(
@@ -677,6 +704,7 @@ def build_metadata_object(
             "modalities": modalities,
             "task_type": task_type,
             "prompt_template": prompt_t,
+            "prompt_template_source": _prompt_template_source_from_args(args, seed_block),
             "mapping_from_source": mfs,
         }
         for k, v in seed_block.items():
@@ -708,6 +736,7 @@ def build_metadata_object(
         "modalities": modalities,
         "task_type": task_type,
         "prompt_template": template_str or "",
+        "prompt_template_source": _prompt_template_source_from_args(args),
         "mapping_from_source": mapping_body,
     }
 
@@ -1288,6 +1317,13 @@ def main() -> int:
     p.add_argument("--source-format", default=None,
                    choices=("huggingface", "tsv", "csv", "json"),
                    help="Force metadata.json mapping_from_source.source.format")
+    p.add_argument("--template-source-origin", default=None,
+                   choices=("official", "source_column", "fallback"),
+                   help="prompt_template_source.origin provenance value")
+    p.add_argument("--template-source-ref", default=None,
+                   help="prompt_template_source.reference (URL/path+lines, source column, or fallback T-id)")
+    p.add_argument("--template-source-notes", default=None,
+                   help="Optional prompt_template_source.notes text")
     p.add_argument("--template", help="Jinja template string or file path")
     p.add_argument("--prompt-prefix", default="",
                    help="If template lacks an <image>/<video> placeholder, optionally prepend this")
@@ -1386,7 +1422,10 @@ def main() -> int:
             raise ValueError("metadata subset must contain mapping_from_source object")
         base_map, choice_specs = colmap_from_mapping(mfs)
         if args.map is not None:
-            base_map = merge_colmap(base_map, parse_map_pairs(args.map, require_id_question=False))
+            base_map = merge_colmap(
+                base_map,
+                parse_map_pairs(args.map, require_id=False, require_question=False),
+            )
         colmap = base_map
         template_str = load_template(args.template)
         if not template_str and block.get("prompt_template"):

@@ -4,8 +4,14 @@ The HF layout stores the same template string in `metadata.json → subsets[<sub
 
 This file defines **one canonical template per task type**. When the table at the bottom forces a choice between two templates, the selection rule is deterministic — based on observable fields, not judgment. The flow is:
 
-1. **Is there an official model-input prompt** for this dataset (paper appendix / official eval-code `construct_prompt` / dataset card)? If yes, **copy it byte-for-byte** into `prompt_template`. Do not use any T-template below. Cite source path + line numbers in `metadata.metadata.notes`.
-2. **Otherwise** (no authoritative source, or source incomplete/ambiguous): pick exactly one T-template from the selection table.
+1. **Is there an official model-input prompt** for this dataset (paper appendix / official eval-code's prompt-construction function, e.g. `construct_prompt` / `build_prompt` / `doc_to_text`, or dataset card)? If yes, **copy it byte-for-byte** into `prompt_template`. Do not use any canonical fallback template below. Record `prompt_template_source.origin = "official"` and cite the source path + line numbers in `prompt_template_source.reference`.
+2. **Does the source dataset ship a full per-row prompt column** (e.g. MathVista `query`, MathVerse `query_wo`, VisOnlyQA `prompt_no_reasoning`, CharXiv per-category instructions)? If yes, use that source-provided prompt instead of falling through to a canonical fallback template:
+   - **2.1** If the source provides both the full prompt and its component fields (`question`, `options`, `hint`, etc.), reverse-engineer a Jinja template that renders byte-identical to the source prompt on sampled rows.
+   - **2.2** If the source provides only the full prompt string, map it to a pass-through field and use the one-key template `{{ prompt }}` (or the mapped field name).
+   Record `prompt_template_source.origin = "source_column"` and the source column name in `prompt_template_source.reference`.
+3. **Otherwise** (no authoritative prompt and no source-provided full prompt column): pick exactly one canonical fallback template from the selection table.
+
+Priority 1 and 2.2 differ by where the prompt is defined. Priority 1 uses a prompt specification outside the data (paper, official eval code, or dataset card) and transcribes it into a real Jinja template. Priority 2.2 forwards an already-materialized prompt column from the data with `{{ prompt }}`. When both exist, priority 1 wins; the official published specification is more authoritative than a possibly third-party rendered column.
 
 The fallback set deliberately tracks VLMEvalKit canonical wording (`open-compass/VLMEvalKit`) — its `ImageMCQDataset.build_prompt` / `ImageVQADataset.build_prompt` / `ImageBaseDataset.build_prompt` defaults are the de-facto ecosystem baseline.
 
@@ -125,20 +131,21 @@ Evaluate the rows top-to-bottom. The first row whose **condition** is true selec
 
 | # | Condition (top-down, first match wins) | Template |
 |---|---|---|
-| 1 | An official model-input prompt is documented in the dataset's paper / official eval code / dataset card | **Copy official byte-for-byte** (not a T-template) |
-| 2 | Task is captioning (`task_type == "captioning"`) | **T5** |
-| 3 | Any media item is a video AND `options` is non-empty AND the question already carries the answer-format instruction or benchmark is judge-scored | **T9** (bare video question) |
-| 4 | Any media item is a video AND `options` is non-empty AND dataset provides structured options dict | **T10** (video MCQ with options dict) |
-| 5 | Any media item is a video AND `options` is non-empty (simple case) | **T6** (video MCQ) |
-| 6 | Any media item is a video AND `options` is empty AND question carries instruction or benchmark is judge-scored | **T9** (bare video question) |
-| 7 | Any media item is a video AND `options` is empty (open-ended video QA) | **T8** (video open-ended VQA) |
-| 8 | Media count is zero (text-only dataset/subset, `--modalities text`) | **T7** |
-| 9 | The dataset is on the judge-scored allow-list **OR** the `question` field already carries the answer-format instruction (see the precise triggers below) | **T2** |
-| 10 | `options` is a non-empty dict AND per-row `n_images > 1` | **T4** |
-| 11 | `options` is a non-empty dict AND per-row media count is 1 | **T3** |
-| 12 | Otherwise (single-image free-form, no inline instruction) | **T1** |
+| 1 | An official model-input prompt is documented in the dataset's paper / official eval-code prompt-construction function / dataset card | **Copy official byte-for-byte** (not a canonical fallback template) |
+| 2 | The source dataset ships a full per-row prompt column | **Reverse-engineer Jinja byte-for-byte** (2.1) or use a **one-key pass-through template** such as `{{ prompt }}` (2.2) |
+| 3 | Task is captioning (`task_type == "captioning"`) | **T5** |
+| 4 | Any media item is a video AND `options` is non-empty AND the question already carries the answer-format instruction or benchmark is judge-scored | **T9** (bare video question) |
+| 5 | Any media item is a video AND `options` is non-empty AND dataset provides structured options dict | **T10** (video MCQ with options dict) |
+| 6 | Any media item is a video AND `options` is non-empty (simple case) | **T6** (video MCQ) |
+| 7 | Any media item is a video AND `options` is empty AND question carries instruction or benchmark is judge-scored | **T9** (bare video question) |
+| 8 | Any media item is a video AND `options` is empty (open-ended video QA) | **T8** (video open-ended VQA) |
+| 9 | Media count is zero (text-only dataset/subset, `--modalities text`) | **T7** |
+| 10 | The dataset is on the judge-scored allow-list **OR** the `question` field already carries the answer-format instruction (see the precise triggers below) | **T2** |
+| 11 | `options` is a non-empty dict AND per-row `n_images > 1` | **T4** |
+| 12 | `options` is a non-empty dict AND per-row media count is 1 | **T3** |
+| 13 | Otherwise (single-image free-form, no inline instruction) | **T1** |
 
-### Precise triggers for row 5 (T2)
+### Precise triggers for row 10 (T2)
 
 T2 is selected when **either** of these is true:
 
@@ -178,7 +185,7 @@ Jinja templates render against the message dict only — they cannot see the spl
 
 When the **official source publishes the prompt in a non-English language** (e.g., MMBench-CN, CCBench, ENEM Portuguese), copy that wording verbatim — translation or paraphrase changes reported scores. The skeleton stays the same as T3/T4 (Question:/Options:/A. opt/<trailing instruction>); only the instruction literals change.
 
-The fallback T-templates above are English-only. There is no language-aware fallback set — when no official source exists for a non-English benchmark, write the template with the same shape as T3/T4 and instruction literals translated by the dataset's authors (cited in `metadata.metadata.notes`); do not invent translations.
+The canonical fallback templates above are English-only. There is no language-aware fallback set — when no official source exists for a non-English benchmark, write the template with the same shape as T3/T4 and instruction literals translated by the dataset's authors. Record that translation source in `prompt_template_source.reference`; do not invent translations.
 
 ## Smell tests (run before push)
 

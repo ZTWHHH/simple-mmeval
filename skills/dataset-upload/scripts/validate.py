@@ -238,10 +238,30 @@ def audit_artifact(hf_dataset_dir: Path, metadata_path: Path) -> int:
                         f"splits {sorted(actual_splits)}"
                     )
 
-    # 2e. Video-specific metadata checks
+        # 2e. prompt_template_source must document prompt provenance
+        pts = sv.get("prompt_template_source")
+        valid_origins = {"official", "source_column", "fallback"}
+        if not isinstance(pts, dict):
+            issues.append(
+                f"subset={sk!r}: prompt_template_source is missing or not an object"
+            )
+        else:
+            origin = pts.get("origin")
+            if origin not in valid_origins:
+                issues.append(
+                    f"subset={sk!r}: prompt_template_source.origin must be one of "
+                    f"{sorted(valid_origins)}, got {origin!r}"
+                )
+            reference = pts.get("reference")
+            if not isinstance(reference, str) or not reference.strip():
+                issues.append(
+                    f"subset={sk!r}: prompt_template_source.reference must be a non-empty string"
+                )
+
+    # 2f. Video-specific metadata checks
     audit_video_metadata(subsets, issues)
 
-    # 2f. Video file existence checks (local artifacts only)
+    # 2g. Video file existence checks (local artifacts only)
     local_artifact_dir = hf_dataset_dir.parent
     if (local_artifact_dir / "data.json").exists():
         audit_video_local(local_artifact_dir, metadata_path, issues)
@@ -300,12 +320,13 @@ def audit_artifact(hf_dataset_dir: Path, metadata_path: Path) -> int:
                 seen_ids[rid] = seen_ids.get(rid, 0) + 1
             try:
                 msg0 = json.loads(row["messages"])[0]
-            except Exception:
-                msg0 = {}
+            except Exception as e:
+                issues.append(f"Split '{split_name}' row[{i}] id={rid}: messages JSON parse error: {e}")
+                continue
             src_id = msg0.get("source_id") if isinstance(msg0, dict) else None
             if src_id:
                 source_ids_seen.setdefault(src_id, []).append(str(rid))
-            msg = json.loads(row["messages"])[0]
+            msg = msg0
             try:
                 rendered = tmpl.render(**msg)
             except Exception as e:
