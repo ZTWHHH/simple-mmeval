@@ -1,0 +1,52 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "This is a dynamic, action-oriented photograph of a **2024 GMC Sierra 1500 pickup truck** in motion on a dusty, arid terrain. Here\u2019s a detailed breakdown:\n\n---\n\n### **Vehicle Details:**\n\n- **Make & Model**: GMC Sierra 1500 ("
+                ]
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": [
+                    "This is a dynamic, wide-angle photograph capturing a white speedboat cutting through the ocean. Here\u2019s a detailed description:\n\n**Subject:**\n- The boat is a modern, high-performance motor yacht, predominantly white with a sleek, aerodynamic design.\n- It features a large, curved windshield and a raised helm"
+                ]
+            }
+        ],
+        "comment": "Test 'single image start' modality.",
+        "eval-id": 1
+    }
+]
