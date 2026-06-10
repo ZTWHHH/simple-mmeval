@@ -82,6 +82,7 @@ series_mapping = {
     "glm_4d1v": ["GLM-4.1V-9B-Thinking", "GLM-4.1V-9B-Base"],
     "ovis2": ["Ovis2-1B", "Ovis2-2B", "Ovis2-4B", "Ovis2-8B", "Ovis2-16B", "Ovis2-34B"],
     "aria": ["Aria"],
+    "qwen3d5": ["Qwen3.5-0.8B", "Qwen3.5-2B", "Qwen3.5-4B", "Qwen3.5-9B", "Qwen3.5-27B", "Qwen3.5-35B-A3B", "Qwen3.5-122B-A10B", "Qwen3.5-397B-A17B", "Qwen3.5-0.8B-Base", "Qwen3.5-4B-Base", "Qwen3.5-9B-Base", "Qwen3.5-35B-A3B-Base", "Qwen3.5-27B-FP8", "Qwen3.5-122B-A10B-FP8", "Qwen3.5-397B-A17B-FP8", "Qwen3.5-35B-A3B-GPTQ-Int4", "Qwen3.5-122B-A10B-GPTQ-Int4"],
 }
 
 series_infer_env_mapping = {
@@ -340,5 +341,9 @@ series_infer_env_mapping = {
     "aria": {
         "env": os.path.join(env_dir, "aria"),
         "infer_file": "aria.py",
+    },
+    "qwen3d5": {
+        "env": os.path.join(env_dir, "qwen3d5"),
+        "infer_file": "qwen3d5.py",
     },
 }
