@@ -46,7 +46,6 @@ class TaskRunner(Task):
         media_list = message.get('media', [])
 
         content = []
-        text_parts = []
         media_idx = 0
         for chunk in q_chunks:
             if not chunk.strip():
@@ -62,8 +61,7 @@ class TaskRunner(Task):
             elif chunk == constants.video:
                 raise NotImplementedError("minicpm_v_4d5 video input not implemented")
             else:
-                text_parts.append(chunk)
-        content.append("".join(text_parts).strip())
+                content.append(chunk)
         return [{"role": "user", "content": content}]
 
     def run_sample(self, sample: dict):
