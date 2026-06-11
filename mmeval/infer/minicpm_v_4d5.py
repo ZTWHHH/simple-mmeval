@@ -23,7 +23,7 @@ class TaskRunner(Task):
         self.default_model_kwargs = {
             "attn_implementation": "sdpa",
         }
-        self.default_gen_kwargs = {"max_new_tokens": 1024}
+        self.default_gen_kwargs = {"max_new_tokens": 2048}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
 

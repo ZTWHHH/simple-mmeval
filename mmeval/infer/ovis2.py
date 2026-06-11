@@ -23,7 +23,7 @@ class TaskRunner(Task):
         self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.default_model_kwargs = {}
         self.default_gen_kwargs = {
-            "max_new_tokens": 1024,
+            "max_new_tokens": 2048,
             "do_sample": False,
         }
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)

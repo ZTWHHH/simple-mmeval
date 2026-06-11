@@ -21,7 +21,7 @@ class TaskRunner(Task):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.default_model_kwargs = {"device_map": "auto"}
-        self.default_gen_kwargs = {"max_new_tokens": 8192}
+        self.default_gen_kwargs = {"max_new_tokens": 2048}
         self.model_kwargs = parse_model_kwargs(args, self.default_model_kwargs)
         self.gen_kwargs = parse_gen_kwargs(args, self.default_gen_kwargs)
 

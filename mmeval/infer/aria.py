@@ -23,7 +23,7 @@ class TaskRunner(Task):
         self.dtype = getattr(args, "dtype") or torch.bfloat16
         self.default_model_kwargs = {"device_map": "auto"}
         self.default_gen_kwargs = {
-            "max_new_tokens": 512,
+            "max_new_tokens": 2048,
             "do_sample": True,
             "temperature": 0.9,
         }
