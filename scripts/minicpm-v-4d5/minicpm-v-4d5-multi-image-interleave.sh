@@ -12,5 +12,5 @@ python $MMEVAL_DIR/mmeval/run.py \
     --model_name_or_path openbmb/MiniCPM-V-4_5 \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
-    --max_new_tokens 512
+    --max_new_tokens 2048
 

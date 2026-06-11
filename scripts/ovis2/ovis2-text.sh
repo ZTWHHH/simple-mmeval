@@ -11,7 +11,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --model_name_or_path AIDC-AI/Ovis2-1B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
-    --max_new_tokens 512
+    --max_new_tokens 2048
 
 python $MMEVAL_DIR/mmeval/run.py \
     --infile $MMEVAL_DIR/tests/samples/no_media.json \
@@ -20,7 +20,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --model_name_or_path AIDC-AI/Ovis2-2B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
-    --max_new_tokens 512
+    --max_new_tokens 2048
 
 python $MMEVAL_DIR/mmeval/run.py \
     --infile $MMEVAL_DIR/tests/samples/no_media.json \
@@ -29,7 +29,7 @@ python $MMEVAL_DIR/mmeval/run.py \
     --model_name_or_path AIDC-AI/Ovis2-4B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
-    --max_new_tokens 512
+    --max_new_tokens 2048
 
 python $MMEVAL_DIR/mmeval/run.py \
     --infile $MMEVAL_DIR/tests/samples/no_media.json \
@@ -38,5 +38,5 @@ python $MMEVAL_DIR/mmeval/run.py \
     --model_name_or_path AIDC-AI/Ovis2-8B \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
-    --max_new_tokens 512
+    --max_new_tokens 2048
 
