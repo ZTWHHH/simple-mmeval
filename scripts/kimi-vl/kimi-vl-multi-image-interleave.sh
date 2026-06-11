@@ -5,21 +5,21 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/tests/samples/single_video_start.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_interleave.json \
     --dataset local@json \
-    --out_dir $RESULT_DIR/work_dirs/glm-4d1v/GLM-4.1V-9B-Thinking-single-video-start \
+    --out_dir $RESULT_DIR/work_dirs/kimi-vl/Kimi-VL-A3B-Instruct-multi-image-interleave \
     --img_dir $MMEVAL_DIR/tests/media/448 \
-    --model_name_or_path THUDM/GLM-4.1V-9B-Thinking \
+    --model_name_or_path moonshotai/Kimi-VL-A3B-Instruct \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/tests/samples/single_video_start.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_interleave.json \
     --dataset local@json \
-    --out_dir $RESULT_DIR/work_dirs/glm-4d1v/GLM-4.1V-9B-Base-single-video-start \
+    --out_dir $RESULT_DIR/work_dirs/kimi-vl/Kimi-VL-A3B-Thinking-multi-image-interleave \
     --img_dir $MMEVAL_DIR/tests/media/448 \
-    --model_name_or_path THUDM/GLM-4.1V-9B-Base \
+    --model_name_or_path moonshotai/Kimi-VL-A3B-Thinking \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
