@@ -80,9 +80,9 @@ series_mapping = {
     "kimi_vl": ["Kimi-VL-A3B-Instruct", "Kimi-VL-A3B-Thinking"],
     "minicpm_v_4d5": ["MiniCPM-V-4_5"],
     "glm_4d1v": ["GLM-4.1V-9B-Thinking", "GLM-4.1V-9B-Base"],
-    "ovis2": ["Ovis2-1B", "Ovis2-2B", "Ovis2-4B", "Ovis2-8B", "Ovis2-16B", "Ovis2-34B"],
+    "ovis2": ["Ovis2-1B", "Ovis2-2B", "Ovis2-4B", "Ovis2-8B"],
     "aria": ["Aria"],
-    "qwen3d5": ["Qwen3.5-0.8B", "Qwen3.5-2B", "Qwen3.5-4B", "Qwen3.5-9B", "Qwen3.5-27B", "Qwen3.5-35B-A3B", "Qwen3.5-122B-A10B", "Qwen3.5-397B-A17B", "Qwen3.5-0.8B-Base", "Qwen3.5-4B-Base", "Qwen3.5-9B-Base", "Qwen3.5-35B-A3B-Base", "Qwen3.5-27B-FP8", "Qwen3.5-122B-A10B-FP8", "Qwen3.5-397B-A17B-FP8", "Qwen3.5-35B-A3B-GPTQ-Int4", "Qwen3.5-122B-A10B-GPTQ-Int4"],
+    "qwen3d5": ["Qwen3.5-0.8B", "Qwen3.5-2B", "Qwen3.5-4B", "Qwen3.5-9B"],
 }
 
 series_infer_env_mapping = {
