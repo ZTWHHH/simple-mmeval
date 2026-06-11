@@ -14,7 +14,9 @@
             },
             {
                 "role": "assistant",
-                "response": "The result of 1 plus 1 is 2.<|im_end|>"
+                "response": [
+                    "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking a simple arithmetic question: \"What is the result of 1 plus "
+                ]
             }
         ],
         "comment": "Test 'no media' modality.",
@@ -35,7 +37,9 @@
             },
             {
                 "role": "assistant",
-                "response": "The capital city of China is Beijing.<|im_end|>"
+                "response": [
+                    "Thinking Process:\n\n1.  **Identify the core question:** The user is asking for the capital city of China.\n2.  **Access knowledge"
+                ]
             }
         ],
         "comment": "Test 'no media' modality.",

@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>The image displays a GMC truck, specifically a model that appears to be a mid-size pickup, possibly a Canyon or a Sierra. The truck is depicted in motion, as evidenced by the dust being kicked up from its tires. The vehicle is painted in a dark color, likely a shade of gray or dark blue"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "<think>The image displays a large, white yacht or motor yacht moving at speed across a body of water, likely the ocean or a large lake. The yacht is the central focus. It has multiple decks, with the main deck featuring a large windshield and windows. The superstructure is white, and the hull is also"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'single video start' modality might be able to handle this, if not, record it in model implement sheet.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "cat.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video features a ginger tabby cat walking through a field of green grass. The cat's fur is a mix of orange and white, with distinct tabby markings. As the cat moves, its tail sways gently, and its ears are perked up, indicating alertness. The sunlight casts a warm glow on"
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "sun.mp4"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<video> Please provide a detailed description of the contents shown in the video.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<video> Please provide a detailed description of the contents shown in the video.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The video captures a serene sunset scene, where the sun is partially obscured by a hillside covered in trees. The sky is painted in warm hues of orange and yellow, creating a tranquil and picturesque atmosphere. As the video progresses, the sun continues its descent, gradually becoming more prominent and casting a brighter glow over the landscape"
+            }
+        ],
+        "comment": "Test 'single video start' modality.",
+        "eval-id": 3
+    }
+]

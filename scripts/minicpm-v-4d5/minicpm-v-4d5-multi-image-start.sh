@@ -5,11 +5,12 @@ export PYTHONPATH="$MMEVAL_DIR:$PYTHONPATH"
 cd "$MMEVAL_DIR"
 
 python $MMEVAL_DIR/mmeval/run.py \
-    --infile $MMEVAL_DIR/tests/samples/single_image_start.json \
+    --infile $MMEVAL_DIR/tests/samples/multi_image_start.json \
     --dataset local@json \
-    --out_dir $RESULT_DIR/work_dirs/kimi-vl/Kimi-VL-A3B-Instruct-single-image-start \
+    --out_dir $RESULT_DIR/work_dirs/minicpm-v-4d5/MiniCPM-V-4_5-multi-image-start \
     --img_dir $MMEVAL_DIR/tests/media/448 \
-    --model_name_or_path moonshotai/Kimi-VL-A3B-Instruct \
+    --model_name_or_path openbmb/MiniCPM-V-4_5 \
     --gpu_per_parallel 1 \
     --parallel_per_task 1 \
     --max_new_tokens 512
+

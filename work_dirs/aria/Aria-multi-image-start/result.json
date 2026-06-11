@@ -1,0 +1,96 @@
+[
+    {
+        "id": 0,
+        "media": [
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The image features a GMC truck driving on a rugged, off-road terrain. The truck appears to be a four-door crew cab design with a robust build, suitable for heavy-duty use. The vehicle is painted in a sleek, dark color that shines under the light, complemented by"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 0
+    },
+    {
+        "id": 1,
+        "media": [
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image> Please provide a detailed description of the contents shown in the image.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image> Please provide a detailed description of the contents shown in the image.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": " The image shows a sleek, modern yacht speeding through the ocean. The yacht is predominantly white with black trim around the windows and along the hull. It has multiple decks, including a lower deck and an upper deck with a cabin and windows. The yacht appears to be in motion"
+            }
+        ],
+        "comment": "Test 'single image start' modality, 'multi image start' modality should be able to handle this.",
+        "eval-id": 1
+    },
+    {
+        "id": 2,
+        "media": [
+            "truck.png",
+            "boat.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image features a GMC truck, likely an off-road model, driving through a dusty and rugged outdoors environment. The truck is depicted at an angle, showcasing its front grille and headlights, with the GMC logo prominently displayed. The wheels are large and rugged, suited"
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 2
+    },
+    {
+        "id": 3,
+        "media": [
+            "boat.png",
+            "truck.png"
+        ],
+        "messages": [
+            {
+                "role": "user",
+                "question": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "answer": "",
+                "options": {},
+                "choices": [],
+                "prompt": "<image><image> Please provide a detailed description of the contents shown in the two images.",
+                "hint": ""
+            },
+            {
+                "role": "assistant",
+                "response": "The first image depicts a sleek white yacht cutting through the water, creating a beautiful wake behind it. The sky is clear, and the sea appears calm, making it a serene scene of luxury cruising. The yacht seems modern, with a streamlined design and a spacious deck, suggesting it is"
+            }
+        ],
+        "comment": "Test 'multi image start' modality.",
+        "eval-id": 3
+    }
+]
