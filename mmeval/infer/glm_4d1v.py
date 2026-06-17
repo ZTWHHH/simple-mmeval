@@ -65,7 +65,13 @@ class TaskRunner(Task):
     def _generate_response(self, inputs):
         generated_ids = self.model.generate(**inputs, **self.gen_kwargs)
         trimmed = generated_ids[0][inputs["input_ids"].shape[1]:]
-        return self.processor.decode(trimmed, skip_special_tokens=False)
+        response = self.processor.decode(trimmed, skip_special_tokens=False)
+        # Strip the trailing chat-template boundary token. The semantic
+        # <|begin_of_box|>...<|end_of_box|> (and <answer></answer>) markers
+        # are kept since they delimit the model's structured answer.
+        if response.endswith("<|user|>"):
+            response = response[:-len("<|user|>")]
+        return response.rstrip()
 
     def run_sample(self, sample: dict):
         if self.args.score_target:

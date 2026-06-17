@@ -74,7 +74,12 @@ class TaskRunner(Task):
             **self.gen_kwargs,
         )
         trimmed = output[0][inputs["input_ids"].shape[1]:]
-        return self.processor.decode(trimmed, skip_special_tokens=True)
+        response = self.processor.decode(trimmed, skip_special_tokens=True)
+        # Aria emits the chat-template boundary token <|im_end|> even when it
+        # is passed as a stop string; strip a single trailing occurrence.
+        if response.endswith("<|im_end|>"):
+            response = response[:-len("<|im_end|>")]
+        return response.rstrip()
 
     def run_sample(self, sample: dict):
         if self.args.score_target:
